@@ -15,6 +15,8 @@ def analyze(rows, pos):
     prep_head_min = Counter()
     prep_pair_difference = Counter()
     prep_excess = 0
+    containment_head_min = Counter()
+    containment_pair_difference = Counter()
     for row in rows:
         branches = {frozenset(branch) for branch in row['clauses']}
         if not branches or frozenset() in branches:
@@ -25,6 +27,16 @@ def analyze(rows, pos):
         totals['heads'] += 1
         totals['distinct_nonempty_branches'] += len(branches)
         totals['heads_with_multiple_branches'] += len(branches) > 1
+        ordered = list(branches)
+        containment_differences = []
+        for i, left in enumerate(ordered):
+            for right in ordered[i + 1:]:
+                if left < right or right < left:
+                    difference = abs(len(left) - len(right))
+                    containment_pair_difference[difference] += 1
+                    containment_differences.append(difference)
+        if containment_differences:
+            containment_head_min[min(containment_differences)] += 1
         usage.update(deps)
         empty.update(next(iter(branch)) for branch in branches if len(branch) == 1)
         affected = set()
@@ -68,6 +80,9 @@ def analyze(rows, pos):
             details.append({'id': node, 'pos': pos[node], 'head_uses': n,
                             'collision_heads': collisions[node], 'empty_heads': empty[node]})
     return {'totals': dict(totals), 'groups': dict(groups),
+            'posthoc_strict_containment': {'affected_heads': sum(containment_head_min.values()),
+                                           'heads_by_min_size_difference': dict(sorted(containment_head_min.items())),
+                                           'pairs_by_size_difference': dict(sorted(containment_pair_difference.items()))},
             'posthoc_all_prep_projection': {'affected_heads': sum(prep_head_min.values()),
                                            'collapsed_excess': prep_excess,
                                            'heads_by_min_symmetric_difference': dict(sorted(prep_head_min.items())),
@@ -100,6 +115,7 @@ def main():
     with args.out.open('x', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2, sort_keys=True)
     print(json.dumps({'totals': result['totals'], 'groups': result['groups'],
+                      'posthoc_strict_containment': result['posthoc_strict_containment'],
                       'posthoc_all_prep_projection': result['posthoc_all_prep_projection']}, ensure_ascii=False))
 
 

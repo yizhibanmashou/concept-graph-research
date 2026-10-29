@@ -10,6 +10,7 @@ class SingleDependencyCollisionTests(unittest.TestCase):
         items = {node['id']: node for node in result['nodes']}
         self.assertEqual(result['totals']['distinct_nonempty_branches'], 3)
         self.assertEqual(items['p']['collision_heads'], 1)
+        self.assertEqual(result['posthoc_strict_containment']['heads_by_min_size_difference'], {1: 1})
         self.assertEqual(items['x']['empty_heads'], 1)
         self.assertEqual(result['groups']['prep']['node_head_uses'], 1)
         self.assertEqual(result['groups']['other']['collision_node_head_pairs'], 0)
@@ -21,6 +22,7 @@ class SingleDependencyCollisionTests(unittest.TestCase):
         projection = result['posthoc_all_prep_projection']
         self.assertEqual(projection['affected_heads'], 1)
         self.assertEqual(projection['heads_by_min_symmetric_difference'], {2: 1})
+        self.assertEqual(result['posthoc_strict_containment']['heads_by_min_size_difference'], {2: 1})
 
     def test_invalid_source_rejected(self):
         for clauses in ([[]], [['absent']], []):
