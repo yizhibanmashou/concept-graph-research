@@ -1,0 +1,203 @@
+{
+  "candidate_id": "c59c6b2ed2d2ecdd321fed767b8616c1981153ca8a00ae4ee6e8fc4ff5348e31",
+  "formula": {
+    "synset_id": "oewn-10280403-n",
+    "usage_id": "life_supplied_usage",
+    "parameters": [
+      {
+        "name": "x",
+        "type": "E",
+        "role": "The individual whose classification is being stated"
+      }
+    ],
+    "lhs": {
+      "op": "target",
+      "args": [
+        {
+          "var": "x"
+        }
+      ]
+    },
+    "rhs": {
+      "op": "and",
+      "args": [
+        {
+          "op": "use",
+          "synset_id": "oewn-00095301-a",
+          "usage_id": "alive_entity",
+          "interface_hash": "4fea27da8c2aed4baa2eaf8e082b4816709045c99d7fe14ced3d97c8697ec604",
+          "occurrence_id": "oewn-10280403-n:def:t001",
+          "args": [
+            {
+              "var": "x"
+            }
+          ]
+        },
+        {
+          "op": "use",
+          "synset_id": "oewn-00007846-n",
+          "usage_id": "person_classification",
+          "interface_hash": "8c387a71bc565f783be99ca320188ceba62bc09c2a1bf10d8929f91ce6c0d257",
+          "occurrence_id": "oewn-10280403-n:def:t002",
+          "args": [
+            {
+              "var": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "primitives": [],
+    "schema_version": "v3.interface-formula-candidate/1"
+  },
+  "inventory": {
+    "synset_id": "oewn-10280403-n",
+    "coverage": {
+      "complete": true,
+      "scope": "supplied_single_usage_only",
+      "rationale": "Covers this supplied single usage only. Proposed enumeration inventory; not certification of all lexical usages.",
+      "evidence_ids": [
+        "definition",
+        "oewn-10280403-n:argumentation:0"
+      ]
+    },
+    "usages": [
+      {
+        "usage_id": "life_supplied_usage",
+        "evidence": [
+          "definition",
+          "oewn-10280403-n:argumentation:0"
+        ],
+        "sentence_a": "The individual is a life.",
+        "sentence_b": "The individual is a living person.",
+        "argumentation": "In this count-noun sense, A 'The individual is a life' classifies the supplied individual x as B 'a living person'. Living and person are both definition content and both apply to x. The predicative article a does not introduce a second person or quantify away x: its nominal head person is predicated of the existing parameter x (V3 action parameter). The scaffold is realizes predication, not an extra definition occurrence. Both conditions are required for equivalence, whereas either condition alone is insufficient. No new witness or event is needed.",
+        "parameters": [
+          {
+            "name": "x",
+            "type": "E",
+            "role": "The individual whose classification is being stated"
+          }
+        ],
+        "target_arguments": [
+          "x"
+        ],
+        "occurrence_ids": [
+          "oewn-10280403-n:def:t000",
+          "oewn-10280403-n:def:t001",
+          "oewn-10280403-n:def:t002"
+        ],
+        "parameter_spans": [
+          {
+            "sentence": "sentence_a",
+            "start": 0,
+            "end": 14,
+            "text": "The individual",
+            "parameter": "x",
+            "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+          },
+          {
+            "sentence": "sentence_b",
+            "start": 0,
+            "end": 14,
+            "text": "The individual",
+            "parameter": "x",
+            "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+          }
+        ],
+        "determiners": [
+          {
+            "occurrence_id": "oewn-10280403-n:def:t000",
+            "kind": "a",
+            "action": "parameter",
+            "parameter": "x",
+            "head_occurrence_id": "oewn-10280403-n:def:t002",
+            "reason": "Predicative noun phrase classifies the existing x, not a fresh witness."
+          }
+        ],
+        "witnesses": [],
+        "voice": "active",
+        "reductions": [],
+        "binding_plan": {
+          "lexical": [
+            {
+              "occurrence_id": "oewn-10280403-n:def:t001",
+              "usage_id": "alive_entity",
+              "bindings": {
+                "x": "x"
+              }
+            },
+            {
+              "occurrence_id": "oewn-10280403-n:def:t002",
+              "usage_id": "person_classification",
+              "bindings": {
+                "x": "x"
+              }
+            }
+          ],
+          "structural": {
+            "lhs": [],
+            "rhs": []
+          }
+        }
+      }
+    ]
+  },
+  "binding_plan": {
+    "lexical": [
+      {
+        "occurrence_id": "oewn-10280403-n:def:t001",
+        "usage_id": "alive_entity",
+        "bindings": {
+          "x": "x"
+        }
+      },
+      {
+        "occurrence_id": "oewn-10280403-n:def:t002",
+        "usage_id": "person_classification",
+        "bindings": {
+          "x": "x"
+        }
+      }
+    ],
+    "structural": {
+      "lhs": [],
+      "rhs": []
+    }
+  },
+  "resource_counts": {
+    "lexical_calls": 2,
+    "exists": 0,
+    "structures": {
+      "Agent": 0,
+      "Theme": 0,
+      "Happen": 0
+    },
+    "available_structural_atoms": {
+      "Agent": 0,
+      "Theme": 0,
+      "Happen": 0
+    },
+    "generated_scopes": 0
+  },
+  "used_occurrence_ids": [
+    "oewn-10280403-n:def:t001",
+    "oewn-10280403-n:def:t002"
+  ],
+  "readable_formula": "TARGET(x) IFF (oewn-00095301-a::alive_entity(x) AND oewn-00007846-n::person_classification(x))",
+  "semantic_acceptance": false,
+  "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+  "interface_gate": {
+    "passed": true,
+    "issues": [],
+    "filters_enumeration": false
+  },
+  "assumption_mode": "interface-only-symbolic",
+  "publishable": false,
+  "basis_rhs_status": "pending",
+  "v3_gate": {
+    "passed": false,
+    "status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+    "issues": [],
+    "filters_enumeration": false
+  }
+}

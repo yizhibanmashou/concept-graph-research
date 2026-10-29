@@ -1,0 +1,35 @@
+{
+  "schema_version": "v3.structures/1",
+  "version": 2,
+  "relations": {
+    "Agent": {
+      "argument_types": ["V", "E"],
+      "return_type": "Prop",
+      "meaning": "事件的主语侧实体参与者；不自动断言意图或生命性。"
+    },
+    "Theme": {
+      "argument_types": ["V", ["E", "V"]],
+      "return_type": "Prop",
+      "meaning": "用法明确要求的实体或事件补语；E 与 V 保持不同类型，不互相转换。"
+    },
+    "Happen": {
+      "argument_types": ["V", "Time"],
+      "return_type": "Prop",
+      "meaning": "事件 e 在时刻 t 处于发生状态；仅有事件变量不意味着 Happen 成立。"
+    },
+    "World": {
+      "argument_types": ["V"],
+      "return_type": "World",
+      "world_slot_only": true,
+      "meaning": "事件 e 对应的单值世界函数；仅向定义中已知词汇用法的 World 类型槽传参。同一 World(e) 可在多个槽位重复使用，不消耗动词或命题结构调用次数预算。"
+    },
+    "ImplicitSubj": {
+      "argument_types": ["V"],
+      "return_type": "E",
+      "passive_only": true,
+      "meaning": "被动用法未明说的主语，限 Agent(e, ImplicitSubj(e))；不得代替已知外部参数。"
+    }
+  },
+  "axioms": [],
+  "extension_policy": "新增关系或签名须经过明确的规范修订；World:V->World 及其槽位使用规则已获本会话用户明确授权。agent 不得自行添加其他结构。当前不继承 V2 的角色存在性、功能性或实际发生公理。"
+}

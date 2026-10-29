@@ -1,0 +1,56 @@
+{
+  "interfaces": {
+    "oewn-00095301-a::alive_entity": {
+      "synset_id": "oewn-00095301-a",
+      "usage_id": "alive_entity",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "x",
+          "type": "E",
+          "role": "The individual whose classification is being stated"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "x"
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "living/alive as an adjective predicated of an existing individual: Alive(x). The frozen adjectival identity is retained despite the old token POS tag VERB.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    },
+    "oewn-00007846-n::person_classification": {
+      "synset_id": "oewn-00007846-n",
+      "usage_id": "person_classification",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "x",
+          "type": "E",
+          "role": "The individual whose classification is being stated"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "x"
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "person as a common-noun classification of the supplied individual: Person(x). This is not the existential-pronoun usage of someone.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    }
+  },
+  "interface_assumptions": [],
+  "rhs_supplied": false
+}

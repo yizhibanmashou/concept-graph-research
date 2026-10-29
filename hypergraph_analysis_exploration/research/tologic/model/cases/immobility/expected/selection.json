@@ -1,0 +1,7 @@
+{
+  "candidate_id": "7ed895cdef917de5e21f17a2c45f29fd96c8c9daac8c922a8345ab2cabcdf639",
+  "line": 36,
+  "readable_formula": "Immobility(q:E) ↔ Quality(q) ∧ ∃h:E [Of(q,h) ∧ Nom[not moving](h)]",
+  "source": "User-accepted formula; matched after enumeration",
+  "exact_ast_match": true
+}

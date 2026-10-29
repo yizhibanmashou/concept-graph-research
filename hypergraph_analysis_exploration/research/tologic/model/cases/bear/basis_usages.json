@@ -1,0 +1,70 @@
+{
+  "interfaces": {
+    "oewn-02208144-v::have_entity": {
+      "synset_id": "oewn-02208144-v",
+      "usage_id": "have_entity",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied event or state in this usage"
+        },
+        {
+          "name": "s",
+          "type": "E",
+          "role": "The supplied subject-side participant; no intentionality axiom"
+        },
+        {
+          "name": "h",
+          "type": "E",
+          "role": "The supplied object participant"
+        }
+      ],
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "s"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Theme",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "h"
+              }
+            ]
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "have something, concrete or abstract: Have(e) AND Agent(e,s) AND Theme(e,h). The subject is the possessor, not necessarily an intentional actor.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    }
+  },
+  "interface_assumptions": [],
+  "rhs_supplied": false
+}

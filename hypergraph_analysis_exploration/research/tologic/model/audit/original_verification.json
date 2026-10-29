@@ -1,0 +1,198 @@
+{
+  "status": "ALL_APPROVED_FORMULAS_FOUND_AFTER_FRESH_OPEN_SCOPE_ENUMERATION",
+  "results": [
+    {
+      "case": "bear",
+      "candidate_count": 130,
+      "complete": true,
+      "exact_approved_formula_present": true,
+      "approved_candidate_id": "b43f31ae027edab85496da20cecd5ac2f84bd968f19d89ca8fabd028a30736f3",
+      "matched_line": 20,
+      "parameters_and_lhs_unchanged": true,
+      "all_static_checks_passed": true,
+      "whole_set_equals_separate_oracle": true,
+      "oracle_candidate_count": 130,
+      "scope_alternatives": {},
+      "reference_path": "[redacted-local-path]",
+      "reference_sha256": "5ace7f5c3372a2a444e03af41f641190996a932f4d6f283070186d59831ed817",
+      "input_sha256": "9f807acd0f60e33c4b8579ac35da93b85f10aa67aba72955d6d4489442fd3c49",
+      "candidate_file_sha256": "f89de77b6da58e649a30d1bd958547643c701e699dc81a46dd70dcf5f01f0e4c"
+    },
+    {
+      "case": "life",
+      "candidate_count": 2,
+      "complete": true,
+      "exact_approved_formula_present": true,
+      "approved_candidate_id": "c59c6b2ed2d2ecdd321fed767b8616c1981153ca8a00ae4ee6e8fc4ff5348e31",
+      "matched_line": 2,
+      "parameters_and_lhs_unchanged": true,
+      "all_static_checks_passed": true,
+      "whole_set_equals_separate_oracle": true,
+      "oracle_candidate_count": 2,
+      "scope_alternatives": {},
+      "reference_path": "[redacted-local-path]",
+      "reference_sha256": "2b6e4a4a951187a685a49bd86b334d80cf360dd117c62de82ba9884a24dbf713",
+      "input_sha256": "5ed53a520019dcd967c955c282f4832570f01c491c2f0d0b32f0c0fea29fac0d",
+      "candidate_file_sha256": "7a9d8c60f03647653ccc2bdcc9f928ed49444973ca1947cc2637dfa282840527"
+    },
+    {
+      "case": "hand_in_hand",
+      "candidate_count": 3,
+      "complete": true,
+      "exact_approved_formula_present": true,
+      "approved_candidate_id": "51497cc63f8c7a398b5fe8f39e95f16b2fd3edc3681fbbbd3c9588724fa4227e",
+      "matched_line": 2,
+      "parameters_and_lhs_unchanged": true,
+      "all_static_checks_passed": true,
+      "whole_set_equals_separate_oracle": true,
+      "oracle_candidate_count": 3,
+      "scope_alternatives": {},
+      "reference_path": "[redacted-local-path]",
+      "reference_sha256": "a84952011977bce6c7e80205de34d9d27ec9a1c013a5c8e973d22338675e126c",
+      "input_sha256": "ac5a9d658cad574b80b0a4a90c7d740fc3083111d256891c264b03fa98f56179",
+      "candidate_file_sha256": "8cb7bbaf08231100ac21355c90bf8a14166083e0dda0da5eaaf5e2654bf91b3c"
+    },
+    {
+      "case": "all_along",
+      "candidate_count": 20,
+      "complete": true,
+      "exact_approved_formula_present": true,
+      "approved_candidate_id": "385a5ac16906dcaca0efc26503bf47cf1cd138e4735de25ece837a0406a7e85a",
+      "matched_line": 1,
+      "parameters_and_lhs_unchanged": true,
+      "all_static_checks_passed": true,
+      "whole_set_equals_separate_oracle": true,
+      "oracle_candidate_count": 20,
+      "scope_alternatives": {
+        "time_in_S": {
+          "count": 10,
+          "example_line": 1,
+          "example_candidate_id": "385a5ac16906dcaca0efc26503bf47cf1cd138e4735de25ece837a0406a7e85a",
+          "example_readable": "TARGET(e) IFF supplied-all-quantifier::time(World(e), LAMBDA r.oewn-00028468-n::time_range(r), LAMBDA t.Happen(e, t))"
+        },
+        "time_in_P": {
+          "count": 10,
+          "example_line": 11,
+          "example_candidate_id": "8dfd9d33f921594259d13168e2df0decc860c92547a062830dd3f03ab3474c59",
+          "example_readable": "TARGET(e) IFF supplied-all-quantifier::time(World(e), LAMBDA t.Happen(e, t), LAMBDA r.oewn-00028468-n::time_range(r))"
+        }
+      },
+      "reference_path": "[redacted-local-path]",
+      "reference_sha256": "20d5fec6b80b4bf8f1448bdfe8ae64966e7a6fe92e00ae9db60f084ebcbad55d",
+      "input_sha256": "1d82ec0cc685b3562d35dcc66c46af91b2237ed51d8e41b90ca9e16cd3e069e6",
+      "candidate_file_sha256": "a61dc30c591b51717e43ee6ded8e4d945545ef3f9384fc02228236649c2315f0"
+    },
+    {
+      "case": "immobility",
+      "candidate_count": 122,
+      "complete": true,
+      "exact_approved_formula_present": true,
+      "approved_candidate_id": "7ed895cdef917de5e21f17a2c45f29fd96c8c9daac8c922a8345ab2cabcdf639",
+      "matched_line": 36,
+      "parameters_and_lhs_unchanged": true,
+      "all_static_checks_passed": true,
+      "whole_set_equals_separate_oracle": true,
+      "oracle_candidate_count": 122,
+      "scope_alternatives": {
+        "not_inside_Nom": {
+          "count": 14,
+          "example_line": 5,
+          "example_candidate_id": "dd791a894ea5aa46167bfeaafc69728b3626e7d675f305a0d883a603dd09a1b3",
+          "example_readable": "TARGET(q) IFF (Nom[not oewn-01839438-v::event_with_subject](q) AND oewn-04731092-n::quality_entity(q))"
+        },
+        "not_outside_Nom": {
+          "count": 57,
+          "example_line": 9,
+          "example_candidate_id": "e5a493aa5a6a872ae83e835559a145ae04e467fd6ceef3dd3582d43b0ce9af93",
+          "example_readable": "TARGET(q) IFF (oewn-00024432-r::proposition_negation(Nom[oewn-01839438-v::event_with_subject](q)) AND oewn-04731092-n::quality_entity(q))"
+        },
+        "not_outside_exists_h": {
+          "count": 21,
+          "example_line": 12,
+          "example_candidate_id": "6dd429fd5d4eaee456e3ed0049d133e22d91188bf4cf8f77ce07ca20e7312cc4",
+          "example_readable": "TARGET(q) IFF (oewn-00024432-r::proposition_negation(EXISTS h.Nom[oewn-01839438-v::event_with_subject](h)) AND oewn-04731092-n::quality_entity(q))"
+        },
+        "exists_h_outside_not": {
+          "count": 48,
+          "example_line": 13,
+          "example_candidate_id": "57aca988793c9f55430a0557f480e9f80f111104e666e0baac497d790ebe95a7",
+          "example_readable": "TARGET(q) IFF (oewn-04731092-n::quality_entity(q) AND EXISTS h.oewn-00024432-r::proposition_negation(Nom[oewn-01839438-v::event_with_subject](h)))"
+        }
+      },
+      "reference_path": "[redacted-local-path]",
+      "reference_sha256": "05954286f0b57485a46e1a35e022b4f237408c69df376de166e8b812bcc90722",
+      "input_sha256": "8fb2abde44be1c4dfa1d510c300dba561d4dd5d977989c453946a8ea3a50249e",
+      "candidate_file_sha256": "8849dc51557d703c39e9a69b43140aa8ee8997048b87ae65dffe935ebd042344"
+    },
+    {
+      "case": "impermissible",
+      "candidate_count": 178,
+      "complete": true,
+      "exact_approved_formula_present": true,
+      "approved_candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+      "matched_line": 17,
+      "parameters_and_lhs_unchanged": true,
+      "all_static_checks_passed": true,
+      "whole_set_equals_separate_oracle": true,
+      "oracle_candidate_count": 178,
+      "scope_alternatives": {
+        "not_outside_exists_r": {
+          "count": 16,
+          "example_line": 17,
+          "example_candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+          "example_readable": "TARGET(b) IFF oewn-00024432-r::proposition_negation(EXISTS r.oewn-00804608-v::passive_entity_theme(r, b))"
+        },
+        "exists_r_outside_not": {
+          "count": 146,
+          "example_line": 33,
+          "example_candidate_id": "a67f206ff83ab2fcf5b2bd93456a365e6f32ac3c1135ff6112c812bb9628ab1e",
+          "example_readable": "TARGET(b) IFF EXISTS r.oewn-00024432-r::proposition_negation(oewn-00804608-v::passive_entity_theme(r, b))"
+        },
+        "without_not": {
+          "count": 16,
+          "example_line": 1,
+          "example_candidate_id": "539ac860411ccd9bd5f277a5be444c2de09d96231b8df169df00b8b26b4426c0",
+          "example_readable": "TARGET(b) IFF EXISTS r.oewn-00804608-v::passive_entity_theme(r, b)"
+        }
+      },
+      "reference_path": "[redacted-local-path]",
+      "reference_sha256": "fb953bf2036fb132eb5b7c391fbf652913746a3403595835d654a10aeb4d3316",
+      "input_sha256": "3b716254937ad47cddd50c55e5d5210e780a3b48a1618b933cae118ce2d1d429",
+      "candidate_file_sha256": "a29456bc3e0369b0f179c8c4e63dded2f9c3bae0f8e0ecd380655cb000b7ef7f"
+    }
+  ],
+  "total_candidates": 455,
+  "scope_was_not_semantically_preselected": true,
+  "answer_loaded_only_after_search_completed": true,
+  "unchanged_sources_interfaces_and_target_parameters": true,
+  "basis_rhs_supplied": false,
+  "new_semantic_review_needed_for_this_containment_check": false,
+  "published": false,
+  "frozen_policies": {
+    "config/policy.json": "6711c8a52c60c53fef1182e1ebd0fe1c38b52a556802899a3705b2852151a3c6",
+    "config/structural_relations.json": "867ab7dcd197b4ef81259c993c1ae22c52230a407340401c5f62bb385026367a",
+    "config/nominalization.json": "430c382776491f60fea75f78ac780b3575459beed9043945bdd94cae6fd4bd1e",
+    "config/event_closure.json": "b6f9c2fbe230f91f2bdaed275d5f8b9007da2819e41c51eba86f16d01c1e844b",
+    "specification/ENUMERATION.md": "15638d8a4c42f38bddc8bc3cd2de73dd3b058dac7f21d4d649869210bb7b1e75"
+  },
+  "search_code": {
+    "src\\tologic_v3\\__init__.py": "b6cc90b43c88948379feffc26067454e82fbc1a45a2b4bd91f1c65da1f75835e",
+    "src\\tologic_v3\\__main__.py": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7",
+    "src\\tologic_v3\\backends.py": "b382acb142365a3c4ee50f4ad624318ae956d0af9b83a0263e29a3210f85bfe4",
+    "src\\tologic_v3\\cleaning_lingua.py": "c89aa4589f79c95e46a2e5be60dbd43f58171341ca4bc0e01d4d1dfa42ebed9e",
+    "src\\tologic_v3\\cli.py": "aafc691b21ab8f27c7fd76d713a9731afea8b297da7a9a9921f3bcd7721ab857",
+    "src\\tologic_v3\\common.py": "ac7dbad2eca03ebc244ff14beba85e79f19cb0313e2f6e2105369d73e5c8fa38",
+    "src\\tologic_v3\\demo.py": "da5cb490b45cb864156194a8484f2dee83eb54679b0b8e73c552e4560da1f8af",
+    "src\\tologic_v3\\enumeration.py": "92b6888951d73a72f6d1b75e1313205915734bc8dd6bc9270744b4e4e876440e",
+    "src\\tologic_v3\\enumeration_input.py": "b8841ad666de5784cf6ec10b13a65ccd785f8c6763f6bdb77929536de57cd3d8",
+    "src\\tologic_v3\\enumeration_interfaces.py": "0997e307d0d32a6118805046e2c3077504e3a7ca677ace11d2be872f559752e4",
+    "src\\tologic_v3\\enumeration_search.py": "77f6bbe3731e48c5c63d1b23f22ec40d3f7b60c6a33f3647483a858a1b650c8c",
+    "src\\tologic_v3\\event_closure.py": "fffd74e0c27c8e1522de7db303e3377bab58fc98d41c72da714ada70933fb949",
+    "src\\tologic_v3\\frontier.py": "eeeb6a44b76946d88bdc92fc058bdef672b65006d12799b3367dccd1f4ab2868",
+    "src\\tologic_v3\\gates.py": "d4dae2864f05a85f35cd230697c4b986a1299a1d2dc77eaffe01fe486ac80a0a",
+    "src\\tologic_v3\\importer.py": "6a3d97210770f2aa8eb5a85cf60d486affceeaf2136b09b966a36af10a95d6f0",
+    "src\\tologic_v3\\nominalization.py": "46f6999a47a3a534bc88fff20c4e3d024f41dba782914693dba80265e45ab384",
+    "src\\tologic_v3\\parameter_projection.py": "e5969951173b0c733e563da6c6b109fd8ec042b3cf9f404ba2bfb61a9ccf4d1c",
+    "src\\tologic_v3\\pipeline.py": "afbd6cd5a7cd6aaae2bd3ae9b3c017c02ae441ae9a8bfa467f5670be329a544f"
+  }
+}

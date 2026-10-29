@@ -1,0 +1,7 @@
+{
+  "candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+  "line": 17,
+  "readable_formula": "Impermissible(b:E) ↔ Not(∃r:V [Permit(r) ∧ Agent(r,ImplicitSubj(r)) ∧ Theme(r,b)])",
+  "source": "User-accepted formula; matched after enumeration",
+  "exact_ast_match": true
+}

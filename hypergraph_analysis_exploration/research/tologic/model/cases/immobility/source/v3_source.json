@@ -1,0 +1,1671 @@
+{
+  "schema_version": "v3.source/1",
+  "synset_id": "oewn-04783538-n",
+  "lemmas": [
+    "immobility"
+  ],
+  "definition": "the quality of not moving",
+  "is_basis": false,
+  "occurrences": [
+    {
+      "occurrence_id": "syntax:the:0",
+      "text": "the",
+      "start": 0,
+      "end": 3,
+      "synset_id": "@syntax:the",
+      "kind": "article",
+      "alignment": "literal_article_token"
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:p0:t4",
+      "text": "quality",
+      "start": 4,
+      "end": 11,
+      "synset_id": "oewn-04731092-n",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-04783538-n:p0:t4"
+      ],
+      "stored_surface": "quality",
+      "stored_lemma": "quality",
+      "part_id": "p0"
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:p0:t5",
+      "text": "of",
+      "start": 12,
+      "end": 14,
+      "synset_id": "of-6",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-04783538-n:p0:t5"
+      ],
+      "stored_surface": "of",
+      "stored_lemma": "of",
+      "part_id": "p0"
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:p0:t6",
+      "text": "not",
+      "start": 15,
+      "end": 18,
+      "synset_id": "oewn-00024432-r",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-04783538-n:p0:t6"
+      ],
+      "stored_surface": "not",
+      "stored_lemma": "not",
+      "part_id": "p0"
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:p0:t7",
+      "text": "moving",
+      "start": 19,
+      "end": 25,
+      "synset_id": "oewn-01839438-v",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-04783538-n:p0:t7"
+      ],
+      "stored_surface": "moving",
+      "stored_lemma": "move",
+      "part_id": "p0"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "definition",
+      "kind": "definition",
+      "text": "the quality of not moving"
+    }
+  ],
+  "provenance": {
+    "kind": "v2_source_only",
+    "path": "[redacted-local-path]",
+    "upstream_sha256": "e768fba7b54d74eddc8567e62a1d7731478a6566f0ec55fcf33328a8839fed8a",
+    "upstream_schema_version": "tologic-v2-item/2",
+    "pos_hint": "n",
+    "definition_text_field": "raw_text",
+    "wsd_policy": "preserve_fixed_identities_no_reselection",
+    "excluded_support_occurrences": 0
+  },
+  "raw_wsd": {
+    "lexical_occurrences": [
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 4,
+        "in_definition_scope": true,
+        "lemma": "the",
+        "occurrence_id": "oewn-04783538-n:p0:t3",
+        "part_id": "p0",
+        "pos": "unknown",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner in definition scope but no candidates; skipped.",
+        "syntactic_pos": "DET",
+        "text": "the",
+        "token_id": "t3"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "an essential and distinguishing attribute of something or someone",
+            "examples": [
+              "the quality of mercy is not strained"
+            ],
+            "lemmas": [
+              "quality"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04731092-n"
+          },
+          {
+            "definition": "a degree or grade of excellence or worth",
+            "examples": [
+              "the quality of students has risen",
+              "an executive of low caliber"
+            ],
+            "lemmas": [
+              "quality",
+              "caliber",
+              "calibre"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04735326-n"
+          },
+          {
+            "definition": "a characteristic property that defines the apparent individual nature of something",
+            "examples": [
+              "each town has a quality all its own",
+              "the radical character of our demands"
+            ],
+            "lemmas": [
+              "quality",
+              "character",
+              "lineament"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-05857811-n"
+          },
+          {
+            "definition": "(music) the distinctive property of a complex sound (a voice or noise or musical sound)",
+            "examples": [
+              "the timbre of her soprano was rich and lovely",
+              "the muffled tones of the broken bell summoned them to meet"
+            ],
+            "lemmas": [
+              "timbre",
+              "timber",
+              "quality",
+              "tone"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04994869-n"
+          },
+          {
+            "definition": "high social status",
+            "examples": [
+              "a man of quality"
+            ],
+            "lemmas": [
+              "quality"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-13971206-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "attr",
+        "head_index": 2,
+        "in_definition_scope": true,
+        "lemma": "quality",
+        "occurrence_id": "oewn-04783538-n:p0:t4",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-04731092-n",
+        "selection_rationale": "Required definition noun; 'an essential and distinguishing attribute' matches 'quality of not moving'.",
+        "syntactic_pos": "NOUN",
+        "text": "quality",
+        "token_id": "t4"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "Possession/association.",
+            "examples": [
+              "the roof of the house"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-1"
+          },
+          {
+            "definition": "Partitive (one/some/most of).",
+            "examples": [
+              "one of the students",
+              "most of the water"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-2"
+          },
+          {
+            "definition": "Material/composition.",
+            "examples": [
+              "made of wood",
+              "a ring of gold"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-3"
+          },
+          {
+            "definition": "Measure/quantity.",
+            "examples": [
+              "a cup of tea",
+              "three kilos of rice"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-4"
+          },
+          {
+            "definition": "Attribute.",
+            "examples": [
+              "a person of courage"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-5"
+          },
+          {
+            "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+            "examples": [
+              "of cytoplasm",
+              "of biological origin",
+              "of local importance"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-6"
+          },
+          {
+            "definition": "Lack, absence, deprivation, or freedom-from complement after adjectives and nouns.",
+            "examples": [
+              "devoid of good sense",
+              "devoid of judgment",
+              "bereft of hope",
+              "destitute of resources",
+              "empty of meaning",
+              "free of defects",
+              "lack of evidence",
+              "absence of evidence"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-7"
+          },
+          {
+            "definition": "Field, subfield, subject-matter, or object-domain relation for nominal scientific, scholarly, or conceptual nouns.",
+            "examples": [
+              "branch of neuroscience",
+              "foundations of mental phenomena",
+              "study of language",
+              "science of behavior",
+              "field of biology",
+              "foundations of mathematics"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-8"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "prep",
+        "head_index": 4,
+        "in_definition_scope": true,
+        "lemma": "of",
+        "occurrence_id": "oewn-04783538-n:p0:t5",
+        "part_id": "p0",
+        "pos": "prep",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "of-6",
+        "selection_rationale": "Required preposition; relational/pertaining-to sense ('of not moving' = pertaining to not moving) fits the pattern.",
+        "syntactic_pos": "ADP",
+        "text": "of",
+        "token_id": "t5"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "negation of a word or group of words",
+            "examples": [
+              "he does not speak French",
+              "she is not going",
+              "they are not friends",
+              "not many",
+              "not much",
+              "not at all"
+            ],
+            "lemmas": [
+              "not",
+              "non"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00024432-r"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "neg",
+        "head_index": 7,
+        "in_definition_scope": true,
+        "lemma": "not",
+        "occurrence_id": "oewn-04783538-n:p0:t6",
+        "part_id": "p0",
+        "pos": "r",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00024432-r",
+        "selection_rationale": "Required negation adverb; only candidate matches meaning.",
+        "syntactic_pos": "PART",
+        "text": "not",
+        "token_id": "t6"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "change location; move, travel, or proceed, also metaphorically",
+            "examples": [
+              "How fast does your new car go?",
+              "We travelled from Rome to Naples by bus",
+              "The policemen went from door to door looking for the suspect",
+              "The soldiers moved towards the city in an attempt to take it before night fell",
+              "news travelled fast"
+            ],
+            "lemmas": [
+              "travel",
+              "go",
+              "move",
+              "locomote"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01839438-v"
+          },
+          {
+            "definition": "cause to move or shift into a new position or place, both in a concrete and in an abstract sense",
+            "examples": [
+              "Move those boxes into the corner, please",
+              "I'm moving my money to another bank",
+              "The director moved more responsibilities onto his new assistant"
+            ],
+            "lemmas": [
+              "move",
+              "displace"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01854282-v"
+          },
+          {
+            "definition": "move so as to change position, perform a nontranslational motion",
+            "examples": [
+              "He moved his hand slightly to the right"
+            ],
+            "lemmas": [
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01835473-v"
+          },
+          {
+            "definition": "change residence, affiliation, or place of employment",
+            "examples": [
+              "We moved from Idaho to Nebraska",
+              "The basketball player moved from one team to another"
+            ],
+            "lemmas": [
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01859592-v"
+          },
+          {
+            "definition": "follow a procedure or take a course",
+            "examples": [
+              "We should go farther in this matter",
+              "She went through a lot of trouble",
+              "go about the world in a certain manner",
+              "Messages must go through diplomatic channels"
+            ],
+            "lemmas": [
+              "go",
+              "proceed",
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02377696-v"
+          },
+          {
+            "definition": "be in a state of action",
+            "examples": [
+              "she is always moving"
+            ],
+            "lemmas": [
+              "be active",
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00014542-v"
+          },
+          {
+            "definition": "go or proceed from one point to another",
+            "examples": [
+              "the debate moved from family values to the economy"
+            ],
+            "lemmas": [
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00124250-v"
+          },
+          {
+            "definition": "perform an action, or work out or perform (an action)",
+            "examples": [
+              "think before you act",
+              "We must move quickly",
+              "The governor should act on the new energy bill",
+              "The nanny acted quickly by grabbing the toddler and covering him with a wet towel"
+            ],
+            "lemmas": [
+              "act",
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02372362-v"
+          },
+          {
+            "definition": "have an emotional or cognitive impact upon",
+            "examples": [
+              "This child impressed me as unusually mature",
+              "This behavior struck me as odd",
+              "he was dumb-struck by the news",
+              "her comments struck a sour note"
+            ],
+            "lemmas": [
+              "affect",
+              "impress",
+              "move",
+              "strike"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01771801-v"
+          },
+          {
+            "definition": "give an incentive for action",
+            "examples": [
+              "This moved me to sacrifice my career"
+            ],
+            "lemmas": [
+              "motivate",
+              "actuate",
+              "propel",
+              "move",
+              "prompt",
+              "incite"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01653541-v"
+          },
+          {
+            "definition": "arouse sympathy or compassion in",
+            "examples": [
+              "Her fate moved us all"
+            ],
+            "lemmas": [
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01775311-v"
+          },
+          {
+            "definition": "dispose of by selling",
+            "examples": [
+              "The chairman of the company told the salesmen to move the computers"
+            ],
+            "lemmas": [
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02360955-v"
+          },
+          {
+            "definition": "progress by being changed",
+            "examples": [
+              "The speech has to go through several more drafts",
+              "run through your presentation before the meeting"
+            ],
+            "lemmas": [
+              "move",
+              "go",
+              "run"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00540190-v"
+          },
+          {
+            "definition": "live one's life in a specified environment",
+            "examples": [
+              "she moves in certain circles only"
+            ],
+            "lemmas": [
+              "move"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02604860-v"
+          },
+          {
+            "definition": "have a turn; make one's move in a game",
+            "examples": [
+              "Can I go now?"
+            ],
+            "lemmas": [
+              "move",
+              "go"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01079008-v"
+          },
+          {
+            "definition": "propose formally; in a debate or parliamentary meeting",
+            "examples": [],
+            "lemmas": [
+              "move",
+              "make a motion"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00880877-v"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "pcomp",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "move",
+        "occurrence_id": "oewn-04783538-n:p0:t7",
+        "part_id": "p0",
+        "pos": "v",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-01839438-v",
+        "selection_rationale": "Required definition verb; 'not moving' negates the sense of changing location; the primary motion sense fits.",
+        "syntactic_pos": "VERB",
+        "text": "moving",
+        "token_id": "t7"
+      }
+    ],
+    "selected_wsd": [
+      {
+        "lemma": "quality",
+        "occurrence_id": "oewn-04783538-n:p0:t4",
+        "part_id": "p0",
+        "pos": "n",
+        "synset_id": "oewn-04731092-n",
+        "text": "quality",
+        "token_id": "t4"
+      },
+      {
+        "lemma": "of",
+        "occurrence_id": "oewn-04783538-n:p0:t5",
+        "part_id": "p0",
+        "pos": "prep",
+        "synset_id": "of-6",
+        "text": "of",
+        "token_id": "t5"
+      },
+      {
+        "lemma": "not",
+        "occurrence_id": "oewn-04783538-n:p0:t6",
+        "part_id": "p0",
+        "pos": "r",
+        "synset_id": "oewn-00024432-r",
+        "text": "not",
+        "token_id": "t6"
+      },
+      {
+        "lemma": "move",
+        "occurrence_id": "oewn-04783538-n:p0:t7",
+        "part_id": "p0",
+        "pos": "v",
+        "synset_id": "oewn-01839438-v",
+        "text": "moving",
+        "token_id": "t7"
+      }
+    ],
+    "parts": {
+      "p0": {
+        "text": "the quality of not moving",
+        "wsd": {
+          "assignments": [
+            {
+              "candidate_inventory": [],
+              "decision": "function_word",
+              "dependency": "det",
+              "frozen_token_record": {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dependency": "det",
+                "head_index": 4,
+                "in_definition_scope": true,
+                "lemma": "the",
+                "occurrence_id": "oewn-04783538-n:p0:t3",
+                "part_id": "p0",
+                "pos": "unknown",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "selection_rationale": "Determiner in definition scope but no candidates; skipped.",
+                "syntactic_pos": "DET",
+                "text": "the",
+                "token_id": "t3"
+              },
+              "head_index": 4,
+              "identity": null,
+              "in_definition_scope": true,
+              "lemma": "the",
+              "occurrence_id": "oewn-04783538-n:p0:t3",
+              "part_id": "p0",
+              "pos": "unknown",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "selected_synset_id": null,
+              "selection_rationale": "Determiner in definition scope but no candidates; skipped.",
+              "syntactic_pos": "DET",
+              "text": "the",
+              "token_id": "t3"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "definition": "an essential and distinguishing attribute of something or someone",
+                  "examples": [
+                    "the quality of mercy is not strained"
+                  ],
+                  "lemmas": [
+                    "quality"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-04731092-n"
+                },
+                {
+                  "definition": "a degree or grade of excellence or worth",
+                  "examples": [
+                    "the quality of students has risen",
+                    "an executive of low caliber"
+                  ],
+                  "lemmas": [
+                    "quality",
+                    "caliber",
+                    "calibre"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-04735326-n"
+                },
+                {
+                  "definition": "a characteristic property that defines the apparent individual nature of something",
+                  "examples": [
+                    "each town has a quality all its own",
+                    "the radical character of our demands"
+                  ],
+                  "lemmas": [
+                    "quality",
+                    "character",
+                    "lineament"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-05857811-n"
+                },
+                {
+                  "definition": "(music) the distinctive property of a complex sound (a voice or noise or musical sound)",
+                  "examples": [
+                    "the timbre of her soprano was rich and lovely",
+                    "the muffled tones of the broken bell summoned them to meet"
+                  ],
+                  "lemmas": [
+                    "timbre",
+                    "timber",
+                    "quality",
+                    "tone"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-04994869-n"
+                },
+                {
+                  "definition": "high social status",
+                  "examples": [
+                    "a man of quality"
+                  ],
+                  "lemmas": [
+                    "quality"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-13971206-n"
+                }
+              ],
+              "decision": "selected",
+              "dependency": "attr",
+              "frozen_token_record": {
+                "candidate_inventory": [
+                  {
+                    "definition": "an essential and distinguishing attribute of something or someone",
+                    "examples": [
+                      "the quality of mercy is not strained"
+                    ],
+                    "lemmas": [
+                      "quality"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-04731092-n"
+                  },
+                  {
+                    "definition": "a degree or grade of excellence or worth",
+                    "examples": [
+                      "the quality of students has risen",
+                      "an executive of low caliber"
+                    ],
+                    "lemmas": [
+                      "quality",
+                      "caliber",
+                      "calibre"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-04735326-n"
+                  },
+                  {
+                    "definition": "a characteristic property that defines the apparent individual nature of something",
+                    "examples": [
+                      "each town has a quality all its own",
+                      "the radical character of our demands"
+                    ],
+                    "lemmas": [
+                      "quality",
+                      "character",
+                      "lineament"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-05857811-n"
+                  },
+                  {
+                    "definition": "(music) the distinctive property of a complex sound (a voice or noise or musical sound)",
+                    "examples": [
+                      "the timbre of her soprano was rich and lovely",
+                      "the muffled tones of the broken bell summoned them to meet"
+                    ],
+                    "lemmas": [
+                      "timbre",
+                      "timber",
+                      "quality",
+                      "tone"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-04994869-n"
+                  },
+                  {
+                    "definition": "high social status",
+                    "examples": [
+                      "a man of quality"
+                    ],
+                    "lemmas": [
+                      "quality"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-13971206-n"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "attr",
+                "head_index": 2,
+                "in_definition_scope": true,
+                "lemma": "quality",
+                "occurrence_id": "oewn-04783538-n:p0:t4",
+                "part_id": "p0",
+                "pos": "n",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-04731092-n",
+                "selection_rationale": "Required definition noun; 'an essential and distinguishing attribute' matches 'quality of not moving'.",
+                "syntactic_pos": "NOUN",
+                "text": "quality",
+                "token_id": "t4"
+              },
+              "head_index": 2,
+              "identity": "oewn-04731092-n",
+              "in_definition_scope": true,
+              "lemma": "quality",
+              "occurrence_id": "oewn-04783538-n:p0:t4",
+              "part_id": "p0",
+              "pos": "n",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "definition": "an essential and distinguishing attribute of something or someone",
+                "examples": [
+                  "the quality of mercy is not strained"
+                ],
+                "identity": "oewn-04731092-n",
+                "lemmas": [
+                  "quality"
+                ],
+                "pos": "n"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "selected_synset_id": "oewn-04731092-n",
+              "selected_wsd_result": {
+                "lemma": "quality",
+                "occurrence_id": "oewn-04783538-n:p0:t4",
+                "part_id": "p0",
+                "pos": "n",
+                "synset_id": "oewn-04731092-n",
+                "text": "quality",
+                "token_id": "t4"
+              },
+              "selection_rationale": "Required definition noun; 'an essential and distinguishing attribute' matches 'quality of not moving'.",
+              "syntactic_pos": "NOUN",
+              "text": "quality",
+              "token_id": "t4"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "definition": "Possession/association.",
+                  "examples": [
+                    "the roof of the house"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-1"
+                },
+                {
+                  "definition": "Partitive (one/some/most of).",
+                  "examples": [
+                    "one of the students",
+                    "most of the water"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-2"
+                },
+                {
+                  "definition": "Material/composition.",
+                  "examples": [
+                    "made of wood",
+                    "a ring of gold"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-3"
+                },
+                {
+                  "definition": "Measure/quantity.",
+                  "examples": [
+                    "a cup of tea",
+                    "three kilos of rice"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-4"
+                },
+                {
+                  "definition": "Attribute.",
+                  "examples": [
+                    "a person of courage"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-5"
+                },
+                {
+                  "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                  "examples": [
+                    "of cytoplasm",
+                    "of biological origin",
+                    "of local importance"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-6"
+                },
+                {
+                  "definition": "Lack, absence, deprivation, or freedom-from complement after adjectives and nouns.",
+                  "examples": [
+                    "devoid of good sense",
+                    "devoid of judgment",
+                    "bereft of hope",
+                    "destitute of resources",
+                    "empty of meaning",
+                    "free of defects",
+                    "lack of evidence",
+                    "absence of evidence"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-7"
+                },
+                {
+                  "definition": "Field, subfield, subject-matter, or object-domain relation for nominal scientific, scholarly, or conceptual nouns.",
+                  "examples": [
+                    "branch of neuroscience",
+                    "foundations of mental phenomena",
+                    "study of language",
+                    "science of behavior",
+                    "field of biology",
+                    "foundations of mathematics"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-8"
+                }
+              ],
+              "decision": "selected",
+              "dependency": "prep",
+              "frozen_token_record": {
+                "candidate_inventory": [
+                  {
+                    "definition": "Possession/association.",
+                    "examples": [
+                      "the roof of the house"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-1"
+                  },
+                  {
+                    "definition": "Partitive (one/some/most of).",
+                    "examples": [
+                      "one of the students",
+                      "most of the water"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-2"
+                  },
+                  {
+                    "definition": "Material/composition.",
+                    "examples": [
+                      "made of wood",
+                      "a ring of gold"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-3"
+                  },
+                  {
+                    "definition": "Measure/quantity.",
+                    "examples": [
+                      "a cup of tea",
+                      "three kilos of rice"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-4"
+                  },
+                  {
+                    "definition": "Attribute.",
+                    "examples": [
+                      "a person of courage"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-5"
+                  },
+                  {
+                    "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                    "examples": [
+                      "of cytoplasm",
+                      "of biological origin",
+                      "of local importance"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-6"
+                  },
+                  {
+                    "definition": "Lack, absence, deprivation, or freedom-from complement after adjectives and nouns.",
+                    "examples": [
+                      "devoid of good sense",
+                      "devoid of judgment",
+                      "bereft of hope",
+                      "destitute of resources",
+                      "empty of meaning",
+                      "free of defects",
+                      "lack of evidence",
+                      "absence of evidence"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-7"
+                  },
+                  {
+                    "definition": "Field, subfield, subject-matter, or object-domain relation for nominal scientific, scholarly, or conceptual nouns.",
+                    "examples": [
+                      "branch of neuroscience",
+                      "foundations of mental phenomena",
+                      "study of language",
+                      "science of behavior",
+                      "field of biology",
+                      "foundations of mathematics"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-8"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "prep",
+                "head_index": 4,
+                "in_definition_scope": true,
+                "lemma": "of",
+                "occurrence_id": "oewn-04783538-n:p0:t5",
+                "part_id": "p0",
+                "pos": "prep",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "of-6",
+                "selection_rationale": "Required preposition; relational/pertaining-to sense ('of not moving' = pertaining to not moving) fits the pattern.",
+                "syntactic_pos": "ADP",
+                "text": "of",
+                "token_id": "t5"
+              },
+              "head_index": 4,
+              "identity": "of-6",
+              "in_definition_scope": true,
+              "lemma": "of",
+              "occurrence_id": "oewn-04783538-n:p0:t5",
+              "part_id": "p0",
+              "pos": "prep",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                "examples": [
+                  "of cytoplasm",
+                  "of biological origin",
+                  "of local importance"
+                ],
+                "identity": "of-6",
+                "lemmas": [],
+                "pos": "prep"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "selected_synset_id": "of-6",
+              "selected_wsd_result": {
+                "lemma": "of",
+                "occurrence_id": "oewn-04783538-n:p0:t5",
+                "part_id": "p0",
+                "pos": "prep",
+                "synset_id": "of-6",
+                "text": "of",
+                "token_id": "t5"
+              },
+              "selection_rationale": "Required preposition; relational/pertaining-to sense ('of not moving' = pertaining to not moving) fits the pattern.",
+              "syntactic_pos": "ADP",
+              "text": "of",
+              "token_id": "t5"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "definition": "negation of a word or group of words",
+                  "examples": [
+                    "he does not speak French",
+                    "she is not going",
+                    "they are not friends",
+                    "not many",
+                    "not much",
+                    "not at all"
+                  ],
+                  "lemmas": [
+                    "not",
+                    "non"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00024432-r"
+                }
+              ],
+              "decision": "selected",
+              "dependency": "neg",
+              "frozen_token_record": {
+                "candidate_inventory": [
+                  {
+                    "definition": "negation of a word or group of words",
+                    "examples": [
+                      "he does not speak French",
+                      "she is not going",
+                      "they are not friends",
+                      "not many",
+                      "not much",
+                      "not at all"
+                    ],
+                    "lemmas": [
+                      "not",
+                      "non"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00024432-r"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "neg",
+                "head_index": 7,
+                "in_definition_scope": true,
+                "lemma": "not",
+                "occurrence_id": "oewn-04783538-n:p0:t6",
+                "part_id": "p0",
+                "pos": "r",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-00024432-r",
+                "selection_rationale": "Required negation adverb; only candidate matches meaning.",
+                "syntactic_pos": "PART",
+                "text": "not",
+                "token_id": "t6"
+              },
+              "head_index": 7,
+              "identity": "oewn-00024432-r",
+              "in_definition_scope": true,
+              "lemma": "not",
+              "occurrence_id": "oewn-04783538-n:p0:t6",
+              "part_id": "p0",
+              "pos": "r",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "definition": "negation of a word or group of words",
+                "examples": [
+                  "he does not speak French",
+                  "she is not going",
+                  "they are not friends",
+                  "not many",
+                  "not much",
+                  "not at all"
+                ],
+                "identity": "oewn-00024432-r",
+                "lemmas": [
+                  "not",
+                  "non"
+                ],
+                "pos": "r"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "selected_synset_id": "oewn-00024432-r",
+              "selected_wsd_result": {
+                "lemma": "not",
+                "occurrence_id": "oewn-04783538-n:p0:t6",
+                "part_id": "p0",
+                "pos": "r",
+                "synset_id": "oewn-00024432-r",
+                "text": "not",
+                "token_id": "t6"
+              },
+              "selection_rationale": "Required negation adverb; only candidate matches meaning.",
+              "syntactic_pos": "PART",
+              "text": "not",
+              "token_id": "t6"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "definition": "change location; move, travel, or proceed, also metaphorically",
+                  "examples": [
+                    "How fast does your new car go?",
+                    "We travelled from Rome to Naples by bus",
+                    "The policemen went from door to door looking for the suspect",
+                    "The soldiers moved towards the city in an attempt to take it before night fell",
+                    "news travelled fast"
+                  ],
+                  "lemmas": [
+                    "travel",
+                    "go",
+                    "move",
+                    "locomote"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01839438-v"
+                },
+                {
+                  "definition": "cause to move or shift into a new position or place, both in a concrete and in an abstract sense",
+                  "examples": [
+                    "Move those boxes into the corner, please",
+                    "I'm moving my money to another bank",
+                    "The director moved more responsibilities onto his new assistant"
+                  ],
+                  "lemmas": [
+                    "move",
+                    "displace"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01854282-v"
+                },
+                {
+                  "definition": "move so as to change position, perform a nontranslational motion",
+                  "examples": [
+                    "He moved his hand slightly to the right"
+                  ],
+                  "lemmas": [
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01835473-v"
+                },
+                {
+                  "definition": "change residence, affiliation, or place of employment",
+                  "examples": [
+                    "We moved from Idaho to Nebraska",
+                    "The basketball player moved from one team to another"
+                  ],
+                  "lemmas": [
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01859592-v"
+                },
+                {
+                  "definition": "follow a procedure or take a course",
+                  "examples": [
+                    "We should go farther in this matter",
+                    "She went through a lot of trouble",
+                    "go about the world in a certain manner",
+                    "Messages must go through diplomatic channels"
+                  ],
+                  "lemmas": [
+                    "go",
+                    "proceed",
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-02377696-v"
+                },
+                {
+                  "definition": "be in a state of action",
+                  "examples": [
+                    "she is always moving"
+                  ],
+                  "lemmas": [
+                    "be active",
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-00014542-v"
+                },
+                {
+                  "definition": "go or proceed from one point to another",
+                  "examples": [
+                    "the debate moved from family values to the economy"
+                  ],
+                  "lemmas": [
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-00124250-v"
+                },
+                {
+                  "definition": "perform an action, or work out or perform (an action)",
+                  "examples": [
+                    "think before you act",
+                    "We must move quickly",
+                    "The governor should act on the new energy bill",
+                    "The nanny acted quickly by grabbing the toddler and covering him with a wet towel"
+                  ],
+                  "lemmas": [
+                    "act",
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-02372362-v"
+                },
+                {
+                  "definition": "have an emotional or cognitive impact upon",
+                  "examples": [
+                    "This child impressed me as unusually mature",
+                    "This behavior struck me as odd",
+                    "he was dumb-struck by the news",
+                    "her comments struck a sour note"
+                  ],
+                  "lemmas": [
+                    "affect",
+                    "impress",
+                    "move",
+                    "strike"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01771801-v"
+                },
+                {
+                  "definition": "give an incentive for action",
+                  "examples": [
+                    "This moved me to sacrifice my career"
+                  ],
+                  "lemmas": [
+                    "motivate",
+                    "actuate",
+                    "propel",
+                    "move",
+                    "prompt",
+                    "incite"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01653541-v"
+                },
+                {
+                  "definition": "arouse sympathy or compassion in",
+                  "examples": [
+                    "Her fate moved us all"
+                  ],
+                  "lemmas": [
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01775311-v"
+                },
+                {
+                  "definition": "dispose of by selling",
+                  "examples": [
+                    "The chairman of the company told the salesmen to move the computers"
+                  ],
+                  "lemmas": [
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-02360955-v"
+                },
+                {
+                  "definition": "progress by being changed",
+                  "examples": [
+                    "The speech has to go through several more drafts",
+                    "run through your presentation before the meeting"
+                  ],
+                  "lemmas": [
+                    "move",
+                    "go",
+                    "run"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-00540190-v"
+                },
+                {
+                  "definition": "live one's life in a specified environment",
+                  "examples": [
+                    "she moves in certain circles only"
+                  ],
+                  "lemmas": [
+                    "move"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-02604860-v"
+                },
+                {
+                  "definition": "have a turn; make one's move in a game",
+                  "examples": [
+                    "Can I go now?"
+                  ],
+                  "lemmas": [
+                    "move",
+                    "go"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-01079008-v"
+                },
+                {
+                  "definition": "propose formally; in a debate or parliamentary meeting",
+                  "examples": [],
+                  "lemmas": [
+                    "move",
+                    "make a motion"
+                  ],
+                  "pos": "v",
+                  "synset_id": "oewn-00880877-v"
+                }
+              ],
+              "decision": "selected",
+              "dependency": "pcomp",
+              "frozen_token_record": {
+                "candidate_inventory": [
+                  {
+                    "definition": "change location; move, travel, or proceed, also metaphorically",
+                    "examples": [
+                      "How fast does your new car go?",
+                      "We travelled from Rome to Naples by bus",
+                      "The policemen went from door to door looking for the suspect",
+                      "The soldiers moved towards the city in an attempt to take it before night fell",
+                      "news travelled fast"
+                    ],
+                    "lemmas": [
+                      "travel",
+                      "go",
+                      "move",
+                      "locomote"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01839438-v"
+                  },
+                  {
+                    "definition": "cause to move or shift into a new position or place, both in a concrete and in an abstract sense",
+                    "examples": [
+                      "Move those boxes into the corner, please",
+                      "I'm moving my money to another bank",
+                      "The director moved more responsibilities onto his new assistant"
+                    ],
+                    "lemmas": [
+                      "move",
+                      "displace"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01854282-v"
+                  },
+                  {
+                    "definition": "move so as to change position, perform a nontranslational motion",
+                    "examples": [
+                      "He moved his hand slightly to the right"
+                    ],
+                    "lemmas": [
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01835473-v"
+                  },
+                  {
+                    "definition": "change residence, affiliation, or place of employment",
+                    "examples": [
+                      "We moved from Idaho to Nebraska",
+                      "The basketball player moved from one team to another"
+                    ],
+                    "lemmas": [
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01859592-v"
+                  },
+                  {
+                    "definition": "follow a procedure or take a course",
+                    "examples": [
+                      "We should go farther in this matter",
+                      "She went through a lot of trouble",
+                      "go about the world in a certain manner",
+                      "Messages must go through diplomatic channels"
+                    ],
+                    "lemmas": [
+                      "go",
+                      "proceed",
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-02377696-v"
+                  },
+                  {
+                    "definition": "be in a state of action",
+                    "examples": [
+                      "she is always moving"
+                    ],
+                    "lemmas": [
+                      "be active",
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-00014542-v"
+                  },
+                  {
+                    "definition": "go or proceed from one point to another",
+                    "examples": [
+                      "the debate moved from family values to the economy"
+                    ],
+                    "lemmas": [
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-00124250-v"
+                  },
+                  {
+                    "definition": "perform an action, or work out or perform (an action)",
+                    "examples": [
+                      "think before you act",
+                      "We must move quickly",
+                      "The governor should act on the new energy bill",
+                      "The nanny acted quickly by grabbing the toddler and covering him with a wet towel"
+                    ],
+                    "lemmas": [
+                      "act",
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-02372362-v"
+                  },
+                  {
+                    "definition": "have an emotional or cognitive impact upon",
+                    "examples": [
+                      "This child impressed me as unusually mature",
+                      "This behavior struck me as odd",
+                      "he was dumb-struck by the news",
+                      "her comments struck a sour note"
+                    ],
+                    "lemmas": [
+                      "affect",
+                      "impress",
+                      "move",
+                      "strike"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01771801-v"
+                  },
+                  {
+                    "definition": "give an incentive for action",
+                    "examples": [
+                      "This moved me to sacrifice my career"
+                    ],
+                    "lemmas": [
+                      "motivate",
+                      "actuate",
+                      "propel",
+                      "move",
+                      "prompt",
+                      "incite"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01653541-v"
+                  },
+                  {
+                    "definition": "arouse sympathy or compassion in",
+                    "examples": [
+                      "Her fate moved us all"
+                    ],
+                    "lemmas": [
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01775311-v"
+                  },
+                  {
+                    "definition": "dispose of by selling",
+                    "examples": [
+                      "The chairman of the company told the salesmen to move the computers"
+                    ],
+                    "lemmas": [
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-02360955-v"
+                  },
+                  {
+                    "definition": "progress by being changed",
+                    "examples": [
+                      "The speech has to go through several more drafts",
+                      "run through your presentation before the meeting"
+                    ],
+                    "lemmas": [
+                      "move",
+                      "go",
+                      "run"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-00540190-v"
+                  },
+                  {
+                    "definition": "live one's life in a specified environment",
+                    "examples": [
+                      "she moves in certain circles only"
+                    ],
+                    "lemmas": [
+                      "move"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-02604860-v"
+                  },
+                  {
+                    "definition": "have a turn; make one's move in a game",
+                    "examples": [
+                      "Can I go now?"
+                    ],
+                    "lemmas": [
+                      "move",
+                      "go"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-01079008-v"
+                  },
+                  {
+                    "definition": "propose formally; in a debate or parliamentary meeting",
+                    "examples": [],
+                    "lemmas": [
+                      "move",
+                      "make a motion"
+                    ],
+                    "pos": "v",
+                    "synset_id": "oewn-00880877-v"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "pcomp",
+                "head_index": 5,
+                "in_definition_scope": true,
+                "lemma": "move",
+                "occurrence_id": "oewn-04783538-n:p0:t7",
+                "part_id": "p0",
+                "pos": "v",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-01839438-v",
+                "selection_rationale": "Required definition verb; 'not moving' negates the sense of changing location; the primary motion sense fits.",
+                "syntactic_pos": "VERB",
+                "text": "moving",
+                "token_id": "t7"
+              },
+              "head_index": 5,
+              "identity": "oewn-01839438-v",
+              "in_definition_scope": true,
+              "lemma": "move",
+              "occurrence_id": "oewn-04783538-n:p0:t7",
+              "part_id": "p0",
+              "pos": "v",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "definition": "change location; move, travel, or proceed, also metaphorically",
+                "examples": [
+                  "How fast does your new car go?",
+                  "We travelled from Rome to Naples by bus",
+                  "The policemen went from door to door looking for the suspect",
+                  "The soldiers moved towards the city in an attempt to take it before night fell",
+                  "news travelled fast"
+                ],
+                "identity": "oewn-01839438-v",
+                "lemmas": [
+                  "travel",
+                  "go",
+                  "move",
+                  "locomote"
+                ],
+                "pos": "v"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "selected_synset_id": "oewn-01839438-v",
+              "selected_wsd_result": {
+                "lemma": "move",
+                "occurrence_id": "oewn-04783538-n:p0:t7",
+                "part_id": "p0",
+                "pos": "v",
+                "synset_id": "oewn-01839438-v",
+                "text": "moving",
+                "token_id": "t7"
+              },
+              "selection_rationale": "Required definition verb; 'not moving' negates the sense of changing location; the primary motion sense fits.",
+              "syntactic_pos": "VERB",
+              "text": "moving",
+              "token_id": "t7"
+            }
+          ],
+          "verification": null
+        }
+      }
+    }
+  },
+  "definition_parts": {
+    "parts": {
+      "p0": "the quality of not moving"
+    },
+    "logic": null
+  },
+  "disabled_dependency_occurrences": [],
+  "blocking_issues": [],
+  "source_warnings": []
+}

@@ -1,0 +1,875 @@
+{
+  "text": "all the time or over a period of time",
+  "coordinate_system": "python_unicode_codepoint_half_open",
+  "tokenization": "word_with_internal_apostrophe_or_hyphen_else_individual_punctuation",
+  "coverage_policy": "every_non_whitespace_character_exactly_once",
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-00068615-r:def:t000",
+      "index": 0,
+      "text": "all",
+      "start": 0,
+      "end": 3,
+      "norm": "all",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u000"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "frozen_function_pos",
+          "quantification"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": true
+      },
+      "wsd_status": "missing_semantic_wsd",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "missing_wsd_and_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t001",
+      "index": 1,
+      "text": "the",
+      "start": 4,
+      "end": 7,
+      "norm": "the",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u001"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [
+        {
+          "source_occurrence_id": "syntax:the:4",
+          "symbol": "@syntax:the",
+          "semantic_identity": false
+        }
+      ],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "article",
+          "frozen_function_pos"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": true
+      },
+      "wsd_status": "missing_semantic_wsd",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "missing_wsd_and_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t002",
+      "index": 2,
+      "text": "time",
+      "start": 8,
+      "end": 12,
+      "norm": "time",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u002"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t003",
+      "index": 3,
+      "text": "or",
+      "start": 13,
+      "end": 15,
+      "norm": "or",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u003"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "coordination"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "missing_semantic_wsd",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "missing_wsd_and_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t004",
+      "index": 4,
+      "text": "over",
+      "start": 16,
+      "end": 20,
+      "norm": "over",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u004"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "frozen_function_pos",
+          "preposition_or_particle"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t005",
+      "index": 5,
+      "text": "a",
+      "start": 21,
+      "end": 22,
+      "norm": "a",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u005"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [
+        {
+          "source_occurrence_id": "syntax:a:21",
+          "symbol": "@syntax:a",
+          "semantic_identity": false
+        }
+      ],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "article",
+          "frozen_function_pos"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": true
+      },
+      "wsd_status": "missing_semantic_wsd",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "missing_wsd_and_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t006",
+      "index": 6,
+      "text": "period",
+      "start": 23,
+      "end": 29,
+      "norm": "period",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u006"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t007",
+      "index": 7,
+      "text": "of",
+      "start": 30,
+      "end": 32,
+      "norm": "of",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u007"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "frozen_function_pos",
+          "preposition_or_particle"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-00068615-r:def:t008",
+      "index": 8,
+      "text": "time",
+      "start": 33,
+      "end": 37,
+      "norm": "time",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-00068615-r:def:u008"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    }
+  ],
+  "lexical_units": [
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u000",
+      "text": "all",
+      "start": 0,
+      "end": 3,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t000"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "missing_semantic_wsd",
+        "identities": [],
+        "selected_synset_id": null,
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p0:t3",
+            "source_path": "raw_wsd.lexical_occurrences[0]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "all",
+            "stored_lemma": "all",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p0:t3",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[0]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "all",
+            "stored_lemma": "all",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          }
+        ],
+        "selected_sense_evidence": []
+      },
+      "is_basis_identity": false,
+      "formula_status": "missing_or_unresolved_wsd_and_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u001",
+      "text": "the",
+      "start": 4,
+      "end": 7,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t001"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "missing_semantic_wsd",
+        "identities": [],
+        "selected_synset_id": null,
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p0:t4",
+            "source_path": "raw_wsd.lexical_occurrences[1]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "the",
+            "stored_lemma": "the",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p0:t4",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[1]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "the",
+            "stored_lemma": "the",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          }
+        ],
+        "selected_sense_evidence": []
+      },
+      "is_basis_identity": false,
+      "formula_status": "missing_or_unresolved_wsd_and_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u002",
+      "text": "time",
+      "start": 8,
+      "end": 12,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t002"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00028468-n"
+        ],
+        "selected_synset_id": "oewn-00028468-n",
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p0:t5",
+            "source_path": "raw_wsd.lexical_occurrences[2]",
+            "part_id": "p0",
+            "token_id": "t5",
+            "stored_text": "time",
+            "stored_lemma": "time",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00028468-n"
+            ],
+            "alignment_method": "normalized_surface_match+unique_contiguous_definition_branch",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00028468-n",
+                "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                "lemmas": [
+                  "time"
+                ],
+                "pos": "n"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p0:t5",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[2]",
+            "part_id": "p0",
+            "token_id": "t5",
+            "stored_text": "time",
+            "stored_lemma": "time",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00028468-n"
+            ],
+            "alignment_method": "normalized_surface_match+unique_contiguous_definition_branch",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00028468-n",
+                "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                "lemmas": [
+                  "time"
+                ],
+                "pos": "n"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00028468-n",
+            "definition": "the continuum of experience in which events pass from the future through the present to the past",
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u003",
+      "text": "or",
+      "start": 13,
+      "end": 15,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t003"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "missing_semantic_wsd",
+        "identities": [],
+        "selected_synset_id": null,
+        "evidence": [],
+        "selected_sense_evidence": []
+      },
+      "is_basis_identity": false,
+      "formula_status": "missing_or_unresolved_wsd_and_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u004",
+      "text": "over",
+      "start": 16,
+      "end": 20,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t004"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "over-4"
+        ],
+        "selected_synset_id": "over-4",
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p1:t3",
+            "source_path": "raw_wsd.lexical_occurrences[3]",
+            "part_id": "p1",
+            "token_id": "t3",
+            "stored_text": "over",
+            "stored_lemma": "over",
+            "syntactic_pos": "ADP",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "over-4"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "over-4",
+                "definition": "During a span; throughout.",
+                "lemmas": [],
+                "pos": "prep"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p1:t3",
+            "source_path": "raw_wsd.parts.p1.wsd.assignments[0]",
+            "part_id": "p1",
+            "token_id": "t3",
+            "stored_text": "over",
+            "stored_lemma": "over",
+            "syntactic_pos": "ADP",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "over-4"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "over-4",
+                "definition": "During a span; throughout.",
+                "lemmas": [],
+                "pos": "prep"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "over-4",
+            "definition": "During a span; throughout.",
+            "lemmas": [],
+            "pos": "prep"
+          }
+        ]
+      },
+      "is_basis_identity": false,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u005",
+      "text": "a",
+      "start": 21,
+      "end": 22,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t005"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "missing_semantic_wsd",
+        "identities": [],
+        "selected_synset_id": null,
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p1:t4",
+            "source_path": "raw_wsd.lexical_occurrences[4]",
+            "part_id": "p1",
+            "token_id": "t4",
+            "stored_text": "a",
+            "stored_lemma": "a",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p1:t4",
+            "source_path": "raw_wsd.parts.p1.wsd.assignments[1]",
+            "part_id": "p1",
+            "token_id": "t4",
+            "stored_text": "a",
+            "stored_lemma": "a",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          }
+        ],
+        "selected_sense_evidence": []
+      },
+      "is_basis_identity": false,
+      "formula_status": "missing_or_unresolved_wsd_and_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u006",
+      "text": "period",
+      "start": 23,
+      "end": 29,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t006"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-15137796-n"
+        ],
+        "selected_synset_id": "oewn-15137796-n",
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p1:t5",
+            "source_path": "raw_wsd.lexical_occurrences[5]",
+            "part_id": "p1",
+            "token_id": "t5",
+            "stored_text": "period",
+            "stored_lemma": "period",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-15137796-n"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-15137796-n",
+                "definition": "an amount of time",
+                "lemmas": [
+                  "time period",
+                  "period of time",
+                  "period"
+                ],
+                "pos": "n"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p1:t5",
+            "source_path": "raw_wsd.parts.p1.wsd.assignments[2]",
+            "part_id": "p1",
+            "token_id": "t5",
+            "stored_text": "period",
+            "stored_lemma": "period",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-15137796-n"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-15137796-n",
+                "definition": "an amount of time",
+                "lemmas": [
+                  "time period",
+                  "period of time",
+                  "period"
+                ],
+                "pos": "n"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-15137796-n",
+            "definition": "an amount of time",
+            "lemmas": [
+              "time period",
+              "period of time",
+              "period"
+            ],
+            "pos": "n"
+          }
+        ]
+      },
+      "is_basis_identity": false,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u007",
+      "text": "of",
+      "start": 30,
+      "end": 32,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t007"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "of-4"
+        ],
+        "selected_synset_id": "of-4",
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p1:t6",
+            "source_path": "raw_wsd.lexical_occurrences[6]",
+            "part_id": "p1",
+            "token_id": "t6",
+            "stored_text": "of",
+            "stored_lemma": "of",
+            "syntactic_pos": "ADP",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "of-4"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "of-4",
+                "definition": "Measure/quantity.",
+                "lemmas": [],
+                "pos": "prep"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p1:t6",
+            "source_path": "raw_wsd.parts.p1.wsd.assignments[3]",
+            "part_id": "p1",
+            "token_id": "t6",
+            "stored_text": "of",
+            "stored_lemma": "of",
+            "syntactic_pos": "ADP",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "of-4"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "of-4",
+                "definition": "Measure/quantity.",
+                "lemmas": [],
+                "pos": "prep"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "of-4",
+            "definition": "Measure/quantity.",
+            "lemmas": [],
+            "pos": "prep"
+          }
+        ]
+      },
+      "is_basis_identity": false,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-00068615-r:def:u008",
+      "text": "time",
+      "start": 33,
+      "end": 37,
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t008"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00028468-n"
+        ],
+        "selected_synset_id": "oewn-00028468-n",
+        "evidence": [
+          {
+            "source_record_id": "oewn-00068615-r:p1:t7",
+            "source_path": "raw_wsd.lexical_occurrences[7]",
+            "part_id": "p1",
+            "token_id": "t7",
+            "stored_text": "time",
+            "stored_lemma": "time",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00028468-n"
+            ],
+            "alignment_method": "normalized_surface_match+unique_part_projection",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00028468-n",
+                "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                "lemmas": [
+                  "time"
+                ],
+                "pos": "n"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-00068615-r:p1:t7",
+            "source_path": "raw_wsd.parts.p1.wsd.assignments[4]",
+            "part_id": "p1",
+            "token_id": "t7",
+            "stored_text": "time",
+            "stored_lemma": "time",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00028468-n"
+            ],
+            "alignment_method": "normalized_surface_match+unique_part_projection",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00028468-n",
+                "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                "lemmas": [
+                  "time"
+                ],
+                "pos": "n"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00028468-n",
+            "definition": "the continuum of experience in which events pass from the future through the present to the past",
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    }
+  ],
+  "unaligned_wsd_evidence": [],
+  "issues": [],
+  "stats": {
+    "occurrences": 9,
+    "word_occurrences": 9,
+    "punctuation_occurrences": 0,
+    "lexical_units": 9,
+    "multiword_lexical_units": 0,
+    "function_word_candidates": 6,
+    "word_wsd_status_counts": {
+      "fixed_identity": 5,
+      "missing_semantic_wsd": 4
+    },
+    "lexical_unit_wsd_status_counts": {
+      "fixed_identity": 5,
+      "missing_semantic_wsd": 4
+    },
+    "confirmed_basis_lexical_units": 2,
+    "excluded_argumentation_support_wsd_records": 0,
+    "unaligned_wsd_evidence": 0,
+    "semantic_formulas_supplied": 0
+  }
+}

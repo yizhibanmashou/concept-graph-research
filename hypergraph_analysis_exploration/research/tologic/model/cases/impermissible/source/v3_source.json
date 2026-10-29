@@ -1,0 +1,1166 @@
+{
+  "schema_version": "v3.source/1",
+  "synset_id": "oewn-01765698-a",
+  "lemmas": [
+    "impermissible"
+  ],
+  "definition": "not permitted",
+  "is_basis": false,
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-01765698-a:p0:t3",
+      "text": "not",
+      "start": 0,
+      "end": 3,
+      "synset_id": "oewn-00024432-r",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-01765698-a:p0:t3"
+      ],
+      "stored_surface": "not",
+      "stored_lemma": "not",
+      "part_id": "p0"
+    },
+    {
+      "occurrence_id": "oewn-01765698-a:p0:t4",
+      "text": "permitted",
+      "start": 4,
+      "end": 13,
+      "synset_id": "oewn-00804608-v",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-01765698-a:p0:t4"
+      ],
+      "stored_surface": "permitted",
+      "stored_lemma": "permit",
+      "part_id": "p0"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "definition",
+      "kind": "definition",
+      "text": "not permitted"
+    },
+    {
+      "evidence_id": "example:0",
+      "kind": "example",
+      "text": "impermissible behavior"
+    }
+  ],
+  "provenance": {
+    "kind": "v2_source_only",
+    "path": "[redacted-local-path]",
+    "upstream_sha256": "d51ca8f3512c5836e890066497b05f9599e5960a0d32a0e92f7f8bba1b423ddf",
+    "upstream_schema_version": "tologic-v2-item/2",
+    "pos_hint": "a",
+    "definition_text_field": "raw_text",
+    "wsd_policy": "preserve_fixed_identities_no_reselection",
+    "excluded_support_occurrences": 4
+  },
+  "raw_wsd": {
+    "lexical_occurrences": [
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 1,
+        "in_definition_scope": false,
+        "lemma": "the",
+        "occurrence_id": "oewn-01765698-a:p0:t0",
+        "part_id": "p0",
+        "pos": "DET",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner; no candidates, skipped.",
+        "syntactic_pos": "DET",
+        "text": "The",
+        "token_id": "t0"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "manner of acting or controlling yourself",
+            "examples": [],
+            "lemmas": [
+              "behavior",
+              "behaviour",
+              "conduct",
+              "doings"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-01223473-n"
+          },
+          {
+            "definition": "the action or reaction of something (as a machine or substance) under specified circumstances",
+            "examples": [
+              "the behavior of small particles can be studied in experiments"
+            ],
+            "lemmas": [
+              "behavior",
+              "behaviour"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-14031827-n"
+          },
+          {
+            "definition": "(behavioral attributes) the way a person behaves toward other people",
+            "examples": [],
+            "lemmas": [
+              "demeanor",
+              "demeanour",
+              "behavior",
+              "behaviour",
+              "conduct",
+              "deportment"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04904939-n"
+          },
+          {
+            "definition": "(psychology) the aggregate of the responses or reactions or movements made by an organism in any situation",
+            "examples": [],
+            "lemmas": [
+              "behavior",
+              "behaviour"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-01223743-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "nsubjpass",
+        "head_index": 4,
+        "in_definition_scope": false,
+        "lemma": "behavior",
+        "occurrence_id": "oewn-01765698-a:p0:t1",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": false,
+        "selected_synset_id": "oewn-01223473-n",
+        "selection_rationale": "Noun; refers to general manner of acting, fits context of impermissible actions.",
+        "syntactic_pos": "NOUN",
+        "text": "behavior",
+        "token_id": "t1"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "have the quality of being; (copula, used with an adjective or a predicate noun)",
+            "examples": [
+              "John is rich",
+              "This is not a good answer"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02610777-v"
+          },
+          {
+            "definition": "be identical to; be someone or something",
+            "examples": [
+              "The president of the company is John Smith",
+              "This is my house"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02622439-v"
+          },
+          {
+            "definition": "occupy a certain position or area; be somewhere",
+            "examples": [
+              "Where is my umbrella?",
+              "The toolshed is in the back",
+              "What is behind this behavior?"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02661230-v"
+          },
+          {
+            "definition": "have an existence, be extant",
+            "examples": [
+              "Is there a God?"
+            ],
+            "lemmas": [
+              "exist",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02609706-v"
+          },
+          {
+            "definition": "be identical or equivalent to",
+            "examples": [
+              "One dollar equals 1,000 rubles these days!"
+            ],
+            "lemmas": [
+              "equal",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02670846-v"
+          },
+          {
+            "definition": "form or compose",
+            "examples": [
+              "This money is my only income",
+              "The stone wall was the backdrop for the performance",
+              "These constitute my entire belonging",
+              "The children made up the chorus",
+              "This sum represents my entire income for a year",
+              "These few men comprise his entire army"
+            ],
+            "lemmas": [
+              "constitute",
+              "represent",
+              "make up",
+              "comprise",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02626667-v"
+          },
+          {
+            "definition": "work in a specific place, with a specific subject, or in a specific function",
+            "examples": [
+              "He is a herpetologist",
+              "She is our resident philosopher"
+            ],
+            "lemmas": [
+              "be",
+              "follow"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02450790-v"
+          },
+          {
+            "definition": "represent, as of a character on stage",
+            "examples": [
+              "Derek Jacobi was Hamlet"
+            ],
+            "lemmas": [
+              "embody",
+              "be",
+              "personify"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02703567-v"
+          },
+          {
+            "definition": "spend or use time",
+            "examples": [
+              "I may be an hour"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02273091-v"
+          },
+          {
+            "definition": "have life, be alive",
+            "examples": [
+              "Our great leader is no more",
+              "My grandfather lived until the end of war"
+            ],
+            "lemmas": [
+              "be",
+              "live"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02620216-v"
+          },
+          {
+            "definition": "to remain unmolested, undisturbed, or uninterrupted — used only in infinitive form",
+            "examples": [
+              "let her be"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02750695-v"
+          },
+          {
+            "definition": "be priced at",
+            "examples": [
+              "These shoes cost $100"
+            ],
+            "lemmas": [
+              "cost",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02708368-v"
+          }
+        ],
+        "decision": "function_word",
+        "dependency": "auxpass",
+        "head_index": 4,
+        "in_definition_scope": false,
+        "lemma": "be",
+        "occurrence_id": "oewn-01765698-a:p0:t2",
+        "part_id": "p0",
+        "pos": "v",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Auxiliary be used in passive voice; skipped per WSD policy.",
+        "syntactic_pos": "AUX",
+        "text": "is",
+        "token_id": "t2"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "negation of a word or group of words",
+            "examples": [
+              "he does not speak French",
+              "she is not going",
+              "they are not friends",
+              "not many",
+              "not much",
+              "not at all"
+            ],
+            "lemmas": [
+              "not",
+              "non"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00024432-r"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "neg",
+        "head_index": 4,
+        "in_definition_scope": true,
+        "lemma": "not",
+        "occurrence_id": "oewn-01765698-a:p0:t3",
+        "part_id": "p0",
+        "pos": "r",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00024432-r",
+        "selection_rationale": "Definition-scope adverb negating 'permitted'; only candidate matches negation sense.",
+        "syntactic_pos": "PART",
+        "text": "not",
+        "token_id": "t3"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "consent to, give permission; permit",
+            "examples": [
+              "She permitted her son to visit her estranged husband",
+              "I won't let the police search her basement",
+              "I cannot allow you to see your exam"
+            ],
+            "lemmas": [
+              "permit",
+              "allow",
+              "let",
+              "countenance"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00803980-v"
+          },
+          {
+            "definition": "make it possible through a specific action or lack of action for something to happen",
+            "examples": [
+              "This permits the water to rush in",
+              "This sealed door won't allow the water to come into the basement",
+              "This will permit the rain to run off"
+            ],
+            "lemmas": [
+              "let",
+              "allow",
+              "permit"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02427979-v"
+          },
+          {
+            "definition": "allow the presence of or allow (an activity) without opposing or prohibiting",
+            "examples": [
+              "We don't allow dogs here",
+              "Children are not permitted beyond this point",
+              "We cannot tolerate smoking in the hospital"
+            ],
+            "lemmas": [
+              "allow",
+              "permit",
+              "tolerate"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00804608-v"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "ROOT",
+        "head_index": 4,
+        "in_definition_scope": true,
+        "lemma": "permit",
+        "occurrence_id": "oewn-01765698-a:p0:t4",
+        "part_id": "p0",
+        "pos": "v",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00804608-v",
+        "selection_rationale": "Replaced with Princeton GlossTag/OEWN mapping after the external LLM audit judged the GlossTag sense acceptable. Original Agent selected oewn-00803980-v; GlossTag selected oewn-00804608-v (allow.v.10); sense_key=permit%2:32:06::.",
+        "syntactic_pos": "VERB",
+        "text": "permitted",
+        "token_id": "t4"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "punct",
+        "head_index": 4,
+        "in_definition_scope": false,
+        "lemma": ".",
+        "occurrence_id": "oewn-01765698-a:p0:t5",
+        "part_id": "p0",
+        "pos": "PUNCT",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Punctuation; no candidates, skipped.",
+        "syntactic_pos": "PUNCT",
+        "text": ".",
+        "token_id": "t5"
+      }
+    ],
+    "selected_wsd": [
+      {
+        "lemma": "behavior",
+        "occurrence_id": "oewn-01765698-a:p0:t1",
+        "part_id": "p0",
+        "pos": "n",
+        "synset_id": "oewn-01223473-n",
+        "text": "behavior",
+        "token_id": "t1"
+      },
+      {
+        "lemma": "not",
+        "occurrence_id": "oewn-01765698-a:p0:t3",
+        "part_id": "p0",
+        "pos": "r",
+        "synset_id": "oewn-00024432-r",
+        "text": "not",
+        "token_id": "t3"
+      },
+      {
+        "lemma": "permit",
+        "occurrence_id": "oewn-01765698-a:p0:t4",
+        "part_id": "p0",
+        "pos": "v",
+        "synset_id": "oewn-00804608-v",
+        "text": "permitted",
+        "token_id": "t4"
+      }
+    ],
+    "parts": {
+      "p0": {
+        "text": "not permitted",
+        "wsd": {
+          "assignments": [
+            {
+              "candidate_inventory": [],
+              "decision": "function_word",
+              "dep": "det",
+              "frozen_token_record": {
+                "decision": "function_word",
+                "dep": "det",
+                "end": 3,
+                "head_index": 1,
+                "in_definition_scope": false,
+                "index": 0,
+                "is_alpha": true,
+                "lemma": "the",
+                "rationale": "Determiner; no candidates, skipped.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "spacy_pos": "DET",
+                "spacy_tag": "DT",
+                "start": 0,
+                "text": "The",
+                "token_id": "t0",
+                "wn_pos": null,
+                "wsd_role": "function_word",
+                "wsd_source": "determiner"
+              },
+              "head_index": 1,
+              "identity": null,
+              "in_definition_scope": false,
+              "lemma": "the",
+              "part_id": "p0",
+              "rationale": "Determiner; no candidates, skipped.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "spacy_pos": "DET",
+              "spacy_tag": "DT",
+              "text": "The",
+              "token_id": "t0",
+              "wn_pos": null
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "behavior",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "manner of acting or controlling yourself",
+                  "examples": [],
+                  "identity": "oewn-01223473-n",
+                  "lemmas": [
+                    "behavior",
+                    "behaviour",
+                    "conduct",
+                    "doings"
+                  ],
+                  "pos": "n"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "behavior",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "the action or reaction of something (as a machine or substance) under specified circumstances",
+                  "examples": [
+                    "the behavior of small particles can be studied in experiments"
+                  ],
+                  "identity": "oewn-14031827-n",
+                  "lemmas": [
+                    "behavior",
+                    "behaviour"
+                  ],
+                  "pos": "n"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "behavior",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "(behavioral attributes) the way a person behaves toward other people",
+                  "examples": [],
+                  "identity": "oewn-04904939-n",
+                  "lemmas": [
+                    "demeanor",
+                    "demeanour",
+                    "behavior",
+                    "behaviour",
+                    "conduct",
+                    "deportment"
+                  ],
+                  "pos": "n"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "behavior",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "(psychology) the aggregate of the responses or reactions or movements made by an organism in any situation",
+                  "examples": [],
+                  "identity": "oewn-01223743-n",
+                  "lemmas": [
+                    "behavior",
+                    "behaviour"
+                  ],
+                  "pos": "n"
+                }
+              ],
+              "decision": "selected",
+              "dep": "nsubjpass",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "nsubjpass",
+                "end": 12,
+                "head_index": 4,
+                "in_definition_scope": false,
+                "index": 1,
+                "is_alpha": true,
+                "lemma": "behavior",
+                "rationale": "Noun; refers to general manner of acting, fits context of impermissible actions.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": "oewn-01223473-n",
+                "spacy_pos": "NOUN",
+                "spacy_tag": "NN",
+                "start": 4,
+                "text": "behavior",
+                "token_id": "t1",
+                "wn_pos": "n",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 4,
+              "identity": "oewn-01223473-n",
+              "in_definition_scope": false,
+              "lemma": "behavior",
+              "part_id": "p0",
+              "rationale": "Noun; refers to general manner of acting, fits context of impermissible actions.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "behavior",
+                  "pos": "n"
+                },
+                "candidate_source_pos": "primary",
+                "definition": "manner of acting or controlling yourself",
+                "examples": [],
+                "identity": "oewn-01223473-n",
+                "lemmas": [
+                  "behavior",
+                  "behaviour",
+                  "conduct",
+                  "doings"
+                ],
+                "pos": "n"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "NOUN",
+              "spacy_tag": "NN",
+              "text": "behavior",
+              "token_id": "t1",
+              "wn_pos": "n"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have the quality of being; (copula, used with an adjective or a predicate noun)",
+                  "examples": [
+                    "John is rich",
+                    "This is not a good answer"
+                  ],
+                  "identity": "oewn-02610777-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be identical to; be someone or something",
+                  "examples": [
+                    "The president of the company is John Smith",
+                    "This is my house"
+                  ],
+                  "identity": "oewn-02622439-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "occupy a certain position or area; be somewhere",
+                  "examples": [
+                    "Where is my umbrella?",
+                    "The toolshed is in the back",
+                    "What is behind this behavior?"
+                  ],
+                  "identity": "oewn-02661230-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have an existence, be extant",
+                  "examples": [
+                    "Is there a God?"
+                  ],
+                  "identity": "oewn-02609706-v",
+                  "lemmas": [
+                    "exist",
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be identical or equivalent to",
+                  "examples": [
+                    "One dollar equals 1,000 rubles these days!"
+                  ],
+                  "identity": "oewn-02670846-v",
+                  "lemmas": [
+                    "equal",
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "form or compose",
+                  "examples": [
+                    "This money is my only income",
+                    "The stone wall was the backdrop for the performance",
+                    "These constitute my entire belonging",
+                    "The children made up the chorus",
+                    "This sum represents my entire income for a year",
+                    "These few men comprise his entire army"
+                  ],
+                  "identity": "oewn-02626667-v",
+                  "lemmas": [
+                    "constitute",
+                    "represent",
+                    "make up",
+                    "comprise",
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "work in a specific place, with a specific subject, or in a specific function",
+                  "examples": [
+                    "He is a herpetologist",
+                    "She is our resident philosopher"
+                  ],
+                  "identity": "oewn-02450790-v",
+                  "lemmas": [
+                    "be",
+                    "follow"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "represent, as of a character on stage",
+                  "examples": [
+                    "Derek Jacobi was Hamlet"
+                  ],
+                  "identity": "oewn-02703567-v",
+                  "lemmas": [
+                    "embody",
+                    "be",
+                    "personify"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "spend or use time",
+                  "examples": [
+                    "I may be an hour"
+                  ],
+                  "identity": "oewn-02273091-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have life, be alive",
+                  "examples": [
+                    "Our great leader is no more",
+                    "My grandfather lived until the end of war"
+                  ],
+                  "identity": "oewn-02620216-v",
+                  "lemmas": [
+                    "be",
+                    "live"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "to remain unmolested, undisturbed, or uninterrupted — used only in infinitive form",
+                  "examples": [
+                    "let her be"
+                  ],
+                  "identity": "oewn-02750695-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be priced at",
+                  "examples": [
+                    "These shoes cost $100"
+                  ],
+                  "identity": "oewn-02708368-v",
+                  "lemmas": [
+                    "cost",
+                    "be"
+                  ],
+                  "pos": "v"
+                }
+              ],
+              "decision": "function_word",
+              "dep": "auxpass",
+              "frozen_token_record": {
+                "decision": "function_word",
+                "dep": "auxpass",
+                "end": 15,
+                "head_index": 4,
+                "in_definition_scope": false,
+                "index": 2,
+                "is_alpha": true,
+                "lemma": "be",
+                "rationale": "Auxiliary be used in passive voice; skipped per WSD policy.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "spacy_pos": "AUX",
+                "spacy_tag": "VBZ",
+                "start": 13,
+                "text": "is",
+                "token_id": "t2",
+                "wn_pos": "v",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 4,
+              "identity": null,
+              "in_definition_scope": false,
+              "lemma": "be",
+              "part_id": "p0",
+              "rationale": "Auxiliary be used in passive voice; skipped per WSD policy.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "spacy_pos": "AUX",
+              "spacy_tag": "VBZ",
+              "text": "is",
+              "token_id": "t2",
+              "wn_pos": "v"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "not",
+                    "pos": "r"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "negation of a word or group of words",
+                  "examples": [
+                    "he does not speak French",
+                    "she is not going",
+                    "they are not friends",
+                    "not many",
+                    "not much",
+                    "not at all"
+                  ],
+                  "identity": "oewn-00024432-r",
+                  "lemmas": [
+                    "not",
+                    "non"
+                  ],
+                  "pos": "r"
+                }
+              ],
+              "decision": "selected",
+              "dep": "neg",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "neg",
+                "end": 19,
+                "head_index": 4,
+                "in_definition_scope": true,
+                "index": 3,
+                "is_alpha": true,
+                "lemma": "not",
+                "rationale": "Definition-scope adverb negating 'permitted'; only candidate matches negation sense.",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-00024432-r",
+                "spacy_pos": "PART",
+                "spacy_tag": "RB",
+                "start": 16,
+                "text": "not",
+                "token_id": "t3",
+                "wn_pos": "r",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 4,
+              "identity": "oewn-00024432-r",
+              "in_definition_scope": true,
+              "lemma": "not",
+              "part_id": "p0",
+              "rationale": "Definition-scope adverb negating 'permitted'; only candidate matches negation sense.",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "not",
+                  "pos": "r"
+                },
+                "candidate_source_pos": "primary",
+                "definition": "negation of a word or group of words",
+                "examples": [
+                  "he does not speak French",
+                  "she is not going",
+                  "they are not friends",
+                  "not many",
+                  "not much",
+                  "not at all"
+                ],
+                "identity": "oewn-00024432-r",
+                "lemmas": [
+                  "not",
+                  "non"
+                ],
+                "pos": "r"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "PART",
+              "spacy_tag": "RB",
+              "text": "not",
+              "token_id": "t3",
+              "wn_pos": "r"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "permit",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "consent to, give permission; permit",
+                  "examples": [
+                    "She permitted her son to visit her estranged husband",
+                    "I won't let the police search her basement",
+                    "I cannot allow you to see your exam"
+                  ],
+                  "identity": "oewn-00803980-v",
+                  "lemmas": [
+                    "permit",
+                    "allow",
+                    "let",
+                    "countenance"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "permit",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "make it possible through a specific action or lack of action for something to happen",
+                  "examples": [
+                    "This permits the water to rush in",
+                    "This sealed door won't allow the water to come into the basement",
+                    "This will permit the rain to run off"
+                  ],
+                  "identity": "oewn-02427979-v",
+                  "lemmas": [
+                    "let",
+                    "allow",
+                    "permit"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "permit",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "allow the presence of or allow (an activity) without opposing or prohibiting",
+                  "examples": [
+                    "We don't allow dogs here",
+                    "Children are not permitted beyond this point",
+                    "We cannot tolerate smoking in the hospital"
+                  ],
+                  "identity": "oewn-00804608-v",
+                  "lemmas": [
+                    "allow",
+                    "permit",
+                    "tolerate"
+                  ],
+                  "pos": "v"
+                }
+              ],
+              "decision": "selected",
+              "dep": "ROOT",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "ROOT",
+                "end": 29,
+                "head_index": 4,
+                "in_definition_scope": true,
+                "index": 4,
+                "is_alpha": true,
+                "lemma": "permit",
+                "rationale": "Replaced with Princeton GlossTag/OEWN mapping after the external LLM audit judged the GlossTag sense acceptable. Original Agent selected oewn-00803980-v; GlossTag selected oewn-00804608-v (allow.v.10); sense_key=permit%2:32:06::.",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-00804608-v",
+                "spacy_pos": "VERB",
+                "spacy_tag": "VBN",
+                "start": 20,
+                "text": "permitted",
+                "token_id": "t4",
+                "wn_pos": "v",
+                "wsd_replacement": {
+                  "comparison_id": 17476,
+                  "final_confidence": "high",
+                  "glosstag_oewn_id": "oewn-00804608-v",
+                  "glosstag_sense_key": "permit%2:32:06::",
+                  "glosstag_wn30_name": "allow.v.10",
+                  "original_agent_selected_synset_id": "oewn-00803980-v",
+                  "source": "princeton_glosstag_llm_plausible"
+                },
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 4,
+              "identity": "oewn-00804608-v",
+              "in_definition_scope": true,
+              "lemma": "permit",
+              "part_id": "p0",
+              "rationale": "Replaced with Princeton GlossTag/OEWN mapping after the external LLM audit judged the GlossTag sense acceptable. Original Agent selected oewn-00803980-v; GlossTag selected oewn-00804608-v (allow.v.10); sense_key=permit%2:32:06::.",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "permit",
+                  "pos": "v"
+                },
+                "candidate_source_pos": "primary",
+                "definition": "allow the presence of or allow (an activity) without opposing or prohibiting",
+                "examples": [
+                  "We don't allow dogs here",
+                  "Children are not permitted beyond this point",
+                  "We cannot tolerate smoking in the hospital"
+                ],
+                "identity": "oewn-00804608-v",
+                "lemmas": [
+                  "allow",
+                  "permit",
+                  "tolerate"
+                ],
+                "pos": "v"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "VERB",
+              "spacy_tag": "VBN",
+              "text": "permitted",
+              "token_id": "t4",
+              "wn_pos": "v"
+            },
+            {
+              "candidate_inventory": [],
+              "decision": "function_word",
+              "dep": "punct",
+              "frozen_token_record": {
+                "decision": "function_word",
+                "dep": "punct",
+                "end": 30,
+                "head_index": 4,
+                "in_definition_scope": false,
+                "index": 5,
+                "is_alpha": false,
+                "lemma": ".",
+                "rationale": "Punctuation; no candidates, skipped.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "spacy_pos": "PUNCT",
+                "spacy_tag": ".",
+                "start": 29,
+                "text": ".",
+                "token_id": "t5",
+                "wn_pos": null,
+                "wsd_role": "function_word",
+                "wsd_source": "none"
+              },
+              "head_index": 4,
+              "identity": null,
+              "in_definition_scope": false,
+              "lemma": ".",
+              "part_id": "p0",
+              "rationale": "Punctuation; no candidates, skipped.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "spacy_pos": "PUNCT",
+              "spacy_tag": ".",
+              "text": ".",
+              "token_id": "t5",
+              "wn_pos": null
+            }
+          ],
+          "verification": {
+            "fixed_data": null,
+            "issues": [],
+            "rationale": "All definition-scope tokens (not, permitted) have correct selected senses from their candidate lists. Auxiliary 'is' is correctly skipped as passive auxiliary. Generated support tokens have appropriate selections. No semantic mismatches, no rule violations.",
+            "verdict": "pass"
+          }
+        }
+      }
+    }
+  },
+  "definition_parts": {
+    "parts": {
+      "p0": "not permitted"
+    },
+    "logic": {
+      "op": "ATOM",
+      "part_id": "p0"
+    }
+  },
+  "disabled_dependency_occurrences": [],
+  "blocking_issues": [],
+  "source_warnings": []
+}

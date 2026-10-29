@@ -1,0 +1,37 @@
+{
+  "inputs": {
+    "candidate_manifest_sha256": "2bb658ae721ea50aa8c2d1d2376b7dff2959987f9f9af88e428ec0869f93e7df",
+    "claim_review_rows_sha256": "13d382dd25ac3af4ffd368ac21cbccc37cbeceb2d9b9a23026ce3b156a247b2d",
+    "expected_candidate_manifest_sha256": "2bb658ae721ea50aa8c2d1d2376b7dff2959987f9f9af88e428ec0869f93e7df",
+    "expected_release_archive_sha256": "8832b8fa26a14c0ba8c99bb1ef8db6f9e122a6d9193b65ca9e0ef572580fee7e",
+    "expected_release_name": "Open English WordNet 2025 Plus",
+    "links_sha256": "d83cf694d16bf4077a602820492ee7db4338eb4f73a4754973c0b8e29ce76513",
+    "relation_queries_sha256": "26e46a7bf618d604eb3778e9fb536fc6cbd57aa89faf9bcc265825f55d3ae7ed",
+    "replay_report_sha256": "dcd3eb4c0767ba8a92080a958a2896c7bf8022c1f75e01faa72c834c6cd56882",
+    "verifier_report_sha256": "82a6954f2a46411c5ee5b63ace7da9788f5d183b6e83b605f7bb98fab2c35093"
+  },
+  "interpretation_limit": "Validation checks cross-artifact identity and a separately replayed OEWN resource relation only. It does not validate the genus mapping or imply that the gloss supports the relation.",
+  "link_count": 2,
+  "mapping_status_counts": {
+    "adjudicated": 1,
+    "unassessed": 1
+  },
+  "resource_relation_status_counts": {
+    "direct_hypernym": 1
+  },
+  "results": [
+    {
+      "candidate_id": "synthetic-fixture-adjudicated",
+      "mapping_status": "adjudicated",
+      "resource_relation_status": "direct_hypernym"
+    },
+    {
+      "candidate_id": "synthetic-fixture-unassessed",
+      "mapping_status": "unassessed",
+      "resource_relation_status": null
+    }
+  ],
+  "schema_version": "gloss-oewn-relation-link-validation/0.2",
+  "valid": true,
+  "validator_version": "gloss-oewn-relation-link-validator/0.2"
+}

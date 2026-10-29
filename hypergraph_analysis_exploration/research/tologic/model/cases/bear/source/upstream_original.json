@@ -1,0 +1,1788 @@
+{
+  "analysis": {
+    "argument_structure": {
+      "definition_predicate": {
+        "event": "e",
+        "predicate": "HAVE_02208144V",
+        "sense": "have or possess, either in a concrete or abstract sense"
+      },
+      "event_coreference": [
+        {
+          "definition_event": "e",
+          "relation": "same replacement eventuality",
+          "target_event": "e"
+        }
+      ],
+      "implicit_arguments": [],
+      "participants": {
+        "mark": {
+          "not_projected_to_rhs": true,
+          "role": "possessed theme",
+          "status": "example-only",
+          "type": "E"
+        },
+        "person": {
+          "not_projected_to_rhs": true,
+          "role": "possessor",
+          "status": "example-only",
+          "type": "E"
+        }
+      },
+      "target_arguments": [
+        {
+          "name": "e",
+          "role": "target eventuality",
+          "type": "V"
+        }
+      ],
+      "target_carrier": "V",
+      "witness_linkage": "The target and defining verb share the supplied eventuality variable e; example participants are not definition-scope content."
+    },
+    "boolean_structure": {
+      "branch_count": 1,
+      "branches": [
+        {
+          "content": "have or possess",
+          "part_id": "p0",
+          "projected_formula": "HAVE_02208144V(e)",
+          "scope": "definition"
+        }
+      ],
+      "op": "ATOM"
+    },
+    "selected_wsd": [
+      {
+        "lemma": "have",
+        "occurrence_id": "oewn-02636952-v:p0:t2",
+        "part_id": "p0",
+        "pos": "v",
+        "synset_id": "oewn-02208144-v",
+        "text": "has",
+        "token_id": "t2"
+      }
+    ]
+  },
+  "formula": {
+    "left": {
+      "args": [
+        {
+          "name": "e",
+          "op": "var",
+          "type": "V"
+        }
+      ],
+      "op": "call",
+      "predicate": "BEAR_02636952V"
+    },
+    "op": "equiv",
+    "right": {
+      "args": [
+        {
+          "name": "e",
+          "op": "var",
+          "type": "V"
+        }
+      ],
+      "op": "call",
+      "predicate": "HAVE_02208144V"
+    }
+  },
+  "item_id": "oewn-02636952-v",
+  "revision": 1,
+  "schema_version": "tologic-v2-item/2",
+  "source": {
+    "definition": {
+      "logic": {
+        "op": "ATOM",
+        "part_id": "p0"
+      },
+      "normalized_text": null,
+      "part_order": [
+        "p0"
+      ],
+      "parts_by_id": {
+        "p0": {
+          "argumentation": {
+            "argumented_definition": "{Noun_subj} has {Noun_obj}.",
+            "argumented_phrase": "{Noun_subj} {Verb} {Noun_obj}.",
+            "checks": {
+              "coverage_all_args_in_B": true,
+              "lemma_consistent": true,
+              "meaning_preserved": true,
+              "minimal_edit": true,
+              "natural_definition": true,
+              "natural_phrase": true,
+              "notes": "Simple transitive with generic arguments.",
+              "strict_template_followed": true
+            },
+            "confidence": 0.95,
+            "constraints_satisfied": [],
+            "examples": [
+              "bear a resemblance",
+              "bear a signature"
+            ],
+            "instantiated": {
+              "instantiated_definition": "The person has the mark.",
+              "instantiated_phrase": "The person bears the mark."
+            },
+            "instantiated_args": {
+              "OBJ": "the mark",
+              "SUBJ": "the person",
+              "V": "bears"
+            },
+            "instantiated_definition": "The person has the mark.",
+            "instantiated_phrase": "The person bears the mark.",
+            "lemmas": [
+              "bear"
+            ],
+            "meaning_sentence": "\"The person bears the mark.\" means \"The person has the mark.\".",
+            "original_definition": "have",
+            "part_id": "p0",
+            "pos": "v",
+            "projection_issues": [],
+            "selected_lemma": "bear",
+            "selection_reason": "only lemma in list",
+            "semantic_focus": "have",
+            "synset_id": "oewn-02636952-v",
+            "target_lemma": "bear",
+            "target_synset_id": "oewn-02636952-v",
+            "template_args": {
+              "OBJ": "the mark",
+              "SUBJ": "the person",
+              "V": "bears"
+            },
+            "template_id": "T4",
+            "template_sentence": "T4"
+          },
+          "argumentation_verification": {
+            "checks": {
+              "A_grammatical": true,
+              "A_natural": true,
+              "A_uses_selected_lemma": true,
+              "B_avoids_selected_lemma": true,
+              "B_grammatical": true,
+              "B_natural": true,
+              "args_all_in_A": true,
+              "args_all_in_B": true,
+              "args_same_surface": true,
+              "meaning_aligned": true,
+              "meaning_sentence_matches": true
+            },
+            "evidence": {
+              "A": "The person bears the mark.",
+              "B": "The person has the mark.",
+              "mismatched_args": [],
+              "missing_in_A": [],
+              "missing_in_B": [],
+              "selected_lemma_leak_in_B": [],
+              "template_args": {
+                "OBJ": "the mark",
+                "SUBJ": "the person",
+                "V": "bears"
+              },
+              "template_id": "T4"
+            },
+            "fixed_data": null,
+            "issues": [],
+            "notes": "",
+            "scores": {
+              "A_fluency": 1,
+              "A_means_B": 1,
+              "B_fluency": 1,
+              "arg_consistency": 1
+            },
+            "suggested_fixes": [],
+            "synset_id": "oewn-02636952-v",
+            "verdict": "pass"
+          },
+          "part_id": "p0",
+          "provenance": {
+            "argumentation_snapshot_sha256": "de4742fc7a5a82d810f1584b3865935089e1e30dc246732af2950dee9b0f3530",
+            "authority": "BASIS85_SECOND_LAYER_184.cache6160_v26.source_snapshot",
+            "generation": "g000035-5a4933e91de8",
+            "source_schema_version": "wn2lingua_v1",
+            "source_snapshot_sha256": "c8ab306f0d081a2eb382806ca7fbae181acf2748ff0b13e51a0de32e403fc5de",
+            "upstream_artifacts": {
+              "content_addressed_value_copy": true,
+              "legacy_locations_excluded": true,
+              "selected_row_sha256": "2b256069d0399098a1067af8dbe00a33064e1aff6b2ee87a8d55a7fd32592d86",
+              "semantic_source_sha256": "082881665f4d21795f9f9912a266494fa28628c3c1473e8ff0dec5e06e639f17"
+            }
+          },
+          "text": "have",
+          "wsd": {
+            "assignments": [
+              {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dep": "det",
+                "frozen_token_record": {
+                  "decision": "function_word",
+                  "dep": "det",
+                  "end": 3,
+                  "head_index": 1,
+                  "in_definition_scope": false,
+                  "index": 0,
+                  "is_alpha": true,
+                  "lemma": "the",
+                  "rationale": "Determiner 'the' is a function word; no candidates provided.",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": null,
+                  "spacy_pos": "DET",
+                  "spacy_tag": "DT",
+                  "start": 0,
+                  "text": "The",
+                  "token_id": "t0",
+                  "wn_pos": null,
+                  "wsd_role": "function_word",
+                  "wsd_source": "determiner"
+                },
+                "head_index": 1,
+                "identity": null,
+                "in_definition_scope": false,
+                "lemma": "the",
+                "part_id": "p0",
+                "rationale": "Determiner 'the' is a function word; no candidates provided.",
+                "requires_definition_wsd": false,
+                "selected_candidate": {},
+                "selected_candidate_inventory_status": "missing_or_not_applicable",
+                "spacy_pos": "DET",
+                "spacy_tag": "DT",
+                "text": "The",
+                "token_id": "t0",
+                "wn_pos": null
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "candidate_query": {
+                      "lemma": "person",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                    "examples": [
+                      "there was too much for one person to do"
+                    ],
+                    "identity": "oewn-00007846-n",
+                    "lemmas": [
+                      "person",
+                      "individual",
+                      "someone",
+                      "somebody",
+                      "mortal",
+                      "soul"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "person",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a human body (usually including the clothing)",
+                    "examples": [
+                      "a weapon was hidden on his person"
+                    ],
+                    "identity": "oewn-05224944-n",
+                    "lemmas": [
+                      "person"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "person",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a grammatical category used in the classification of pronouns, possessive determiners, and verb forms according to whether they indicate the speaker, the addressee, or a third party",
+                    "examples": [
+                      "stop talking about yourself in the third person"
+                    ],
+                    "identity": "oewn-06337790-n",
+                    "lemmas": [
+                      "person"
+                    ],
+                    "pos": "n"
+                  }
+                ],
+                "decision": "selected",
+                "dep": "nsubj",
+                "frozen_token_record": {
+                  "decision": "selected",
+                  "dep": "nsubj",
+                  "end": 10,
+                  "head_index": 2,
+                  "in_definition_scope": false,
+                  "index": 1,
+                  "is_alpha": true,
+                  "lemma": "person",
+                  "rationale": "The noun 'person' in this sentence clearly refers to a human being, matching the first candidate sense (oewn-00007846-n).",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": "oewn-00007846-n",
+                  "spacy_pos": "NOUN",
+                  "spacy_tag": "NN",
+                  "start": 4,
+                  "text": "person",
+                  "token_id": "t1",
+                  "wn_pos": "n",
+                  "wsd_role": "content_word",
+                  "wsd_source": "oewn"
+                },
+                "head_index": 2,
+                "identity": "oewn-00007846-n",
+                "in_definition_scope": false,
+                "lemma": "person",
+                "part_id": "p0",
+                "rationale": "The noun 'person' in this sentence clearly refers to a human being, matching the first candidate sense (oewn-00007846-n).",
+                "requires_definition_wsd": false,
+                "selected_candidate": {
+                  "candidate_query": {
+                    "lemma": "person",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                  "examples": [
+                    "there was too much for one person to do"
+                  ],
+                  "identity": "oewn-00007846-n",
+                  "lemmas": [
+                    "person",
+                    "individual",
+                    "someone",
+                    "somebody",
+                    "mortal",
+                    "soul"
+                  ],
+                  "pos": "n"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "spacy_pos": "NOUN",
+                "spacy_tag": "NN",
+                "text": "person",
+                "token_id": "t1",
+                "wn_pos": "n"
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "have or possess, either in a concrete or an abstract sense",
+                    "examples": [
+                      "She has $1,000 in the bank",
+                      "He has got two beautiful daughters",
+                      "She holds a Master's degree from Harvard",
+                      "I have two years left",
+                      "I don't have any money left",
+                      "They have two more years before they retire"
+                    ],
+                    "identity": "oewn-02208144-v",
+                    "lemmas": [
+                      "have",
+                      "have got",
+                      "hold"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "have as a feature",
+                    "examples": [
+                      "This restaurant features the most famous chefs in France"
+                    ],
+                    "identity": "oewn-02636270-v",
+                    "lemmas": [
+                      "have",
+                      "feature"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "go through (mental or physical states or experiences)",
+                    "examples": [
+                      "get an idea",
+                      "experience vertigo",
+                      "get nauseous",
+                      "receive injuries",
+                      "have a feeling"
+                    ],
+                    "identity": "oewn-02112480-v",
+                    "lemmas": [
+                      "experience",
+                      "receive",
+                      "have",
+                      "get"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "have ownership or possession of",
+                    "examples": [
+                      "He owns three houses in Florida",
+                      "How many cars does she have?"
+                    ],
+                    "identity": "oewn-02209474-v",
+                    "lemmas": [
+                      "own",
+                      "have",
+                      "possess"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "cause to move; cause to be in a certain position or condition",
+                    "examples": [
+                      "He got his squad on the ball",
+                      "This let me in for a big surprise",
+                      "He got a girl into trouble"
+                    ],
+                    "identity": "oewn-00120604-v",
+                    "lemmas": [
+                      "get",
+                      "let",
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "serve oneself to, or consume regularly",
+                    "examples": [
+                      "Have another bowl of chicken soup!",
+                      "I don't take sugar in my coffee"
+                    ],
+                    "identity": "oewn-01159300-v",
+                    "lemmas": [
+                      "consume",
+                      "ingest",
+                      "take in",
+                      "take",
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "have a personal or business relationship with someone",
+                    "examples": [
+                      "have a postdoc",
+                      "have an assistant",
+                      "have a lover"
+                    ],
+                    "identity": "oewn-02383544-v",
+                    "lemmas": [
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "organize or be responsible for",
+                    "examples": [
+                      "hold a reception",
+                      "have, throw, or make a party",
+                      "give a course"
+                    ],
+                    "identity": "oewn-01737358-v",
+                    "lemmas": [
+                      "hold",
+                      "throw",
+                      "have",
+                      "make",
+                      "give"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "be confronted with",
+                    "examples": [
+                      "What do we have here?",
+                      "Now we have a fine mess"
+                    ],
+                    "identity": "oewn-02746620-v",
+                    "lemmas": [
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "undergo",
+                    "examples": [
+                      "The stocks had a fast run-up"
+                    ],
+                    "identity": "oewn-00120854-v",
+                    "lemmas": [
+                      "have",
+                      "experience"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "suffer from; be ill with",
+                    "examples": [
+                      "She has arthritis"
+                    ],
+                    "identity": "oewn-00065141-v",
+                    "lemmas": [
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "cause to do; cause to act in a specified manner",
+                    "examples": [
+                      "The ads induced me to buy a VCR",
+                      "My children finally got me to buy a computer",
+                      "My wife made me buy a new sofa"
+                    ],
+                    "identity": "oewn-00772482-v",
+                    "lemmas": [
+                      "induce",
+                      "stimulate",
+                      "cause",
+                      "have",
+                      "get",
+                      "make"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "receive willingly something given or offered",
+                    "examples": [
+                      "The only girl who would have him was the miller's daughter",
+                      "I won't have this dog in my house!",
+                      "Please accept my present"
+                    ],
+                    "identity": "oewn-02240906-v",
+                    "lemmas": [
+                      "accept",
+                      "take",
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "get something; come into possession of",
+                    "examples": [
+                      "receive payment",
+                      "receive a gift",
+                      "receive letters from the front"
+                    ],
+                    "identity": "oewn-02214901-v",
+                    "lemmas": [
+                      "receive",
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "undergo (as of injuries and illnesses)",
+                    "examples": [
+                      "She suffered a fracture in the accident",
+                      "He had an insulin shock after eating three candy bars",
+                      "She got a bruise on her leg",
+                      "He got his arm broken in the scuffle"
+                    ],
+                    "identity": "oewn-00065410-v",
+                    "lemmas": [
+                      "suffer",
+                      "sustain",
+                      "have",
+                      "get"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "achieve a point or goal",
+                    "examples": [
+                      "Nicklaus had a 70",
+                      "The Brazilian team got 4 goals",
+                      "She made 29 points that day"
+                    ],
+                    "identity": "oewn-02360592-v",
+                    "lemmas": [
+                      "have",
+                      "get",
+                      "make"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "cause to be born",
+                    "examples": [
+                      "My wife had twins yesterday!"
+                    ],
+                    "identity": "oewn-00056644-v",
+                    "lemmas": [
+                      "give birth",
+                      "deliver",
+                      "bear",
+                      "birth",
+                      "have"
+                    ],
+                    "pos": "v"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "have",
+                      "pos": "v"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "have sex with; archaic use",
+                    "examples": [
+                      "He had taken this woman when she was most vulnerable"
+                    ],
+                    "identity": "oewn-01429760-v",
+                    "lemmas": [
+                      "take",
+                      "have"
+                    ],
+                    "pos": "v"
+                  }
+                ],
+                "decision": "selected",
+                "dep": "ROOT",
+                "frozen_token_record": {
+                  "decision": "selected",
+                  "dep": "ROOT",
+                  "end": 14,
+                  "head_index": 2,
+                  "in_definition_scope": true,
+                  "index": 2,
+                  "is_alpha": true,
+                  "lemma": "have",
+                  "rationale": "The verb 'has' denotes possession, aligning with the definition 'have' for the target synset 'bear'. Candidate oewn-02208144-v 'have or possess' is the best semantic fit.",
+                  "requires_definition_wsd": true,
+                  "selected_synset_id": "oewn-02208144-v",
+                  "spacy_pos": "VERB",
+                  "spacy_tag": "VBZ",
+                  "start": 11,
+                  "text": "has",
+                  "token_id": "t2",
+                  "wn_pos": "v",
+                  "wsd_role": "content_word",
+                  "wsd_source": "oewn"
+                },
+                "head_index": 2,
+                "identity": "oewn-02208144-v",
+                "in_definition_scope": true,
+                "lemma": "have",
+                "part_id": "p0",
+                "rationale": "The verb 'has' denotes possession, aligning with the definition 'have' for the target synset 'bear'. Candidate oewn-02208144-v 'have or possess' is the best semantic fit.",
+                "requires_definition_wsd": true,
+                "selected_candidate": {
+                  "candidate_query": {
+                    "lemma": "have",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have or possess, either in a concrete or an abstract sense",
+                  "examples": [
+                    "She has $1,000 in the bank",
+                    "He has got two beautiful daughters",
+                    "She holds a Master's degree from Harvard",
+                    "I have two years left",
+                    "I don't have any money left",
+                    "They have two more years before they retire"
+                  ],
+                  "identity": "oewn-02208144-v",
+                  "lemmas": [
+                    "have",
+                    "have got",
+                    "hold"
+                  ],
+                  "pos": "v"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "spacy_pos": "VERB",
+                "spacy_tag": "VBZ",
+                "text": "has",
+                "token_id": "t2",
+                "wn_pos": "v"
+              },
+              {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dep": "det",
+                "frozen_token_record": {
+                  "decision": "function_word",
+                  "dep": "det",
+                  "end": 18,
+                  "head_index": 4,
+                  "in_definition_scope": false,
+                  "index": 3,
+                  "is_alpha": true,
+                  "lemma": "the",
+                  "rationale": "Determiner 'the' is a function word; no candidates provided.",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": null,
+                  "spacy_pos": "DET",
+                  "spacy_tag": "DT",
+                  "start": 15,
+                  "text": "the",
+                  "token_id": "t3",
+                  "wn_pos": null,
+                  "wsd_role": "function_word",
+                  "wsd_source": "determiner"
+                },
+                "head_index": 4,
+                "identity": null,
+                "in_definition_scope": false,
+                "lemma": "the",
+                "part_id": "p0",
+                "rationale": "Determiner 'the' is a function word; no candidates provided.",
+                "requires_definition_wsd": false,
+                "selected_candidate": {},
+                "selected_candidate_inventory_status": "missing_or_not_applicable",
+                "spacy_pos": "DET",
+                "spacy_tag": "DT",
+                "text": "the",
+                "token_id": "t3",
+                "wn_pos": null
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a number or letter indicating quality (especially of a student's performance)",
+                    "examples": [
+                      "she made good marks in algebra",
+                      "grade A milk",
+                      "what was your score on your homework?"
+                    ],
+                    "identity": "oewn-05745098-n",
+                    "lemmas": [
+                      "mark",
+                      "grade",
+                      "score"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a distinguishing symbol",
+                    "examples": [
+                      "the owner's mark was on all the sheep"
+                    ],
+                    "identity": "oewn-07284884-n",
+                    "lemmas": [
+                      "marker",
+                      "marking",
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a reference point to shoot at",
+                    "examples": [
+                      "his arrow hit the mark"
+                    ],
+                    "identity": "oewn-07276776-n",
+                    "lemmas": [
+                      "target",
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a visible indication made on a surface",
+                    "examples": [
+                      "some previous reader had covered the pages with dozens of marks",
+                      "paw prints were everywhere"
+                    ],
+                    "identity": "oewn-06811608-n",
+                    "lemmas": [
+                      "mark",
+                      "print"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "the impression created by doing something unusual or extraordinary that people notice and remember",
+                    "examples": [
+                      "it was in London that he made his mark",
+                      "he left an indelible mark on the American theater"
+                    ],
+                    "identity": "oewn-04683421-n",
+                    "lemmas": [
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a symbol of disgrace or infamy",
+                    "examples": [
+                      "And the Lord set a mark upon Cain"
+                    ],
+                    "identity": "oewn-06807523-n",
+                    "lemmas": [
+                      "mark",
+                      "stigma",
+                      "brand",
+                      "stain"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "formerly the basic unit of money in Germany",
+                    "examples": [],
+                    "identity": "oewn-13710138-n",
+                    "lemmas": [
+                      "mark",
+                      "German mark",
+                      "Deutsche Mark",
+                      "Deutschmark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a person who is gullible and easy to take advantage of",
+                    "examples": [],
+                    "identity": "oewn-09940867-n",
+                    "lemmas": [
+                      "chump",
+                      "fool",
+                      "gull",
+                      "mark",
+                      "patsy",
+                      "sucker",
+                      "soft touch",
+                      "mug"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a written or printed symbol (as for punctuation)",
+                    "examples": [
+                      "his answer was just a punctuation mark"
+                    ],
+                    "identity": "oewn-06830640-n",
+                    "lemmas": [
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a perceptible indication of something not immediately apparent (as a visible clue that something has happened)",
+                    "examples": [
+                      "he showed signs of strain",
+                      "they welcomed the signs of spring"
+                    ],
+                    "identity": "oewn-06659006-n",
+                    "lemmas": [
+                      "sign",
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "an indication of damage",
+                    "examples": [],
+                    "identity": "oewn-04701248-n",
+                    "lemmas": [
+                      "scratch",
+                      "scrape",
+                      "scar",
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "a marking that consists of lines that cross each other",
+                    "examples": [],
+                    "identity": "oewn-04688744-n",
+                    "lemmas": [
+                      "crisscross",
+                      "cross",
+                      "mark"
+                    ],
+                    "pos": "n"
+                  },
+                  {
+                    "candidate_query": {
+                      "lemma": "mark",
+                      "pos": "n"
+                    },
+                    "candidate_source_pos": "primary",
+                    "definition": "something that exactly succeeds in achieving its goal",
+                    "examples": [
+                      "the new advertising campaign was a bell ringer",
+                      "scored a bull's eye",
+                      "hit the mark",
+                      "the president's speech was a home run"
+                    ],
+                    "identity": "oewn-00065609-n",
+                    "lemmas": [
+                      "bell ringer",
+                      "bull's eye",
+                      "mark",
+                      "home run",
+                      "bull's-eye"
+                    ],
+                    "pos": "n"
+                  }
+                ],
+                "decision": "selected",
+                "dep": "dobj",
+                "frozen_token_record": {
+                  "decision": "selected",
+                  "dep": "dobj",
+                  "end": 23,
+                  "head_index": 2,
+                  "in_definition_scope": false,
+                  "index": 4,
+                  "is_alpha": true,
+                  "lemma": "mark",
+                  "rationale": "The noun 'mark' in the context of 'bears the mark' fits the sense of a distinguishing symbol, as in candidate oewn-07284884-n.",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": "oewn-07284884-n",
+                  "spacy_pos": "NOUN",
+                  "spacy_tag": "NN",
+                  "start": 19,
+                  "text": "mark",
+                  "token_id": "t4",
+                  "wn_pos": "n",
+                  "wsd_role": "content_word",
+                  "wsd_source": "oewn"
+                },
+                "head_index": 2,
+                "identity": "oewn-07284884-n",
+                "in_definition_scope": false,
+                "lemma": "mark",
+                "part_id": "p0",
+                "rationale": "The noun 'mark' in the context of 'bears the mark' fits the sense of a distinguishing symbol, as in candidate oewn-07284884-n.",
+                "requires_definition_wsd": false,
+                "selected_candidate": {
+                  "candidate_query": {
+                    "lemma": "mark",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a distinguishing symbol",
+                  "examples": [
+                    "the owner's mark was on all the sheep"
+                  ],
+                  "identity": "oewn-07284884-n",
+                  "lemmas": [
+                    "marker",
+                    "marking",
+                    "mark"
+                  ],
+                  "pos": "n"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "spacy_pos": "NOUN",
+                "spacy_tag": "NN",
+                "text": "mark",
+                "token_id": "t4",
+                "wn_pos": "n"
+              },
+              {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dep": "punct",
+                "frozen_token_record": {
+                  "decision": "function_word",
+                  "dep": "punct",
+                  "end": 24,
+                  "head_index": 2,
+                  "in_definition_scope": false,
+                  "index": 5,
+                  "is_alpha": false,
+                  "lemma": ".",
+                  "rationale": "Punctuation token '.' is a function word; no candidates provided.",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": null,
+                  "spacy_pos": "PUNCT",
+                  "spacy_tag": ".",
+                  "start": 23,
+                  "text": ".",
+                  "token_id": "t5",
+                  "wn_pos": null,
+                  "wsd_role": "function_word",
+                  "wsd_source": "none"
+                },
+                "head_index": 2,
+                "identity": null,
+                "in_definition_scope": false,
+                "lemma": ".",
+                "part_id": "p0",
+                "rationale": "Punctuation token '.' is a function word; no candidates provided.",
+                "requires_definition_wsd": false,
+                "selected_candidate": {},
+                "selected_candidate_inventory_status": "missing_or_not_applicable",
+                "spacy_pos": "PUNCT",
+                "spacy_tag": ".",
+                "text": ".",
+                "token_id": "t5",
+                "wn_pos": null
+              }
+            ],
+            "verification": {
+              "fixed_data": null,
+              "issues": [],
+              "rationale": "All checks pass: required definition-scope token 'has' is correctly selected with sense 'have or possess', generated support tokens have valid selections, function words are not assigned ids, and no semantic mismatches or rule violations are present.",
+              "verdict": "pass"
+            }
+          }
+        }
+      },
+      "provenance": {
+        "authority": "BASIS85_SECOND_LAYER_184.cache6160_v26.source_snapshot",
+        "generation": "g000035-5a4933e91de8",
+        "source_schema_version": "wn2lingua_v1",
+        "source_snapshot_sha256": "c8ab306f0d081a2eb382806ca7fbae181acf2748ff0b13e51a0de32e403fc5de",
+        "upstream_artifacts": {
+          "content_addressed_value_copy": true,
+          "legacy_locations_excluded": true,
+          "selected_row_sha256": "2b256069d0399098a1067af8dbe00a33064e1aff6b2ee87a8d55a7fd32592d86",
+          "semantic_source_sha256": "082881665f4d21795f9f9912a266494fa28628c3c1473e8ff0dec5e06e639f17"
+        }
+      },
+      "raw_text": "have"
+    },
+    "examples": [
+      "bear a resemblance",
+      "bear a signature"
+    ],
+    "lemmas": [
+      "bear"
+    ],
+    "lexical_occurrences": [
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 1,
+        "in_definition_scope": false,
+        "lemma": "the",
+        "occurrence_id": "oewn-02636952-v:p0:t0",
+        "part_id": "p0",
+        "pos": "DET",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner 'the' is a function word; no candidates provided.",
+        "syntactic_pos": "DET",
+        "text": "The",
+        "token_id": "t0"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+            "examples": [
+              "there was too much for one person to do"
+            ],
+            "lemmas": [
+              "person",
+              "individual",
+              "someone",
+              "somebody",
+              "mortal",
+              "soul"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-00007846-n"
+          },
+          {
+            "definition": "a human body (usually including the clothing)",
+            "examples": [
+              "a weapon was hidden on his person"
+            ],
+            "lemmas": [
+              "person"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-05224944-n"
+          },
+          {
+            "definition": "a grammatical category used in the classification of pronouns, possessive determiners, and verb forms according to whether they indicate the speaker, the addressee, or a third party",
+            "examples": [
+              "stop talking about yourself in the third person"
+            ],
+            "lemmas": [
+              "person"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06337790-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "nsubj",
+        "head_index": 2,
+        "in_definition_scope": false,
+        "lemma": "person",
+        "occurrence_id": "oewn-02636952-v:p0:t1",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": false,
+        "selected_synset_id": "oewn-00007846-n",
+        "selection_rationale": "The noun 'person' in this sentence clearly refers to a human being, matching the first candidate sense (oewn-00007846-n).",
+        "syntactic_pos": "NOUN",
+        "text": "person",
+        "token_id": "t1"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "have or possess, either in a concrete or an abstract sense",
+            "examples": [
+              "She has $1,000 in the bank",
+              "He has got two beautiful daughters",
+              "She holds a Master's degree from Harvard",
+              "I have two years left",
+              "I don't have any money left",
+              "They have two more years before they retire"
+            ],
+            "lemmas": [
+              "have",
+              "have got",
+              "hold"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02208144-v"
+          },
+          {
+            "definition": "have as a feature",
+            "examples": [
+              "This restaurant features the most famous chefs in France"
+            ],
+            "lemmas": [
+              "have",
+              "feature"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02636270-v"
+          },
+          {
+            "definition": "go through (mental or physical states or experiences)",
+            "examples": [
+              "get an idea",
+              "experience vertigo",
+              "get nauseous",
+              "receive injuries",
+              "have a feeling"
+            ],
+            "lemmas": [
+              "experience",
+              "receive",
+              "have",
+              "get"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02112480-v"
+          },
+          {
+            "definition": "have ownership or possession of",
+            "examples": [
+              "He owns three houses in Florida",
+              "How many cars does she have?"
+            ],
+            "lemmas": [
+              "own",
+              "have",
+              "possess"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02209474-v"
+          },
+          {
+            "definition": "cause to move; cause to be in a certain position or condition",
+            "examples": [
+              "He got his squad on the ball",
+              "This let me in for a big surprise",
+              "He got a girl into trouble"
+            ],
+            "lemmas": [
+              "get",
+              "let",
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00120604-v"
+          },
+          {
+            "definition": "serve oneself to, or consume regularly",
+            "examples": [
+              "Have another bowl of chicken soup!",
+              "I don't take sugar in my coffee"
+            ],
+            "lemmas": [
+              "consume",
+              "ingest",
+              "take in",
+              "take",
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01159300-v"
+          },
+          {
+            "definition": "have a personal or business relationship with someone",
+            "examples": [
+              "have a postdoc",
+              "have an assistant",
+              "have a lover"
+            ],
+            "lemmas": [
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02383544-v"
+          },
+          {
+            "definition": "organize or be responsible for",
+            "examples": [
+              "hold a reception",
+              "have, throw, or make a party",
+              "give a course"
+            ],
+            "lemmas": [
+              "hold",
+              "throw",
+              "have",
+              "make",
+              "give"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01737358-v"
+          },
+          {
+            "definition": "be confronted with",
+            "examples": [
+              "What do we have here?",
+              "Now we have a fine mess"
+            ],
+            "lemmas": [
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02746620-v"
+          },
+          {
+            "definition": "undergo",
+            "examples": [
+              "The stocks had a fast run-up"
+            ],
+            "lemmas": [
+              "have",
+              "experience"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00120854-v"
+          },
+          {
+            "definition": "suffer from; be ill with",
+            "examples": [
+              "She has arthritis"
+            ],
+            "lemmas": [
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00065141-v"
+          },
+          {
+            "definition": "cause to do; cause to act in a specified manner",
+            "examples": [
+              "The ads induced me to buy a VCR",
+              "My children finally got me to buy a computer",
+              "My wife made me buy a new sofa"
+            ],
+            "lemmas": [
+              "induce",
+              "stimulate",
+              "cause",
+              "have",
+              "get",
+              "make"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00772482-v"
+          },
+          {
+            "definition": "receive willingly something given or offered",
+            "examples": [
+              "The only girl who would have him was the miller's daughter",
+              "I won't have this dog in my house!",
+              "Please accept my present"
+            ],
+            "lemmas": [
+              "accept",
+              "take",
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02240906-v"
+          },
+          {
+            "definition": "get something; come into possession of",
+            "examples": [
+              "receive payment",
+              "receive a gift",
+              "receive letters from the front"
+            ],
+            "lemmas": [
+              "receive",
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02214901-v"
+          },
+          {
+            "definition": "undergo (as of injuries and illnesses)",
+            "examples": [
+              "She suffered a fracture in the accident",
+              "He had an insulin shock after eating three candy bars",
+              "She got a bruise on her leg",
+              "He got his arm broken in the scuffle"
+            ],
+            "lemmas": [
+              "suffer",
+              "sustain",
+              "have",
+              "get"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00065410-v"
+          },
+          {
+            "definition": "achieve a point or goal",
+            "examples": [
+              "Nicklaus had a 70",
+              "The Brazilian team got 4 goals",
+              "She made 29 points that day"
+            ],
+            "lemmas": [
+              "have",
+              "get",
+              "make"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02360592-v"
+          },
+          {
+            "definition": "cause to be born",
+            "examples": [
+              "My wife had twins yesterday!"
+            ],
+            "lemmas": [
+              "give birth",
+              "deliver",
+              "bear",
+              "birth",
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00056644-v"
+          },
+          {
+            "definition": "have sex with; archaic use",
+            "examples": [
+              "He had taken this woman when she was most vulnerable"
+            ],
+            "lemmas": [
+              "take",
+              "have"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-01429760-v"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "ROOT",
+        "head_index": 2,
+        "in_definition_scope": true,
+        "lemma": "have",
+        "occurrence_id": "oewn-02636952-v:p0:t2",
+        "part_id": "p0",
+        "pos": "v",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-02208144-v",
+        "selection_rationale": "The verb 'has' denotes possession, aligning with the definition 'have' for the target synset 'bear'. Candidate oewn-02208144-v 'have or possess' is the best semantic fit.",
+        "syntactic_pos": "VERB",
+        "text": "has",
+        "token_id": "t2"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 4,
+        "in_definition_scope": false,
+        "lemma": "the",
+        "occurrence_id": "oewn-02636952-v:p0:t3",
+        "part_id": "p0",
+        "pos": "DET",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner 'the' is a function word; no candidates provided.",
+        "syntactic_pos": "DET",
+        "text": "the",
+        "token_id": "t3"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "a number or letter indicating quality (especially of a student's performance)",
+            "examples": [
+              "she made good marks in algebra",
+              "grade A milk",
+              "what was your score on your homework?"
+            ],
+            "lemmas": [
+              "mark",
+              "grade",
+              "score"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-05745098-n"
+          },
+          {
+            "definition": "a distinguishing symbol",
+            "examples": [
+              "the owner's mark was on all the sheep"
+            ],
+            "lemmas": [
+              "marker",
+              "marking",
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-07284884-n"
+          },
+          {
+            "definition": "a reference point to shoot at",
+            "examples": [
+              "his arrow hit the mark"
+            ],
+            "lemmas": [
+              "target",
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-07276776-n"
+          },
+          {
+            "definition": "a visible indication made on a surface",
+            "examples": [
+              "some previous reader had covered the pages with dozens of marks",
+              "paw prints were everywhere"
+            ],
+            "lemmas": [
+              "mark",
+              "print"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06811608-n"
+          },
+          {
+            "definition": "the impression created by doing something unusual or extraordinary that people notice and remember",
+            "examples": [
+              "it was in London that he made his mark",
+              "he left an indelible mark on the American theater"
+            ],
+            "lemmas": [
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04683421-n"
+          },
+          {
+            "definition": "a symbol of disgrace or infamy",
+            "examples": [
+              "And the Lord set a mark upon Cain"
+            ],
+            "lemmas": [
+              "mark",
+              "stigma",
+              "brand",
+              "stain"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06807523-n"
+          },
+          {
+            "definition": "formerly the basic unit of money in Germany",
+            "examples": [],
+            "lemmas": [
+              "mark",
+              "German mark",
+              "Deutsche Mark",
+              "Deutschmark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-13710138-n"
+          },
+          {
+            "definition": "a person who is gullible and easy to take advantage of",
+            "examples": [],
+            "lemmas": [
+              "chump",
+              "fool",
+              "gull",
+              "mark",
+              "patsy",
+              "sucker",
+              "soft touch",
+              "mug"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-09940867-n"
+          },
+          {
+            "definition": "a written or printed symbol (as for punctuation)",
+            "examples": [
+              "his answer was just a punctuation mark"
+            ],
+            "lemmas": [
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06830640-n"
+          },
+          {
+            "definition": "a perceptible indication of something not immediately apparent (as a visible clue that something has happened)",
+            "examples": [
+              "he showed signs of strain",
+              "they welcomed the signs of spring"
+            ],
+            "lemmas": [
+              "sign",
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06659006-n"
+          },
+          {
+            "definition": "an indication of damage",
+            "examples": [],
+            "lemmas": [
+              "scratch",
+              "scrape",
+              "scar",
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04701248-n"
+          },
+          {
+            "definition": "a marking that consists of lines that cross each other",
+            "examples": [],
+            "lemmas": [
+              "crisscross",
+              "cross",
+              "mark"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04688744-n"
+          },
+          {
+            "definition": "something that exactly succeeds in achieving its goal",
+            "examples": [
+              "the new advertising campaign was a bell ringer",
+              "scored a bull's eye",
+              "hit the mark",
+              "the president's speech was a home run"
+            ],
+            "lemmas": [
+              "bell ringer",
+              "bull's eye",
+              "mark",
+              "home run",
+              "bull's-eye"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-00065609-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "dobj",
+        "head_index": 2,
+        "in_definition_scope": false,
+        "lemma": "mark",
+        "occurrence_id": "oewn-02636952-v:p0:t4",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": false,
+        "selected_synset_id": "oewn-07284884-n",
+        "selection_rationale": "The noun 'mark' in the context of 'bears the mark' fits the sense of a distinguishing symbol, as in candidate oewn-07284884-n.",
+        "syntactic_pos": "NOUN",
+        "text": "mark",
+        "token_id": "t4"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "punct",
+        "head_index": 2,
+        "in_definition_scope": false,
+        "lemma": ".",
+        "occurrence_id": "oewn-02636952-v:p0:t5",
+        "part_id": "p0",
+        "pos": "PUNCT",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Punctuation token '.' is a function word; no candidates provided.",
+        "syntactic_pos": "PUNCT",
+        "text": ".",
+        "token_id": "t5"
+      }
+    ],
+    "pos": "v",
+    "synset_id": "oewn-02636952-v"
+  },
+  "status": "EQUIV_ACCEPTED",
+  "status_reason": null,
+  "target_contract": {
+    "argument_types": [
+      "V"
+    ],
+    "name": "BEAR_02636952V"
+  },
+  "verification": {
+    "decision": "ACCEPT",
+    "summary": "The RHS exactly realizes the supplied definition of the target sense as HAVE_02208144V over the same replacement eventuality. The example participants are correctly treated as non-definition-scope content, and the single definitional branch, polarity, and event coreference are preserved without extra commitments."
+  }
+}

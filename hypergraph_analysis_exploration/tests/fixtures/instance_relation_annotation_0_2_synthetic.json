@@ -1,0 +1,85 @@
+{
+  "schema_version": "wordnet-instance-relation-annotation/0.2-draft",
+  "item_id": "oewn-v:instance-id->class-id",
+  "annotation_id": "ann-a",
+  "source": {
+    "resource": "synthetic WordNet-like resource",
+    "version": "fixture-v1",
+    "license": "synthetic-only",
+    "archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "instance_sense": {
+    "synset_id": "instance-id",
+    "lemmas": [
+      "Example"
+    ],
+    "pos": "n",
+    "gloss": "a named person",
+    "gloss_sha256": "921d837e631c8bdb8fbe5f559bbd35b4c2920a536a3d9e6c8bab8e8cf7fe4577"
+  },
+  "class_sense": {
+    "synset_id": "class-id",
+    "lemmas": [
+      "person"
+    ],
+    "pos": "n",
+    "gloss": "a human being",
+    "gloss_sha256": "9914ec6bbff3e5fbd41cfdb16b53c3e7d61fd47434814daf635244d589fbf192"
+  },
+  "relation_claim": {
+    "predicate": "instance_of",
+    "direction": "instance_to_class"
+  },
+  "judgments": {
+    "sense_relation": {
+      "label": "yes",
+      "basis": [
+        "gloss_only"
+      ],
+      "rationale": "Synthetic fixture: both glosses describe the same category relation.",
+      "evidence_spans": {
+        "instance_gloss": [
+          {
+            "start": 2,
+            "end": 14
+          }
+        ],
+        "class_gloss": [
+          {
+            "start": 2,
+            "end": 7
+          }
+        ]
+      },
+      "confidence": "medium"
+    },
+    "gloss_support": {
+      "status": "supported",
+      "inference_basis": [
+        "lexical_or_paraphrastic"
+      ],
+      "rationale": "Synthetic fixture: the two glosses jointly license the ordered claim.",
+      "support_reasons": [],
+      "evidence_spans": {
+        "instance_gloss": [
+          {
+            "start": 2,
+            "end": 14
+          }
+        ],
+        "class_gloss": [
+          {
+            "start": 2,
+            "end": 7
+          }
+        ]
+      },
+      "confidence": "medium"
+    }
+  },
+  "annotation": {
+    "annotator_id": "a",
+    "adjudication_status": "independent",
+    "notes": []
+  }
+}

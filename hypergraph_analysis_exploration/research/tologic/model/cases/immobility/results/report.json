@@ -1,0 +1,67 @@
+{
+  "schema_version": "v3.enumeration-report/1",
+  "status": "COMPLETE",
+  "complete": true,
+  "exhausted": true,
+  "candidate_count": 122,
+  "input_hash": "76ba704aa13a4a284c10a0c60ad61da615494879ab6cf3d6de6cad25bf043d5c",
+  "assumption_mode": "interface-only-symbolic",
+  "semantic_acceptance": false,
+  "published": false,
+  "synset_id": "oewn-04783538-n",
+  "usage_id": "immobility_scope_trial",
+  "max_candidates": null,
+  "output_dir": "[redacted-local-path]",
+  "stats": {
+    "resource_selections": 20,
+    "scope_mode_selections": 28,
+    "region_placements": 238,
+    "structural_atom_selections": 198,
+    "typed_binding_combinations": 544,
+    "engine_candidates": 420,
+    "interface_gate_passed": 122,
+    "rejected_external_coverage": 24,
+    "rejected_unused_witnesses": 100,
+    "supplied_constraint_rejections": 298
+  },
+  "guarantee": "For validated input, COMPLETE exhausts the declared finite lexical/parameter/scope grammar. Any correct formula satisfying that grammar and the supplied structured constraints has its canonical representative in candidates.jsonl. Provider semantics and input constraints are assumptions.",
+  "v3_gate_is_diagnostic_only": false,
+  "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+  "basis_rhs_status": "pending",
+  "publishable": false,
+  "v3_gate_status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+  "interface_gate_is_diagnostic_only": true,
+  "interface_assumptions": [],
+  "interface_hashes": {
+    "oewn-04731092-n::quality_entity": "9454df089bf20210cef9b74689770c5bcfe617a6e669daae1d00a2caf701e284",
+    "oewn-00024432-r::proposition_negation": "362740c58230e7969cfa5f52e86ff48edb905d30a600bd341b5b8a1426bca0d6",
+    "oewn-01839438-v::event_with_subject": "b2f6a9882a743cef6e1fed6728b2e89bece60ec07d612a98278c606f4757703e",
+    "of-6::abstract_referent_relation": "17455e76fc7793e2272acb36de2cbebd771d4070d6890f965a42db851b57df34"
+  },
+  "nominalization_analysis": [
+    {
+      "occurrence_id": "oewn-04783538-n:def:t004",
+      "synset_id": "oewn-01839438-v",
+      "surface": "moving",
+      "decision": "NOMINAL_GERUND",
+      "dependency": "pcomp",
+      "governor": "of",
+      "negation_occurrence_ids": [
+        "oewn-04783538-n:def:t003"
+      ],
+      "other_definition_dependents": [],
+      "overt_argument_parameters": [],
+      "unmapped_overt_arguments": [],
+      "evidence": {
+        "sentence": "sentence_b",
+        "token_index": 7,
+        "start": 32,
+        "end": 38,
+        "syntax_provenance": "Exact cleaned B-token positions and existing dependency/head/POS evidence; unavailable support-token syntax is marked UNKNOWN, never fabricated."
+      }
+    }
+  ],
+  "nominalization_hashes": {
+    "nominal_0": "cc0c89bfa2087a835ef69333255306488043b6058dc612401f23012b79572ee9"
+  }
+}

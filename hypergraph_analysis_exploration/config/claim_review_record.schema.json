@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wordnet-gloss-horn:claim-review-record:0.1",
+  "title": "Claim review and adjudication sidecar",
+  "description": "Internal record for blind review of a fixed gloss-hypothesis candidate. NLI relation labels and directional gloss-support labels are separate judgments. This schema is a draft and does not authorize data distribution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "candidate_set_version",
+    "group_id",
+    "split",
+    "source",
+    "premise",
+    "premise_sha256",
+    "hypothesis",
+    "hypothesis_sha256",
+    "direction",
+    "nli_relation_status",
+    "semantic_support",
+    "inference_basis",
+    "evidence_spans",
+    "annotation"
+  ],
+  "properties": {
+    "schema_version": {"const": "claim-review-record/0.1"},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "candidate_set_version": {"type": "string", "minLength": 1},
+    "group_id": {"type": "string", "minLength": 1},
+    "split": {"enum": ["train", "dev", "test", "unassigned"]},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource", "release", "sense_id", "pos", "gloss_sha256"],
+      "properties": {
+        "resource": {"type": "string", "minLength": 1},
+        "release": {"type": "string", "minLength": 1},
+        "sense_id": {"type": "string", "minLength": 1},
+        "pos": {"enum": ["n", "v", "a", "r"]},
+        "gloss_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "premise": {"type": "string", "minLength": 1},
+    "premise_sha256": {"$ref": "#/$defs/sha256"},
+    "hypothesis": {"type": "string", "minLength": 1},
+    "hypothesis_sha256": {"$ref": "#/$defs/sha256"},
+    "direction": {"enum": ["target_to_gloss", "gloss_to_target", "both", "none"]},
+    "relation": {"enum": ["necessary", "sufficient", "biconditional", "typical", "example", "other"]},
+    "formula_sha256": {"$ref": "#/$defs/sha256"},
+    "nli_relation_status": {"enum": ["adjudicated", "uncertain", "unassessed"]},
+    "nli_relation_gold": {"enum": ["entailment", "neutral", "contradiction"]},
+    "semantic_support": {"enum": ["supported", "not_supported", "uncertain", "unassessed"]},
+    "inference_basis": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "lexical_or_paraphrastic",
+          "compositional_or_logical",
+          "external_world_knowledge",
+          "pragmatic_or_conversational",
+          "figurative_or_metaphorical",
+          "unclear",
+          "unassessed"
+        ]
+      }
+    },
+    "support_reasons": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "content_not_licensed",
+          "claim_overstates_or_omits_qualifier",
+          "direction_mismatch",
+          "operator_or_scope_mismatch",
+          "source_conflict",
+          "lexical_or_sense_ambiguity",
+          "scope_or_reference_ambiguity",
+          "insufficient_context",
+          "other"
+        ]
+      }
+    },
+    "evidence_spans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["start", "end"],
+        "properties": {
+          "start": {"type": "integer", "minimum": 0},
+          "end": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["annotator_id", "adjudication_status", "notes"],
+      "properties": {
+        "annotator_id": {"type": "string", "minLength": 1},
+        "adjudication_status": {"enum": ["independent", "adjudicated", "unresolved"]},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"nli_relation_status": {"const": "adjudicated"}}},
+      "then": {"required": ["nli_relation_gold"]},
+      "else": {"not": {"required": ["nli_relation_gold"]}}
+    },
+    {
+      "if": {"properties": {"semantic_support": {"const": "unassessed"}}},
+      "then": {"properties": {"inference_basis": {"const": ["unassessed"]}}},
+      "else": {
+        "properties": {
+          "inference_basis": {
+            "items": {"not": {"const": "unassessed"}},
+            "not": {"contains": {"const": "unclear"}, "minItems": 2}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"semantic_support": {"enum": ["not_supported", "uncertain"]}}},
+      "then": {"properties": {"support_reasons": {"minItems": 1}}, "required": ["support_reasons"]}
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

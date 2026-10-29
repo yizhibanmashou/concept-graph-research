@@ -1,0 +1,14 @@
+{
+  "replay_version": "oewn-hypernym-path-replay/3",
+  "valid": true,
+  "claim_count": 1,
+  "claims_sha256": "26e46a7bf618d604eb3778e9fb536fc6cbd57aa89faf9bcc265825f55d3ae7ed",
+  "replayed_positive_paths": 1,
+  "status_counts": {
+    "direct_hypernym": 1
+  },
+  "release_archive_sha256": "8832b8fa26a14c0ba8c99bb1ef8db6f9e122a6d9193b65ca9e0ef572580fee7e",
+  "errors": [],
+  "scope_note": "Replays relation paths and release/claim fingerprints only; it does not validate gloss semantics or provide an open-world negative proof.",
+  "producer_report_sha256": "82a6954f2a46411c5ee5b63ace7da9788f5d183b6e83b605f7bb98fab2c35093"
+}

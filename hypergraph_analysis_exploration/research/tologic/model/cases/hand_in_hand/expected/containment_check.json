@@ -1,0 +1,177 @@
+{
+  "case": "hand_in_hand",
+  "candidate_count": 3,
+  "complete": true,
+  "exact_approved_formula_present": true,
+  "approved_candidate_id": "51497cc63f8c7a398b5fe8f39e95f16b2fd3edc3681fbbbd3c9588724fa4227e",
+  "matched_line": 2,
+  "parameters_and_lhs_unchanged": true,
+  "all_static_checks_passed": true,
+  "whole_set_equals_separate_oracle": true,
+  "oracle_candidate_count": 3,
+  "scope_alternatives": {},
+  "reference_path": "[redacted-local-path]",
+  "reference_sha256": "a84952011977bce6c7e80205de34d9d27ec9a1c013a5c8e973d22338675e126c",
+  "input_sha256": "ac5a9d658cad574b80b0a4a90c7d740fc3083111d256891c264b03fa98f56179",
+  "candidate_file_sha256": "8cb7bbaf08231100ac21355c90bf8a14166083e0dda0da5eaaf5e2654bf91b3c",
+  "matched_candidate": {
+    "candidate_id": "51497cc63f8c7a398b5fe8f39e95f16b2fd3edc3681fbbbd3c9588724fa4227e",
+    "formula": {
+      "synset_id": "oewn-00246625-r",
+      "usage_id": "hand_in_hand_supplied_usage",
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied event or state in this usage"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      "rhs": {
+        "op": "use",
+        "synset_id": "oewn-00117495-r",
+        "usage_id": "cooperative_event",
+        "interface_hash": "d3a19c1badc2a2bb97d768fb50f2b8a8b4caf6bf68dda872918047d4b929d7f9",
+        "occurrence_id": "oewn-00246625-r:def:t000",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      "primitives": [],
+      "schema_version": "v3.interface-formula-candidate/1"
+    },
+    "inventory": {
+      "synset_id": "oewn-00246625-r",
+      "coverage": {
+        "complete": true,
+        "scope": "supplied_single_usage_only",
+        "rationale": "Covers this supplied single usage only. Proposed enumeration inventory; not certification of all lexical usages.",
+        "evidence_ids": [
+          "definition",
+          "oewn-00246625-r:argumentation:0"
+        ]
+      },
+      "usages": [
+        {
+          "usage_id": "hand_in_hand_supplied_usage",
+          "evidence": [
+            "definition",
+            "oewn-00246625-r:argumentation:0"
+          ],
+          "sentence_a": "The workers work hand in hand.",
+          "sentence_b": "The workers work together.",
+          "argumentation": "For this cooperative sense, A 'The workers work hand in hand' and B 'The workers work together' replace only the cooperative modifier of the supplied event e. The modifier interfaces are HandInHand(e) and Together(e). The collective subject g and Agent(e,g) remain in the surrounding sentence context, recorded separately in source.provenance.sentence_context; they are not arguments or conjuncts of the adverb usage. This does not derive g uniquely from e or existentially close g. Source-marked work supplies e; neither Work(e) nor Worker(g) is definition content. Together retains the frozen cooperative WSD.",
+          "parameters": [
+            {
+              "name": "e",
+              "type": "V",
+              "role": "The supplied event or state in this usage"
+            }
+          ],
+          "target_arguments": [
+            "e"
+          ],
+          "occurrence_ids": [
+            "oewn-00246625-r:def:t000"
+          ],
+          "parameter_spans": [
+            {
+              "sentence": "sentence_a",
+              "start": 12,
+              "end": 16,
+              "text": "work",
+              "parameter": "e",
+              "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+              "sentence": "sentence_b",
+              "start": 12,
+              "end": 16,
+              "text": "work",
+              "parameter": "e",
+              "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            }
+          ],
+          "determiners": [],
+          "witnesses": [],
+          "voice": "active",
+          "reductions": [],
+          "binding_plan": {
+            "lexical": [
+              {
+                "occurrence_id": "oewn-00246625-r:def:t000",
+                "usage_id": "cooperative_event",
+                "bindings": {
+                  "e": "e"
+                }
+              }
+            ],
+            "structural": {
+              "lhs": [],
+              "rhs": []
+            }
+          }
+        }
+      ]
+    },
+    "binding_plan": {
+      "lexical": [
+        {
+          "occurrence_id": "oewn-00246625-r:def:t000",
+          "usage_id": "cooperative_event",
+          "bindings": {
+            "e": "e"
+          }
+        }
+      ],
+      "structural": {
+        "lhs": [],
+        "rhs": []
+      }
+    },
+    "resource_counts": {
+      "lexical_calls": 1,
+      "exists": 0,
+      "structures": {
+        "Agent": 0,
+        "Theme": 0,
+        "Happen": 0
+      },
+      "available_structural_atoms": {
+        "Agent": 0,
+        "Theme": 1,
+        "Happen": 0
+      },
+      "generated_scopes": 0
+    },
+    "used_occurrence_ids": [
+      "oewn-00246625-r:def:t000"
+    ],
+    "readable_formula": "TARGET(e) IFF oewn-00117495-r::cooperative_event(e)",
+    "semantic_acceptance": false,
+    "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+    "interface_gate": {
+      "passed": true,
+      "issues": [],
+      "filters_enumeration": false
+    },
+    "assumption_mode": "interface-only-symbolic",
+    "publishable": false,
+    "basis_rhs_status": "pending",
+    "v3_gate": {
+      "passed": false,
+      "status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+      "issues": [],
+      "filters_enumeration": false
+    }
+  }
+}

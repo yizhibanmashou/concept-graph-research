@@ -1,0 +1,168 @@
+{
+  "schema_version": "v3.enumeration-interfaces-input/1",
+  "source": {
+    "schema_version": "v3.source/1",
+    "synset_id": "oewn-00246625-r",
+    "lemmas": [
+      "hand in hand"
+    ],
+    "definition": "together",
+    "is_basis": false,
+    "occurrences": [
+      {
+        "occurrence_id": "oewn-00246625-r:def:t000",
+        "text": "together",
+        "start": 0,
+        "end": 8,
+        "synset_id": "oewn-00117495-r",
+        "pos": "r"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "definition",
+        "kind": "definition",
+        "text": "together"
+      },
+      {
+        "evidence_id": "oewn-00246625-r:argumentation:0",
+        "kind": "argumentation",
+        "text": "The workers work together."
+      }
+    ],
+    "provenance": {
+      "kind": "real_cleaned_521_manual_interface_trial",
+      "path": "[redacted-local-path]",
+      "sha256": "e0c708e56a37fed4c45edc9769b142808a5d41ddf70ee29d646bac9b75676b0a",
+      "argumentation_id": "oewn-00246625-r:argumentation:0",
+      "wsd_policy": "preserve_fixed_identities_no_reselection",
+      "article_policy": "reuse_existing_V3_syntax_anchor_not_semantic_WSD",
+      "historical_formulas_imported": false,
+      "sentence_context": {
+        "parameters": [
+          {
+            "name": "g",
+            "type": "E",
+            "role": "The supplied collective subject; no member or distributive axioms"
+          }
+        ],
+        "parameter_spans": [
+          {
+            "sentence": "sentence_a",
+            "start": 0,
+            "end": 11,
+            "text": "The workers",
+            "parameter": "g",
+            "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+          },
+          {
+            "sentence": "sentence_b",
+            "start": 0,
+            "end": 11,
+            "text": "The workers",
+            "parameter": "g",
+            "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+          }
+        ],
+        "shared_target_parameters": [
+          "e"
+        ],
+        "structural_relations": [
+          {
+            "name": "Agent",
+            "arguments": [
+              "e",
+              "g"
+            ]
+          }
+        ],
+        "disposition": "Preserve in the surrounding sentence; not part of target LHS/RHS enumeration.",
+        "revision_id": "together_event_only_user_correction"
+      }
+    }
+  },
+  "usage": {
+    "usage_id": "hand_in_hand_supplied_usage",
+    "evidence": [
+      "definition",
+      "oewn-00246625-r:argumentation:0"
+    ],
+    "sentence_a": "The workers work hand in hand.",
+    "sentence_b": "The workers work together.",
+    "argumentation": "For this cooperative sense, A 'The workers work hand in hand' and B 'The workers work together' replace only the cooperative modifier of the supplied event e. The modifier interfaces are HandInHand(e) and Together(e). The collective subject g and Agent(e,g) remain in the surrounding sentence context, recorded separately in source.provenance.sentence_context; they are not arguments or conjuncts of the adverb usage. This does not derive g uniquely from e or existentially close g. Source-marked work supplies e; neither Work(e) nor Worker(g) is definition content. Together retains the frozen cooperative WSD.",
+    "parameters": [
+      {
+        "name": "e",
+        "type": "V",
+        "role": "The supplied event or state in this usage"
+      }
+    ],
+    "target_arguments": [
+      "e"
+    ],
+    "occurrence_ids": [
+      "oewn-00246625-r:def:t000"
+    ],
+    "parameter_spans": [
+      {
+        "sentence": "sentence_a",
+        "start": 12,
+        "end": 16,
+        "text": "work",
+        "parameter": "e",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      },
+      {
+        "sentence": "sentence_b",
+        "start": 12,
+        "end": 16,
+        "text": "work",
+        "parameter": "e",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      }
+    ],
+    "determiners": [],
+    "witnesses": [],
+    "voice": "active",
+    "reductions": []
+  },
+  "interfaces": {
+    "oewn-00117495-r::cooperative_event": {
+      "synset_id": "oewn-00117495-r",
+      "usage_id": "cooperative_event",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied event or state in this usage"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "together in the fixed cooperative sense, used as a property of the supplied event: Together(e). The sentence's collective subject and its Agent relation belong to the surrounding context, not this adverb's interface. The modifier does not select a separate participant argument; neither Work nor Worker is definition content.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    }
+  },
+  "enumeration": {
+    "lexical": [
+      {
+        "occurrence_id": "oewn-00246625-r:def:t000",
+        "min_calls": 0,
+        "max_calls": 1
+      }
+    ],
+    "lhs_structures": [],
+    "quantifier_inventory_complete": true
+  },
+  "notice": "Real first-layer single-usage trial, manually supplied basis LHS only. Deliberately no fixed binding_plan, RHS required_structures, or structural caps. Lexical resources are at most once (zero allowed unless the article head constraint requires a call). All typed candidate bindings and available structural atom subsets are enumerated. No basis RHS or historical formula is supplied. Not publication or all-usages coverage."
+}

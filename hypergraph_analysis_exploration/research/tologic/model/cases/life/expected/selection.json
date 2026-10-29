@@ -1,0 +1,7 @@
+{
+  "candidate_id": "c59c6b2ed2d2ecdd321fed767b8616c1981153ca8a00ae4ee6e8fc4ff5348e31",
+  "line": 2,
+  "readable_formula": "Life(x) ↔ Alive(x) ∧ Person(x)",
+  "source": "User-accepted formula; matched after enumeration",
+  "exact_ast_match": true
+}

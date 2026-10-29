@@ -1,0 +1,353 @@
+{
+  "text": "a living person",
+  "coordinate_system": "python_unicode_codepoint_half_open",
+  "tokenization": "word_with_internal_apostrophe_or_hyphen_else_individual_punctuation",
+  "coverage_policy": "every_non_whitespace_character_exactly_once",
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-10280403-n:def:t000",
+      "index": 0,
+      "text": "a",
+      "start": 0,
+      "end": 1,
+      "norm": "a",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-10280403-n:def:u000"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [
+        {
+          "source_occurrence_id": "syntax:a:0",
+          "symbol": "@syntax:a",
+          "semantic_identity": false
+        }
+      ],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "article",
+          "frozen_function_pos"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": true
+      },
+      "wsd_status": "missing_semantic_wsd",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "missing_wsd_and_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-10280403-n:def:t001",
+      "index": 1,
+      "text": "living",
+      "start": 2,
+      "end": 8,
+      "norm": "living",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-10280403-n:def:u001"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-10280403-n:def:t002",
+      "index": 2,
+      "text": "person",
+      "start": 9,
+      "end": 15,
+      "norm": "person",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-10280403-n:def:u002"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    }
+  ],
+  "lexical_units": [
+    {
+      "lexical_unit_id": "oewn-10280403-n:def:u000",
+      "text": "a",
+      "start": 0,
+      "end": 1,
+      "occurrence_ids": [
+        "oewn-10280403-n:def:t000"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "missing_semantic_wsd",
+        "identities": [],
+        "selected_synset_id": null,
+        "evidence": [
+          {
+            "source_record_id": "oewn-10280403-n:p0:t3",
+            "source_path": "raw_wsd.lexical_occurrences[3]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "a",
+            "stored_lemma": "a",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          },
+          {
+            "source_record_id": "oewn-10280403-n:p0:t3",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[3]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "a",
+            "stored_lemma": "a",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          }
+        ],
+        "selected_sense_evidence": []
+      },
+      "is_basis_identity": false,
+      "formula_status": "missing_or_unresolved_wsd_and_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-10280403-n:def:u001",
+      "text": "living",
+      "start": 2,
+      "end": 8,
+      "occurrence_ids": [
+        "oewn-10280403-n:def:t001"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00095301-a"
+        ],
+        "selected_synset_id": "oewn-00095301-a",
+        "evidence": [
+          {
+            "source_record_id": "oewn-10280403-n:p0:t4",
+            "source_path": "raw_wsd.lexical_occurrences[4]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "living",
+            "stored_lemma": "live",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00095301-a"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00095301-a",
+                "definition": "possessing life",
+                "lemmas": [
+                  "alive",
+                  "live"
+                ],
+                "pos": "a"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-10280403-n:p0:t4",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[4]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "living",
+            "stored_lemma": "live",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00095301-a"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00095301-a",
+                "definition": "possessing life",
+                "lemmas": [
+                  "alive",
+                  "live"
+                ],
+                "pos": "a"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00095301-a",
+            "definition": "possessing life",
+            "lemmas": [
+              "alive",
+              "live"
+            ],
+            "pos": "a"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-10280403-n:def:u002",
+      "text": "person",
+      "start": 9,
+      "end": 15,
+      "occurrence_ids": [
+        "oewn-10280403-n:def:t002"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00007846-n"
+        ],
+        "selected_synset_id": "oewn-00007846-n",
+        "evidence": [
+          {
+            "source_record_id": "oewn-10280403-n:p0:t5",
+            "source_path": "raw_wsd.lexical_occurrences[5]",
+            "part_id": "p0",
+            "token_id": "t5",
+            "stored_text": "person",
+            "stored_lemma": "person",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00007846-n"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00007846-n",
+                "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                "lemmas": [
+                  "person",
+                  "individual",
+                  "someone",
+                  "somebody",
+                  "mortal",
+                  "soul"
+                ],
+                "pos": "n"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-10280403-n:p0:t5",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[5]",
+            "part_id": "p0",
+            "token_id": "t5",
+            "stored_text": "person",
+            "stored_lemma": "person",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00007846-n"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00007846-n",
+                "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                "lemmas": [
+                  "person",
+                  "individual",
+                  "someone",
+                  "somebody",
+                  "mortal",
+                  "soul"
+                ],
+                "pos": "n"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00007846-n",
+            "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+            "lemmas": [
+              "person",
+              "individual",
+              "someone",
+              "somebody",
+              "mortal",
+              "soul"
+            ],
+            "pos": "n"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    }
+  ],
+  "unaligned_wsd_evidence": [],
+  "issues": [],
+  "stats": {
+    "occurrences": 3,
+    "word_occurrences": 3,
+    "punctuation_occurrences": 0,
+    "lexical_units": 3,
+    "multiword_lexical_units": 0,
+    "function_word_candidates": 1,
+    "word_wsd_status_counts": {
+      "fixed_identity": 2,
+      "missing_semantic_wsd": 1
+    },
+    "lexical_unit_wsd_status_counts": {
+      "fixed_identity": 2,
+      "missing_semantic_wsd": 1
+    },
+    "confirmed_basis_lexical_units": 2,
+    "excluded_argumentation_support_wsd_records": 8,
+    "unaligned_wsd_evidence": 0,
+    "semantic_formulas_supplied": 0
+  }
+}

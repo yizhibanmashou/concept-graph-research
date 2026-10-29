@@ -1,0 +1,48 @@
+{
+  "facts": [
+    {
+      "predicate": "person",
+      "arguments": ["alice"]
+    }
+  ],
+  "rules": [
+    {
+      "id": "person_is_entity",
+      "head": {
+        "predicate": "entity",
+        "arguments": ["?x"]
+      },
+      "body": [
+        {
+          "predicate": "person",
+          "arguments": ["?x"]
+        }
+      ]
+    }
+  ],
+  "query": {
+    "predicate": "entity",
+    "arguments": ["alice"]
+  },
+  "type_system": {
+    "schema_version": "datalog-type-system/1",
+    "type_system_id": "synthetic-example",
+    "version": "1",
+    "sorts": {
+      "Entity": [],
+      "Person": ["Entity"]
+    },
+    "predicate_signatures": {
+      "person": ["Person"],
+      "entity": ["Entity"]
+    },
+    "constant_sorts": {
+      "alice": ["Person"]
+    },
+    "rule_variable_sorts": {
+      "person_is_entity": {
+        "?x": "Person"
+      }
+    }
+  }
+}

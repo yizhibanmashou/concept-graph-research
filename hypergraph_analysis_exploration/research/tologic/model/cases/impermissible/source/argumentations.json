@@ -1,0 +1,727 @@
+[
+  {
+    "argumentation_id": "oewn-01765698-a:argumentation:0",
+    "part_id": "p0",
+    "part_definition": "not permitted",
+    "provenance": [
+      {
+        "field_path": "analysis.argument_structure.parts[0].analysis"
+      },
+      {
+        "field_path": "source.definition.parts_by_id.p0.argumentation"
+      }
+    ],
+    "sentence_a": {
+      "text": "The behavior is impermissible.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_a:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 12,
+          "text": "behavior",
+          "word_id": "sentence_a:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 13,
+          "end": 15,
+          "text": "is",
+          "word_id": "sentence_a:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "auxiliary_or_copula"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t3",
+          "start": 16,
+          "end": 29,
+          "text": "impermissible",
+          "word_id": "sentence_a:t3",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "recorded_target_surface_unique_match"
+          ],
+          "origin": "target",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "target_lhs"
+        },
+        {
+          "token_id": "t4",
+          "start": 29,
+          "end": 30,
+          "text": ".",
+          "word_id": "sentence_a:t4",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 12,
+          "text": "The behavior",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "sentence_b": {
+      "text": "The behavior is not permitted.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_b:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-01765698-a:p0:t0",
+              "token_id": "t0",
+              "text": "The",
+              "lemma": "the",
+              "selected_synset_id": null,
+              "dependency": "det",
+              "head_index": 1,
+              "syntactic_pos": "DET",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "function_word"
+            }
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article",
+              "frozen_function_pos"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": true
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 12,
+          "text": "behavior",
+          "word_id": "sentence_b:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-01765698-a:p0:t1",
+              "token_id": "t1",
+              "text": "behavior",
+              "lemma": "behavior",
+              "selected_synset_id": "oewn-01223473-n",
+              "dependency": "nsubjpass",
+              "head_index": 4,
+              "syntactic_pos": "NOUN",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "selected"
+            }
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 13,
+          "end": 15,
+          "text": "is",
+          "word_id": "sentence_b:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "outside_definition_shared_template_scaffold"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-01765698-a:p0:t2",
+              "token_id": "t2",
+              "text": "is",
+              "lemma": "be",
+              "selected_synset_id": null,
+              "dependency": "auxpass",
+              "head_index": 4,
+              "syntactic_pos": "AUX",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "function_word"
+            }
+          ],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "auxiliary_or_copula",
+              "frozen_function_pos"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": true
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t3",
+          "start": 16,
+          "end": 19,
+          "text": "not",
+          "word_id": "sentence_b:t3",
+          "definition_occurrence_ids": [
+            "oewn-01765698-a:def:t000"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-01765698-a:p0:t3",
+              "token_id": "t3",
+              "text": "not",
+              "lemma": "not",
+              "selected_synset_id": "oewn-00024432-r",
+              "dependency": "neg",
+              "head_index": 4,
+              "syntactic_pos": "PART",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "frozen_function_pos",
+              "negation"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t4",
+          "start": 20,
+          "end": 29,
+          "text": "permitted",
+          "word_id": "sentence_b:t4",
+          "definition_occurrence_ids": [
+            "oewn-01765698-a:def:t001"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-01765698-a:p0:t4",
+              "token_id": "t4",
+              "text": "permitted",
+              "lemma": "permit",
+              "selected_synset_id": "oewn-00804608-v",
+              "dependency": "ROOT",
+              "head_index": 4,
+              "syntactic_pos": "VERB",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t5",
+          "start": 29,
+          "end": 30,
+          "text": ".",
+          "word_id": "sentence_b:t5",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-01765698-a:p0:t5",
+              "token_id": "t5",
+              "text": ".",
+              "lemma": ".",
+              "selected_synset_id": null,
+              "dependency": "punct",
+              "head_index": 4,
+              "syntactic_pos": "PUNCT",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "function_word"
+            }
+          ],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": true
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 12,
+          "text": "The behavior",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "parameterized_a": "{Noun_subj} is impermissible.",
+    "parameterized_b": "{Noun_subj} is not permitted.",
+    "template_id": "T1",
+    "template_args": {
+      "SUBJ": "the behavior"
+    },
+    "instantiated_args": {
+      "SUBJ": "the behavior"
+    },
+    "slots": [
+      {
+        "slot": "SUBJ",
+        "surface": "the behavior",
+        "kind": "parameter",
+        "logical_type": null
+      }
+    ],
+    "selected_lemma": "impermissible",
+    "textual_argumentation": {
+      "meaning_sentence": "\"The behavior is impermissible.\" means \"The behavior is not permitted.\".",
+      "semantic_focus": "not permitted",
+      "selection_reason": "Only lemma in list."
+    },
+    "issues": [],
+    "review_status": "source_cleaning_not_usage_certification",
+    "lingua": {
+      "status": "present",
+      "graph_count": 1,
+      "graphs": [
+        {
+          "graph_json": {
+            "meta": {},
+            "words": [
+              "The",
+              " behavior",
+              " is",
+              " not",
+              " permitted",
+              "."
+            ],
+            "graph": {
+              "nodes": [
+                {
+                  "spans": [
+                    [
+                      0,
+                      0
+                    ]
+                  ],
+                  "type": "DeterminerConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      1,
+                      1
+                    ]
+                  ],
+                  "type": "NominalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      5,
+                      5
+                    ]
+                  ],
+                  "type": "PunctuationalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      2,
+                      4
+                    ]
+                  ],
+                  "type": "FactualPredicator"
+                }
+              ],
+              "edges": [
+                {
+                  "start": 0,
+                  "end": 1,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 2,
+                  "end": 3,
+                  "label": "as:punctuation"
+                },
+                {
+                  "start": 3,
+                  "end": 0,
+                  "label": "pred.arg.1"
+                }
+              ]
+            }
+          },
+          "sha256": "f9ed1a339c3c322d9d5812312407afb0258ef7c4a8261cfdfc2e11e450670753",
+          "sources": [
+            {
+              "path": "[redacted-local-path]",
+              "line": 12680,
+              "record_sha256": "4e43bece008f9ec8f9014b991f3fb8563808a09ab85d9c0ac48a1eb9ceb21c7b",
+              "job_id": "oewn-01765698-a::p0",
+              "part_id": "p0",
+              "source_sentence": "The behavior is not permitted.",
+              "source_status": "success",
+              "source_graph_field": "graph_json",
+              "match_method": "exact",
+              "error": "",
+              "lingua_conversion_error": ""
+            }
+          ],
+          "validation": {
+            "structurally_valid": true,
+            "semantic_certified": false,
+            "word_count": 6,
+            "node_count": 4,
+            "edge_count": 3,
+            "root_node_indices": [
+              2
+            ],
+            "explicit_root_node_indices": [],
+            "issue_counts": {},
+            "issues": []
+          },
+          "token_alignment": {
+            "status": "aligned",
+            "issues": [],
+            "method": "exact_non_whitespace_codepoints_with_original_sentence_offsets",
+            "graph_word_offsets": [
+              {
+                "word_index": 0,
+                "graph_word": "The",
+                "start": 0,
+                "end": 3,
+                "text": "The"
+              },
+              {
+                "word_index": 1,
+                "graph_word": " behavior",
+                "start": 4,
+                "end": 12,
+                "text": "behavior"
+              },
+              {
+                "word_index": 2,
+                "graph_word": " is",
+                "start": 13,
+                "end": 15,
+                "text": "is"
+              },
+              {
+                "word_index": 3,
+                "graph_word": " not",
+                "start": 16,
+                "end": 19,
+                "text": "not"
+              },
+              {
+                "word_index": 4,
+                "graph_word": " permitted",
+                "start": 20,
+                "end": 29,
+                "text": "permitted"
+              },
+              {
+                "word_index": 5,
+                "graph_word": ".",
+                "start": 29,
+                "end": 30,
+                "text": "."
+              }
+            ],
+            "word_token_alignment": [
+              {
+                "token_id": "t0",
+                "text": "The",
+                "start": 0,
+                "end": 3,
+                "graph_word_indices": [
+                  0
+                ],
+                "graph_node_indices": [
+                  0
+                ]
+              },
+              {
+                "token_id": "t1",
+                "text": "behavior",
+                "start": 4,
+                "end": 12,
+                "graph_word_indices": [
+                  1
+                ],
+                "graph_node_indices": [
+                  1
+                ]
+              },
+              {
+                "token_id": "t2",
+                "text": "is",
+                "start": 13,
+                "end": 15,
+                "graph_word_indices": [
+                  2
+                ],
+                "graph_node_indices": [
+                  3
+                ]
+              },
+              {
+                "token_id": "t3",
+                "text": "not",
+                "start": 16,
+                "end": 19,
+                "graph_word_indices": [
+                  3
+                ],
+                "graph_node_indices": [
+                  3
+                ]
+              },
+              {
+                "token_id": "t4",
+                "text": "permitted",
+                "start": 20,
+                "end": 29,
+                "graph_word_indices": [
+                  4
+                ],
+                "graph_node_indices": [
+                  3
+                ]
+              },
+              {
+                "token_id": "t5",
+                "text": ".",
+                "start": 29,
+                "end": 30,
+                "graph_word_indices": [
+                  5
+                ],
+                "graph_node_indices": [
+                  2
+                ]
+              }
+            ],
+            "node_word_links": [
+              {
+                "node_index": 0,
+                "graph_word_indices": [
+                  0
+                ],
+                "sentence_token_ids": [
+                  "t0"
+                ],
+                "char_spans": [
+                  {
+                    "start": 0,
+                    "end": 3
+                  }
+                ],
+                "text": "The"
+              },
+              {
+                "node_index": 1,
+                "graph_word_indices": [
+                  1
+                ],
+                "sentence_token_ids": [
+                  "t1"
+                ],
+                "char_spans": [
+                  {
+                    "start": 4,
+                    "end": 12
+                  }
+                ],
+                "text": "behavior"
+              },
+              {
+                "node_index": 2,
+                "graph_word_indices": [
+                  5
+                ],
+                "sentence_token_ids": [
+                  "t5"
+                ],
+                "char_spans": [
+                  {
+                    "start": 29,
+                    "end": 30
+                  }
+                ],
+                "text": "."
+              },
+              {
+                "node_index": 3,
+                "graph_word_indices": [
+                  2,
+                  3,
+                  4
+                ],
+                "sentence_token_ids": [
+                  "t2",
+                  "t3",
+                  "t4"
+                ],
+                "char_spans": [
+                  {
+                    "start": 13,
+                    "end": 15
+                  },
+                  {
+                    "start": 16,
+                    "end": 19
+                  },
+                  {
+                    "start": 20,
+                    "end": 29
+                  }
+                ],
+                "text": "is not permitted"
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_certified": false,
+      "matching_policy": "same_synset_and_part_then_exact_or_whitespace_only_sentence; never_part_only",
+      "unavailable_records": []
+    }
+  }
+]

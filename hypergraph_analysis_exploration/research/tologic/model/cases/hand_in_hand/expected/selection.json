@@ -1,0 +1,7 @@
+{
+  "candidate_id": "51497cc63f8c7a398b5fe8f39e95f16b2fd3edc3681fbbbd3c9588724fa4227e",
+  "line": 2,
+  "readable_formula": "HandInHand(e) ↔ Together(e)",
+  "source": "User-accepted formula; matched after enumeration",
+  "exact_ast_match": true
+}

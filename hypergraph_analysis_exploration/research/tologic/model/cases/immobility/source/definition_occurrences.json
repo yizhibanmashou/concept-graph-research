@@ -1,0 +1,565 @@
+{
+  "text": "the quality of not moving",
+  "coordinate_system": "python_unicode_codepoint_half_open",
+  "tokenization": "word_with_internal_apostrophe_or_hyphen_else_individual_punctuation",
+  "coverage_policy": "every_non_whitespace_character_exactly_once",
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-04783538-n:def:t000",
+      "index": 0,
+      "text": "the",
+      "start": 0,
+      "end": 3,
+      "norm": "the",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-04783538-n:def:u000"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [
+        {
+          "source_occurrence_id": "syntax:the:0",
+          "symbol": "@syntax:the",
+          "semantic_identity": false
+        }
+      ],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "article",
+          "frozen_function_pos"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": true
+      },
+      "wsd_status": "missing_semantic_wsd",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "missing_wsd_and_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:def:t001",
+      "index": 1,
+      "text": "quality",
+      "start": 4,
+      "end": 11,
+      "norm": "quality",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-04783538-n:def:u001"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:def:t002",
+      "index": 2,
+      "text": "of",
+      "start": 12,
+      "end": 14,
+      "norm": "of",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-04783538-n:def:u002"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "frozen_function_pos",
+          "preposition_or_particle"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:def:t003",
+      "index": 3,
+      "text": "not",
+      "start": 15,
+      "end": 18,
+      "norm": "not",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-04783538-n:def:u003"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "frozen_function_pos",
+          "negation"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-04783538-n:def:t004",
+      "index": 4,
+      "text": "moving",
+      "start": 19,
+      "end": 25,
+      "norm": "moving",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-04783538-n:def:u004"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    }
+  ],
+  "lexical_units": [
+    {
+      "lexical_unit_id": "oewn-04783538-n:def:u000",
+      "text": "the",
+      "start": 0,
+      "end": 3,
+      "occurrence_ids": [
+        "oewn-04783538-n:def:t000"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "missing_semantic_wsd",
+        "identities": [],
+        "selected_synset_id": null,
+        "evidence": [
+          {
+            "source_record_id": "oewn-04783538-n:p0:t3",
+            "source_path": "raw_wsd.lexical_occurrences[0]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "the",
+            "stored_lemma": "the",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          },
+          {
+            "source_record_id": "oewn-04783538-n:p0:t3",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[0]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "the",
+            "stored_lemma": "the",
+            "syntactic_pos": "DET",
+            "decision": "function_word",
+            "in_definition_scope": true,
+            "selected_identities": [],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": []
+          }
+        ],
+        "selected_sense_evidence": []
+      },
+      "is_basis_identity": false,
+      "formula_status": "missing_or_unresolved_wsd_and_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-04783538-n:def:u001",
+      "text": "quality",
+      "start": 4,
+      "end": 11,
+      "occurrence_ids": [
+        "oewn-04783538-n:def:t001"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-04731092-n"
+        ],
+        "selected_synset_id": "oewn-04731092-n",
+        "evidence": [
+          {
+            "source_record_id": "oewn-04783538-n:p0:t4",
+            "source_path": "raw_wsd.lexical_occurrences[1]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "quality",
+            "stored_lemma": "quality",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-04731092-n"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-04731092-n",
+                "definition": "an essential and distinguishing attribute of something or someone",
+                "lemmas": [
+                  "quality"
+                ],
+                "pos": "n"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-04783538-n:p0:t4",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[1]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "quality",
+            "stored_lemma": "quality",
+            "syntactic_pos": "NOUN",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-04731092-n"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-04731092-n",
+                "definition": "an essential and distinguishing attribute of something or someone",
+                "lemmas": [
+                  "quality"
+                ],
+                "pos": "n"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-04731092-n",
+            "definition": "an essential and distinguishing attribute of something or someone",
+            "lemmas": [
+              "quality"
+            ],
+            "pos": "n"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-04783538-n:def:u002",
+      "text": "of",
+      "start": 12,
+      "end": 14,
+      "occurrence_ids": [
+        "oewn-04783538-n:def:t002"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "of-6"
+        ],
+        "selected_synset_id": "of-6",
+        "evidence": [
+          {
+            "source_record_id": "oewn-04783538-n:p0:t5",
+            "source_path": "raw_wsd.lexical_occurrences[2]",
+            "part_id": "p0",
+            "token_id": "t5",
+            "stored_text": "of",
+            "stored_lemma": "of",
+            "syntactic_pos": "ADP",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "of-6"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "of-6",
+                "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                "lemmas": [],
+                "pos": "prep"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-04783538-n:p0:t5",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[2]",
+            "part_id": "p0",
+            "token_id": "t5",
+            "stored_text": "of",
+            "stored_lemma": "of",
+            "syntactic_pos": "ADP",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "of-6"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "of-6",
+                "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                "lemmas": [],
+                "pos": "prep"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "of-6",
+            "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+            "lemmas": [],
+            "pos": "prep"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-04783538-n:def:u003",
+      "text": "not",
+      "start": 15,
+      "end": 18,
+      "occurrence_ids": [
+        "oewn-04783538-n:def:t003"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00024432-r"
+        ],
+        "selected_synset_id": "oewn-00024432-r",
+        "evidence": [
+          {
+            "source_record_id": "oewn-04783538-n:p0:t6",
+            "source_path": "raw_wsd.lexical_occurrences[3]",
+            "part_id": "p0",
+            "token_id": "t6",
+            "stored_text": "not",
+            "stored_lemma": "not",
+            "syntactic_pos": "PART",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00024432-r"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00024432-r",
+                "definition": "negation of a word or group of words",
+                "lemmas": [
+                  "not",
+                  "non"
+                ],
+                "pos": "r"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-04783538-n:p0:t6",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[3]",
+            "part_id": "p0",
+            "token_id": "t6",
+            "stored_text": "not",
+            "stored_lemma": "not",
+            "syntactic_pos": "PART",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00024432-r"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00024432-r",
+                "definition": "negation of a word or group of words",
+                "lemmas": [
+                  "not",
+                  "non"
+                ],
+                "pos": "r"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00024432-r",
+            "definition": "negation of a word or group of words",
+            "lemmas": [
+              "not",
+              "non"
+            ],
+            "pos": "r"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-04783538-n:def:u004",
+      "text": "moving",
+      "start": 19,
+      "end": 25,
+      "occurrence_ids": [
+        "oewn-04783538-n:def:t004"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-01839438-v"
+        ],
+        "selected_synset_id": "oewn-01839438-v",
+        "evidence": [
+          {
+            "source_record_id": "oewn-04783538-n:p0:t7",
+            "source_path": "raw_wsd.lexical_occurrences[4]",
+            "part_id": "p0",
+            "token_id": "t7",
+            "stored_text": "moving",
+            "stored_lemma": "move",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-01839438-v"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-01839438-v",
+                "definition": "change location; move, travel, or proceed, also metaphorically",
+                "lemmas": [
+                  "travel",
+                  "go",
+                  "move",
+                  "locomote"
+                ],
+                "pos": "v"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-04783538-n:p0:t7",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[4]",
+            "part_id": "p0",
+            "token_id": "t7",
+            "stored_text": "moving",
+            "stored_lemma": "move",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-01839438-v"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-01839438-v",
+                "definition": "change location; move, travel, or proceed, also metaphorically",
+                "lemmas": [
+                  "travel",
+                  "go",
+                  "move",
+                  "locomote"
+                ],
+                "pos": "v"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-01839438-v",
+            "definition": "change location; move, travel, or proceed, also metaphorically",
+            "lemmas": [
+              "travel",
+              "go",
+              "move",
+              "locomote"
+            ],
+            "pos": "v"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    }
+  ],
+  "unaligned_wsd_evidence": [],
+  "issues": [],
+  "stats": {
+    "occurrences": 5,
+    "word_occurrences": 5,
+    "punctuation_occurrences": 0,
+    "lexical_units": 5,
+    "multiword_lexical_units": 0,
+    "function_word_candidates": 3,
+    "word_wsd_status_counts": {
+      "fixed_identity": 4,
+      "missing_semantic_wsd": 1
+    },
+    "lexical_unit_wsd_status_counts": {
+      "fixed_identity": 4,
+      "missing_semantic_wsd": 1
+    },
+    "confirmed_basis_lexical_units": 4,
+    "excluded_argumentation_support_wsd_records": 0,
+    "unaligned_wsd_evidence": 0,
+    "semantic_formulas_supplied": 0
+  }
+}

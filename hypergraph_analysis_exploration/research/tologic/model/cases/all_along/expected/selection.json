@@ -1,0 +1,7 @@
+{
+  "candidate_id": "385a5ac16906dcaca0efc26503bf47cf1cd138e4735de25ece837a0406a7e85a",
+  "line": 1,
+  "readable_formula": "AllAlong(e) ↔ All_Time^World(e)(λr:Time.Time(r), λt:Time.Happen(e,t))",
+  "source": "User-accepted formula; matched after enumeration",
+  "exact_ast_match": true
+}

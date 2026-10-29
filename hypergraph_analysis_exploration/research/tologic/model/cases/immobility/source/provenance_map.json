@@ -1,0 +1,23 @@
+{
+  "paths_are_historical_not_runtime_dependencies": true,
+  "files": [
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/immobility/source/cleaned.json",
+      "sha256": "fc711711d3b905cce9f07b1fc49801ab0618965d8782c74cf055bbd8c79667e0",
+      "bytes_preserved": true
+    },
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/immobility/source/v3_source.json",
+      "sha256": "55bf2a93e7160d0b333f45effed94d209fa4e43796fdd77f45cf2d1599894e5a",
+      "bytes_preserved": true
+    },
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/immobility/source/upstream_original.json",
+      "sha256": "e768fba7b54d74eddc8567e62a1d7731478a6566f0ec55fcf33328a8839fed8a",
+      "bytes_preserved": true
+    }
+  ]
+}

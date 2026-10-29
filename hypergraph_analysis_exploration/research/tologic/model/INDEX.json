@@ -1,0 +1,71 @@
+{
+  "schema_version": "v3.six-sense-portable-index/1",
+  "cases": [
+    {
+      "name": "bear",
+      "synset_id": "oewn-02636952-v",
+      "directory": "cases/bear",
+      "definition": "have",
+      "candidate_count": 130,
+      "selected_line": 20,
+      "candidate_id": "b43f31ae027edab85496da20cecd5ac2f84bd968f19d89ca8fabd028a30736f3",
+      "readable_formula": "Bear(e) ∧ Agent(e,s) ∧ Theme(e,h) ↔ Have(e) ∧ Agent(e,s) ∧ Theme(e,h)"
+    },
+    {
+      "name": "life",
+      "synset_id": "oewn-10280403-n",
+      "directory": "cases/life",
+      "definition": "a living person",
+      "candidate_count": 2,
+      "selected_line": 2,
+      "candidate_id": "c59c6b2ed2d2ecdd321fed767b8616c1981153ca8a00ae4ee6e8fc4ff5348e31",
+      "readable_formula": "Life(x) ↔ Alive(x) ∧ Person(x)"
+    },
+    {
+      "name": "hand_in_hand",
+      "synset_id": "oewn-00246625-r",
+      "directory": "cases/hand_in_hand",
+      "definition": "together",
+      "candidate_count": 3,
+      "selected_line": 2,
+      "candidate_id": "51497cc63f8c7a398b5fe8f39e95f16b2fd3edc3681fbbbd3c9588724fa4227e",
+      "readable_formula": "HandInHand(e) ↔ Together(e)"
+    },
+    {
+      "name": "all_along",
+      "synset_id": "oewn-00068615-r",
+      "directory": "cases/all_along",
+      "definition": "all the time",
+      "candidate_count": 20,
+      "selected_line": 1,
+      "candidate_id": "385a5ac16906dcaca0efc26503bf47cf1cd138e4735de25ece837a0406a7e85a",
+      "readable_formula": "AllAlong(e) ↔ All_Time^World(e)(λr:Time.Time(r), λt:Time.Happen(e,t))"
+    },
+    {
+      "name": "immobility",
+      "synset_id": "oewn-04783538-n",
+      "directory": "cases/immobility",
+      "definition": "the quality of not moving",
+      "candidate_count": 122,
+      "selected_line": 36,
+      "candidate_id": "7ed895cdef917de5e21f17a2c45f29fd96c8c9daac8c922a8345ab2cabcdf639",
+      "readable_formula": "Immobility(q:E) ↔ Quality(q) ∧ ∃h:E [Of(q,h) ∧ Nom[not moving](h)]"
+    },
+    {
+      "name": "impermissible",
+      "synset_id": "oewn-01765698-a",
+      "directory": "cases/impermissible",
+      "definition": "not permitted",
+      "candidate_count": 178,
+      "selected_line": 17,
+      "candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+      "readable_formula": "Impermissible(b:E) ↔ Not(∃r:V [Permit(r) ∧ Agent(r,ImplicitSubj(r)) ∧ Theme(r,b)])"
+    }
+  ],
+  "total_candidates": 455,
+  "cleaned_records": 6,
+  "lingua_graph_count": 7,
+  "python_requirement": ">=3.11",
+  "third_party_dependencies": [],
+  "basis_rhs_supplied": false
+}

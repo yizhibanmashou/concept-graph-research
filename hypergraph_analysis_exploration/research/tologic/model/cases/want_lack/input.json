@@ -1,0 +1,204 @@
+{
+    "schema_version": "v3.enumeration-interfaces-input/1",
+    "source": {
+        "schema_version": "v3.source/1",
+        "synset_id": "oewn-02638648-v",
+        "lemmas": [ "want" ],
+        "definition": "be without, lack; be deficient in",
+        "is_basis": false,
+        "occurrences": [
+            {
+                "occurrence_id": "oewn-02638648-v:def:t001",
+                "text": "without",
+                "start": 3,
+                "end": 10,
+                "synset_id": "supplied-without",
+                "pos": "adp",
+                "frozen_synset_id": null,
+                "identity_status": "explicit_user_supplied_operator_not_frozen_wsd"
+            }
+        ],
+        "evidence": [
+            {
+                "evidence_id": "definition",
+                "kind": "definition",
+                "text": "be without, lack; be deficient in"
+            },
+            {
+                "evidence_id": "oewn-02638648-v:argumentation:0",
+                "kind": "argumentation",
+                "text": "The room is without paint."
+            }
+        ],
+        "provenance": {
+            "kind": "manual_want_lack_branch_trial",
+            "path": "manual/OEWN/oewn-02638648-v",
+            "sha256": "",
+            "argumentation_id": "oewn-02638648-v:argumentation:0",
+            "full_definition": "be without, lack; be deficient in",
+            "definition_projection": "dnf_branch_be_without",
+            "frozen_wsd_changed": false,
+            "historical_formulas_imported": false,
+            "source_issues_preserved_in_snapshot": []
+        }
+    },
+    "usage": {
+        "usage_id": "want_lack_branch",
+        "evidence": [ "definition", "oewn-02638648-v:argumentation:0" ],
+        "sentence_a": "The room is without paint.",
+        "sentence_b": "The room wants paint.",
+        "argumentation": "DNF branch 'be without' of want-lack (oewn-02638648-v). A 'The room is without paint' and B 'The room wants paint' describe the same lacking state e, subject s and object h. The copula be is syntax, not content, and is not listed as an occurrence. Without is here a user-supplied external dependency interface, not a basis word; the definition text contains no literal not or have, so neither basis interface is used in this branch. The room and paint are source-marked parameter phrases, not Room or Paint conditions.",
+        "parameters": [
+            {
+                "name": "e",
+                "type": "V",
+                "role": "The supplied lacking state in this usage"
+            },
+            {
+                "name": "s",
+                "type": "E",
+                "role": "The supplied subject-side participant; no intentionality axiom"
+            },
+            {
+                "name": "h",
+                "type": "E",
+                "role": "The supplied object participant that is lacked"
+            }
+        ],
+        "target_arguments": [ "e" ],
+        "occurrence_ids": [ "oewn-02638648-v:def:t001" ],
+        "parameter_spans": [
+            {
+                "sentence": "sentence_a",
+                "start": 0,
+                "end": 8,
+                "text": "The room",
+                "parameter": "s",
+                "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+                "sentence": "sentence_a",
+                "start": 20,
+                "end": 25,
+                "text": "paint",
+                "parameter": "h",
+                "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+                "sentence": "sentence_b",
+                "start": 0,
+                "end": 8,
+                "text": "The room",
+                "parameter": "s",
+                "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+                "sentence": "sentence_b",
+                "start": 15,
+                "end": 20,
+                "text": "paint",
+                "parameter": "h",
+                "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            }
+        ],
+        "determiners": [],
+        "witnesses": [],
+        "voice": "active",
+        "reductions": []
+    },
+    "interfaces": {
+        "supplied-without::absence_relation": {
+            "synset_id": "supplied-without",
+            "usage_id": "absence_relation",
+            "is_basis": false,
+            "parameters": [
+                {
+                    "name": "e",
+                    "type": "V",
+                    "role": "The supplied lacking state"
+                },
+                {
+                    "name": "s",
+                    "type": "E",
+                    "role": "The subject-side participant that lacks"
+                },
+                {
+                    "name": "h",
+                    "type": "E",
+                    "role": "The object participant that is lacked"
+                }
+            ],
+            "rhs_status": "pending",
+            "lhs": {
+                "op": "and",
+                "args": [
+                    {
+                        "op": "target",
+                        "args": [
+                            {
+                                "var": "e"
+                            }
+                        ]
+                    },
+                    {
+                        "op": "struct",
+                        "name": "Agent",
+                        "args": [
+                            {
+                                "var": "e"
+                            },
+                            {
+                                "var": "s"
+                            }
+                        ]
+                    },
+                    {
+                        "op": "struct",
+                        "name": "Theme",
+                        "args": [
+                            {
+                                "var": "e"
+                            },
+                            {
+                                "var": "h"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "description": "Without(e,s,h): subject s is in a lacking state e with respect to object h. User-supplied external dependency interface for the want-lack trial; not a basis formula.",
+            "evidence": [
+                "Manually declared from the OEWN definition occurrence of want (oewn-02638648-v) and its supplied A/B usage; not a published basis formula."
+            ]
+        }
+    },
+    "enumeration": {
+        "lexical": [
+            {
+                "occurrence_id": "oewn-02638648-v:def:t001",
+                "min_calls": 0,
+                "max_calls": 1
+            }
+        ],
+        "lhs_structures": [
+            {
+                "name": "Agent",
+                "arguments": [ "e", "s" ]
+            },
+            {
+                "name": "Theme",
+                "arguments": [ "e", "h" ]
+            }
+        ],
+        "quantifier_inventory_complete": true
+    },
+    "notice": "Manual want-lack single-branch trial using a user-supplied external absence interface. No fixed binding plan, semantic pruning or candidate cap. The 'lack' and 'be deficient in' branches are separate enumerations.",
+    "interface_assumptions": [
+        {
+            "synset_id": "supplied-without",
+            "occurrence_ids": [ "oewn-02638648-v:def:t001" ],
+            "reason": "The real without occurrence has no frozen semantic WSD; use a user-supplied absence-relation contract as an explicitly local experiment assumption.",
+            "authorization": "User supplied Without(e,s,h) as an LHS-only interface for the want-lack 'be without' branch. This is not a new frozen basis member."
+        }
+    ]
+}

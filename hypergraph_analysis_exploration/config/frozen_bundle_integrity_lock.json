@@ -1,0 +1,12 @@
+{
+  "lock_version": "oewn-frozen-bundle-integrity-lock/2",
+  "bundle_semantic_fingerprint_sha256": "6a26db5de732d90e7eb1ae700eec5c6f34e9c28fa83f35d2eb616c6abb8d4e41",
+  "files": {
+    "manifest.json": "126c8c5390efaff9ca1aaa1e12f7931ca90b802104ffaf57385d4b692c23605f",
+    "checksums.jsonl": "6800f0840858d4358a873dcec941c9c15ab85539b3c91f357c11444477040e6c",
+    "graph/hypergraph_rules.jsonl": "c07dd37342ab399244a091501a21ada9e2f9f706efb1dc34d6b8ebc16a8a0a53",
+    "graph/coverage_witnesses.jsonl": "a36e5938b7f060628e739c62ab55af6802eed5a3b1ace135690e8e6821bcfa27",
+    "indexes/senses.jsonl": "f60679d8cf86e5378411bf0ec7a4759e882fde97e6002945b17e5483558abd30",
+    "provenance/hypergraph_source_contract.json": "ca1690bb3c4a6687bf0e26922eee8ddab1b21e1a700b3bc1b697afd6fcc6d6c0"
+  }
+}

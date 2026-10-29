@@ -1,0 +1,1935 @@
+{
+  "project_name": "OEWN超图依赖网络深度分析",
+  "version": "3.0.0",
+  "description": "对冻结 OEWN 正 Horn 定义依赖图进行可复算结构审计，并为有证据的形式逻辑推理建立研究基线",
+  "data_source": {
+    "root": "../OEWN",
+    "graph_dir": "graph",
+    "nodes_file": "graph/nodes.tsv",
+    "hypergraph_rules": "graph/hypergraph_rules.jsonl",
+    "hyperedges": "graph/hyperedges.jsonl",
+    "basis_atoms": "graph/selected_basis_atoms.txt"
+  },
+  "phases": {
+    "phase1": {
+      "name": "探索性分析",
+      "status": "historical_exploratory_unverified",
+      "date": "2026-10-01",
+      "outputs": "outputs/phase1",
+      "reports": "../report/phase1_exploration"
+    },
+    "phase2": {
+      "name": "社区检测",
+      "status": "historical_exploratory_unverified",
+      "outputs": "outputs/phase2",
+      "reports": "../report/phase2_community_detection"
+    },
+    "phase3": {
+      "name": "路径分析",
+      "status": "historical_exploratory_unverified",
+      "outputs": "outputs/phase3",
+      "reports": "../report/phase3_path_analysis"
+    },
+    "phase4": {
+      "name": "循环分析",
+      "status": "historical_exploratory_unverified",
+      "outputs": "outputs/phase4",
+      "reports": "../report/phase4_cycle_analysis"
+    },
+    "phase5": {
+      "name": "Hub节点分析",
+      "status": "historical_exploratory_unverified",
+      "outputs": "outputs/phase5",
+      "reports": "../report/phase5_hub_analysis"
+    },
+    "phase6": {
+      "name": "冻结 Horn 超图结构审计",
+      "status": "reproduced",
+      "outputs": "outputs/phase6",
+      "reports": "../report/final_report"
+    },
+    "phase7": {
+      "name": "WordNet 定义逻辑化标注 pilot 基础设施",
+      "status": "pilot_ready_no_gold_annotations",
+      "outputs": "outputs/phase7",
+      "reports": "docs/annotation_protocol.md"
+    },
+    "phase8": {
+      "name": "全量来源索引与活跃 clause-part 结构追踪",
+      "status": "structural_audit_reproduced_mapping_batch_exported_no_annotations",
+      "outputs": "outputs/phase8",
+      "reports": "docs/data_provenance.md"
+    },
+    "phase9": {
+      "name": "释义起始名词词面候选基线",
+      "status": "pilot_resource_alignment_proxy_reproduced_no_semantic_gold",
+      "outputs": "outputs/phase9",
+      "reports": "docs/phase9_gloss_genus_baseline.md"
+    },
+    "phase10": {
+      "name": "双标注一致性评估工具",
+      "status": "weighted_kappa_ci_exploratory_undercoverage_warning_no_real_double_annotation_data",
+      "outputs": "outputs/phase10",
+      "reports": "docs/annotation_protocol.md"
+    },
+    "phase11": {
+      "name": "OEWN 2025 Plus 全量名词释义词面候选基线",
+      "status": "release_wide_resource_proxy_reproduced_no_semantic_gold",
+      "outputs": "outputs/phase11",
+      "reports": "docs/phase11_gloss_genus_release_baseline.md"
+    },
+    "phase12": {
+      "name": "OEWN 2025 Plus 释义上下文 sense-ranking 基线",
+      "status": "release_wide_weak_wsd_proxy_reproduced_no_semantic_gold",
+      "outputs": "outputs/phase12",
+      "reports": "docs/phase12_gloss_sense_rank_baseline.md"
+    },
+    "phase13": {
+      "name": "冻结候选依赖弧投影 SCC 审计",
+      "status": "projection_scc_audit_reproduced_structural_only",
+      "outputs": "outputs/phase13",
+      "reports": "docs/dependency_projection_scc.md"
+    },
+    "phase14": {
+      "name": "最小 grounded witness 推导深度基线",
+      "status": "minimum_depth_audit_reproduced_structural_only",
+      "outputs": "outputs/phase14",
+      "reports": "docs/minimum_witness_audit.md"
+    },
+    "phase15": {
+      "name": "全量活跃来源 payload 结构普查",
+      "status": "all_active_payloads_checksum_verified_structural_only",
+      "outputs": "outputs/phase15",
+      "reports": "docs/full_source_payload_census.md"
+    },
+    "phase16": {
+      "name": "OEWN 义项级有向 hypernym 闭包核验原型",
+      "status": "resource_relative_proof_paths_independently_replayed_no_semantic_gold",
+      "outputs": "outputs/phase16",
+      "reports": "docs/phase16_oewn_hypernym_verifier.md"
+    },
+    "phase17": {
+      "name": "局部最小深度 witness 的结构 basis 支持包络",
+      "status": "reproduced_structural_only",
+      "outputs": "outputs/phase17",
+      "reports": "docs/minimum_witness_basis_support.md"
+    },
+    "phase18": {
+      "name": "输出发布面字段审计",
+      "status": "reproduced_heuristic_manual_review_required",
+      "outputs": "outputs/phase18",
+      "reports": "docs/data_release_gate.md"
+    },
+    "phase19": {
+      "name": "selected witness 来源 lineage 复核",
+      "status": "reproduced_structural_only",
+      "outputs": "outputs/phase19",
+      "reports": "docs/selected_witness_source_lineage.md"
+    },
+    "phase20": {
+      "name": "NLI 到证明候选组合 gate",
+      "status": "implemented_no_real_nli_or_semantic_gold",
+      "outputs": "src/logic/verified_reasoning_pipeline.py",
+      "reports": "docs/logic_verification.md"
+    },
+    "phase21": {
+      "name": "AND/OR 超图压平损失消融",
+      "status": "reproduced_structural_only",
+      "outputs": "outputs/phase21",
+      "reports": "docs/flattening_ablation.md"
+    },
+    "phase22": {
+      "name": "释义逻辑化确认性标注候选抽样设计",
+      "status": "weighted_kappa_ci_stress_test_flags_undercoverage_no_annotations",
+      "outputs": "outputs/phase7/annotation_candidate_frame_v3_400.jsonl; outputs/phase7/annotation_batch_2025_plus_v3_400_blind.jsonl",
+      "reports": "docs/annotation_study_design_v3.md"
+    },
+    "phase23": {
+      "name": "全量 source-record 来源/许可元数据覆盖普查",
+      "status": "full_bundle_metadata_census_reproduced_license_clearance_unresolved",
+      "outputs": "outputs/phase23/source_release_metadata_audit.json",
+      "reports": "docs/data_release_gate.md"
+    },
+    "phase24": {
+      "name": "替代释义来源证据候选清单",
+      "status": "selected_family_payloads_verified_candidate_crosswalk_not_legal_clearance",
+      "outputs": "outputs/phase24/source_release_candidate_triage.json",
+      "reports": "docs/data_provenance.md"
+    },
+    "phase25": {
+      "name": "高频来源官方版本与许可证据定向复核",
+      "status": "selected_provider_statements_recorded_exact_payload_mapping_and_full_rights_review_pending",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "docs/data_provenance.md"
+    },
+    "phase26": {
+      "name": "人工标注来源记录字节与义项绑定复核器及可复用路由门",
+      "status": "implemented_routing_integrated_batch_reusable_no_returned_annotations_yet",
+      "outputs": "src/logic/source_record_verifier.py",
+      "reports": "docs/data_provenance.md"
+    },
+    "phase27": {
+      "name": "ACL/TACL 2026 词义与逻辑文献官方检索增量",
+      "status": "bounded_official_page_deduplication_not_systematic_or_exhaustive",
+      "outputs": "sources/literature_screening_log_2026-10-06_acl_lexical_logic_delta.json",
+      "reports": "docs/related_work.md"
+    },
+    "phase28": {
+      "name": "严格组合路由批量 API 与研究进度深度审查",
+      "status": "batch_api_added_no_gold_or_end_to_end_evaluation",
+      "outputs": "src/logic/verified_reasoning_pipeline.py::route_pipeline_batch_from_export",
+      "reports": "../report/research_progress_deep_review_2026-10-06.md"
+    },
+    "phase29": {
+      "name": "固定 ACL v3 中 2025 规则/形式化高优先近邻筛读与日志对账",
+      "status": "four_targeted_section_reviews_reconciled_no_systematic_review",
+      "outputs": "sources/literature_screening_log_2026-10-06_acl_2025_formalization_rule_neighbors.json",
+      "reports": "docs/closest_work_comparison.md"
+    },
+    "phase30": {
+      "name": "ACL v3 2025 definition-to-formal-logic 词族筛读",
+      "status": "bounded_family_screen_and_four_targeted_reviews_no_systematic_review",
+      "outputs": "sources/literature_screening_log_2026-10-06_acl_2025_definition_to_formal_logic_full_screen.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase30.md"
+    },
+    "phase31": {
+      "name": "ACL v3 2025 NLI、逻辑与证明近邻筛读",
+      "status": "fixed_family_screened_with_six_targeted_reviews_no_matched_baseline",
+      "outputs": "sources/literature_screening_log_2026-10-06_acl_2025_nli_logic_proof_full_screen.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase31.md"
+    },
+    "phase32": {
+      "name": "ACL v3 2024 definition-to-formal-logic 词族筛读",
+      "status": "family_screened_with_six_targeted_reviews_no_systematic_review",
+      "outputs": "sources/literature_screening_log_2026-10-06_acl_2024_definition_to_formal_logic_full_screen.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase32.md"
+    },
+    "phase33": {
+      "name": "2026 formal NLI 与 proof-tree 高优先近邻筛读",
+      "status": "two_targeted_reviews_no_novelty_or_effectiveness_claim",
+      "outputs": "sources/literature_screening_log_2026-10-06_acl2026_proof_and_formal_nli.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase33.md"
+    },
+    "phase34": {
+      "name": "source-only 证据链层级与接口静态审计",
+      "status": "evidence_scope_contract_documented_no_semantic_gold",
+      "outputs": "docs/source_only_evidence_contract.md",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase34.md"
+    },
+    "phase35": {
+      "name": "形式化编译器类型系统范围审计",
+      "status": "unary_positive_horn_scope_confirmed_typed_horn_unimplemented",
+      "outputs": "src/logic/annotation_to_datalog.py",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase35.md"
+    },
+    "phase36": {
+      "name": "ICML 2026 跨会场验证与推理图补查",
+      "status": "two_abstract_level_neighbors_no_acl_reconciliation_change",
+      "outputs": "sources/literature_screening_log_2026-10-06_icml2026_verification_supplement.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase36.md"
+    },
+    "phase37": {
+      "name": "NeurIPS 2025 reasoning graph 与 KG constraint 近邻筛读",
+      "status": "two_targeted_full_text_reviews_not_a_systematic_screen",
+      "outputs": "sources/literature_screening_log_2026-10-06_neurips2025_graph_verification.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase37.md"
+    },
+    "phase38": {
+      "name": "OEWN 资源级 hypernym verifier 压力覆盖与独立回放",
+      "status": "deterministic_360_case_stress_replayed_no_semantic_accuracy_claim",
+      "outputs": "outputs/phase16/oewn_hypernym_stress_v1_replay.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase38.md"
+    },
+    "phase39": {
+      "name": "冻结来源元数据、权利与发布 gate 复核",
+      "status": "inventory_consistent_source_level_release_clearance_unresolved",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase39.md"
+    },
+    "phase40": {
+      "name": "IJCAI 2026 logical rule induction 与 textual-entailment 近邻筛读",
+      "status": "two_targeted_reviews_broad_pipeline_and_dnf_not_novelty_claims",
+      "outputs": "sources/literature_screening_log_2026-10-06_ijcai2026_logic_neighbors.json",
+      "reports": "../report/research_progress_deep_review_2026-10-06_phase40.md"
+    },
+    "phase41": {
+      "name": "source-record verifier 与组合路由静态复查",
+      "status": "source_payload_binding_reviewed_current_regression_status_unknown",
+      "outputs": "src/logic/source_record_verifier.py",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase41.md"
+    },
+    "phase42": {
+      "name": "IJCAI 2026 全目录标题级近邻补筛",
+      "status": "title_level_index_screen_no_additional_obvious_neighbor_not_exhaustive",
+      "outputs": "sources/ijcai2026_title_screen_audit_2026-10-07.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase42.md"
+    },
+    "phase43": {
+      "name": "GCIDE 0.54 与 NLM MeSH 2026 提供方版本/复用条款复核",
+      "status": "official_provider_evidence_updated_payload_alignment_and_release_clearance_unresolved",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase43.md"
+    },
+    "phase44": {
+      "name": "NCIt 专用许可与 OLS 冻结记录映射复核",
+      "status": "provider_license_and_formats_verified_exact_snapshot_alignment_unresolved",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase44.md"
+    },
+    "phase45": {
+      "name": "ACL 2026 规则依赖图与动态证据状态近邻筛读",
+      "status": "targeted_official_fulltext_review_novelty_and_effectiveness_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl_rule_graph_neighbor.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase45.md"
+    },
+    "phase46": {
+      "name": "AAAI 2027 匿名既有稿件归属和用户新研究定位审计",
+      "status": "key_visible_docs_attribution_boundary_clarified_release_rights_unresolved",
+      "outputs": "docs/research_positioning_and_prior_work.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase46.md"
+    },
+    "phase47": {
+      "name": "NLI relation gold 与 gloss-support schema/协议一致性审计",
+      "status": "stale_protocol_field_claim_corrected_no_annotations_or_authorization",
+      "outputs": "docs/claim_verification_evaluation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase47.md"
+    },
+    "phase48": {
+      "name": "冻结 source-record 索引上游版本/许可字段覆盖审计",
+      "status": "index_lacks_provider_release_fields_payload_metadata_unassessed",
+      "outputs": "../OEWN/indexes/source_records.jsonl",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase48.md"
+    },
+    "phase49": {
+      "name": "核心研究假设可证伪性与 matched evaluation 判据",
+      "status": "hypotheses_operationalized_no_gold_no_matched_results",
+      "outputs": "docs/claim_verification_evaluation_protocol.md; docs/research_positioning_and_prior_work.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase49.md"
+    },
+    "phase50": {
+      "name": "来源画像与官方权利证据日志的精确标签对账",
+      "status": "aggregate_crosswalk_recomputed_alias_and_release_alignment_unresolved",
+      "outputs": "src/analysis/reconcile_source_rights_coverage.py; outputs/phase50/source_rights_crosswalk_audit.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase50.md"
+    },
+    "phase51": {
+      "name": "OEWN 2025+、Wiktionary 与 ChEBI 来源证据补录",
+      "status": "resource_level_official_terms_recorded_payload_level_mapping_unresolved",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json; outputs/phase51/source_rights_crosswalk_audit.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase51.md"
+    },
+    "phase52": {
+      "name": "Gene Ontology 与 IUPAC Gold Book 版本线索核查",
+      "status": "resource_terms_recorded_exact_release_item_and_payload_hash_unresolved",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json; outputs/phase52/source_rights_crosswalk_audit.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase52.md"
+    },
+    "phase54": {
+      "name": "非规范来源字符串结构与安全 host 提取审计",
+      "status": "source_values_are_noncanonical_strings_no_safe_host_provenance_unresolved",
+      "outputs": "src/analysis/audit_source_release_candidates.py; outputs/phase54/source_release_candidate_triage_host_recovered.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase54.md"
+    },
+    "phase55": {
+      "name": "COLM 2026 组合证据核验与形式验证近邻筛读",
+      "status": "three_targeted_full_text_reviews_completed_no_matched_evaluation_or_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_colm2026_compositional_verification.json; docs/closest_work_comparison.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase55.md"
+    },
+    "phase56": {
+      "name": "ACL 2026 NLI/逻辑固定候选子集逐条筛读与全文近邻分析",
+      "status": "58_title_abstract_screened_five_targeted_official_full_text_reviews_no_direct_match_or_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2026_nli_logic.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase56.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase56.md"
+    },
+    "phase57": {
+      "name": "ACL 2026 图/规则/来源证据候选筛读与 hypergraph 邻居核查",
+      "status": "117_title_abstract_screened_four_targeted_full_text_reviews_all_2026_candidates_url_matched_no_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2026_graph_rule_provenance.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase57.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase57.md"
+    },
+    "phase58": {
+      "name": "ACL 2025 图/规则候选筛查及 WordNet taxonomy 直接近邻审计",
+      "status": "133_title_abstract_screened_ten_targeted_full_text_reviews_lorex_baseline_candidate_identified_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2025_graph_rule_provenance.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase58.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase58.md"
+    },
+    "phase59": {
+      "name": "ACL 2024 来源支撑蕴含候选筛读与归因/NLI近邻审计",
+      "status": "84_title_abstract_screened_ten_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2024_source_grounded_entailment.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase59.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase59.md"
+    },
+    "phase60": {
+      "name": "ACL 2024 NLI/逻辑/证明候选筛读与词汇知识方法核查",
+      "status": "36_title_abstract_screened_eight_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2024_nli_logic_proof.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase60.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase60.md"
+    },
+    "phase61": {
+      "name": "ACL 2024 图/规则/来源候选筛读与 claim-level attribution 近邻审计",
+      "status": "100_title_abstract_screened_ten_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2024_graph_rule_provenance.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase61.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase61.md"
+    },
+    "phase62": {
+      "name": "ACL 2023 定义到形式逻辑候选筛读与文本规则学习近邻审计",
+      "status": "31_title_abstract_screened_nine_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2023_definition_to_formal_logic.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase62.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase62.md"
+    },
+    "phase63": {
+      "name": "ACL 2023 释义辅助蕴含与来源归因近邻筛读",
+      "status": "57_title_abstract_screened_ten_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2023_source_grounded_entailment.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase63.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase63.md"
+    },
+    "phase64": {
+      "name": "ACL 2023 文本到逻辑、KG规则与多证据验证近邻筛读",
+      "status": "55_title_abstract_screened_ten_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2023_graph_rule_provenance.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase64.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase64.md"
+    },
+    "phase65": {
+      "name": "ACL 2023 NLI、推理链与证据验证近邻筛读",
+      "status": "16_title_abstract_screened_nine_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2023_nli_logic_proof.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase65.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md; docs/research_positioning_and_prior_work.md; docs/claim_verification_evaluation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase65.md"
+    },
+    "phase66": {
+      "name": "ACL 2022 NL逻辑解析、proof verifier 与定义表示近邻筛读",
+      "status": "20_targeted_title_abstract_screened_ten_targeted_pdf_reviews_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2022_definition_logic_proof.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase66.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md; docs/research_positioning_and_prior_work.md; docs/claim_verification_evaluation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase66.md"
+    },
+    "phase67": {
+      "name": "ACL 2021 定理证明、Horn 推理近邻与实现边界审计",
+      "status": "14_title_abstract_screened_six_targeted_pdf_reviews_codegraph_unavailable_novelty_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2021_logic_proof.json; sources/acl_anthology_candidates_2026-10-06_v3_reconciled_phase67.json; docs/related_work.md; docs/literature_search_protocol.md; docs/claim_verification_evaluation_protocol.md; docs/research_readiness_audit.md; SUMMARY.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase67.md"
+    },
+    "phase68": {
+      "name": "显式版本化类型签名下的 Datalog 校验原型",
+      "status": "optional_typed_checker_added_py_compile_only_runtime_behavior_unverified",
+      "outputs": "src/logic/typed_program_validator.py; config/typed_datalog_problem.example.json; docs/typed_datalog_contract.md; src/logic/datalog_checker.py; src/logic/verified_reasoning_pipeline.py",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase68.md"
+    },
+    "phase69": {
+      "name": "Typed proof/countermodel 与 signature table hash 绑定",
+      "status": "hash_binding_added_py_compile_only_replay_behavior_unverified",
+      "outputs": "src/logic/datalog_checker.py; docs/typed_datalog_contract.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase69.md"
+    },
+    "phase70": {
+      "name": "Canonical annotation 到 typed Horn 的变量 sort 传递",
+      "status": "experimental_schema_0_5_typed_replay_and_agreement_tests_passed_61_v3_stays_0_4",
+      "outputs": "src/logic/annotation_validator.py; src/logic/annotation_to_datalog.py; src/analysis/annotation_agreement.py; tests/test_annotation_to_datalog.py; tests/test_annotation_agreement.py; docs/annotation_protocol.md; docs/typed_datalog_contract.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase70.md"
+    },
+    "phase71": {
+      "name": "Typed Datalog sort-domain 与 artifact tampering replay 验证",
+      "status": "synthetic_sort_boundary_and_hash_tampering_tests_passed_10",
+      "outputs": "tests/test_datalog_checker.py; src/logic/datalog_checker.py",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase71.md"
+    },
+    "phase72": {
+      "name": "Typed proof/countermodel 的 strict pipeline 路由验证",
+      "status": "synthetic_end_to_end_typed_replay_route_tests_passed_66_focused_suite",
+      "outputs": "tests/test_verified_reasoning_pipeline.py; src/logic/verified_reasoning_pipeline.py",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase72.md"
+    },
+    "phase73": {
+      "name": "OEWN 词汇类型来源与关系类型 inventory 审计",
+      "status": "pinned_release_profile_recomputed_relation_families_separated_semantic_sorts_unresolved",
+      "outputs": "src/analysis/audit_oewn_type_inventory.py; tests/test_audit_oewn_type_inventory.py; outputs/phase73/oewn_type_inventory_audit.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase73.md"
+    },
+    "phase74": {
+      "name": "Gloss Horn referent/type 契约与 WordNet gloss semantic parsing 近邻复核",
+      "status": "experimental_domain_contract_drafted_no_schema_implementation_or_typing_gold",
+      "outputs": "docs/gloss_referent_type_contract.md; docs/typed_datalog_contract.md; docs/annotation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase74.md"
+    },
+    "phase75": {
+      "name": "Sort judgment provenance schema 与 annotation/compiler/agreement 扩展",
+      "status": "schema_06_compiler_v5_agreement_v12_typed_pipeline_and_sort_iaa_connected_73_focused_tests_passed_no_semantic_gold",
+      "outputs": "src/logic/annotation_validator.py; src/logic/annotation_to_datalog.py; src/analysis/annotation_agreement.py; tests/test_annotation_to_datalog.py; tests/test_annotation_agreement.py; tests/test_verified_reasoning_pipeline.py",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase75.md"
+    },
+    "phase76": {
+      "name": "OEWN instance_hypernym 资源内关系验证器",
+      "status": "pinned_release_producer_and_independent_archive_path_rule_replay_passed_220_tests_no_semantic_gold",
+      "outputs": "src/analysis/oewn_instance_hypernym_verifier.py; src/analysis/replay_oewn_instance_hypernym_certificates.py; tests/test_oewn_instance_hypernym_verifier.py; tests/test_replay_oewn_instance_hypernym_certificates.py; config/instance_hypernym_claims.example.jsonl; outputs/phase76/oewn_instance_hypernym_verification.json; outputs/phase76/oewn_instance_hypernym_replay.json; docs/phase76_oewn_instance_hypernym_verifier.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase76.md"
+    },
+    "phase77": {
+      "name": "OEWN instance_hypernym 分层压力集与独立回放",
+      "status": "fixed_seed_320_claims_eight_strata_independent_replay_valid_full_suite_222_no_semantic_gold",
+      "outputs": "src/analysis/build_oewn_instance_hypernym_stress_claims.py; tests/test_build_oewn_instance_hypernym_stress_claims.py; outputs/phase77/oewn_instance_hypernym_stress_v1_claims.jsonl; outputs/phase77/oewn_instance_hypernym_stress_v1_manifest.json; outputs/phase77/oewn_instance_hypernym_stress_v1_verification.json; outputs/phase77/oewn_instance_hypernym_stress_v1_replay.json; docs/phase77_oewn_instance_hypernym_stress_frame.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase77.md"
+    },
+    "phase78": {
+      "name": "instance_hypernym 人工关系与 gloss support 审查候选设计",
+      "status": "internal_text_free_320_pair_frame_preflight_replayed_protocol_unauthorized_pair_schema_pending",
+      "outputs": "src/analysis/build_oewn_instance_manual_audit_frame.py; tests/test_build_oewn_instance_manual_audit_frame.py; docs/instance_relation_human_audit_design.md; outputs/phase78/instance_relation_candidate_ids.jsonl; outputs/phase78/instance_relation_sampling_key.jsonl; outputs/phase78/instance_relation_candidate_manifest.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase78.md"
+    },
+    "phase79": {
+      "name": "pair-level relation annotation schema draft",
+      "status": "synthetic_structural_validation_only_not_frozen_not_semantic_gold",
+      "outputs": "src/logic/instance_relation_annotation_validator.py; tests/test_instance_relation_annotation_validator.py; docs/instance_relation_human_audit_design.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase79.md"
+    },
+    "phase80": {
+      "name": "pair annotation handbook and rationale fields",
+      "status": "handbook_draft_schema_0_2_synthetic_only_protocol_not_frozen",
+      "outputs": "docs/instance_relation_annotation_handbook_draft.md; src/logic/instance_relation_annotation_validator.py; tests/test_instance_relation_annotation_validator.py; tests/fixtures/instance_relation_annotation_0_2_synthetic.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase80.md"
+    },
+    "phase81": {
+      "name": "relation-pair sample precision and estimand audit",
+      "status": "aggregate_planning_precision_only_not_power_or_confirmatory_interval",
+      "outputs": "src/analysis/audit_instance_relation_frame_precision.py; tests/test_audit_instance_relation_frame_precision.py; docs/instance_relation_human_audit_design.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase81.md"
+    },
+    "phase82": {
+      "name": "relation-pair statistical analysis plan draft",
+      "status": "recommended_estimands_and_missingness_draft_not_frozen_or_preregistered",
+      "outputs": "docs/instance_relation_statistical_analysis_plan_draft.md; docs/instance_relation_human_audit_design.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase82.md"
+    },
+    "phase83": {
+      "name": "finite-population exact intervals for pair prevalence",
+      "status": "hypergeometric_interval_prototype_exhaustive_small_population_coverage_not_frozen",
+      "outputs": "src/analysis/finite_population_proportion_intervals.py; tests/test_finite_population_proportion_intervals.py; docs/instance_relation_statistical_analysis_plan_draft.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase83.md"
+    },
+    "phase84": {
+      "name": "SemEval 2026 Task 11 formal/content effect evaluation precedent",
+      "status": "targeted_official_full_paper_review_design_implications_only_not_matched_baseline",
+      "outputs": "docs/closest_work_comparison.md; docs/research_readiness_audit.md; sources/literature_screening_log_2026-10-07_semeval2026_task11_overview.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase84.md"
+    },
+    "phase85": {
+      "name": "NLI content-effect and irrelevant-context evaluation draft",
+      "status": "unfrozen_protocol_design; prototype_implemented_in_phase86",
+      "outputs": "docs/nli_content_effect_evaluation_draft.md; docs/logic_verification.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase85.md"
+    },
+    "phase86": {
+      "name": "NLI content-effect diagnostic sidecar and descriptive evaluator",
+      "status": "synthetic_unit_verified_descriptive_only_no_real_data_or_inference",
+      "outputs": "src/logic/nli_content_effect.py; tests/test_nli_content_effect.py; docs/nli_content_effect_evaluation_draft.md; docs/logic_verification.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase86.md"
+    },
+    "phase87": {
+      "name": "current readiness snapshot and Neural DTS full-paper follow-up",
+      "status": "documentation_audit_current_snapshot_and_targeted_prior_work_revalidation",
+      "outputs": "docs/research_readiness_audit.md; docs/research_positioning_and_prior_work.md; sources/literature_screening_log_2026-10-05_neural_dts.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase87.md"
+    },
+    "phase88": {
+      "name": "OEWN 2025+ candidate payload to pinned release record crosswalk",
+      "status": "six_record_field_match_recomputed_graph_lineage_audited_in_phase89_release_clearance_unverified",
+      "outputs": "src/analysis/audit_oewn_2025_plus_payload_matches.py; outputs/phase88/oewn_2025_plus_payload_release_match.json; docs/data_provenance.md; sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase88.md"
+    },
+    "phase89": {
+      "name": "OEWN 2025+ candidate payload graph and witness lineage audit",
+      "status": "structural_lineage_v3_two_of_six_selected_witness_source_and_content_hash_matches_semantic_support_and_release_clearance_unverified",
+      "outputs": "src/analysis/audit_oewn_2025_plus_graph_lineage.py; outputs/phase89/oewn_2025_plus_graph_lineage.json; docs/data_provenance.md; docs/research_readiness_audit.md; sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase89.md"
+    },
+    "phase90": {
+      "name": "selected witness source-document binding refinement",
+      "status": "two_of_six_candidate_source_pairs_match_selected_witness_document; semantic_and_rights_validation_unverified",
+      "outputs": "src/analysis/audit_oewn_2025_plus_graph_lineage.py; outputs/phase89/oewn_2025_plus_graph_lineage.json; sources/source_release_rights_evidence_2026-10-06.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase90.md"
+    },
+    "phase91": {
+      "name": "current global ACL Anthology candidate-to-screening-log reconciliation",
+      "status": "1286_of_1747_exact_url_log_matches_461_without_global_log_match_at_phase91_baseline",
+      "outputs": "src/analysis/audit_acl_screening_coverage.py; outputs/phase91/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase91.md"
+    },
+    "phase92": {
+      "name": "ACL 2022 globally unmatched candidate screening and targeted prior-work review",
+      "status": "130_title_abstract_screened_22_adjacent_2_background_106_excluded_4_targeted_pdf_reviews_global_unmatched_331",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2022_unmatched_title_abstract.json; outputs/phase92/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase92.md"
+    },
+    "phase93": {
+      "name": "ACL 2021 unmatched candidate screening and logic/proof validation prior-work review",
+      "status": "85_screened_26_adjacent_2_background_54_excluded_3_deferred_4_targeted_pdf_reviews_global_unmatched_246",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2021_unmatched_title_abstract.json; outputs/phase93/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase93.md"
+    },
+    "phase94": {
+      "name": "ACL 2020 unmatched candidate screening and closest-prior-work review",
+      "status": "94_screened_29_adjacent_3_background_62_excluded_6_targeted_pdf_reviews_global_unmatched_152",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2020_unmatched_title_abstract.json; outputs/phase94/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase94.md"
+    },
+    "phase95": {
+      "name": "ACL 2019 unmatched candidate screening and definition-to-graph-path prior-work review",
+      "status": "68_screened_26_adjacent_7_background_35_excluded_4_targeted_pdf_reviews_global_unmatched_84",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2019_unmatched_title_abstract.json; outputs/phase95/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase95.md"
+    },
+    "phase96": {
+      "name": "ACL 2018 unmatched candidate screening and lexical formalization/proof prior-work review",
+      "status": "38_screened_18_adjacent_8_background_12_excluded_6_targeted_pdf_reviews_global_unmatched_46",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2018_unmatched_title_abstract.json; outputs/phase96/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase96.md"
+    },
+    "phase97": {
+      "name": "ACL 2017 unmatched candidate screening and lexical axiom/proof-system prior-work review",
+      "status": "27_screened_17_adjacent_7_background_3_excluded_4_targeted_pdf_reviews_global_unmatched_19",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2017_unmatched_title_abstract.json; outputs/phase97/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase97.md"
+    },
+    "phase98": {
+      "name": "ACL 2016 unmatched candidates and fixed-frame coverage completion",
+      "status": "19_screened_10_adjacent_6_background_3_excluded_5_targeted_pdf_reviews_acl_frame_1747_matched_0_pending",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2016_unmatched_title_abstract.json; outputs/phase98/acl_screening_coverage.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase98.md"
+    },
+    "phase99": {
+      "name": "ACL 框外 4lang 词典定义图蕴含期刊后续定向复核",
+      "status": "targeted_official_full_text_screen_same_research_line_as_BMEAUT_no_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_4lang_explainable_lexical_entailment.json; docs/related_work.md; docs/closest_work_comparison.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase99.md"
+    },
+    "phase100": {
+      "name": "4lang 图模式到法规 formal rule 的邻接先例定向复核",
+      "status": "targeted_official_full_text_screen_legal_rule_extraction_not_wordnet_baseline_no_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_brise_plandok_rule_extraction.json; docs/related_work.md; docs/closest_work_comparison.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase100.md"
+    },
+    "phase101": {
+      "name": "BRISE 2021 图式规则抽取与 deontic prover 原型定向复核",
+      "status": "targeted_official_full_paper_screen_toy_evaluation_scope_verified_same_line_as_BRISE_Plandok",
+      "outputs": "sources/literature_screening_log_2026-10-07_brise_explainable_rule_extraction_2021.json; docs/related_work.md; docs/closest_work_comparison.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase101.md"
+    },
+    "phase102": {
+      "name": "gloss 编译器与 typed Datalog checker 实现范围审计",
+      "status": "static_scope_audit_compiler_unary_shared_variable_checker_accepts_caller_signatures_no_gloss_semantic_claim",
+      "outputs": "docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase102.md"
+    },
+    "phase103": {
+      "name": "AKBC 2026 lex-NLI 结构化词汇解释与形式证明强邻接工作复核",
+      "status": "targeted_full_text_screen_accepted_workshop_distinct_from_wordnet_gloss_rule_induction_no_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_lex_nli_formal_proofs_akbc2026.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase103.md"
+    },
+    "phase104": {
+      "name": "annotation schema 多参考 gold 表示范围审计",
+      "status": "static_audit_v0_4_has_no_whole_analysis_alternative_grouping_protocol_proposal_only_no_schema_or_lock_change",
+      "outputs": "docs/annotation_protocol.md; docs/annotation_preregistration_draft_v3.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase104.md"
+    },
+    "phase105": {
+      "name": "gloss 多参考 gold sidecar validator 与 scorer 原型",
+      "status": "implemented_static_review_only_not_tested_or_protocol_locked_no_gold_or_authorization",
+      "outputs": "src/logic/gloss_analysis_reference.py; src/analysis/score_gloss_analysis_references.py; docs/annotation_protocol.md; docs/annotation_preregistration_draft_v3.md; docs/research_readiness_audit.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase105.md"
+    },
+    "phase106": {
+      "name": "多参考 annotation scorer 的 micro/macro 汇总审计",
+      "status": "macro_metrics_added_static_review_only_not_tested_or_protocol_locked",
+      "outputs": "src/analysis/score_gloss_analysis_references.py; docs/annotation_protocol.md; docs/annotation_preregistration_draft_v3.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase106.md"
+    },
+    "phase107": {
+      "name": "多参考 scorer 源码/runtime 指纹记录",
+      "status": "implementation_hash_metadata_added_static_review_only_not_cli_verified",
+      "outputs": "src/analysis/score_gloss_analysis_references.py; docs/annotation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase107.md"
+    },
+    "phase108": {
+      "name": "多参考 scorer 输出 schema 版本同步",
+      "status": "schema_version_bumped_static_review_only_not_cli_verified",
+      "outputs": "src/analysis/score_gloss_analysis_references.py; docs/annotation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase108.md"
+    },
+    "phase109": {
+      "name": "多参考 sidecar schema 状态互斥约束",
+      "status": "unresolved_candidate_scoring_leak_closed_static_review_only_not_tested",
+      "outputs": "src/logic/gloss_analysis_reference.py; docs/annotation_protocol.md; docs/annotation_preregistration_draft_v3.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase109.md"
+    },
+    "phase110": {
+      "name": "gloss 候选到 OEWN 关系证明桥接契约",
+      "status": "bridge_validator_implemented_static_review_only_not_tested_or_run",
+      "outputs": "src/analysis/verify_gloss_oewn_relation_links.py; src/analysis/verify_oewn_hypernym_certificates.py; docs/claim_verification_evaluation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase110.md"
+    },
+    "phase111": {
+      "name": "bridge validator 结构审计与契约边界复核",
+      "status": "codegraph_initialized_static_audit_span_whitespace_rejected_manifest_lock_missing_not_tested_or_run",
+      "outputs": "src/analysis/verify_gloss_oewn_relation_links.py; docs/claim_verification_evaluation_protocol.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase111.md"
+    },
+    "phase112": {
+      "name": "gloss–OEWN bridge 的候选清单外部锁定",
+      "status": "candidate_manifest_pin_integrated_and_static_reviewed_not_tested_or_run",
+      "outputs": "src/analysis/verify_gloss_oewn_relation_links.py; docs/claim_verification_evaluation_protocol.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase112.md"
+    },
+    "phase113": {
+      "name": "gloss–OEWN bridge schema 与全候选分母",
+      "status": "independent_schemas_added_candidate_denominator_enforced_not_schema_checked_or_tested",
+      "outputs": "config/gloss_oewn_relation_link.schema.json; config/gloss_oewn_relation_link_validation.schema.json; src/analysis/verify_gloss_oewn_relation_links.py; docs/claim_verification_evaluation_protocol.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase113.md"
+    },
+    "phase114": {
+      "name": "ACL 2026 官方检索去重与候选框范围复核",
+      "status": "targeted_official_source_dedup_no_new_direct_neighbor_no_recall_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_acl2026_lexical_relation_dedup.json; docs/related_work.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase114.md"
+    },
+    "phase115": {
+      "name": "NeurIPS 2025 autoformalization fidelity 与 WordNet hierarchy 定向筛读",
+      "status": "targeted_official_source_screen_three_papers_no_matched_baseline_or_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_neurips2025_autoformalization_wordnet.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase115.md"
+    },
+    "phase116": {
+      "name": "ICLR 2026 semantic fidelity 与 AND/OR pattern audit 定向筛读",
+      "status": "targeted_official_fulltext_screen_two_papers_no_project_gold_or_matched_eval",
+      "outputs": "sources/literature_screening_log_2026-10-07_iclr2026_reflective_fidelity_and_andor_audit.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase116.md"
+    },
+    "phase117": {
+      "name": "selected-witness lineage integrity lock、basis checksum 与实现指纹复算",
+      "status": "v2_full_bundle_replay_passed_input_and_code_hashes_bound_semantics_not_verified",
+      "outputs": "src/analysis/selected_witness_source_lineage.py; outputs/phase117/selected_witness_source_lineage.json; config/selected_witness_source_lineage.schema.json; docs/selected_witness_source_lineage.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase117.md"
+    },
+    "phase118": {
+      "name": "OEWN hypernym producer/replay v3 结构压力复算",
+      "status": "360_claims_recomputed_replay_v3_valid_zero_errors_bridge_schemas_meta_valid_no_gloss_bridge_gold",
+      "outputs": "outputs/phase118/oewn_hypernym_stress_v1_verification_v2.json; outputs/phase118/oewn_hypernym_stress_v1_replay_v3.json; config/gloss_oewn_relation_link.schema.json; config/gloss_oewn_relation_link_validation.schema.json; docs/phase16_oewn_hypernym_verifier.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase118.md"
+    },
+    "phase119": {
+      "name": "gloss-OEWN bridge 合成端到端 wiring 验证",
+      "status": "synthetic_manifest_producer_replay_bridge_passed_bad_pin_and_missing_denominator_rows_rejected_no_semantic_gold",
+      "outputs": "examples/synthetic_gloss_oewn_bridge/README.md; examples/synthetic_gloss_oewn_bridge/candidate_manifest.json; examples/synthetic_gloss_oewn_bridge/claim_review.jsonl; examples/synthetic_gloss_oewn_bridge/links.jsonl; examples/synthetic_gloss_oewn_bridge/links_missing_unassessed.jsonl; examples/synthetic_gloss_oewn_bridge/queries.jsonl; examples/synthetic_gloss_oewn_bridge/verifier_report.json; examples/synthetic_gloss_oewn_bridge/replay_v3.json; examples/synthetic_gloss_oewn_bridge/validation_report.json; examples/synthetic_gloss_oewn_bridge/validation_report_bad_pin.json; examples/synthetic_gloss_oewn_bridge/validation_report_missing_candidate.json; docs/claim_verification_evaluation_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase119.md"
+    },
+    "phase120": {
+      "name": "Findings of EMNLP 2025 推理、验证与 grounding 定向全文筛查",
+      "status": "four_official_fulltext_targeted_screen_outside_frozen_acl_frame_no_matched_baseline_or_novelty_claim",
+      "outputs": "sources/literature_screening_log_2026-10-07_emnlp2025_reasoning_verification_grounding.json; docs/related_work.md; docs/closest_work_comparison.md; docs/literature_search_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase120.md"
+    },
+    "phase121": {
+      "name": "确认性标注 v3 preregistration 输入完整性复审",
+      "status": "21_input_integrity_checks_passed_no_returns_protocol_signature_registration_or_distribution_authorization",
+      "outputs": "outputs/phase121/annotation_preregistration_v3_input_preflight.json; docs/annotation_preregistration_draft_v3.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase121.md"
+    },
+    "phase122": {
+      "name": "多参考 gloss-analysis scorer 与确认性 estimand 静态审计",
+      "status": "implementation_protocol_alignment_reviewed_performance_scope_and_macro_denominator_caveats_documented_estimand_unfrozen",
+      "outputs": "src/analysis/score_gloss_analysis_references.py; src/logic/gloss_analysis_reference.py; docs/annotation_protocol.md; docs/annotation_preregistration_draft_v3.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase122.md"
+    },
+    "phase123": {
+      "name": "三轨逻辑/NLI/端到端 matched-baseline 证据就绪度对账",
+      "status": "implementation_artifact_crosswalk_completed_structural_and_synthetic_evidence_separated_no_real_gold_backed_matched_run",
+      "outputs": "docs/evaluation_readiness_matrix.md; docs/claim_verification_evaluation_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase123.md"
+    },
+    "phase124": {
+      "name": "高频 GCIDE 0.54 来源族的子来源/许可粒度补查",
+      "status": "official_project_license_and_mixed_subsource_model_documented_payload_archive_match_and_item_lineage_unresolved_clearance_unchanged",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json; docs/data_provenance.md; docs/data_release_gate.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase124.md"
+    },
+    "phase125": {
+      "name": "GCIDE 0.54 冻结来源 evidence 受限范围复算",
+      "status": "5625_target_payload_checksums_verified_1573_unique_gcide_payloads_1580_v054_hash_bearing_evidence_objects_upstream_archive_and_subsource_rights_unverified",
+      "outputs": "src/analysis/audit_gcide_source_evidence.py; outputs/phase125/gcide_source_evidence_census.json; sources/source_release_rights_evidence_2026-10-06.json; docs/data_provenance.md; docs/data_release_gate.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase125.md"
+    },
+    "phase126": {
+      "name": "GCIDE 0.54 冻结定义哈希与官方归档交叉审计",
+      "status": "official_page_md5_matched_signature_unverified_846_of_1562_hashes_match_named_normalization_1579_of_1580_equal_same_payload_raw_gloss_sha256_exception_hash_matches_wordnet_marker_subsource_graph_lineage_unresolved",
+      "outputs": "src/analysis/match_gcide_evidence_hashes.py; outputs/phase126/gcide_archive_hash_crosswalk.json; sources/source_release_rights_evidence_2026-10-06.json; docs/data_provenance.md; docs/data_release_gate.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase126.md"
+    },
+    "phase127": {
+      "name": "GCIDE source payload 到 frozen graph/witness 的路径级 lineage",
+      "status": "5625_target_checksums_passed_1573_payloads_index_identity_matched_886_selected_witness_sources_302_nonselected_active_sources_385_no_active_link_exception_wordnet_marker_payload_unlinked",
+      "outputs": "src/analysis/audit_gcide_graph_lineage.py; outputs/phase127/gcide_graph_lineage.json; sources/source_release_rights_evidence_2026-10-06.json; docs/data_provenance.md; docs/data_release_gate.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase127.md"
+    },
+    "phase128": {
+      "name": "selected-witness-linked GCIDE gloss 与归档子来源 marker crosswalk",
+      "status": "886_selected_source_payloads_506_normalized_archive_matches_46_wordnet_marker_433_webster_marker_categories_overlap_semantic_support_and_rights_unresolved",
+      "outputs": "src/analysis/audit_gcide_marker_witness_crosswalk.py; outputs/phase128/gcide_marker_witness_crosswalk.json; sources/source_release_rights_evidence_2026-10-06.json; docs/data_provenance.md; docs/data_release_gate.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase128.md"
+    },
+    "phase129": {
+      "name": "exact raw-premise hash split leakage guard",
+      "status": "freezer_manifest_validator_and_standalone_nli_evaluator_reject_identical_exact_premise_hashes_across_train_dev_test_no_project_candidate_manifest_or_empirical_leakage_rate",
+      "outputs": "src/analysis/freeze_claim_review_candidate_manifest.py; src/logic/claim_review_validator.py; src/logic/nli_gate.py; docs/claim_verification_evaluation_protocol.md; docs/evaluation_readiness_matrix.md; docs/logic_verification.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase129.md"
+    },
+    "phase130": {
+      "name": "targeted primary-source review of 2026 lexical explanation and definition-derived semantics",
+      "status": "official_sources_confirm_akbc2026_lex_nli_accepted_forthcoming_and_acl2026_sememelrm_definition_to_lexical_relation_prior_art_research_positioning_narrowed_no_novelty_claim_or_project_gold",
+      "outputs": "docs/research_positioning_and_prior_work.md; docs/closest_work_comparison.md; docs/related_work.md; sources/literature_screening_log_2026-10-07_lex_nli_formal_proofs_akbc2026.json",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase130.md"
+    },
+    "phase131": {
+      "name": "source and sense identity binding for multi-reference gloss-analysis scoring",
+      "status": "sidecar_validator_requires_linked_records_to_share_source_sense_identity_scorer_requires_prediction_identity_match_scorer_v0_5_static_only_no_runtime_tests_or_real_gold",
+      "outputs": "src/logic/gloss_analysis_reference.py; src/analysis/score_gloss_analysis_references.py; docs/annotation_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md; CodeGraph full re-index (139 Python files, 2466 nodes, 4915 edges)",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase131.md"
+    },
+    "phase132": {
+      "name": "source-specific rights and attribution gate for OEWN 2025 Plus annotation batch",
+      "status": "400_raw_glosses_crosschecked_and_manifest_has_attribution_notice_distribution_and_protocol_unauthorized_no_returns_no_legal_clearance",
+      "outputs": "sources/source_release_rights_evidence_2026-10-06.json; docs/data_release_gate.md; docs/data_provenance.md; docs/evaluation_readiness_matrix.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase132.md"
+    },
+    "phase133": {
+      "name": "KR 2026 Datalog provenance prior and 2026 lexical/rule-paper de-duplication",
+      "status": "official_kr2026_why_provenance_prior_added_three_existing_2026_neighbors_reconciled_novelty_boundary_narrowed_no_systematic_review_or_project_gold",
+      "outputs": "sources/literature_screening_log_2026-10-07_kr2026_provenance_and_lexical_reasoning.json; docs/closest_work_comparison.md; docs/related_work.md; docs/research_positioning_and_prior_work.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase133.md"
+    },
+    "phase134": {
+      "name": "KR 2026 bounded minimal-support, formal-explanation, and proof-certificate screening",
+      "status": "selected_official_abstract_screen_adds_adjacent_prior_art_no_full_proceedings_review_no_project_gold",
+      "outputs": "sources/literature_screening_log_2026-10-07_kr2026_provenance_and_lexical_reasoning.json; docs/closest_work_comparison.md; docs/related_work.md; docs/research_positioning_and_prior_work.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase134.md"
+    },
+    "phase135": {
+      "name": "EACL 2026 WordNet definition and lexical prediction prior",
+      "status": "official_full_text_prior_added_acl_v3_query_vocabulary_gap_found_gloss_rule_support_unverified",
+      "outputs": "sources/literature_screening_log_2026-10-07_eacl2026_gloss_composition.json; docs/closest_work_comparison.md; docs/related_work.md; docs/literature_search_protocol.md; docs/research_positioning_and_prior_work.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase135.md"
+    },
+    "phase136": {
+      "name": "ACL candidate query expansion for definition-conditioned lexical prediction",
+      "status": "v4_created_v3_preserved_one_new_candidate_observed_export_hashes_changed_exact_reconciliation_logged",
+      "outputs": "src/analysis/search_related_work_acl.py; sources/acl_anthology_candidates_2026-10-07_v4.json; sources/acl_anthology_candidates_2026-10-07_v4_reconciled.json; sources/acl_query_expansion_audit_2026-10-07_phase136.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase136.md"
+    },
+    "phase137": {
+      "name": "Pinned ACL export replay and same-export query-family ablation",
+      "status": "offline_export_replay_added_baseline_id_set_matches_frozen_v3_new_family_adds_one_candidate_exactly",
+      "outputs": "src/analysis/search_related_work_acl.py; sources/acl_anthology_export_snapshot_2026-10-07.bib.gz; sources/acl_anthology_candidates_2026-10-07_v5.json; sources/acl_anthology_candidates_2026-10-07_v5_baseline.json; sources/acl_anthology_candidates_2026-10-07_v5_reconciled.json; sources/acl_query_expansion_audit_2026-10-07_phase137.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-07_phase137.md"
+    },
+    "phase138": {
+      "name": "Streaming ACL BibTeX parser and same-export parity replay",
+      "status": "streaming_parser_added_same_snapshot_candidate_and_record_parity_confirmed_resource_observations_not_controlled_benchmark",
+      "date": "2026-10-08",
+      "outputs": "src/analysis/search_related_work_acl.py; sources/acl_anthology_candidates_2026-10-08_v6.json; sources/acl_anthology_candidates_2026-10-08_v6_reconciled.json; sources/acl_streaming_parser_audit_2026-10-08_phase138.json; docs/literature_search_protocol.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-08_phase138.md"
+    },
+    "phase139": {
+      "name": "Current-worktree reproducibility replay of the OEWN noun gloss genus baseline",
+      "status": "full_release_inputs_verified_output_byte_identical_to_phase11_resource_internal_proxy_only",
+      "date": "2026-10-08",
+      "outputs": "outputs/phase139/gloss_genus_release_baseline_2025_plus_replay.json; sources/oewn_genus_baseline_replay_audit_2026-10-08_phase139.json; docs/phase11_gloss_genus_release_baseline.md; docs/method_and_evaluation.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-08_phase139.md"
+    },
+    "phase140": {
+      "name": "Annotation batch suitability and evaluation-track fitness audit",
+      "status": "presentation_replay_valid_track_c_input_fit_conditional_track_a_pair_data_absent_protocol_schema_not_locked_and_distribution_unauthorized",
+      "date": "2026-10-08",
+      "outputs": "sources/annotation_batch_fitness_audit_2026-10-08_phase140.json; docs/annotation_protocol.md; docs/evaluation_readiness_matrix.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-08_phase140.md"
+    },
+    "phase141": {
+      "name": "Track A target-context and premise-hash contract audit",
+      "status": "existing_raw_gloss_only_pair_contract_lacks_frozen_target_lemma_context_and_hypothesis_template_pair_frame_not_generated",
+      "date": "2026-10-08",
+      "outputs": "sources/claim_pair_premise_context_audit_2026-10-08_phase141.json; docs/claim_verification_evaluation_protocol.md; docs/evaluation_readiness_matrix.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-08_phase141.md"
+    },
+    "phase142": {
+      "name": "ACL 2026 grounded claim factuality method screening",
+      "status": "official_full_text_method_neighbor_added_as_candidate_adapted_baseline_no_project_pair_or_gold_result",
+      "date": "2026-10-08",
+      "outputs": "sources/literature_screening_log_2026-10-08_grounded_claim_factuality_acl2026.json; docs/closest_work_comparison.md; docs/claim_verification_evaluation_protocol.md; docs/research_positioning_and_prior_work.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-08_phase142.md"
+    },
+    "phase143": {
+      "name": "Source-only proof and NLI route static contract audit",
+      "status": "source_partition_type_proof_countermodel_unknown_source_bundle_and_nli_export_contracts_present_static_only_no_real_gold_run",
+      "date": "2026-10-08",
+      "outputs": "sources/verified_reasoning_route_contract_audit_2026-10-08_phase143.json; docs/logic_verification.md; docs/research_readiness_audit.md; SUMMARY.md; PROJECT_COMPLETION.md",
+      "reports": "../report/research_progress_deep_review_2026-10-08_phase143.md"
+    },
+    "phase144": {
+      "name": "Track A 候选输入一致性审计",
+      "status": "local_resource_identity_audit_complete_pair_design_pending",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase144/annotation_frame_release_identity_audit.json",
+        "sources/track_a_pair_frame_input_inventory_2026-10-08_phase144.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase144.md"
+      ],
+      "code": [
+        "src/analysis/audit_annotation_frame_release_identity.py"
+      ],
+      "findings": {
+        "target_senses_found_in_release": 400,
+        "raw_gloss_exact_matches": 400,
+        "frame_pos_mismatches": 1,
+        "frame_lemma_set_mismatches": 1,
+        "track_a_pair_frame_created": false,
+        "semantic_gold_created": false
+      },
+      "next_gate": "Freeze parent-synset hypothesis rendering and versioned premise renderer; derive target POS and complete lemma set from the pinned release for any new frame."
+    },
+    "phase145": {
+      "name": "Track A hypothesis 表层策略与 split 组规模审计",
+      "status": "local_candidate_surface_inventory_complete_policy_unfrozen",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase145/track_a_hypothesis_surface_policy_audit.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase145.md"
+      ],
+      "code": [
+        "src/analysis/audit_track_a_hypothesis_surface_policy.py"
+      ],
+      "findings": {
+        "direct_hypernym_edges": 322,
+        "all_parent_lemma_surface_rows": 680,
+        "extra_rows_over_one_per_edge": 358,
+        "multi_surface_edges": 177,
+        "draft_leakage_components": 279,
+        "largest_draft_component_rows": 26,
+        "candidate_pairs_or_labels_created": false
+      },
+      "next_gate": "Review target premise rendering and parent lemma hypothesis policy; add parent relation provenance in a new manifest version; recompute leakage components and split feasibility after exact rendered premises are frozen."
+    },
+    "phase146": {
+      "name": "Track A contextual premise 跨组件契约依赖审计",
+      "status": "static_contract_audit_complete_new_context_path_not_implemented",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/track_a_context_contract_audit_2026-10-08_phase146.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase146.md"
+      ],
+      "reviewed_components": [
+        "claim-review sidecar/manifest validator",
+        "candidate freezer",
+        "NLI exporter",
+        "NLI content-effect evaluator",
+        "NLI calibration gate",
+        "strict proof/NLI route",
+        "instance-relation span validator"
+      ],
+      "findings": {
+        "legacy_premise_equals_raw_gloss": true,
+        "parent_relation_identity_in_manifest_0_2": false,
+        "group_id_has_split_and_calibration_roles": true,
+        "new_context_path_implemented": false,
+        "pairs_labels_or_splits_created": false
+      },
+      "next_gate": "Review context-specific NLI gold scope, surface/edge estimand, calibration unit, POS and verb hypothesis template; then version schema through strict export/route without altering legacy hashes."
+    },
+    "phase147": {
+      "name": "Track A pair contract 设计选项审议稿",
+      "status": "design_options_documented_not_frozen_not_implemented",
+      "date": "2026-10-08",
+      "outputs": [
+        "docs/track_a_pair_contract_design_options.md"
+      ],
+      "reports": [
+        "docs/track_a_pair_contract_design_options.md"
+      ],
+      "findings": {
+        "maximum_surface_context_pair_rows": 1360,
+        "maximum_two_annotator_judgments": 2720,
+        "candidate_pairs_created": false,
+        "labels_or_splits_created": false
+      },
+      "recommended_design": "Separate raw-gloss support gold, condition-specific NLI relation gold, parent relation edge identity, split leakage component, and statistical/calibration unit.",
+      "open_decisions": [
+        "parent lemma surface scope",
+        "NLI gold scope by context condition",
+        "primary statistical/calibration unit",
+        "verb hypothesis template"
+      ],
+      "next_gate": "Researcher review of the four material design decisions before implementing versioned schemas and runtime support."
+    },
+    "phase148": {
+      "name": "selected witness Datalog bridge 历史格式迁移与当前重放",
+      "status": "current_bridge_replay_passed_historical_certificate_schema_drift_documented",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase148/witness_example_replay_audit.json",
+        "outputs/phase148/witness_oewn-00520548-n_datalog_bridge.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase148.md"
+      ],
+      "findings": {
+        "target": "oewn-00520548-n",
+        "structural_nodes": 3596,
+        "dependency_edges": 14923,
+        "ground_datalog_rules": 3512,
+        "current_bridge_valid": true,
+        "phase117_source_lineage_matches_current_bundle": true,
+        "legacy_proof_certificate_schema_drift": [
+          "source_bindings",
+          "source_claim_refs"
+        ],
+        "gloss_semantic_support_verified": false,
+        "license_clearance_verified": false
+      },
+      "next_gate": "Continue with evidence-backed semantic evaluation and resolve the pending Track A pair-contract design decisions before implementing the contextual route."
+    },
+    "phase149": {
+      "name": "ACL 2026 gloss 对照与 claim-support 定向筛读",
+      "status": "two_out_of_frame_fulltext_screens_complete_novelty_boundary_updated",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_acl2026_gloss_auditability_addendum.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase149.md"
+      ],
+      "findings": {
+        "selected_acl2026_papers": 2,
+        "papers_in_pinned_acl_v3_frame": 0,
+        "fixed_frame_sha256": "2c35da96d8f68a2ae04312a52a8e0770293c1ebb108a42a318b164b4145b4e37",
+        "gloss_no_gloss_contrast_is_prior_art": true,
+        "report_level_human_claim_support_is_prior_art": true,
+        "matched_project_baseline_evidence": false,
+        "systematic_review_complete": false,
+        "project_effectiveness_or_novelty_established": false
+      },
+      "next_gate": "Continue cross-field search and complete the pending Track A estimand/context decisions before any schema migration or claim-pair generation."
+    },
+    "phase150": {
+      "name": "COLM 2026 Q-CARE claim verifiability 邻接审查",
+      "status": "one_targeted_fulltext_screen_novelty_boundary_updated_no_matched_baseline",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_colm2026_qcare_fulltext.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase150.md"
+      ],
+      "findings": {
+        "selected_colm2026_papers": 1,
+        "human_annotated_query_count": 320,
+        "human_annotated_claim_count": 7907,
+        "generic_claim_to_evidence_evaluation_is_prior_art": true,
+        "matched_project_baseline_evidence": false,
+        "track_a_contract_frozen": false,
+        "systematic_review_complete": false,
+        "project_effectiveness_or_novelty_established": false
+      },
+      "next_gate": "Resolve pending Track A estimand/context/grammar choices; only then decide whether to implement an adapted pairwise-support baseline and new contract."
+    },
+    "phase151": {
+      "name": "COLM 2026 grounded logic 与 judge 可靠性扩展筛读",
+      "status": "two_targeted_full_text_screens_two_abstract_screens_no_matched_baseline",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_colm2026_grounded_logic_addendum.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase151.md"
+      ],
+      "findings": {
+        "selected_colm2026_papers": 4,
+        "full_text_screens": 2,
+        "title_abstract_screens": 2,
+        "independent_human_gold_needed_for_judge_assessment": true,
+        "executable_logic_benchmark_is_prior_art": true,
+        "project_gloss_support_gold_available": false,
+        "matched_project_baseline_evidence": false,
+        "systematic_review_complete": false,
+        "project_effectiveness_or_novelty_established": false
+      },
+      "next_gate": "Continue cross-venue related-work screening; resolve pending Track A contract decisions before schema implementation or pair generation."
+    },
+    "phase152": {
+      "name": "当前文献快照与 Track A 实现边界深度复核",
+      "status": "v6_snapshot_reconciled_and_codegraph_current_track_a_context_route_absent_design_gate_unresolved",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/acl_anthology_candidates_2026-10-08_v6.json",
+        "sources/acl_anthology_candidates_2026-10-08_v6_reconciled.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase152.md"
+      ],
+      "findings": {
+        "v6_candidate_count": 1748,
+        "v6_exact_url_log_matches": 1748,
+        "phase142_paper_in_v6_frame": false,
+        "lorefact_already_full_text_screened": true,
+        "codegraph_files": 140,
+        "codegraph_nodes": 2466,
+        "codegraph_edges": 4915,
+        "contextual_track_a_premise_path_implemented": false,
+        "track_a_design_decisions_resolved": false,
+        "candidate_pairs_or_labels_created": false,
+        "matched_project_baseline_evidence": false
+      },
+      "next_gate": "Researcher decision on the four Phase147 Track A contract choices before implementing a new schema or generating candidate pairs."
+    },
+    "phase153": {
+      "name": "Track A 设计选择、estimand 与校准单位深度分析",
+      "status": "coherent_design_recommendation_documented_unconfirmed_no_data_or_schema_changes",
+      "date": "2026-10-08",
+      "outputs": [
+        "docs/track_a_design_decision_memo.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase153.md"
+      ],
+      "findings": {
+        "candidate_parent_edges": 322,
+        "parent_lemma_surface_rows": 680,
+        "draft_split_components_before_policy_freeze": 279,
+        "max_pair_condition_rows": 1360,
+        "max_two_annotator_nli_judgments": 2720,
+        "old_calibration_gate_directly_applicable_to_all_surface_rows": false,
+        "proposed_primary_outcome": "raw_gloss_span_support_for_relation_edge_or_typed_literal",
+        "proposed_nli_context_contrast_secondary": true,
+        "schema_or_candidate_data_changed": false
+      },
+      "next_gate": "Researcher decision on Track A scope, condition-specific NLI gold, primary estimand/statistical unit, and noun/verb coverage; then freeze the protocol and implement versioned schemas plus cluster-aware calibration."
+    },
+    "phase154": {
+      "name": "分层 conformal risk control 与项目 NLI 校准契约对照",
+      "status": "one_targeted_full_text_preprint_screen_and_code_contract_reconciled_no_implementation",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_hierarchical_group_risk_control.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase154.md"
+      ],
+      "findings": {
+        "selected_papers": 1,
+        "venue_status": "arxiv_preprint_no_accepted_conference_listed",
+        "formal_group_risk_method_prior_art": true,
+        "strict_guarantee_assumption_includes_iid_calibration_rows": true,
+        "hierarchy_membership_solves_correlated_surface_clusters": false,
+        "project_exploratory_wilson_selector_distinguished_from_strict_gate": true,
+        "project_strict_gate_requires_unique_dev_group_id": true,
+        "cluster_aware_project_calibration_implemented": false,
+        "project_pair_gold_or_schema_changed": false
+      },
+      "next_gate": "Before cluster-aware gate implementation, define the independent calibration observation and prove alignment between the aggregated calibration outcome and per-candidate strict-route action; Track A design remains under researcher review."
+    },
+    "phase155": {
+      "name": "多元 typed Horn 编译边界与目标变量缺口",
+      "status": "static_audit_and_backward_compatible_schema_draft_no_implementation",
+      "date": "2026-10-08",
+      "outputs": [],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase155.md"
+      ],
+      "findings": {
+        "compiler_v5_unary_shared_variable_only": true,
+        "schema_06_records_sorts_but_no_target_variable": true,
+        "typed_datalog_checker_supports_arbitrary_arity": true,
+        "proposed_schema_07_requires_explicit_target_variable": true,
+        "sufficient_multivariate_body_only_variables_candidate": true,
+        "necessary_non_target_consequent_variables_safe_in_positive_datalog": false,
+        "code_schema_data_or_frozen_graph_changed": false
+      },
+      "next_gate": "Superseded by Phase156 implementation; retain this design-only record as the rationale for explicit target-variable and direction-specific safety checks."
+    },
+    "phase156": {
+      "name": "显式目标变量 schema 0.7 与多元 Horn 编译器 v6",
+      "status": "experimental_schema_compiler_agreement_path_implemented_static_syntax_check_only",
+      "date": "2026-10-08",
+      "outputs": [
+        "src/logic/annotation_validator.py",
+        "src/logic/annotation_to_datalog.py",
+        "src/analysis/annotation_agreement.py",
+        "docs/annotation_protocol.md",
+        "docs/typed_datalog_contract.md",
+        "docs/gloss_referent_type_contract.md",
+        "docs/logic_verification.md",
+        "docs/source_only_evidence_contract.md",
+        "docs/method_and_evaluation.md",
+        "docs/annotation_preregistration_draft_v3.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase156.md"
+      ],
+      "findings": {
+        "schema_07_target_variable_validation_implemented": true,
+        "compiler_version": "annotation-to-positive-horn/6",
+        "legacy_schema_path_preserved": true,
+        "sufficient_multivariate_dnf_branch_target_gate_implemented": true,
+        "necessary_non_target_head_variables_rejection_implemented": true,
+        "agreement_version": "wordnet-annotation-agreement/13",
+        "python_syntax_check_passed": true,
+        "runtime_or_unit_tests_run": false,
+        "real_gloss_gold_or_semantic_effect_evidence": false
+      },
+      "next_gate": "Source-only static call-path audit and multivariate ground matcher update are recorded in Phase157; runtime edge validation and a new blind return/import schema remain open."
+    },
+    "phase157": {
+      "name": "schema 0.7 到 source-only proof route 的多元事实绑定审计",
+      "status": "source_only_multivariate_fact_matcher_updated_static_syntax_check_only",
+      "date": "2026-10-08",
+      "outputs": [
+        "src/logic/verified_reasoning_pipeline.py",
+        "docs/source_only_evidence_contract.md",
+        "docs/research_readiness_audit.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase157.md"
+      ],
+      "findings": {
+        "source_fact_atom_arity_matching_implemented": true,
+        "repeated_variable_consistency_check_implemented": true,
+        "schema_07_target_binding_to_query_checked": true,
+        "legacy_unary_target_recovery_preserved": true,
+        "pipeline_version": "reviewed-gloss-proof-pipeline/12",
+        "blind_return_importer_current_schema": "0.4-draft",
+        "python_syntax_check_passed": true,
+        "source_only_runtime_replay_performed": false
+      },
+      "next_gate": "Phase158 adds explicit canonical importer schema selection; full versioned blind task/return materials and runtime source-only proof validation remain open."
+    },
+    "phase158": {
+      "name": "blind annotation importer 的显式 canonical schema 选择",
+      "status": "backward_compatible_importer_schema_switch_static_syntax_check_only",
+      "date": "2026-10-08",
+      "outputs": [
+        "src/analysis/import_annotation_returns.py",
+        "docs/annotation_protocol.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase158.md"
+      ],
+      "findings": {
+        "default_canonical_schema_preserved": "0.4-draft",
+        "selectable_canonical_schemas": [
+          "0.4-draft",
+          "0.5-draft",
+          "0.6-draft",
+          "0.7-draft"
+        ],
+        "schema_validator_remains_final_import_gate": true,
+        "locked_v3_batch_or_manifest_changed": false,
+        "new_blind_task_return_materials_added": false,
+        "python_syntax_check_passed": true,
+        "importer_runtime_or_test_executed": false
+      },
+      "next_gate": "Design and freeze a complete schema-specific blind task/return material set only if the research protocol selects 0.7; then run importer and validator round-trip checks before any real annotation."
+    },
+    "phase159": {
+      "name": "形式正确性、verifier 监督与逻辑内容效应的定向相关工作审查",
+      "status": "three_paper_targeted_official_screen_evaluation_axes_refined_no_matched_baseline",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_formal_correctness_nli_addendum.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase159.md"
+      ],
+      "findings": {
+        "selected_papers": 3,
+        "venue_tiers": [
+          "ACL Industry Track",
+          "Findings ACL",
+          "SemEval workshop"
+        ],
+        "formal_validity_behavior_source_fidelity_separated": true,
+        "project_gloss_support_gold_available": false,
+        "matched_project_baseline_evidence": false,
+        "systematic_review_complete": false,
+        "project_effectiveness_or_novelty_established": false,
+        "frozen_acl_candidate_frame_changed": false,
+        "project_code_or_data_changed": false
+      },
+      "next_gate": "Continue bounded cross-venue literature screening and retain Track A contract decisions as an explicit unresolved researcher gate before pair generation or protocol freeze."
+    },
+    "phase160": {
+      "name": "typed pipeline 输出与严格路由诊断审计",
+      "status": "type_validation_diagnostics_exposed_syntax_check_only",
+      "date": "2026-10-08",
+      "outputs": [],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase160.md"
+      ],
+      "code": [
+        "src/logic/verified_reasoning_pipeline.py"
+      ],
+      "findings": {
+        "pipeline_version": "reviewed-gloss-proof-pipeline/13",
+        "typed_certificate_and_countermodel_replay_revalidate_signature_hash": true,
+        "invalid_typed_program_unknown_reason_code": "invalid_typed_program",
+        "strict_route_recomputes_and_reports_typed_validation": true,
+        "untyped_program_status": "not_requested",
+        "python_syntax_check_passed": true,
+        "tests_or_runtime_route_executed": false,
+        "real_gloss_gold_or_semantic_effect_evidence": false
+      },
+      "next_gate": "Run the existing focused typed-route regression suite only when implementation verification is authorized; then build a schema-specific blind return/task path after the Track A protocol decisions are resolved."
+    },
+    "phase161": {
+      "name": "可复算运行环境与外置冻结数据边界审计",
+      "status": "stdlib_environment_static_audit_external_bundle_presence_only_no_integrity_replay",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/reproducibility_environment_audit_2026-10-08_phase161.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase161.md"
+      ],
+      "findings": {
+        "maintained_python_files_scanned": 132,
+        "ast_parse_errors": 0,
+        "non_stdlib_non_local_top_level_imports": 0,
+        "runtime_observed": "3.13.9",
+        "declared_minimum": "3.10",
+        "ci_matrix_declared_only": true,
+        "external_bundle_root_and_manifest_exist_on_audit_machine": true,
+        "bundle_integrity_replayed": false,
+        "tests_or_ci_executed": false,
+        "full_data_reproducibility_requires_external_bundle": true
+      },
+      "next_gate": "If an authorized full-data replay is desired, run the read-only frozen-bundle integrity audit; keep source-release rights review and Track A design decisions as separate gates."
+    },
+    "phase162": {
+      "name": "外置 frozen bundle integrity lock 只读重放",
+      "status": "six_locked_bundle_files_and_semantic_fingerprint_pass_full_payload_scan_not_run",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase162/frozen_bundle_integrity_replay.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase162.md"
+      ],
+      "findings": {
+        "lock_version": "oewn-frozen-bundle-integrity-lock/2",
+        "integrity_valid": true,
+        "required_files_checked": 6,
+        "semantic_fingerprint_matches": true,
+        "full_source_payload_checksum_scan_run": false,
+        "tests_ci_or_model_runs_executed": false
+      },
+      "next_gate": "Freeze Track A design choices before candidate generation; separately run a full source-payload checksum audit only if a current all-payload integrity claim is required."
+    },
+    "phase163": {
+      "name": "冻结 sense index 引用来源 payload 全量 checksum 当前重放",
+      "status": "all_115235_referenced_source_payloads_match_checksums_current_replay_output_identical_to_phase23",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase163/source_release_metadata_audit_current.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase163.md"
+      ],
+      "findings": {
+        "sense_index_records": 110425,
+        "unique_source_payloads_read": 115235,
+        "source_payload_bytes": 18734636389,
+        "all_source_payloads_match_frozen_checksums": true,
+        "duplicate_source_path_references": 0,
+        "malformed_index_records": 0,
+        "bundle_integrity_lock_valid": true,
+        "current_output_sha256": "9ff9ea44209fdb27e7967123ed9570f5a95ca236d6fc147ae955aa34f4d6dc2d",
+        "phase23_output_byte_identical": true,
+        "release_clearance": "not_assessed; source-level rights and license compatibility require human review",
+        "gloss_semantic_validity_or_paper_novelty_established": false,
+        "markdown_link_audit_final_issues": 0,
+        "four_broken_local_references_repaired": true
+      },
+      "next_gate": "Resolve and document the Track A protocol decisions before generating candidate pairs or labels; keep source-rights clearance as an independent open gate."
+    },
+    "phase164": {
+      "name": "ICML 2026 与 NeurIPS 2025 formal reasoning/verifier 定向补筛",
+      "status": "seven_selected_cross_venue_records_screened_fulltext_or_abstract_no_systematic_census",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_icml2026_neurips2025_formal_verification.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase164.md"
+      ],
+      "findings": {
+        "selected_papers": 7,
+        "full_text_targeted_screens": 2,
+        "abstract_only_screens": 5,
+        "existing_records_deduplicated": 3,
+        "venues": [
+          "NeurIPS 2025",
+          "ICML 2025",
+          "ICML 2026"
+        ],
+        "icml_2026_volume_306_published": "2026-09-29",
+        "formal_validity_specification_fidelity_verifier_quality_source_support_plausibility_separated": true,
+        "matched_wordnet_gloss_to_horn_baseline_found": false,
+        "project_effectiveness_or_novelty_established": false,
+        "systematic_review_complete": false,
+        "project_code_or_data_changed": false,
+        "project_tests_or_benchmarks_run": false,
+        "unresolved_author_metadata_discrepancy": "APOLLO official metadata and PDF title page differ on third author name"
+      },
+      "next_gate": "Continue systematic title/abstract coverage of current top-conference proceedings and close Track A protocol decisions before candidate pair or label generation."
+    },
+    "phase165": {
+      "name": "ICLR 2026 autoformalization、proof DAG 与 verifier 定向补筛",
+      "status": "four_selected_iclr_main_conference_papers_targeted_full_text_no_systematic_census",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_iclr2026_formalization_verification.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase165.md"
+      ],
+      "findings": {
+        "selected_papers": 4,
+        "full_text_targeted_screens": 4,
+        "abstract_only_screens": 0,
+        "venues": [
+          "ICLR 2026"
+        ],
+        "general_nl_to_formal_semantic_evaluation_prior_art": true,
+        "generic_proof_dependency_dag_topological_traversal_prior_art": true,
+        "expert_answer_equivalence_verifier_benchmark_prior_art": true,
+        "verifier_generator_difficulty_interaction_documented": true,
+        "matched_wordnet_gloss_to_horn_baseline_found": false,
+        "project_effectiveness_or_novelty_established": false,
+        "systematic_review_complete": false,
+        "project_code_or_data_changed": false,
+        "project_tests_or_benchmarks_run": false
+      },
+      "next_gate": "Continue official top-conference coverage and preserve the unresolved researcher decisions for Track A; no claim pairs or labels before a frozen protocol and authorization."
+    },
+    "phase166": {
+      "name": "ACL v6 2026 WordNet/gloss query-family deep-screen upgrade",
+      "status": "all_nine_2026_query_family_records_have_explicit_depth_5_full_text_2_targeted_sections_2_abstract_only",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_acl2026_wordnet_slice_phase166.json",
+        "sources/acl_anthology_candidates_2026-10-08_v6_reconciled_phase166.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase166.md"
+      ],
+      "findings": {
+        "v6_frame_candidate_count": 1748,
+        "year_2026_candidate_count": 296,
+        "2026_wordnet_gloss_family_count": 9,
+        "prior_full_text_in_slice": 5,
+        "prior_abstract_only_in_slice": 4,
+        "current_full_text_upgrades": 0,
+        "current_abstract_only_screens": 2,
+        "updated_full_text_in_slice": 5,
+        "updated_abstract_only_in_slice": 2,
+        "selected_official_pdf_review": [
+          "2026.lrec-1.856",
+          "2026.lrec-1.292"
+        ],
+        "gloss_wordnet_hypernym_contextual_wsd_prior_art": true,
+        "llm_wordnet_gloss_to_sense_label_transfer_prior_art": true,
+        "manual_label_validation_absent_in_cefr_neighbor": true,
+        "project_gloss_span_to_horn_matched_gold_found": false,
+        "project_effectiveness_or_novelty_established": false,
+        "systematic_review_complete": false,
+        "original_v6_candidate_frame_overwritten": false,
+        "project_code_or_data_changed": false,
+        "project_tests_or_benchmarks_run": false,
+        "current_targeted_section_screens": 2,
+        "updated_targeted_sections_in_slice": 2
+      },
+      "next_gate": "Continue screening remaining venue/family gaps and resolve Track A preregistration/authorization before any gold or candidate-pair generation."
+    },
+    "phase167": {
+      "name": "AAAI 2026 formal logic and autoformalization neighboring-work screen",
+      "status": "four_selected_official_papers_targeted_pdf_review_no_proceedings_census",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_aaai2026_formal_logic_neighbors.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase167.md"
+      ],
+      "findings": {
+        "selected_papers": 4,
+        "targeted_official_pdf_screens": 4,
+        "main_technical_track_papers": 3,
+        "special_track_papers": 1,
+        "fixed_ontology_gloss_nl_to_fol_smt_equivalence_prior_art": true,
+        "logic_perturbation_evaluation_prior_art": true,
+        "selective_translation_backward_reasoning_prior_art": true,
+        "specialized_math_autoformalization_prior_art": true,
+        "nl_rules_to_executable_prolog_abstention_prior_art": true,
+        "direct_wordnet_gloss_span_to_typed_horn_matched_gold_found": false,
+        "project_effectiveness_or_novelty_established": false,
+        "systematic_review_complete": false,
+        "project_code_or_data_changed": false,
+        "project_tests_or_benchmarks_run": false,
+        "track_a_protocol_decisions_resolved": false
+      },
+      "next_gate": "Continue bounded top-conference coverage; keep ontology/type identification, formula construction, source-span fidelity, proof replay, and NLI outcome as separate evaluation axes. Resolve Track A researcher decisions before candidate-pair generation or schema migration."
+    },
+    "phase168": {
+      "name": "Anonymous prior-work authorship boundary and positioning refresh",
+      "status": "documentary_scan_completed_ambiguous_possession_wording_corrected_no_pdf_review",
+      "date": "2026-10-08",
+      "outputs": [],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase168.md"
+      ],
+      "findings": {
+        "user_disclaims_aaai2027_authorship_per_explicit_statement": true,
+        "core_documentary_attribution_conflict_found": false,
+        "ambiguous_user_provided_wording_corrected": true,
+        "phase166_167_prior_art_added_to_positioning_memo": true,
+        "anonymous_pdf_opened_or_copied": false,
+        "manuscript_authorship_or_status_independently_verified": false,
+        "manuscript_publication_rights_cleared": false,
+        "bundle_source_rights_cleared": false,
+        "worktree_git_remote_configured_at_audit_time": false,
+        "project_code_or_data_changed": false,
+        "project_tests_or_benchmarks_run": false
+      },
+      "next_gate": "Preserve the non-attribution and restricted-use boundary; independently resolve authorship/status/data rights only through authorized channels before any external manuscript or data use. Continue the research goal on public prior art and reproducible project evidence."
+    },
+    "phase169": {
+      "name": "Track A implementation gate and protocol-boundary audit",
+      "status": "static_cross_document_and_codegraph_review_completed_no_schema_or_data_change",
+      "date": "2026-10-08",
+      "outputs": [],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase169.md"
+      ],
+      "findings": {
+        "legacy_400_item_lock_is_distinct_from_track_a_proposal": true,
+        "legacy_lock_scope_is_bytes_and_schema_preflight_only": true,
+        "track_a_protocol_signed": false,
+        "track_a_distribution_authorized": false,
+        "source_release_rights_cleared": false,
+        "current_exporter_checks_hash_pinned_candidate_manifest": true,
+        "source_verifier_proves_gloss_semantic_support_or_reuse_rights": false,
+        "cluster_valid_calibration_implemented_or_established": false,
+        "codegraph_index_healthy_and_current": true,
+        "markdown_link_audit_issues": 0,
+        "project_code_schema_or_data_changed": false,
+        "project_tests_benchmarks_models_or_annotations_run": false
+      },
+      "next_gate": "Keep the legacy 400-item lock separate. Resolve exact source-release reuse rights and Track A scope, estimands, labels, split/calibration plan, and annotation responsibilities before constructing a new candidate frame/manifest or migrating schemas."
+    },
+    "phase170": {
+      "name": "Recent logic evaluation and semantics-aware formula metric screen",
+      "status": "two_official_full_texts_targeted_screen_no_project_experiment",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_logic_evaluation_neighbors_phase170.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase170.md"
+      ],
+      "findings": {
+        "selected_papers": 2,
+        "full_texts_reviewed": 2,
+        "main_conference_papers": 1,
+        "workshop_papers": 1,
+        "operation_aware_verifier_error_analysis_prior_art": true,
+        "presburger_model_set_semantic_formula_distance_prior_art": true,
+        "semantic_distance_formula_structure_failure_observed_in_neighbor": true,
+        "wordnet_gloss_span_typed_horn_matched_gold_found": false,
+        "project_effectiveness_or_novelty_established": false,
+        "systematic_review_complete": false,
+        "project_code_schema_or_data_changed": false,
+        "project_models_experiments_tests_or_annotations_run": false
+      },
+      "next_gate": "Keep source-span support, exact-condition NLI, formal validity/equivalence, and source-only replay as separate endpoints; inspect verifier disagreement. Continue scoped venue/family screening without treating selected papers as comprehensive coverage."
+    },
+    "phase175": {
+      "name": "Current frozen AND-OR Horn hypergraph and witness revalidation",
+      "status": "frozen_structural_closure_and_witnesses_replayed_current_graph_matches_prior_statistics",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase175/frozen_hypergraph_current.json",
+        "outputs/phase175/minimum_witness_current.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase175.md"
+      ],
+      "findings": {
+        "heads": 110425,
+        "clauses": 154206,
+        "dependency_literals": 917767,
+        "basis_atoms": 85,
+        "basis_closure_complete": true,
+        "integrity_lock_valid": true,
+        "hyperedges_match_rules": true,
+        "valid_frozen_witnesses": 110425,
+        "minimum_depth_witnesses_valid": true,
+        "selected_witness_heads_at_minimum_depth": 110425,
+        "selected_witness_extra_depth_heads": 0,
+        "basis_single_deletions_with_nonzero_exact_closure_loss": 85,
+        "selected_witness_descendant_comparison": {
+          "overestimates": 53,
+          "underestimates": 19,
+          "matches": 13
+        },
+        "gloss_semantic_support_established": false,
+        "basis_global_minimum_cardinality_established": false,
+        "project_source_code_schema_or_bundle_changed": false,
+        "project_tests_models_experiments_or_annotations_run": false
+      },
+      "next_gate": "Keep exact AND/OR closure recomputation as the basis-deletion impact oracle; treat selected witness descendants only as a certificate-DAG diagnostic. To establish source semantics, add sense-bound human gloss-span adjudication and replay rules against that independently reviewed source evidence."
+    },
+    "phase174": {
+      "name": "ACL Findings 2026 inference-time NL2FOL correction prior-work screen",
+      "status": "one_official_full_text_screened_out_of_frame_targeted_discovery_no_novelty_or_effectiveness_claim",
+      "date": "2026-10-08",
+      "outputs": [],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase174.md"
+      ],
+      "sources": [
+        "sources/literature_screening_log_2026-10-08_lseg_nl2fol_findings_acl2026.json"
+      ],
+      "findings": {
+        "official_papers_screened": 1,
+        "official_full_texts_reviewed": 1,
+        "fixed_acl_v6_candidate_frame_changed": false,
+        "recall_estimated": false,
+        "nl2fol_inference_time_representation_intervention_prior_art": true,
+        "logical_equivalence_endpoint_prior_art": true,
+        "wordnet_gloss_span_horn_support_evaluated": false,
+        "matched_project_baseline": false,
+        "project_effectiveness_or_novelty_established": false,
+        "project_code_schema_or_data_changed": false,
+        "project_tests_models_experiments_or_annotations_run": false
+      },
+      "next_gate": "Keep formal equivalence, typed proof/witness replay, and human sense-bound gloss-span support as separate endpoints. Continue official proceedings screening and do not claim novelty/effectiveness without exhaustive-enough retrieval and matched annotated evaluation."
+    },
+    "phase173": {
+      "name": "PubMed Central Open Access candidate article-level rights review",
+      "status": "official_item_specific_license_guidance_recorded_candidate_article_identity_and_clearance_unverified",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase173/source_rights_crosswalk_current.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase173.md"
+      ],
+      "findings": {
+        "candidate_profiles": 90,
+        "distinct_candidate_source_labels": 58,
+        "rights_log_source_labels": 18,
+        "candidate_profile_payload_count_total": 3595,
+        "pmc_oa_candidate_profiles": 2,
+        "pmc_oa_candidate_payloads": 2,
+        "pmc_article_identity_bound": false,
+        "pmc_item_license_verified": false,
+        "pmc_automated_retrieval_method_audited": false,
+        "exact_label_matched_profiles": 25,
+        "exact_label_matched_profile_payload_count": 2348,
+        "unmatched_profiles": 65,
+        "unmatched_profile_payload_count": 1247,
+        "official_item_specific_license_guidance_found": true,
+        "local_reuse_clearance_established": false,
+        "release_clearance": "not_assessed",
+        "project_code_schema_or_bundle_changed": false,
+        "project_tests_models_experiments_or_annotations_run": false
+      },
+      "next_gate": "Bind PMC candidates to exact article identities under applicable privacy and authorization constraints, then inspect each article's copyright/license statement and third-party content scope before reuse; do not infer permission from Open Access Subset membership."
+    },
+    "phase172": {
+      "name": "Glottolog 5.3 source-family rights evidence and local binding audit",
+      "status": "official_release_and_license_statement_recorded_local_payload_binding_and_clearance_unverified",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase172/source_rights_crosswalk_current.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase172.md"
+      ],
+      "findings": {
+        "candidate_profiles": 90,
+        "distinct_candidate_source_labels": 58,
+        "rights_log_source_labels": 17,
+        "candidate_profile_payload_count_total": 3595,
+        "glottolog_5_3_candidate_payloads": 3,
+        "glottolog_local_source_version_missing": true,
+        "glottolog_exact_release_artifact_hash_match": false,
+        "exact_label_matched_profiles": 23,
+        "exact_label_matched_profile_payload_count": 2346,
+        "unmatched_profiles": 67,
+        "unmatched_profile_payload_count": 1249,
+        "official_release_and_license_evidence_found": true,
+        "local_reuse_clearance_established": false,
+        "release_clearance": "not_assessed",
+        "project_code_schema_or_bundle_changed": false,
+        "project_tests_models_experiments_or_annotations_run": false
+      },
+      "next_gate": "For Glottolog and other high-risk families, bind candidate records to the exact upstream release artifact and applicable item-level/source-scope terms before treating reuse as cleared; continue the source-family audit without exposing raw glosses or identifiers."
+    },
+    "phase171": {
+      "name": "Current source-rights crosswalk and OEWN witness lineage replay",
+      "status": "current_aggregate_crosswalk_and_six_payload_graph_lineage_replayed_no_clearance",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase171/source_rights_crosswalk_current.json",
+        "outputs/phase171/oewn_2025_plus_graph_lineage_current.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase171.md"
+      ],
+      "findings": {
+        "candidate_profiles": 90,
+        "distinct_candidate_source_labels": 58,
+        "rights_log_source_labels": 16,
+        "exact_label_matched_profiles": 22,
+        "exact_label_matched_profile_payload_count": 2343,
+        "unmatched_profiles": 68,
+        "unmatched_profile_payload_count": 1252,
+        "exact_match_count_unchanged_from_phase52": true,
+        "rights_evidence_input_sha_changed_from_phase52": true,
+        "oewn_candidate_payloads": 6,
+        "oewn_payloads_uniquely_joined_to_sense_index_identity": 6,
+        "oewn_graph_clauses_joined_to_hyperedges": 11,
+        "selected_witness_source_documents_checksum_verified": 6,
+        "selected_witness_documents_with_candidate_path_and_matching_oewn_evidence": 2,
+        "payloads_only_in_nonwitness_active_clauses": 2,
+        "payloads_absent_from_active_clause_sources": 2,
+        "semantic_source_support_established": false,
+        "license_or_public_release_clearance_established": false,
+        "project_code_schema_or_bundle_changed": false,
+        "project_tests_models_experiments_or_annotations_run": false
+      },
+      "next_gate": "Continue source-specific release and item-attribution mapping for unmatched/high-risk families. Do not interpret exact-label matches or structural graph/witness lineage as semantic gloss support or reuse permission; obtain applicable rights and Track A researcher decisions before external annotation or release."
+    },
+    "phase218": {
+      "name": "Track A 启动门与冻结标注包现态复核",
+      "status": "inventory_consistent_but_distribution_unauthorized_and_track_a_unfrozen",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/annotation_and_track_a_launch_readiness_audit_2026-10-08_phase218.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase218.md"
+      ],
+      "findings": {
+        "release_inventory_consistency_checks_passed": 15,
+        "v3_preflight_and_preview_integrity_passed": true,
+        "protocol_signed": false,
+        "distribution_authorized": false,
+        "pinned_release_pos_mismatches": 1,
+        "pinned_release_lemma_set_mismatches": 1,
+        "track_a_pairs_generated": false
+      },
+      "next_gate": "Freeze Track A estimand, sampling frame, and annotation design; resolve attribution and authorization before any external annotation."
+    },
+    "phase219": {
+      "name": "Track A v1 protocol design review",
+      "status": "design_draft_only_four_choices_pending_no_pairs_or_schema",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/track_a_protocol_design_review_2026-10-08_phase219.json",
+        "docs/track_a_protocol_v1_draft.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase219.md"
+      ],
+      "findings": {
+        "protocol_version": "v1-draft",
+        "pending_design_choices": 4,
+        "candidate_pairs_generated": false,
+        "labels_generated": false,
+        "splits_generated": false,
+        "schema_generated": false
+      },
+      "next_gate": "Resolve the four design choices and freeze the estimand, frame, target presentation, reference structure, and precision target before constructing annotation materials."
+    },
+    "phase220": {
+      "name": "Mixed-source rights evidence coverage crosswalk",
+      "status": "aggregate_label_crosswalk_recomputed_release_clearance_unresolved",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/source_rights_coverage_audit_2026-10-08_phase220.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase220.md"
+      ],
+      "findings": {
+        "candidate_profiles": 90,
+        "candidate_source_labels": 58,
+        "rights_log_source_labels": 18,
+        "exact_label_matched_profiles": 25,
+        "exact_label_matched_profile_payload_count": 2348,
+        "unmatched_profiles": 65,
+        "unmatched_profile_payload_count": 1247,
+        "profile_payload_count_sum_not_unique_payload_count": 3595,
+        "release_clearance": "not_assessed"
+      },
+      "next_gate": "Bind high-risk source families to exact upstream releases and applicable record-level terms; do not interpret label matches as clearance."
+    },
+    "phase221": {
+      "name": "MeSH/OLS upstream identity and release binding audit",
+      "status": "current_identifier_resolution_verified_historical_cache_binding_unresolved",
+      "date": "2026-10-08",
+      "outputs": [
+        "src/analysis/audit_mesh_ols_record_binding.py",
+        "sources/mesh_ols_record_binding_audit_2026-10-08_phase221.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase221.md"
+      ],
+      "findings": {
+        "payload_checksums_verified": 5625,
+        "unique_target_payloads": 461,
+        "evidence_objects": 631,
+        "evidence_objects_with_external_id_and_locator": 631,
+        "evidence_objects_without_download_url": 631,
+        "current_nlm_identifier_echo_matches": 130,
+        "current_ols_namespace_metadata_collected": 5,
+        "frozen_historical_release_bytes_bound": false,
+        "release_clearance": "not_assessed"
+      },
+      "next_gate": "Bind the frozen OLS cache to its historical upstream release artifact or API capture before making release-level claims."
+    },
+    "phase222": {
+      "name": "Source evidence producer boundary and forward capture contract",
+      "status": "forward_capture_schema_drafted_producer_absent_from_current_checkout_not_integrated",
+      "date": "2026-10-08",
+      "outputs": [
+        "config/source_evidence_capture.schema.json",
+        "docs/source_evidence_capture_contract.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase222.md"
+      ],
+      "findings": {
+        "source_evidence_producer_found_in_current_checkout": false,
+        "schema_version": "source-evidence-capture/1",
+        "historical_records_backfilled": false,
+        "frozen_records_modified": false,
+        "rights_clearance": "not_assessed"
+      },
+      "next_gate": "Identify the original producer or create a versioned acquisition component, then integrate schema validation and an end-to-end capture replay without backfilling guessed historical metadata."
+    },
+    "phase223": {
+      "name": "External frozen producer boundary and capture contract consistency audit",
+      "status": "pipeline_label_and_structure_replay_found_but_producer_code_unavailable_contract_hash_gap_fixed",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/source_producer_boundary_audit_2026-10-08_phase223.json",
+        "config/source_evidence_capture.schema.json",
+        "docs/source_evidence_capture_contract.md"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase223.md"
+      ],
+      "findings": {
+        "archived_pipeline_label": "Wn2Lingua/KaikkiBasisHeldoutEvaluation",
+        "producer_source_files_in_frozen_bundle": 0,
+        "referenced_original_inputs_available": false,
+        "source_record_files": 115235,
+        "clauses_with_source_dnf_evidence": 154206,
+        "clauses": 154206,
+        "canonical_replay_exact_heads": 110424,
+        "heads": 110425,
+        "producer_parser_normalizer_hashes_required_by_schema": true,
+        "semantic_gloss_support_established": false,
+        "rights_clearance": "not_assessed"
+      },
+      "next_gate": "Recover the original producer and referenced inputs, or create a versioned replacement producer whose code/parser/normalizer hashes and pinned upstream bytes support end-to-end replay."
+    },
+    "phase224": {
+      "name": "Current-state replay exception consistency replay",
+      "status": "single_declared_exception_recomputed_with_inputs_and_details_unchanged",
+      "date": "2026-10-08",
+      "outputs": [
+        "outputs/phase224/frozen_bundle_replay_exceptions_current.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase224.md"
+      ],
+      "findings": {
+        "exception_count": 1,
+        "exception_identity": "ext_wikt_full_dd659c7fcb3b",
+        "matches_phase8_input_hashes_and_exception_details": true,
+        "selected_witness_depth": 376,
+        "all_graph_clauses_have_direct_source_dnf_evidence": true,
+        "source_payloads_opened": false,
+        "upstream_source_replay_rerun": false,
+        "independent_witness_proof_replay": false,
+        "semantic_gloss_support_established": false
+      },
+      "next_gate": "Keep the declared graph-slice selection exception explicit; if stronger proof claims are needed, run the dedicated certificate verifier and obtain the original source-replay implementation and inputs."
+    },
+    "phase225": {
+      "name": "NeurIPS 2026 autoformalization and proof-graph close-work supplement",
+      "status": "four_targeted_author_version_reviews_completed_track_labels_unverified_not_systematic",
+      "date": "2026-10-08",
+      "outputs": [
+        "sources/literature_screening_log_2026-10-08_neurips2026_autoformalization_and_proof_graph_phase225.json"
+      ],
+      "reports": [
+        "../report/research_progress_deep_review_2026-10-08_phase225.md",
+        "docs/related_work.md",
+        "docs/literature_search_protocol.md"
+      ],
+      "findings": {
+        "targeted_author_version_reviews": 4,
+        "official_index": "NeurIPS 2026 Downloads mixed event directory",
+        "poster_detail_track_labels_verified": false,
+        "systematic_review": false,
+        "broad_natural_language_to_formalization_novelty_supported": false,
+        "wordnet_gloss_span_to_typed_horn_matched_baseline_found": false,
+        "project_effectiveness_or_novelty_established": false
+      },
+      "next_gate": "Expand the reproducible venue/year candidate census beyond targeted supplements, verify track metadata when official pages become accessible, and only then reassess the narrow gloss-span-to-Horn-support gap."
+    }
+  },
+  "directories": {
+    "src": "源代码目录",
+    "outputs": "各阶段输出结果",
+    "reports": "各阶段工作记录（markdown）",
+    "config": "配置文件",
+    "docs": "项目文档",
+    "archive": "未验证的历史探索源码和规划，只读保留"
+  },
+  "analysis_params": {
+    "community_detection": {
+      "algorithm": "louvain",
+      "min_community_size": 10,
+      "resolution": 1.0
+    },
+    "path_analysis": {
+      "sample_concepts": 10,
+      "max_path_length": 50,
+      "max_paths_per_concept": 5
+    },
+    "cycle_analysis": {
+      "short_cycle_threshold": 5,
+      "medium_cycle_threshold": 15,
+      "sample_size": 100
+    },
+    "hub_analysis": {
+      "top_k": 100,
+      "risk_threshold": 10000
+    }
+  }
+}

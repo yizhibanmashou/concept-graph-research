@@ -1,0 +1,35 @@
+{
+  "candidate_count": 2,
+  "candidate_set_version": "phase119-synthetic-fixture/2",
+  "candidates": [
+    {
+      "candidate_id": "synthetic-fixture-adjudicated",
+      "direction": "gloss_to_target",
+      "group_id": "synthetic-group-001",
+      "hypothesis_sha256": "9fbc4da70ea5a798e59ab29c439a27ab6c7b479dce63d137c0abec012acbbc98",
+      "premise_sha256": "7870f0c78e2721ecc46691287e223d523d8015bed6a62834eded735c3133ffaa",
+      "source": {
+        "pos": "v",
+        "release": "Open English WordNet 2025 Plus",
+        "resource": "oewn",
+        "sense_id": "oewn-00075867-v"
+      },
+      "split": "unassigned"
+    },
+    {
+      "candidate_id": "synthetic-fixture-unassessed",
+      "direction": "gloss_to_target",
+      "group_id": "synthetic-group-002",
+      "hypothesis_sha256": "d1474dce0415b9fb339cd51b80bea2c466e3169bbd3f387a12c66e8dfb0d62bb",
+      "premise_sha256": "7870f0c78e2721ecc46691287e223d523d8015bed6a62834eded735c3133ffaa",
+      "source": {
+        "pos": "n",
+        "release": "Open English WordNet 2025 Plus",
+        "resource": "oewn",
+        "sense_id": "oewn-00253529-n"
+      },
+      "split": "unassigned"
+    }
+  ],
+  "schema_version": "claim-review-candidate-manifest/0.2"
+}

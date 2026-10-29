@@ -1,0 +1,163 @@
+{
+  "schema_version": "v3.nominalization-expansion/1",
+  "publishable": false,
+  "basis_expansion": "complete_lhs_only",
+  "formula": {
+    "synset_id": "oewn-04783538-n",
+    "usage_id": "immobility_scope_trial",
+    "parameters": [
+      {
+        "name": "q",
+        "type": "E",
+        "role": "The external state/quality denoted by The state"
+      }
+    ],
+    "lhs": {
+      "op": "target",
+      "args": [
+        {
+          "var": "q"
+        }
+      ]
+    },
+    "rhs": {
+      "op": "and",
+      "args": [
+        {
+          "op": "use",
+          "synset_id": "oewn-04731092-n",
+          "usage_id": "quality_entity",
+          "interface_hash": "9454df089bf20210cef9b74689770c5bcfe617a6e669daae1d00a2caf701e284",
+          "occurrence_id": "oewn-04783538-n:def:t001",
+          "args": [
+            {
+              "var": "q"
+            }
+          ]
+        },
+        {
+          "op": "exists",
+          "variables": [
+            {
+              "name": "h",
+              "type": "E"
+            }
+          ],
+          "body": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "nom_internal",
+                    "name": "NominalRef",
+                    "args": [
+                      {
+                        "var": "h"
+                      }
+                    ],
+                    "origin": "nom_expansion",
+                    "nominalization_id": "nominal_0"
+                  },
+                  {
+                    "op": "forall",
+                    "variables": [
+                      {
+                        "name": "nom_role_s",
+                        "type": "E"
+                      }
+                    ],
+                    "body": {
+                      "op": "iff",
+                      "left": {
+                        "op": "nom_internal",
+                        "name": "Holds",
+                        "args": [
+                          {
+                            "var": "h"
+                          },
+                          {
+                            "var": "nom_role_s"
+                          }
+                        ],
+                        "origin": "nom_expansion",
+                        "nominalization_id": "nominal_0"
+                      },
+                      "right": {
+                        "op": "use",
+                        "synset_id": "oewn-00024432-r",
+                        "usage_id": "proposition_negation",
+                        "interface_hash": "362740c58230e7969cfa5f52e86ff48edb905d30a600bd341b5b8a1426bca0d6",
+                        "occurrence_id": "oewn-04783538-n:def:t003",
+                        "args": [
+                          {
+                            "op": "exists",
+                            "variables": [
+                              {
+                                "name": "nom_event",
+                                "type": "V"
+                              }
+                            ],
+                            "body": {
+                              "op": "and",
+                              "args": [
+                                {
+                                  "op": "target",
+                                  "args": [
+                                    {
+                                      "var": "nom_event"
+                                    }
+                                  ],
+                                  "synset_id": "oewn-01839438-v",
+                                  "usage_id": "event_with_subject"
+                                },
+                                {
+                                  "op": "struct",
+                                  "name": "Agent",
+                                  "args": [
+                                    {
+                                      "var": "nom_event"
+                                    },
+                                    {
+                                      "var": "nom_role_s"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "origin": "nom_expansion",
+                            "occurrence_id": "oewn-04783538-n:def:t004"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "op": "use",
+                "synset_id": "of-6",
+                "usage_id": "abstract_referent_relation",
+                "interface_hash": "17455e76fc7793e2272acb36de2cbebd771d4070d6890f965a42db851b57df34",
+                "occurrence_id": "oewn-04783538-n:def:t002",
+                "args": [
+                  {
+                    "var": "q"
+                  },
+                  {
+                    "var": "h"
+                  }
+                ]
+              }
+            ]
+          },
+          "origin": "nominalization",
+          "occurrence_id": "oewn-04783538-n:def:t004"
+        }
+      ]
+    },
+    "primitives": [],
+    "schema_version": "v3.interface-formula-candidate/1"
+  }
+}

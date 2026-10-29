@@ -1,0 +1,282 @@
+{
+  "case": "bear",
+  "candidate_count": 130,
+  "complete": true,
+  "exact_approved_formula_present": true,
+  "approved_candidate_id": "b43f31ae027edab85496da20cecd5ac2f84bd968f19d89ca8fabd028a30736f3",
+  "matched_line": 20,
+  "parameters_and_lhs_unchanged": true,
+  "all_static_checks_passed": true,
+  "whole_set_equals_separate_oracle": true,
+  "oracle_candidate_count": 130,
+  "scope_alternatives": {},
+  "reference_path": "[redacted-local-path]",
+  "reference_sha256": "5ace7f5c3372a2a444e03af41f641190996a932f4d6f283070186d59831ed817",
+  "input_sha256": "9f807acd0f60e33c4b8579ac35da93b85f10aa67aba72955d6d4489442fd3c49",
+  "candidate_file_sha256": "f89de77b6da58e649a30d1bd958547643c701e699dc81a46dd70dcf5f01f0e4c",
+  "matched_candidate": {
+    "candidate_id": "b43f31ae027edab85496da20cecd5ac2f84bd968f19d89ca8fabd028a30736f3",
+    "formula": {
+      "synset_id": "oewn-02636952-v",
+      "usage_id": "bear_supplied_usage",
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied event or state in this usage"
+        },
+        {
+          "name": "s",
+          "type": "E",
+          "role": "The supplied subject-side participant; no intentionality axiom"
+        },
+        {
+          "name": "h",
+          "type": "E",
+          "role": "The supplied object participant"
+        }
+      ],
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "s"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Theme",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "h"
+              }
+            ]
+          }
+        ]
+      },
+      "rhs": {
+        "op": "use",
+        "synset_id": "oewn-02208144-v",
+        "usage_id": "have_entity",
+        "interface_hash": "afaa1af628015ee25097d30a6134c10f3c07a7742d6e8600012fd554c228f416",
+        "occurrence_id": "oewn-02636952-v:def:t000",
+        "args": [
+          {
+            "var": "e"
+          },
+          {
+            "var": "s"
+          },
+          {
+            "var": "h"
+          }
+        ]
+      },
+      "primitives": [],
+      "schema_version": "v3.interface-formula-candidate/1"
+    },
+    "inventory": {
+      "synset_id": "oewn-02636952-v",
+      "coverage": {
+        "complete": true,
+        "scope": "supplied_single_usage_only",
+        "rationale": "Covers this supplied single usage only. Proposed enumeration inventory; not certification of all lexical usages.",
+        "evidence_ids": [
+          "definition",
+          "oewn-02636952-v:argumentation:0"
+        ]
+      },
+      "usages": [
+        {
+          "usage_id": "bear_supplied_usage",
+          "evidence": [
+            "definition",
+            "oewn-02636952-v:argumentation:0"
+          ],
+          "sentence_a": "The person bears the mark.",
+          "sentence_b": "The person has the mark.",
+          "argumentation": "For the frozen sense bear = have, A 'The person bears the mark' and B 'The person has the mark' describe the same supplied state e, subject s and object h. The person and the mark are source-marked parameter phrases, not Person or Mark conditions. Both directions preserve e, the possessor-side participant s and the possessed object h. Agent is the V3 subject-side role and does not add intentionality. No time or new witness is supplied.",
+          "parameters": [
+            {
+              "name": "e",
+              "type": "V",
+              "role": "The supplied event or state in this usage"
+            },
+            {
+              "name": "s",
+              "type": "E",
+              "role": "The supplied subject-side participant; no intentionality axiom"
+            },
+            {
+              "name": "h",
+              "type": "E",
+              "role": "The supplied object participant"
+            }
+          ],
+          "target_arguments": [
+            "e"
+          ],
+          "occurrence_ids": [
+            "oewn-02636952-v:def:t000"
+          ],
+          "parameter_spans": [
+            {
+              "sentence": "sentence_a",
+              "start": 0,
+              "end": 10,
+              "text": "The person",
+              "parameter": "s",
+              "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+              "sentence": "sentence_a",
+              "start": 17,
+              "end": 25,
+              "text": "the mark",
+              "parameter": "h",
+              "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+              "sentence": "sentence_b",
+              "start": 0,
+              "end": 10,
+              "text": "The person",
+              "parameter": "s",
+              "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            },
+            {
+              "sentence": "sentence_b",
+              "start": 15,
+              "end": 23,
+              "text": "the mark",
+              "parameter": "h",
+              "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+            }
+          ],
+          "determiners": [],
+          "witnesses": [],
+          "voice": "active",
+          "reductions": [],
+          "binding_plan": {
+            "lexical": [
+              {
+                "occurrence_id": "oewn-02636952-v:def:t000",
+                "usage_id": "have_entity",
+                "bindings": {
+                  "e": "e",
+                  "s": "s",
+                  "h": "h"
+                }
+              }
+            ],
+            "structural": {
+              "lhs": [
+                {
+                  "name": "Agent",
+                  "arguments": [
+                    "e",
+                    "s"
+                  ]
+                },
+                {
+                  "name": "Theme",
+                  "arguments": [
+                    "e",
+                    "h"
+                  ]
+                }
+              ],
+              "rhs": []
+            }
+          }
+        }
+      ]
+    },
+    "binding_plan": {
+      "lexical": [
+        {
+          "occurrence_id": "oewn-02636952-v:def:t000",
+          "usage_id": "have_entity",
+          "bindings": {
+            "e": "e",
+            "s": "s",
+            "h": "h"
+          }
+        }
+      ],
+      "structural": {
+        "lhs": [
+          {
+            "name": "Agent",
+            "arguments": [
+              "e",
+              "s"
+            ]
+          },
+          {
+            "name": "Theme",
+            "arguments": [
+              "e",
+              "h"
+            ]
+          }
+        ],
+        "rhs": []
+      }
+    },
+    "resource_counts": {
+      "lexical_calls": 1,
+      "exists": 0,
+      "structures": {
+        "Agent": 0,
+        "Theme": 0,
+        "Happen": 0
+      },
+      "available_structural_atoms": {
+        "Agent": 2,
+        "Theme": 3,
+        "Happen": 0
+      },
+      "generated_scopes": 0
+    },
+    "used_occurrence_ids": [
+      "oewn-02636952-v:def:t000"
+    ],
+    "readable_formula": "(TARGET(e) AND Agent(e, s) AND Theme(e, h)) IFF oewn-02208144-v::have_entity(e, s, h)",
+    "semantic_acceptance": false,
+    "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+    "interface_gate": {
+      "passed": true,
+      "issues": [],
+      "filters_enumeration": false
+    },
+    "assumption_mode": "interface-only-symbolic",
+    "publishable": false,
+    "basis_rhs_status": "pending",
+    "v3_gate": {
+      "passed": false,
+      "status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+      "issues": [],
+      "filters_enumeration": false
+    }
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "schema_version": "v3.source/1",
+  "synset_id": "oewn-00246625-r",
+  "lemmas": [
+    "hand in hand"
+  ],
+  "definition": "together",
+  "is_basis": false,
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-00246625-r:p0:t3",
+      "text": "together",
+      "start": 0,
+      "end": 8,
+      "synset_id": "oewn-00117495-r",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-00246625-r:p0:t3"
+      ],
+      "stored_surface": "together",
+      "stored_lemma": "together",
+      "part_id": "p0"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "definition",
+      "kind": "definition",
+      "text": "together"
+    },
+    {
+      "evidence_id": "example:0",
+      "kind": "example",
+      "text": "hand in hand with hope went fear"
+    },
+    {
+      "evidence_id": "example:1",
+      "kind": "example",
+      "text": "doctors and nurses work hand in hand to save lives"
+    }
+  ],
+  "provenance": {
+    "kind": "v2_source_only",
+    "path": "[redacted-local-path]",
+    "upstream_sha256": "63ba8904ab188d7401f4f0375e4b57f598d70fcb1cf3c6403bb8209c44d9d411",
+    "upstream_schema_version": "tologic-v2-item/2",
+    "pos_hint": "r",
+    "definition_text_field": "raw_text",
+    "wsd_policy": "preserve_fixed_identities_no_reselection",
+    "excluded_support_occurrences": 0
+  },
+  "raw_wsd": {
+    "lexical_occurrences": [
+      {
+        "candidate_inventory": [
+          {
+            "definition": "in contact with each other or in proximity",
+            "examples": [
+              "the leaves stuck together"
+            ],
+            "lemmas": [
+              "together"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00117698-r"
+          },
+          {
+            "definition": "assembled in one place",
+            "examples": [
+              "we were gathered together"
+            ],
+            "lemmas": [
+              "together"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00117901-r"
+          },
+          {
+            "definition": "in each other's company",
+            "examples": [
+              "we went to the movies together",
+              "the family that prays together stays together"
+            ],
+            "lemmas": [
+              "together"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00510460-r"
+          },
+          {
+            "definition": "at the same time",
+            "examples": [
+              "we graduated together"
+            ],
+            "lemmas": [
+              "together"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00117417-r"
+          },
+          {
+            "definition": "with cooperation and interchange",
+            "examples": [
+              "we worked together on the project"
+            ],
+            "lemmas": [
+              "together",
+              "unitedly"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00117495-r"
+          },
+          {
+            "definition": "with a common plan",
+            "examples": [
+              "act in concert"
+            ],
+            "lemmas": [
+              "in concert",
+              "together"
+            ],
+            "pos": "r",
+            "synset_id": "oewn-00117612-r"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "advmod",
+        "head_index": 2,
+        "in_definition_scope": true,
+        "lemma": "together",
+        "occurrence_id": "oewn-00246625-r:p0:t3",
+        "part_id": "p0",
+        "pos": "r",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00117495-r",
+        "selection_rationale": "Required definition WSD; 'with cooperation and interchange' directly matches 'work together'.",
+        "syntactic_pos": "ADV",
+        "text": "together",
+        "token_id": "t3"
+      }
+    ],
+    "selected_wsd": [
+      {
+        "lemma": "together",
+        "occurrence_id": "oewn-00246625-r:p0:t3",
+        "part_id": "p0",
+        "pos": "r",
+        "synset_id": "oewn-00117495-r",
+        "text": "together",
+        "token_id": "t3"
+      }
+    ],
+    "parts": {
+      "p0": {
+        "text": "together",
+        "wsd": {
+          "assignments": [
+            {
+              "candidate_inventory": [
+                {
+                  "definition": "in contact with each other or in proximity",
+                  "examples": [
+                    "the leaves stuck together"
+                  ],
+                  "lemmas": [
+                    "together"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00117698-r"
+                },
+                {
+                  "definition": "assembled in one place",
+                  "examples": [
+                    "we were gathered together"
+                  ],
+                  "lemmas": [
+                    "together"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00117901-r"
+                },
+                {
+                  "definition": "in each other's company",
+                  "examples": [
+                    "we went to the movies together",
+                    "the family that prays together stays together"
+                  ],
+                  "lemmas": [
+                    "together"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00510460-r"
+                },
+                {
+                  "definition": "at the same time",
+                  "examples": [
+                    "we graduated together"
+                  ],
+                  "lemmas": [
+                    "together"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00117417-r"
+                },
+                {
+                  "definition": "with cooperation and interchange",
+                  "examples": [
+                    "we worked together on the project"
+                  ],
+                  "lemmas": [
+                    "together",
+                    "unitedly"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00117495-r"
+                },
+                {
+                  "definition": "with a common plan",
+                  "examples": [
+                    "act in concert"
+                  ],
+                  "lemmas": [
+                    "in concert",
+                    "together"
+                  ],
+                  "pos": "r",
+                  "synset_id": "oewn-00117612-r"
+                }
+              ],
+              "decision": "selected",
+              "dependency": "advmod",
+              "frozen_token_record": {
+                "candidate_inventory": [
+                  {
+                    "definition": "in contact with each other or in proximity",
+                    "examples": [
+                      "the leaves stuck together"
+                    ],
+                    "lemmas": [
+                      "together"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00117698-r"
+                  },
+                  {
+                    "definition": "assembled in one place",
+                    "examples": [
+                      "we were gathered together"
+                    ],
+                    "lemmas": [
+                      "together"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00117901-r"
+                  },
+                  {
+                    "definition": "in each other's company",
+                    "examples": [
+                      "we went to the movies together",
+                      "the family that prays together stays together"
+                    ],
+                    "lemmas": [
+                      "together"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00510460-r"
+                  },
+                  {
+                    "definition": "at the same time",
+                    "examples": [
+                      "we graduated together"
+                    ],
+                    "lemmas": [
+                      "together"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00117417-r"
+                  },
+                  {
+                    "definition": "with cooperation and interchange",
+                    "examples": [
+                      "we worked together on the project"
+                    ],
+                    "lemmas": [
+                      "together",
+                      "unitedly"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00117495-r"
+                  },
+                  {
+                    "definition": "with a common plan",
+                    "examples": [
+                      "act in concert"
+                    ],
+                    "lemmas": [
+                      "in concert",
+                      "together"
+                    ],
+                    "pos": "r",
+                    "synset_id": "oewn-00117612-r"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "advmod",
+                "head_index": 2,
+                "in_definition_scope": true,
+                "lemma": "together",
+                "occurrence_id": "oewn-00246625-r:p0:t3",
+                "part_id": "p0",
+                "pos": "r",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-00117495-r",
+                "selection_rationale": "Required definition WSD; 'with cooperation and interchange' directly matches 'work together'.",
+                "syntactic_pos": "ADV",
+                "text": "together",
+                "token_id": "t3"
+              },
+              "head_index": 2,
+              "identity": "oewn-00117495-r",
+              "in_definition_scope": true,
+              "lemma": "together",
+              "occurrence_id": "oewn-00246625-r:p0:t3",
+              "part_id": "p0",
+              "pos": "r",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "definition": "with cooperation and interchange",
+                "examples": [
+                  "we worked together on the project"
+                ],
+                "lemmas": [
+                  "together",
+                  "unitedly"
+                ],
+                "pos": "r",
+                "synset_id": "oewn-00117495-r"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "selected_synset_id": "oewn-00117495-r",
+              "selected_wsd_result": {
+                "lemma": "together",
+                "occurrence_id": "oewn-00246625-r:p0:t3",
+                "part_id": "p0",
+                "pos": "r",
+                "synset_id": "oewn-00117495-r",
+                "text": "together",
+                "token_id": "t3"
+              },
+              "selection_rationale": "Required definition WSD; 'with cooperation and interchange' directly matches 'work together'.",
+              "syntactic_pos": "ADV",
+              "text": "together",
+              "token_id": "t3"
+            }
+          ],
+          "verification": null
+        }
+      }
+    }
+  },
+  "definition_parts": {
+    "parts": {
+      "p0": "together"
+    },
+    "logic": null
+  },
+  "disabled_dependency_occurrences": [],
+  "blocking_issues": [],
+  "source_warnings": []
+}

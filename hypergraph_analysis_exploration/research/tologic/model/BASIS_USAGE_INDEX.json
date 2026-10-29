@@ -1,0 +1,895 @@
+{
+  "interfaces": {
+    "oewn-02208144-v::have_entity": {
+      "signature": {
+        "synset_id": "oewn-02208144-v",
+        "usage_id": "have_entity",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "e",
+            "type": "V",
+            "role": "The supplied event or state in this usage"
+          },
+          {
+            "name": "s",
+            "type": "E",
+            "role": "The supplied subject-side participant; no intentionality axiom"
+          },
+          {
+            "name": "h",
+            "type": "E",
+            "role": "The supplied object participant"
+          }
+        ],
+        "lhs": {
+          "op": "and",
+          "args": [
+            {
+              "op": "target",
+              "args": [
+                {
+                  "var": "e"
+                }
+              ]
+            },
+            {
+              "op": "struct",
+              "name": "Agent",
+              "args": [
+                {
+                  "var": "e"
+                },
+                {
+                  "var": "s"
+                }
+              ]
+            },
+            {
+              "op": "struct",
+              "name": "Theme",
+              "args": [
+                {
+                  "var": "e"
+                },
+                {
+                  "var": "h"
+                }
+              ]
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "bear"
+      ],
+      "full_records": {
+        "bear": {
+          "synset_id": "oewn-02208144-v",
+          "usage_id": "have_entity",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "e",
+              "type": "V",
+              "role": "The supplied event or state in this usage"
+            },
+            {
+              "name": "s",
+              "type": "E",
+              "role": "The supplied subject-side participant; no intentionality axiom"
+            },
+            {
+              "name": "h",
+              "type": "E",
+              "role": "The supplied object participant"
+            }
+          ],
+          "lhs": {
+            "op": "and",
+            "args": [
+              {
+                "op": "target",
+                "args": [
+                  {
+                    "var": "e"
+                  }
+                ]
+              },
+              {
+                "op": "struct",
+                "name": "Agent",
+                "args": [
+                  {
+                    "var": "e"
+                  },
+                  {
+                    "var": "s"
+                  }
+                ]
+              },
+              {
+                "op": "struct",
+                "name": "Theme",
+                "args": [
+                  {
+                    "var": "e"
+                  },
+                  {
+                    "var": "h"
+                  }
+                ]
+              }
+            ]
+          },
+          "rhs_status": "pending",
+          "description": "have something, concrete or abstract: Have(e) AND Agent(e,s) AND Theme(e,h). The subject is the possessor, not necessarily an intentional actor.",
+          "evidence": [
+            "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+          ]
+        }
+      }
+    },
+    "oewn-00095301-a::alive_entity": {
+      "signature": {
+        "synset_id": "oewn-00095301-a",
+        "usage_id": "alive_entity",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "x",
+            "type": "E",
+            "role": "The individual whose classification is being stated"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "x"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "life"
+      ],
+      "full_records": {
+        "life": {
+          "synset_id": "oewn-00095301-a",
+          "usage_id": "alive_entity",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "x",
+              "type": "E",
+              "role": "The individual whose classification is being stated"
+            }
+          ],
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "x"
+              }
+            ]
+          },
+          "rhs_status": "pending",
+          "description": "living/alive as an adjective predicated of an existing individual: Alive(x). The frozen adjectival identity is retained despite the old token POS tag VERB.",
+          "evidence": [
+            "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+          ]
+        }
+      }
+    },
+    "oewn-00007846-n::person_classification": {
+      "signature": {
+        "synset_id": "oewn-00007846-n",
+        "usage_id": "person_classification",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "x",
+            "type": "E",
+            "role": "The individual whose classification is being stated"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "x"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "life"
+      ],
+      "full_records": {
+        "life": {
+          "synset_id": "oewn-00007846-n",
+          "usage_id": "person_classification",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "x",
+              "type": "E",
+              "role": "The individual whose classification is being stated"
+            }
+          ],
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "x"
+              }
+            ]
+          },
+          "rhs_status": "pending",
+          "description": "person as a common-noun classification of the supplied individual: Person(x). This is not the existential-pronoun usage of someone.",
+          "evidence": [
+            "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+          ]
+        }
+      }
+    },
+    "oewn-00117495-r::cooperative_event": {
+      "signature": {
+        "synset_id": "oewn-00117495-r",
+        "usage_id": "cooperative_event",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "e",
+            "type": "V",
+            "role": "The supplied event or state in this usage"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "e"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "hand_in_hand"
+      ],
+      "full_records": {
+        "hand_in_hand": {
+          "synset_id": "oewn-00117495-r",
+          "usage_id": "cooperative_event",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "e",
+              "type": "V",
+              "role": "The supplied event or state in this usage"
+            }
+          ],
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          "rhs_status": "pending",
+          "description": "together in the fixed cooperative sense, used as a property of the supplied event: Together(e). The sentence's collective subject and its Agent relation belong to the surrounding context, not this adverb's interface. The modifier does not select a separate participant argument; neither Work nor Worker is definition content.",
+          "evidence": [
+            "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+          ]
+        }
+      }
+    },
+    "supplied-all-quantifier::time": {
+      "signature": {
+        "synset_id": "supplied-all-quantifier",
+        "usage_id": "time",
+        "is_basis": false,
+        "parameters": [
+          {
+            "name": "w",
+            "type": "World",
+            "role": "World in which the complete quantification is interpreted"
+          },
+          {
+            "name": "S",
+            "type": {
+              "arrow": [
+                "Time",
+                "Prop"
+              ]
+            },
+            "role": "Quantification range"
+          },
+          {
+            "name": "P",
+            "type": {
+              "arrow": [
+                "Time",
+                "Prop"
+              ]
+            },
+            "role": "Property asserted of each member of the range"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "S"
+            },
+            {
+              "var": "P"
+            },
+            {
+              "var": "w"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "all_along"
+      ],
+      "full_records": {
+        "all_along": {
+          "synset_id": "supplied-all-quantifier",
+          "usage_id": "time",
+          "is_basis": false,
+          "parameters": [
+            {
+              "name": "w",
+              "type": "World",
+              "role": "World in which the complete quantification is interpreted"
+            },
+            {
+              "name": "S",
+              "type": {
+                "arrow": [
+                  "Time",
+                  "Prop"
+                ]
+              },
+              "role": "Quantification range"
+            },
+            {
+              "name": "P",
+              "type": {
+                "arrow": [
+                  "Time",
+                  "Prop"
+                ]
+              },
+              "role": "Property asserted of each member of the range"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "S"
+              },
+              {
+                "var": "P"
+              },
+              {
+                "var": "w"
+              }
+            ]
+          },
+          "description": "The user explicitly supplied All_Time^w(S,P). Its interpretation is fixed by that instruction. This record supplies only the LHS, not a replacement RHS, and is not a frozen Basis85 member.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        }
+      }
+    },
+    "oewn-00028468-n::time_range": {
+      "signature": {
+        "synset_id": "oewn-00028468-n",
+        "usage_id": "time_range",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "t",
+            "type": "Time",
+            "role": "The time value classified by the noun time"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "t"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "all_along"
+      ],
+      "full_records": {
+        "all_along": {
+          "synset_id": "oewn-00028468-n",
+          "usage_id": "time_range",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "t",
+              "type": "Time",
+              "role": "The time value classified by the noun time"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "t"
+              }
+            ]
+          },
+          "description": "Time(t) means t is a time. It does not introduce a narrower contextual interval. In all along, the full time quantification is evaluated in World(e), which carries the contextual world.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        }
+      }
+    },
+    "oewn-04731092-n::quality_entity": {
+      "signature": {
+        "synset_id": "oewn-04731092-n",
+        "usage_id": "quality_entity",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "q",
+            "type": "E",
+            "role": "The supplied quality/state being classified"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "q"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "immobility"
+      ],
+      "full_records": {
+        "immobility": {
+          "synset_id": "oewn-04731092-n",
+          "usage_id": "quality_entity",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "q",
+              "type": "E",
+              "role": "The supplied quality/state being classified"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "q"
+              }
+            ]
+          },
+          "description": "Quality(q), common-noun classification of the external state/quality referent.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        }
+      }
+    },
+    "oewn-00024432-r::proposition_negation": {
+      "signature": {
+        "synset_id": "oewn-00024432-r",
+        "usage_id": "proposition_negation",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "p",
+            "type": "Prop",
+            "role": "The proposition being negated"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "p"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "immobility",
+        "impermissible"
+      ],
+      "full_records": {
+        "immobility": {
+          "synset_id": "oewn-00024432-r",
+          "usage_id": "proposition_negation",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "p",
+              "type": "Prop",
+              "role": "The proposition being negated"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "p"
+              }
+            ]
+          },
+          "description": "Not(p), the source word not with its ordinary proposition-negation use. The enumerator never authors native not.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        },
+        "impermissible": {
+          "synset_id": "oewn-00024432-r",
+          "usage_id": "proposition_negation",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "p",
+              "type": "Prop",
+              "role": "The proposition being negated"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "p"
+              }
+            ]
+          },
+          "description": "Not(p), the source word not with its ordinary proposition-negation use. The enumerator never authors native not.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        }
+      }
+    },
+    "oewn-01839438-v::event_with_subject": {
+      "signature": {
+        "synset_id": "oewn-01839438-v",
+        "usage_id": "event_with_subject",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "e",
+            "type": "V",
+            "role": "The moving event/state"
+          },
+          {
+            "name": "s",
+            "type": "E",
+            "role": "The subject-side participant of that event"
+          }
+        ],
+        "lhs": {
+          "op": "and",
+          "args": [
+            {
+              "op": "target",
+              "args": [
+                {
+                  "var": "e"
+                }
+              ]
+            },
+            {
+              "op": "struct",
+              "name": "Agent",
+              "args": [
+                {
+                  "var": "e"
+                },
+                {
+                  "var": "s"
+                }
+              ]
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "immobility"
+      ],
+      "full_records": {
+        "immobility": {
+          "synset_id": "oewn-01839438-v",
+          "usage_id": "event_with_subject",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "e",
+              "type": "V",
+              "role": "The moving event/state"
+            },
+            {
+              "name": "s",
+              "type": "E",
+              "role": "The subject-side participant of that event"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "and",
+            "args": [
+              {
+                "op": "target",
+                "args": [
+                  {
+                    "var": "e"
+                  }
+                ]
+              },
+              {
+                "op": "struct",
+                "name": "Agent",
+                "args": [
+                  {
+                    "var": "e"
+                  },
+                  {
+                    "var": "s"
+                  }
+                ]
+              }
+            ]
+          },
+          "description": "Move(e) AND Agent(e,s). A concrete event slot and its supplied subject are retained; no event or subject is hidden inside an unprovided RHS.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        }
+      }
+    },
+    "of-6::abstract_referent_relation": {
+      "signature": {
+        "synset_id": "of-6",
+        "usage_id": "abstract_referent_relation",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "q",
+            "type": "E",
+            "role": "The quality referent"
+          },
+          {
+            "name": "h",
+            "type": "E",
+            "role": "The nominalized activity/property referent"
+          }
+        ],
+        "lhs": {
+          "op": "target",
+          "args": [
+            {
+              "var": "q"
+            },
+            {
+              "var": "h"
+            }
+          ]
+        },
+        "voice": null
+      },
+      "cases": [
+        "immobility"
+      ],
+      "full_records": {
+        "immobility": {
+          "synset_id": "of-6",
+          "usage_id": "abstract_referent_relation",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "q",
+              "type": "E",
+              "role": "The quality referent"
+            },
+            {
+              "name": "h",
+              "type": "E",
+              "role": "The nominalized activity/property referent"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "target",
+            "args": [
+              {
+                "var": "q"
+              },
+              {
+                "var": "h"
+              }
+            ]
+          },
+          "description": "Of(q:E,h:E) relates the quality to an abstract nominal referent. Neither argument is a function or a concrete movement event.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ]
+        }
+      }
+    },
+    "oewn-00804608-v::passive_entity_theme": {
+      "signature": {
+        "synset_id": "oewn-00804608-v",
+        "usage_id": "passive_entity_theme",
+        "is_basis": true,
+        "parameters": [
+          {
+            "name": "r",
+            "type": "V",
+            "role": "The permission event/state, not automatically identical to the permitted behavior"
+          },
+          {
+            "name": "b",
+            "type": "E",
+            "role": "The entity denoted by the passive noun phrase"
+          }
+        ],
+        "lhs": {
+          "op": "and",
+          "args": [
+            {
+              "op": "target",
+              "args": [
+                {
+                  "var": "r"
+                }
+              ]
+            },
+            {
+              "op": "struct",
+              "name": "Agent",
+              "args": [
+                {
+                  "var": "r"
+                },
+                {
+                  "op": "struct",
+                  "name": "ImplicitSubj",
+                  "args": [
+                    {
+                      "var": "r"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "op": "struct",
+              "name": "Theme",
+              "args": [
+                {
+                  "var": "r"
+                },
+                {
+                  "var": "b"
+                }
+              ]
+            }
+          ]
+        },
+        "voice": "passive"
+      },
+      "cases": [
+        "impermissible"
+      ],
+      "full_records": {
+        "impermissible": {
+          "synset_id": "oewn-00804608-v",
+          "usage_id": "passive_entity_theme",
+          "is_basis": true,
+          "parameters": [
+            {
+              "name": "r",
+              "type": "V",
+              "role": "The permission event/state, not automatically identical to the permitted behavior"
+            },
+            {
+              "name": "b",
+              "type": "E",
+              "role": "The entity denoted by the passive noun phrase"
+            }
+          ],
+          "rhs_status": "pending",
+          "lhs": {
+            "op": "and",
+            "args": [
+              {
+                "op": "target",
+                "args": [
+                  {
+                    "var": "r"
+                  }
+                ]
+              },
+              {
+                "op": "struct",
+                "name": "Agent",
+                "args": [
+                  {
+                    "var": "r"
+                  },
+                  {
+                    "op": "struct",
+                    "name": "ImplicitSubj",
+                    "args": [
+                      {
+                        "var": "r"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "struct",
+                "name": "Theme",
+                "args": [
+                  {
+                    "var": "r"
+                  },
+                  {
+                    "var": "b"
+                  }
+                ]
+              }
+            ]
+          },
+          "description": "Permit(r:V) AND Agent(r,ImplicitSubj(r)) AND Theme(r,b:E). The permission event is introduced by the verb; the nominal behavior b is an entity.",
+          "evidence": [
+            "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+            "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+          ],
+          "voice": "passive"
+        }
+      }
+    }
+  },
+  "total_interfaces": 11,
+  "frozen_basis_interface_count": 10,
+  "explicit_supplied_operator_count": 1
+}

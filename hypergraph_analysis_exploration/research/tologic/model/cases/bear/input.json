@@ -1,0 +1,207 @@
+{
+  "schema_version": "v3.enumeration-interfaces-input/1",
+  "source": {
+    "schema_version": "v3.source/1",
+    "synset_id": "oewn-02636952-v",
+    "lemmas": [
+      "bear"
+    ],
+    "definition": "have",
+    "is_basis": false,
+    "occurrences": [
+      {
+        "occurrence_id": "oewn-02636952-v:def:t000",
+        "text": "have",
+        "start": 0,
+        "end": 4,
+        "synset_id": "oewn-02208144-v",
+        "pos": "v"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "definition",
+        "kind": "definition",
+        "text": "have"
+      },
+      {
+        "evidence_id": "oewn-02636952-v:argumentation:0",
+        "kind": "argumentation",
+        "text": "The person has the mark."
+      }
+    ],
+    "provenance": {
+      "kind": "real_cleaned_521_manual_interface_trial",
+      "path": "[redacted-local-path]",
+      "sha256": "cc41614b8ae3fdee2d111ce41fcf1164278ffdbc31f98286d2daf8232f43ffcc",
+      "argumentation_id": "oewn-02636952-v:argumentation:0",
+      "wsd_policy": "preserve_fixed_identities_no_reselection",
+      "article_policy": "reuse_existing_V3_syntax_anchor_not_semantic_WSD",
+      "historical_formulas_imported": false
+    }
+  },
+  "usage": {
+    "usage_id": "bear_supplied_usage",
+    "evidence": [
+      "definition",
+      "oewn-02636952-v:argumentation:0"
+    ],
+    "sentence_a": "The person bears the mark.",
+    "sentence_b": "The person has the mark.",
+    "argumentation": "For the frozen sense bear = have, A 'The person bears the mark' and B 'The person has the mark' describe the same supplied state e, subject s and object h. The person and the mark are source-marked parameter phrases, not Person or Mark conditions. Both directions preserve e, the possessor-side participant s and the possessed object h. Agent is the V3 subject-side role and does not add intentionality. No time or new witness is supplied.",
+    "parameters": [
+      {
+        "name": "e",
+        "type": "V",
+        "role": "The supplied event or state in this usage"
+      },
+      {
+        "name": "s",
+        "type": "E",
+        "role": "The supplied subject-side participant; no intentionality axiom"
+      },
+      {
+        "name": "h",
+        "type": "E",
+        "role": "The supplied object participant"
+      }
+    ],
+    "target_arguments": [
+      "e"
+    ],
+    "occurrence_ids": [
+      "oewn-02636952-v:def:t000"
+    ],
+    "parameter_spans": [
+      {
+        "sentence": "sentence_a",
+        "start": 0,
+        "end": 10,
+        "text": "The person",
+        "parameter": "s",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      },
+      {
+        "sentence": "sentence_a",
+        "start": 17,
+        "end": 25,
+        "text": "the mark",
+        "parameter": "h",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      },
+      {
+        "sentence": "sentence_b",
+        "start": 0,
+        "end": 10,
+        "text": "The person",
+        "parameter": "s",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      },
+      {
+        "sentence": "sentence_b",
+        "start": 15,
+        "end": 23,
+        "text": "the mark",
+        "parameter": "h",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      }
+    ],
+    "determiners": [],
+    "witnesses": [],
+    "voice": "active",
+    "reductions": []
+  },
+  "interfaces": {
+    "oewn-02208144-v::have_entity": {
+      "synset_id": "oewn-02208144-v",
+      "usage_id": "have_entity",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied event or state in this usage"
+        },
+        {
+          "name": "s",
+          "type": "E",
+          "role": "The supplied subject-side participant; no intentionality axiom"
+        },
+        {
+          "name": "h",
+          "type": "E",
+          "role": "The supplied object participant"
+        }
+      ],
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "s"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Theme",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "h"
+              }
+            ]
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "have something, concrete or abstract: Have(e) AND Agent(e,s) AND Theme(e,h). The subject is the possessor, not necessarily an intentional actor.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    }
+  },
+  "enumeration": {
+    "lexical": [
+      {
+        "occurrence_id": "oewn-02636952-v:def:t000",
+        "min_calls": 0,
+        "max_calls": 1
+      }
+    ],
+    "lhs_structures": [
+      {
+        "name": "Agent",
+        "arguments": [
+          "e",
+          "s"
+        ]
+      },
+      {
+        "name": "Theme",
+        "arguments": [
+          "e",
+          "h"
+        ]
+      }
+    ],
+    "quantifier_inventory_complete": true
+  },
+  "notice": "Real first-layer single-usage trial, manually supplied basis LHS only. Deliberately no fixed binding_plan, RHS required_structures, or structural caps. Lexical resources are at most once (zero allowed unless the article head constraint requires a call). All typed candidate bindings and available structural atom subsets are enumerated. No basis RHS or historical formula is supplied. Not publication or all-usages coverage."
+}

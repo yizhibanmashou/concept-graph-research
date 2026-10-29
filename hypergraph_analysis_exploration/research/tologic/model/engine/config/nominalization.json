@@ -1,0 +1,20 @@
+{
+  "schema_version": "v3.nominalization-policy/1",
+  "expansion_version": 1,
+  "author_operator": "nom",
+  "author_result_type": "Prop",
+  "referent_type": "E",
+  "recognition": "nominal dependency evidence plus gerund form; never suffix alone; progressive and ambiguous parses do not authorize Nom",
+  "fixed_wsd": "preserve verb synset; record nominalization as a construction, not a noun-sense replacement",
+  "source_budget": "each nominalized verb and each attached not occurrence consumed at most once across ordinary calls and Nom",
+  "witness_origin": "nominalization",
+  "max_referent_witnesses_per_head": 1,
+  "external_parameters": "captured values remain free and unchanged; only declared formal role slots are abstracted",
+  "positive_template": "NominalRef(h) AND forall roles (Holds(h,roles) IFF exists e FullVerbUsage(e,roles,captures))",
+  "negative_template": "NominalRef(h) AND forall roles (Holds(h,roles) IFF Not(exists e FullVerbUsage(e,roles,captures)))",
+  "world_time_dimensions": false,
+  "reserved_internal_symbols": ["NominalRef", "Holds"],
+  "internal_symbols_authorable": false,
+  "internal_symbols_location": "compiler-generated v3.nominalization-expansion/1 artifacts only",
+  "publication": "symbolic enumeration and expansion do not certify a basis RHS or authorize publication"
+}

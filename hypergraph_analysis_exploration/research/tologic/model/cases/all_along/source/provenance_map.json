@@ -1,0 +1,23 @@
+{
+  "paths_are_historical_not_runtime_dependencies": true,
+  "files": [
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/all_along/source/cleaned.json",
+      "sha256": "df51c8c93cae3771b7d6fc4b69ad82c808cdd4b522208b2ee4cc9a1bea8958fc",
+      "bytes_preserved": true
+    },
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/all_along/source/v3_source.json",
+      "sha256": "1490b6f5bea8bd39c805a579c9ebf84b6bafb7b594afa585e942a47cb86fbd7d",
+      "bytes_preserved": true
+    },
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/all_along/source/upstream_original.json",
+      "sha256": "febc13a85a623a9988bd45abe0cf434536c77763f2cd6a07f7ecc1caa7fe564f",
+      "bytes_preserved": true
+    }
+  ]
+}

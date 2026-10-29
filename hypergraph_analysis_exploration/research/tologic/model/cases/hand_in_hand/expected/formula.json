@@ -1,0 +1,33 @@
+{
+  "synset_id": "oewn-00246625-r",
+  "usage_id": "hand_in_hand_supplied_usage",
+  "parameters": [
+    {
+      "name": "e",
+      "type": "V",
+      "role": "The supplied event or state in this usage"
+    }
+  ],
+  "lhs": {
+    "op": "target",
+    "args": [
+      {
+        "var": "e"
+      }
+    ]
+  },
+  "rhs": {
+    "op": "use",
+    "synset_id": "oewn-00117495-r",
+    "usage_id": "cooperative_event",
+    "interface_hash": "d3a19c1badc2a2bb97d768fb50f2b8a8b4caf6bf68dda872918047d4b929d7f9",
+    "occurrence_id": "oewn-00246625-r:def:t000",
+    "args": [
+      {
+        "var": "e"
+      }
+    ]
+  },
+  "primitives": [],
+  "schema_version": "v3.interface-formula-candidate/1"
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "v3.enumeration-report/1",
+  "status": "COMPLETE",
+  "complete": true,
+  "exhausted": true,
+  "candidate_count": 130,
+  "input_hash": "cc103660988a22990517312d8a384a59d8a06b4a68bfdac2b4c054d4b8fa009b",
+  "assumption_mode": "interface-only-symbolic",
+  "semantic_acceptance": false,
+  "published": false,
+  "synset_id": "oewn-02638648-v",
+  "usage_id": "want_lack_branch",
+  "max_candidates": null,
+  "output_dir": "[redacted-local-path]",
+  "stats": {
+    "resource_selections": 2,
+    "scope_mode_selections": 2,
+    "region_placements": 2,
+    "structural_atom_selections": 64,
+    "typed_binding_combinations": 159,
+    "rejected_external_coverage": 29,
+    "engine_candidates": 130,
+    "interface_gate_passed": 130
+  },
+  "guarantee": "For validated input, COMPLETE exhausts the declared finite lexical/parameter/scope grammar. Any correct formula satisfying that grammar and the supplied structured constraints has its canonical representative in candidates.jsonl. Provider semantics and input constraints are assumptions.",
+  "v3_gate_is_diagnostic_only": false,
+  "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+  "basis_rhs_status": "pending",
+  "publishable": false,
+  "v3_gate_status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+  "interface_gate_is_diagnostic_only": true,
+  "interface_assumptions": [
+    {
+      "synset_id": "supplied-without",
+      "occurrence_ids": [
+        "oewn-02638648-v:def:t001"
+      ],
+      "reason": "The real without occurrence has no frozen semantic WSD; use a user-supplied absence-relation contract as an explicitly local experiment assumption.",
+      "authorization": "User supplied Without(e,s,h) as an LHS-only interface for the want-lack 'be without' branch. This is not a new frozen basis member."
+    }
+  ],
+  "interface_hashes": {
+    "supplied-without::absence_relation": "07e97e6844c2dc3b100e73d18541b827693aa27962b9dc9b7d1ac72ab5d30920"
+  }
+}

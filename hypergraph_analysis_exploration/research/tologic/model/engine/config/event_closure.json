@@ -1,0 +1,18 @@
+{
+  "schema_version": "v3.event-closure-policy/1",
+  "version": 1,
+  "witness_origin": "verb_event",
+  "witness_type": "V",
+  "max_fresh_primary_events_per_occurrence": 1,
+  "nominalized_verbs": "Nom_only",
+  "requires": ["active frozen verb occurrence", "affirmative verbal syntax", "exact complete usage", "designated V target slot", "explicit event ownership"],
+  "modes": ["existential", "reuse"],
+  "reuse_sources": ["external event", "supplied lambda event", "another verb occurrence's one event witness"],
+  "closure_and_owning_call_must_cooccur": true,
+  "event_slot_must_receive_its_witness": true,
+  "external_parameters_may_be_quantified": false,
+  "fresh_entities_licensed": false,
+  "scope": "explicit lexical argument constraint when supplied; otherwise enumerate every legal scope",
+  "author_symbols_added": [],
+  "publication": "symbolic enumeration only; not a basis RHS or publication certificate"
+}

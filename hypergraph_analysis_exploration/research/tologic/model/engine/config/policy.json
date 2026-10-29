@@ -1,0 +1,36 @@
+{
+  "schema_version": "v3.policy/1",
+  "version": 4,
+  "fixed_wsd": true,
+  "definition_only_direct_lexical_calls": true,
+  "basis_only_semantic_primitives": true,
+  "formula_required_for_public_interface": true,
+  "earlier_round_providers_only": true,
+  "external_parameters_must_remain_open": true,
+  "strict_entity_event_types": true,
+  "native_forall_basis_only": true,
+  "usage_reduction_allowed": true,
+  "verifier_certified_binding_plan_required": true,
+  "determiner_coverage": "all_independent_source_occurrences_or_independently_reviewed_exclusions",
+  "basis_all_direct_definition_allowed": true,
+  "basis_dependency_wsd_conflicts": "disable_all_conflicting_calls_and_preserve_warnings",
+  "atomic_synset_publication": true,
+  "structural_allowlist": "config/structural_relations.json",
+  "nominalization_policy": "config/nominalization.json",
+  "event_closure_policy": "config/event_closure.json",
+  "base_types": ["E", "V", "Time", "World", "Prop"],
+  "world_terms": "World(event)_only_in_declared_world_slots_repeatable_as_parameter",
+  "parameter_phrases": "explicit_argumentation_spans_are_not_lexical_conditions",
+  "determiners": {
+    "a": "exists_for_declared_internal_witness_only",
+    "the": "share_antecedent_parameter_else_drop_article_only",
+    "all": "invoke_fixed_wsd_provider_formula"
+  },
+  "verification": {
+    "inventory_checks": ["coverage", "argumentation", "external_parameters", "determiners", "fixed_wsd"],
+    "formula_checks": ["forward_equivalence", "reverse_equivalence", "external_parameters", "scope", "definition_faithfulness"],
+    "independent_role_executions": true,
+    "local_gate_is_semantic_acceptance": false,
+    "demo_certificates_publishable": false
+  }
+}

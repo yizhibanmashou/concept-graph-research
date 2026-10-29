@@ -1,0 +1,140 @@
+{
+  "interfaces": {
+    "oewn-04731092-n::quality_entity": {
+      "synset_id": "oewn-04731092-n",
+      "usage_id": "quality_entity",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "q",
+          "type": "E",
+          "role": "The supplied quality/state being classified"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "q"
+          }
+        ]
+      },
+      "description": "Quality(q), common-noun classification of the external state/quality referent.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-00024432-r::proposition_negation": {
+      "synset_id": "oewn-00024432-r",
+      "usage_id": "proposition_negation",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "p",
+          "type": "Prop",
+          "role": "The proposition being negated"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "p"
+          }
+        ]
+      },
+      "description": "Not(p), the source word not with its ordinary proposition-negation use. The enumerator never authors native not.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-01839438-v::event_with_subject": {
+      "synset_id": "oewn-01839438-v",
+      "usage_id": "event_with_subject",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The moving event/state"
+        },
+        {
+          "name": "s",
+          "type": "E",
+          "role": "The subject-side participant of that event"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "description": "Move(e) AND Agent(e,s). A concrete event slot and its supplied subject are retained; no event or subject is hidden inside an unprovided RHS.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "of-6::abstract_referent_relation": {
+      "synset_id": "of-6",
+      "usage_id": "abstract_referent_relation",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "q",
+          "type": "E",
+          "role": "The quality referent"
+        },
+        {
+          "name": "h",
+          "type": "E",
+          "role": "The nominalized activity/property referent"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "q"
+          },
+          {
+            "var": "h"
+          }
+        ]
+      },
+      "description": "Of(q:E,h:E) relates the quality to an abstract nominal referent. Neither argument is a function or a concrete movement event.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    }
+  },
+  "interface_assumptions": [],
+  "rhs_supplied": false
+}

@@ -1,0 +1,108 @@
+[
+  {
+    "case": "bear",
+    "original_input": "[redacted-local-path]",
+    "original_input_sha256": "9f807acd0f60e33c4b8579ac35da93b85f10aa67aba72955d6d4489442fd3c49",
+    "new_input_sha256": "9f807acd0f60e33c4b8579ac35da93b85f10aa67aba72955d6d4489442fd3c49",
+    "scope_changes": [],
+    "target_interfaces_unchanged": true,
+    "no_fixed_binding_plan": true,
+    "no_slot_mapping": true,
+    "no_structural_caps": true,
+    "no_rhs_constraints": true,
+    "all_event_scope_within_constraints_removed": true,
+    "scope_templates_are_typed_binders_not_slot_assignments": true,
+    "prose_and_syntax_preserved_as_evidence": true,
+    "candidate_count": 130
+  },
+  {
+    "case": "life",
+    "original_input": "[redacted-local-path]",
+    "original_input_sha256": "5ed53a520019dcd967c955c282f4832570f01c491c2f0d0b32f0c0fea29fac0d",
+    "new_input_sha256": "5ed53a520019dcd967c955c282f4832570f01c491c2f0d0b32f0c0fea29fac0d",
+    "scope_changes": [],
+    "target_interfaces_unchanged": true,
+    "no_fixed_binding_plan": true,
+    "no_slot_mapping": true,
+    "no_structural_caps": true,
+    "no_rhs_constraints": true,
+    "all_event_scope_within_constraints_removed": true,
+    "scope_templates_are_typed_binders_not_slot_assignments": true,
+    "prose_and_syntax_preserved_as_evidence": true,
+    "candidate_count": 2
+  },
+  {
+    "case": "hand_in_hand",
+    "original_input": "[redacted-local-path]",
+    "original_input_sha256": "ac5a9d658cad574b80b0a4a90c7d740fc3083111d256891c264b03fa98f56179",
+    "new_input_sha256": "ac5a9d658cad574b80b0a4a90c7d740fc3083111d256891c264b03fa98f56179",
+    "scope_changes": [],
+    "target_interfaces_unchanged": true,
+    "no_fixed_binding_plan": true,
+    "no_slot_mapping": true,
+    "no_structural_caps": true,
+    "no_rhs_constraints": true,
+    "all_event_scope_within_constraints_removed": true,
+    "scope_templates_are_typed_binders_not_slot_assignments": true,
+    "prose_and_syntax_preserved_as_evidence": true,
+    "candidate_count": 3
+  },
+  {
+    "case": "all_along",
+    "original_input": "[redacted-local-path]",
+    "original_input_sha256": "1d82ec0cc685b3562d35dcc66c46af91b2237ed51d8e41b90ca9e16cd3e069e6",
+    "new_input_sha256": "1d82ec0cc685b3562d35dcc66c46af91b2237ed51d8e41b90ca9e16cd3e069e6",
+    "scope_changes": [],
+    "target_interfaces_unchanged": true,
+    "no_fixed_binding_plan": true,
+    "no_slot_mapping": true,
+    "no_structural_caps": true,
+    "no_rhs_constraints": true,
+    "all_event_scope_within_constraints_removed": true,
+    "scope_templates_are_typed_binders_not_slot_assignments": true,
+    "prose_and_syntax_preserved_as_evidence": true,
+    "candidate_count": 20
+  },
+  {
+    "case": "immobility",
+    "original_input": "[redacted-local-path]",
+    "original_input_sha256": "8fb2abde44be1c4dfa1d510c300dba561d4dd5d977989c453946a8ea3a50249e",
+    "new_input_sha256": "8fb2abde44be1c4dfa1d510c300dba561d4dd5d977989c453946a8ea3a50249e",
+    "scope_changes": [],
+    "target_interfaces_unchanged": true,
+    "no_fixed_binding_plan": true,
+    "no_slot_mapping": true,
+    "no_structural_caps": true,
+    "no_rhs_constraints": true,
+    "all_event_scope_within_constraints_removed": true,
+    "scope_templates_are_typed_binders_not_slot_assignments": true,
+    "prose_and_syntax_preserved_as_evidence": true,
+    "candidate_count": 122
+  },
+  {
+    "case": "impermissible",
+    "original_input": "[redacted-local-path]",
+    "original_input_sha256": "265b7e21c41322182f41f1fa40ba24a241e39fe8efd78eceb0f80b7f4fc352d6",
+    "new_input_sha256": "3b716254937ad47cddd50c55e5d5210e780a3b48a1618b933cae118ce2d1d429",
+    "scope_changes": [
+      {
+        "path": "enumeration.event_bindings[0].within",
+        "previous": {
+          "occurrence_id": "oewn-01765698-a:def:t000",
+          "usage_id": "proposition_negation",
+          "parameter": "p"
+        },
+        "reason": "Enumerate event-exists and lexical negation scope, rather than selecting their order before search."
+      }
+    ],
+    "target_interfaces_unchanged": true,
+    "no_fixed_binding_plan": true,
+    "no_slot_mapping": true,
+    "no_structural_caps": true,
+    "no_rhs_constraints": true,
+    "all_event_scope_within_constraints_removed": true,
+    "scope_templates_are_typed_binders_not_slot_assignments": true,
+    "prose_and_syntax_preserved_as_evidence": true,
+    "candidate_count": 178
+  }
+]

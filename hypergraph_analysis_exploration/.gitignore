@@ -1,0 +1,91 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+
+# Local indexes and analysis scratch space (may contain external source archives)
+/.codegraph/
+/.pytest_cache/
+/tmp/
+
+# 数据和缓存
+data/cache/*
+!data/cache/.gitkeep
+*.pkl
+*.pickle
+
+# 输出结果（可选择性提交）
+outputs/*/results/*.json
+outputs/*/results/*.png
+/outputs/phase7/*answer_key*.json
+/outputs/phase7/annotation_batch_*_blind.jsonl
+/outputs/phase7/annotations_*.jsonl
+/outputs/phase7/annotation_sampling_frame.jsonl
+/outputs/phase7/annotation_sampling_manifest.json
+/outputs/phase7/annotation_sampling_frame_v2.jsonl
+/outputs/phase7/annotation_sampling_manifest_v2.json
+/outputs/phase7/annotation_candidate_frame_v3_400.jsonl
+/outputs/phase7/annotation_candidate_frame_v3_400_manifest.json
+/outputs/phase7/oewn_2025_plus_release_crosscheck_v3_400.json
+/outputs/phase7/annotation_batch_2025_plus_v3_400_manifest.json
+/outputs/phase7/annotation_presentation_v1/
+/outputs/phase8/source_clause_mapping_tasks.jsonl
+/outputs/phase8/source_clause_mapping_answer_key.json
+/outputs/phase8/source_part_span_suggestions.jsonl
+/outputs/phase8/source_part_span_suggestions_manifest.json
+/outputs/phase8/frozen_bundle_replay_exceptions.json
+/outputs/phase6/witness_*_datalog_bridge.json
+/outputs/phase6/witness_*.json
+/outputs/phase7/oewn_*_release_crosscheck.json
+/outputs/phase7/oewn_*_release_crosscheck_v2.json
+/outputs/phase7/annotation_batch_2025_plus_v2_manifest.json
+/outputs/phase9/gloss_genus_baseline_2025_plus_200.json
+/outputs/phase16/oewn_hypernym_verification.json
+/outputs/phase18/output_release_surface_audit.json
+/outputs/phase21/flattening_ablation.json
+/outputs/phase23/source_release_metadata_audit.json
+/outputs/phase24/source_release_candidate_triage.json
+/outputs/phase53/source_release_candidate_triage_shapes.json
+/outputs/phase54/source_release_candidate_triage_host_recovered.json
+/outputs/phase10/agreement_summary_v3.json
+/outputs/phase10/kappa_ci_design_simulation.json
+/outputs/phase10/prevalence_ci_design_simulation.json
+/outputs/phase7/annotation_presentation_v2/
+/outputs/phase78/
+/outputs/phase186/oewn_hypernym_candidate_inventory.json
+/outputs/phase188/oewn_hypernym_candidate_workload_audit.json
+/sources/output_release_surface_audit_*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 临时文件
+*.tmp
+*.log
+/tmp/oewn-2025-json.zip
+/tmp/oewn-2025-json/
+/tmp/oewn-2025-plus-json.zip
+/tmp/oewn-2025-plus-json/
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 测试
+test_output/
+
+# Unreviewed collaborator bundle and derived outputs; keep the track guide.
+/research/tologic/six_senses/
+/research/tologic/additional_cases/
+/research/tologic/rerun_*/
+/research/tologic/want_lack_rerun_*/

@@ -1,0 +1,9 @@
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+data/*.sqlite3
+data/*.sqlite3-*
+data/graph-building-*.sqlite3
+__pycache__/
+.pytest_cache/
+*.pyc

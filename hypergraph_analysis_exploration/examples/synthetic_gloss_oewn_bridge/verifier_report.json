@@ -1,0 +1,89 @@
+{
+  "verifier_version": "oewn-hypernym-closure-verifier/2",
+  "method": "direct OEWN hypernym edges with directed breadth-first proof-path search",
+  "inputs": {
+    "release_name": "Open English WordNet 2025 Plus",
+    "release_date": "2025-12-31",
+    "archive_sha256": "8832b8fa26a14c0ba8c99bb1ef8db6f9e122a6d9193b65ca9e0ef572580fee7e",
+    "verified_file_count": 45,
+    "verified_file_set_sha256": "b64a7d84ee3e101e0ecedcab43b42e622c4d0a8f1cab46f5121d74b09d88b8fa",
+    "claims_sha256": "26e46a7bf618d604eb3778e9fb536fc6cbd57aa89faf9bcc265825f55d3ae7ed",
+    "synset_count": 120564,
+    "direct_hypernym_edge_count": 93395
+  },
+  "taxonomy_graph_audit": {
+    "acyclic": true,
+    "unprocessed_node_count": 0
+  },
+  "claim_count": 1,
+  "status_counts": {
+    "direct_hypernym": 1
+  },
+  "results": [
+    {
+      "claim_id": "synthetic-fixture-adjudicated",
+      "child_synset_id": "00075867-v",
+      "ancestor_synset_id": "00092045-v",
+      "status": "direct_hypernym",
+      "child_pos": "v",
+      "proof_path": [
+        {
+          "child_synset_id": "00075867-v",
+          "hypernym_synset_id": "00092045-v",
+          "source_file": "verb.body.json"
+        }
+      ],
+      "logical_proof": {
+        "rule": {
+          "rule_id": "oewn_hypernym_transitivity/1",
+          "body": [
+            {
+              "predicate": "oewn_hypernym",
+              "arguments": [
+                "?x",
+                "?y"
+              ]
+            },
+            {
+              "predicate": "oewn_hypernym",
+              "arguments": [
+                "?y",
+                "?z"
+              ]
+            }
+          ],
+          "head": {
+            "predicate": "oewn_hypernym",
+            "arguments": [
+              "?x",
+              "?z"
+            ]
+          }
+        },
+        "steps": [
+          {
+            "id": "fact-0",
+            "kind": "fact",
+            "atom": {
+              "predicate": "oewn_hypernym",
+              "arguments": [
+                "00075867-v",
+                "00092045-v"
+              ]
+            },
+            "source_file": "verb.body.json"
+          }
+        ],
+        "root_step_id": "fact-0"
+      },
+      "reverse_path": null
+    }
+  ],
+  "interpretation_limits": [
+    "A positive result proves only that the directed relation is reachable in the pinned OEWN release; it is a resource-relative certificate, not an independent semantic judgment.",
+    "not_in_hypernym_closure means no path was found in this release, not that natural-language entailment is false.",
+    "logical_proof uses the declared transitivity axiom over direct OEWN hypernym facts; that axiom is an explicit proof assumption, not a gloss-derived rule.",
+    "This verifier consumes explicit synset pairs; it does not parse glosses, select senses, infer new facts, or use NLI.",
+    "Proof paths contain only synset IDs and release file names; they do not copy definition or example text."
+  ]
+}

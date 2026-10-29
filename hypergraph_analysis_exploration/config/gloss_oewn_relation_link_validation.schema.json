@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wordnet-gloss-horn:gloss-oewn-relation-link-validation:0.2",
+  "title": "Gloss to OEWN relation link validation report",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["schema_version", "validator_version", "valid", "link_count", "mapping_status_counts", "resource_relation_status_counts", "inputs", "results", "interpretation_limit"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {"const": "gloss-oewn-relation-link-validation/0.2"},
+        "validator_version": {"enum": ["gloss-oewn-relation-link-validator/0.2", "gloss-oewn-relation-link-validator/0.3"]},
+        "valid": {"const": true},
+        "link_count": {"type": "integer", "minimum": 1},
+        "mapping_status_counts": {"$ref": "#/$defs/mapping_counts"},
+        "resource_relation_status_counts": {"$ref": "#/$defs/resource_counts"},
+        "inputs": {"$ref": "#/$defs/inputs"},
+        "results": {"type": "array", "items": {"$ref": "#/$defs/result"}},
+        "interpretation_limit": {"type": "string", "minLength": 1}
+      }
+    },
+    {
+      "type": "object",
+      "required": ["schema_version", "validator_version", "valid", "errors", "inputs"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {"const": "gloss-oewn-relation-link-validation/0.2"},
+        "validator_version": {"enum": ["gloss-oewn-relation-link-validator/0.2", "gloss-oewn-relation-link-validator/0.3"]},
+        "valid": {"const": false},
+        "errors": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "inputs": {"$ref": "#/$defs/invalid_inputs"}
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nullable_sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+    "inputs": {
+      "type": "object",
+      "required": ["links_sha256", "claim_review_rows_sha256", "candidate_manifest_sha256", "expected_candidate_manifest_sha256", "relation_queries_sha256", "verifier_report_sha256", "replay_report_sha256", "expected_release_name", "expected_release_archive_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "links_sha256": {"$ref": "#/$defs/sha256"},
+        "claim_review_rows_sha256": {"$ref": "#/$defs/sha256"},
+        "candidate_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "expected_candidate_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "relation_queries_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "verifier_report_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "replay_report_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "expected_release_name": {"type": "string", "minLength": 1},
+        "expected_release_archive_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "invalid_inputs": {
+      "type": "object",
+      "required": ["links_sha256", "claim_review_rows_sha256", "candidate_manifest_sha256", "expected_candidate_manifest_sha256", "relation_queries_sha256", "verifier_report_sha256", "replay_report_sha256", "expected_release_name", "expected_release_archive_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "links_sha256": {"$ref": "#/$defs/sha256"},
+        "claim_review_rows_sha256": {"$ref": "#/$defs/sha256"},
+        "candidate_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "expected_candidate_manifest_sha256": {"type": "string"},
+        "relation_queries_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "verifier_report_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "replay_report_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "expected_release_name": {"type": "string"},
+        "expected_release_archive_sha256": {"type": "string"}
+      }
+    },
+    "mapping_counts": {
+      "type": "object",
+      "propertyNames": {"enum": ["adjudicated", "ambiguous", "unassessed"]},
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "resource_counts": {
+      "type": "object",
+      "propertyNames": {"enum": ["direct_hypernym", "transitive_hypernym", "not_in_hypernym_closure", "unknown_missing_synset", "not_a_proper_hypernym", "unsupported_cross_pos"]},
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "result": {
+      "type": "object",
+      "required": ["candidate_id", "mapping_status", "resource_relation_status"],
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {"type": "string", "minLength": 1},
+        "mapping_status": {"enum": ["adjudicated", "ambiguous", "unassessed"]},
+        "resource_relation_status": {"oneOf": [{"enum": ["direct_hypernym", "transitive_hypernym", "not_in_hypernym_closure", "unknown_missing_synset", "not_a_proper_hypernym", "unsupported_cross_pos"]}, {"type": "null"}]}
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "python_version": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:03:56) [MSC v.1929 64 bit (AMD64)]",
+  "checks": [
+    "All 455 bundled candidates passed static checks",
+    "Six accepted formulas exactly matched",
+    "Fresh six-case replay matched every archived candidate ID",
+    "Whole candidate sets matched separate constructors"
+  ],
+  "cases": [
+    {
+      "case": "bear",
+      "candidate_count": 130,
+      "selected_line": 20,
+      "exact_formula_found": true,
+      "all_static_checks_passed": true,
+      "separate_oracle_count": 130,
+      "whole_candidate_sets_identical": true,
+      "fresh_ids_equal_archived_ids": true
+    },
+    {
+      "case": "life",
+      "candidate_count": 2,
+      "selected_line": 2,
+      "exact_formula_found": true,
+      "all_static_checks_passed": true,
+      "separate_oracle_count": 2,
+      "whole_candidate_sets_identical": true,
+      "fresh_ids_equal_archived_ids": true
+    },
+    {
+      "case": "hand_in_hand",
+      "candidate_count": 3,
+      "selected_line": 2,
+      "exact_formula_found": true,
+      "all_static_checks_passed": true,
+      "separate_oracle_count": 3,
+      "whole_candidate_sets_identical": true,
+      "fresh_ids_equal_archived_ids": true
+    },
+    {
+      "case": "all_along",
+      "candidate_count": 20,
+      "selected_line": 1,
+      "exact_formula_found": true,
+      "all_static_checks_passed": true,
+      "separate_oracle_count": 20,
+      "whole_candidate_sets_identical": true,
+      "fresh_ids_equal_archived_ids": true
+    },
+    {
+      "case": "immobility",
+      "candidate_count": 122,
+      "selected_line": 36,
+      "exact_formula_found": true,
+      "all_static_checks_passed": true,
+      "separate_oracle_count": 122,
+      "whole_candidate_sets_identical": true,
+      "fresh_ids_equal_archived_ids": true
+    },
+    {
+      "case": "impermissible",
+      "candidate_count": 178,
+      "selected_line": 17,
+      "exact_formula_found": true,
+      "all_static_checks_passed": true,
+      "separate_oracle_count": 178,
+      "whole_candidate_sets_identical": true,
+      "fresh_ids_equal_archived_ids": true
+    }
+  ],
+  "offline": true,
+  "basis_rhs_supplied": false
+}

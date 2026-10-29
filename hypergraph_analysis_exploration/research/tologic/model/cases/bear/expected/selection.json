@@ -1,0 +1,7 @@
+{
+  "candidate_id": "b43f31ae027edab85496da20cecd5ac2f84bd968f19d89ca8fabd028a30736f3",
+  "line": 20,
+  "readable_formula": "Bear(e) ∧ Agent(e,s) ∧ Theme(e,h) ↔ Have(e) ∧ Agent(e,s) ∧ Theme(e,h)",
+  "source": "User-accepted formula; matched after enumeration",
+  "exact_ast_match": true
+}

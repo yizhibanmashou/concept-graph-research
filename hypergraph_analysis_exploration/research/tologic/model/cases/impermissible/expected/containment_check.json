@@ -1,0 +1,310 @@
+{
+  "case": "impermissible",
+  "candidate_count": 178,
+  "complete": true,
+  "exact_approved_formula_present": true,
+  "approved_candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+  "matched_line": 17,
+  "parameters_and_lhs_unchanged": true,
+  "all_static_checks_passed": true,
+  "whole_set_equals_separate_oracle": true,
+  "oracle_candidate_count": 178,
+  "scope_alternatives": {
+    "not_outside_exists_r": {
+      "count": 16,
+      "example_line": 17,
+      "example_candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+      "example_readable": "TARGET(b) IFF oewn-00024432-r::proposition_negation(EXISTS r.oewn-00804608-v::passive_entity_theme(r, b))"
+    },
+    "exists_r_outside_not": {
+      "count": 146,
+      "example_line": 33,
+      "example_candidate_id": "a67f206ff83ab2fcf5b2bd93456a365e6f32ac3c1135ff6112c812bb9628ab1e",
+      "example_readable": "TARGET(b) IFF EXISTS r.oewn-00024432-r::proposition_negation(oewn-00804608-v::passive_entity_theme(r, b))"
+    },
+    "without_not": {
+      "count": 16,
+      "example_line": 1,
+      "example_candidate_id": "539ac860411ccd9bd5f277a5be444c2de09d96231b8df169df00b8b26b4426c0",
+      "example_readable": "TARGET(b) IFF EXISTS r.oewn-00804608-v::passive_entity_theme(r, b)"
+    }
+  },
+  "reference_path": "[redacted-local-path]",
+  "reference_sha256": "fb953bf2036fb132eb5b7c391fbf652913746a3403595835d654a10aeb4d3316",
+  "input_sha256": "3b716254937ad47cddd50c55e5d5210e780a3b48a1618b933cae118ce2d1d429",
+  "candidate_file_sha256": "a29456bc3e0369b0f179c8c4e63dded2f9c3bae0f8e0ecd380655cb000b7ef7f",
+  "matched_candidate": {
+    "candidate_id": "00259fef6de7f556b0a784c7b94640ef07f43b12cf03fa38e19a7a080102a637",
+    "formula": {
+      "synset_id": "oewn-01765698-a",
+      "usage_id": "impermissible_scope_trial",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "E",
+          "role": "The entity denoted by the noun phrase The behavior; not a verb event"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "b"
+          }
+        ]
+      },
+      "rhs": {
+        "op": "use",
+        "synset_id": "oewn-00024432-r",
+        "usage_id": "proposition_negation",
+        "interface_hash": "362740c58230e7969cfa5f52e86ff48edb905d30a600bd341b5b8a1426bca0d6",
+        "occurrence_id": "oewn-01765698-a:def:t000",
+        "args": [
+          {
+            "op": "exists",
+            "variables": [
+              {
+                "name": "r",
+                "type": "V"
+              }
+            ],
+            "body": {
+              "op": "use",
+              "synset_id": "oewn-00804608-v",
+              "usage_id": "passive_entity_theme",
+              "interface_hash": "28bd282e1a6e93f0b4d75b1bec98f853d9d7a2677fc2785d883173266c1781f9",
+              "occurrence_id": "oewn-01765698-a:def:t001",
+              "args": [
+                {
+                  "var": "r"
+                },
+                {
+                  "var": "b"
+                }
+              ]
+            },
+            "origin": "verb_event",
+            "occurrence_id": "oewn-01765698-a:def:t001"
+          }
+        ]
+      },
+      "primitives": [],
+      "schema_version": "v3.interface-formula-candidate/1"
+    },
+    "inventory": {
+      "synset_id": "oewn-01765698-a",
+      "coverage": {
+        "complete": true,
+        "scope": "supplied_single_usage_only",
+        "rationale": "Covers this supplied single usage only. Proposed enumeration inventory; not certification of all lexical usages.",
+        "evidence_ids": [
+          "definition",
+          "oewn-01765698-a:argumentation:0"
+        ]
+      },
+      "usages": [
+        {
+          "usage_id": "impermissible_scope_trial",
+          "sentence_a": "The behavior is impermissible.",
+          "sentence_b": "The behavior is not permitted.",
+          "argumentation": "The noun phrase The behavior supplies an entity b:E, and the target LHS is Impermissible(b). The preserved parse marks permitted as the passive verbal head, with is/auxpass, behavior/nsubjpass and not/neg. The complete permit usage owns an internal permission event r:V, whose implicit subject is ImplicitSubj(r) and whose Theme is b. A source-owned event license binds r inside the proposition negated by not. This licenses no new E participant, no extra target slot, and no Nom construction. The event's existence is within the negated proposition, not an assertion outside not.",
+          "parameters": [
+            {
+              "name": "b",
+              "type": "E",
+              "role": "The entity denoted by the noun phrase The behavior; not a verb event"
+            }
+          ],
+          "target_arguments": [
+            "b"
+          ],
+          "occurrence_ids": [
+            "oewn-01765698-a:def:t000",
+            "oewn-01765698-a:def:t001"
+          ],
+          "parameter_spans": [
+            {
+              "sentence": "sentence_a",
+              "parameter": "b",
+              "start": 0,
+              "end": 12,
+              "text": "The behavior",
+              "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+            },
+            {
+              "sentence": "sentence_b",
+              "parameter": "b",
+              "start": 0,
+              "end": 12,
+              "text": "The behavior",
+              "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+            }
+          ],
+          "evidence": [
+            "definition",
+            "oewn-01765698-a:argumentation:0"
+          ],
+          "determiners": [],
+          "witnesses": [
+            {
+              "name": "r",
+              "type": "V",
+              "origin": "verb_event",
+              "occurrence_id": "oewn-01765698-a:def:t001",
+              "reason": "The source permitted is the ordinary passive verb head, not a nominalized verb. It owns its permission-event slot r. The attached source not negates the closed permission proposition; the existing entity b remains external."
+            }
+          ],
+          "voice": "passive",
+          "reductions": [],
+          "syntax": {
+            "sentence": "sentence_b",
+            "tokens": [
+              {
+                "index": 0,
+                "text": "The",
+                "start": 0,
+                "end": 3,
+                "pos": "DET",
+                "dependency": "det",
+                "head": 1,
+                "lemma": "the"
+              },
+              {
+                "index": 1,
+                "text": "behavior",
+                "start": 4,
+                "end": 12,
+                "pos": "NOUN",
+                "dependency": "nsubjpass",
+                "head": 4,
+                "lemma": "behavior"
+              },
+              {
+                "index": 2,
+                "text": "is",
+                "start": 13,
+                "end": 15,
+                "pos": "AUX",
+                "dependency": "auxpass",
+                "head": 4,
+                "lemma": "be"
+              },
+              {
+                "index": 3,
+                "text": "not",
+                "start": 16,
+                "end": 19,
+                "pos": "PART",
+                "dependency": "neg",
+                "head": 4,
+                "lemma": "not",
+                "occurrence_id": "oewn-01765698-a:def:t000"
+              },
+              {
+                "index": 4,
+                "text": "permitted",
+                "start": 20,
+                "end": 29,
+                "pos": "VERB",
+                "dependency": "ROOT",
+                "head": 4,
+                "lemma": "permit",
+                "occurrence_id": "oewn-01765698-a:def:t001"
+              },
+              {
+                "index": 5,
+                "text": ".",
+                "start": 29,
+                "end": 30,
+                "pos": "PUNCT",
+                "dependency": "punct",
+                "head": 4,
+                "lemma": "."
+              }
+            ],
+            "provenance": "Exact existing cleaned WSD token POS/dependency/head records; no new parser or model run."
+          },
+          "binding_plan": {
+            "lexical": [
+              {
+                "occurrence_id": "oewn-01765698-a:def:t001",
+                "usage_id": "passive_entity_theme",
+                "bindings": {
+                  "r": "r",
+                  "b": "b"
+                }
+              },
+              {
+                "occurrence_id": "oewn-01765698-a:def:t000",
+                "usage_id": "proposition_negation",
+                "bindings": {}
+              }
+            ],
+            "structural": {
+              "lhs": [],
+              "rhs": []
+            }
+          }
+        }
+      ]
+    },
+    "binding_plan": {
+      "lexical": [
+        {
+          "occurrence_id": "oewn-01765698-a:def:t001",
+          "usage_id": "passive_entity_theme",
+          "bindings": {
+            "r": "r",
+            "b": "b"
+          }
+        },
+        {
+          "occurrence_id": "oewn-01765698-a:def:t000",
+          "usage_id": "proposition_negation",
+          "bindings": {}
+        }
+      ],
+      "structural": {
+        "lhs": [],
+        "rhs": []
+      }
+    },
+    "resource_counts": {
+      "lexical_calls": 2,
+      "exists": 1,
+      "event_exists": 1,
+      "structures": {
+        "Agent": 0,
+        "Theme": 0,
+        "Happen": 0
+      },
+      "available_structural_atoms": {
+        "Agent": 2,
+        "Theme": 2,
+        "Happen": 0
+      },
+      "generated_scopes": 1
+    },
+    "used_occurrence_ids": [
+      "oewn-01765698-a:def:t000",
+      "oewn-01765698-a:def:t001"
+    ],
+    "readable_formula": "TARGET(b) IFF oewn-00024432-r::proposition_negation(EXISTS r.oewn-00804608-v::passive_entity_theme(r, b))",
+    "semantic_acceptance": false,
+    "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+    "interface_gate": {
+      "passed": true,
+      "issues": [],
+      "filters_enumeration": false
+    },
+    "assumption_mode": "interface-only-symbolic",
+    "publishable": false,
+    "basis_rhs_status": "pending",
+    "v3_gate": {
+      "passed": false,
+      "status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+      "issues": [],
+      "filters_enumeration": false
+    }
+  }
+}

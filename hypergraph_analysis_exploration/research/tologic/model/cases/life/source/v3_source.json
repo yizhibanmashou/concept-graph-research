@@ -1,0 +1,1731 @@
+{
+  "schema_version": "v3.source/1",
+  "synset_id": "oewn-10280403-n",
+  "lemmas": [
+    "life"
+  ],
+  "definition": "a living person",
+  "is_basis": false,
+  "occurrences": [
+    {
+      "occurrence_id": "syntax:a:0",
+      "text": "a",
+      "start": 0,
+      "end": 1,
+      "synset_id": "@syntax:a",
+      "kind": "article",
+      "alignment": "literal_article_token"
+    },
+    {
+      "occurrence_id": "oewn-10280403-n:p0:t4",
+      "text": "living",
+      "start": 2,
+      "end": 8,
+      "synset_id": "oewn-00095301-a",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-10280403-n:p0:t4"
+      ],
+      "stored_surface": "living",
+      "stored_lemma": "live",
+      "part_id": "p0"
+    },
+    {
+      "occurrence_id": "oewn-10280403-n:p0:t5",
+      "text": "person",
+      "start": 9,
+      "end": 15,
+      "synset_id": "oewn-00007846-n",
+      "alignment": "exact_unique_match",
+      "source_occurrence_ids": [
+        "oewn-10280403-n:p0:t5"
+      ],
+      "stored_surface": "person",
+      "stored_lemma": "person",
+      "part_id": "p0"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "definition",
+      "kind": "definition",
+      "text": "a living person"
+    },
+    {
+      "evidence_id": "example:0",
+      "kind": "example",
+      "text": "his heroism saved a life"
+    }
+  ],
+  "provenance": {
+    "kind": "v2_source_only",
+    "path": "[redacted-local-path]",
+    "upstream_sha256": "eda1622c078dbf7878537380418caba3722efcd455945ae5e69728dc849520b7",
+    "upstream_schema_version": "tologic-v2-item/2",
+    "pos_hint": "n",
+    "definition_text_field": "raw_text",
+    "wsd_policy": "preserve_fixed_identities_no_reselection",
+    "excluded_support_occurrences": 4
+  },
+  "raw_wsd": {
+    "lexical_occurrences": [
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 1,
+        "in_definition_scope": false,
+        "lemma": "the",
+        "occurrence_id": "oewn-10280403-n:p0:t0",
+        "part_id": "p0",
+        "pos": "DET",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner; no candidates; skipped.",
+        "syntactic_pos": "DET",
+        "text": "The",
+        "token_id": "t0"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+            "examples": [
+              "there was too much for one person to do"
+            ],
+            "lemmas": [
+              "person",
+              "individual",
+              "someone",
+              "somebody",
+              "mortal",
+              "soul"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-00007846-n"
+          },
+          {
+            "definition": "a single organism",
+            "examples": [],
+            "lemmas": [
+              "individual"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-10223458-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "nsubj",
+        "head_index": 2,
+        "in_definition_scope": false,
+        "lemma": "individual",
+        "occurrence_id": "oewn-10280403-n:p0:t1",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": false,
+        "selected_synset_id": "oewn-00007846-n",
+        "selection_rationale": "Refers to a human being; matches the context 'a living person'.",
+        "syntactic_pos": "NOUN",
+        "text": "individual",
+        "token_id": "t1"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "have the quality of being; (copula, used with an adjective or a predicate noun)",
+            "examples": [
+              "John is rich",
+              "This is not a good answer"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02610777-v"
+          },
+          {
+            "definition": "be identical to; be someone or something",
+            "examples": [
+              "The president of the company is John Smith",
+              "This is my house"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02622439-v"
+          },
+          {
+            "definition": "occupy a certain position or area; be somewhere",
+            "examples": [
+              "Where is my umbrella?",
+              "The toolshed is in the back",
+              "What is behind this behavior?"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02661230-v"
+          },
+          {
+            "definition": "have an existence, be extant",
+            "examples": [
+              "Is there a God?"
+            ],
+            "lemmas": [
+              "exist",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02609706-v"
+          },
+          {
+            "definition": "be identical or equivalent to",
+            "examples": [
+              "One dollar equals 1,000 rubles these days!"
+            ],
+            "lemmas": [
+              "equal",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02670846-v"
+          },
+          {
+            "definition": "form or compose",
+            "examples": [
+              "This money is my only income",
+              "The stone wall was the backdrop for the performance",
+              "These constitute my entire belonging",
+              "The children made up the chorus",
+              "This sum represents my entire income for a year",
+              "These few men comprise his entire army"
+            ],
+            "lemmas": [
+              "constitute",
+              "represent",
+              "make up",
+              "comprise",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02626667-v"
+          },
+          {
+            "definition": "work in a specific place, with a specific subject, or in a specific function",
+            "examples": [
+              "He is a herpetologist",
+              "She is our resident philosopher"
+            ],
+            "lemmas": [
+              "be",
+              "follow"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02450790-v"
+          },
+          {
+            "definition": "represent, as of a character on stage",
+            "examples": [
+              "Derek Jacobi was Hamlet"
+            ],
+            "lemmas": [
+              "embody",
+              "be",
+              "personify"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02703567-v"
+          },
+          {
+            "definition": "spend or use time",
+            "examples": [
+              "I may be an hour"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02273091-v"
+          },
+          {
+            "definition": "have life, be alive",
+            "examples": [
+              "Our great leader is no more",
+              "My grandfather lived until the end of war"
+            ],
+            "lemmas": [
+              "be",
+              "live"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02620216-v"
+          },
+          {
+            "definition": "to remain unmolested, undisturbed, or uninterrupted — used only in infinitive form",
+            "examples": [
+              "let her be"
+            ],
+            "lemmas": [
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02750695-v"
+          },
+          {
+            "definition": "be priced at",
+            "examples": [
+              "These shoes cost $100"
+            ],
+            "lemmas": [
+              "cost",
+              "be"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02708368-v"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "ROOT",
+        "head_index": 2,
+        "in_definition_scope": false,
+        "lemma": "be",
+        "occurrence_id": "oewn-10280403-n:p0:t2",
+        "part_id": "p0",
+        "pos": "v",
+        "requires_definition_wsd": false,
+        "selected_synset_id": "oewn-02610777-v",
+        "selection_rationale": "Copular be linking subject to predicate noun phrase; definition 'have the quality of being (copula)' fits.",
+        "syntactic_pos": "AUX",
+        "text": "is",
+        "token_id": "t2"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "a",
+        "occurrence_id": "oewn-10280403-n:p0:t3",
+        "part_id": "p0",
+        "pos": "DET",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner; no candidates; skipped.",
+        "syntactic_pos": "DET",
+        "text": "a",
+        "token_id": "t3"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "be an inhabitant of or reside in",
+            "examples": [
+              "People lived in Africa millions of years ago",
+              "The people inhabited the islands that are now deserted",
+              "this kind of fish dwells near the bottom of the ocean",
+              "deer are populating the woods"
+            ],
+            "lemmas": [
+              "populate",
+              "dwell",
+              "live",
+              "inhabit"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02655932-v"
+          },
+          {
+            "definition": "lead a certain kind of life; live in a certain style",
+            "examples": [
+              "we had to live frugally after the war"
+            ],
+            "lemmas": [
+              "live"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02620422-v"
+          },
+          {
+            "definition": "continue to live and avoid dying",
+            "examples": [
+              "We went without water and food for 3 days",
+              "These superstitions survive in the backwaters of America",
+              "The race car driver lived through several very serious accidents",
+              "how long can a person last without food and water?",
+              "one crash victim died, the other lived"
+            ],
+            "lemmas": [
+              "survive",
+              "last",
+              "live",
+              "live on",
+              "go",
+              "endure",
+              "hold up",
+              "hold out"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02624202-v"
+          },
+          {
+            "definition": "support oneself",
+            "examples": [
+              "he could barely exist on such a low wage",
+              "Can you live on $2000 a month in New York City?",
+              "Many people in the world have to subsist on $1 a day"
+            ],
+            "lemmas": [
+              "exist",
+              "survive",
+              "live",
+              "subsist"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02622766-v"
+          },
+          {
+            "definition": "have life, be alive",
+            "examples": [
+              "Our great leader is no more",
+              "My grandfather lived until the end of war"
+            ],
+            "lemmas": [
+              "be",
+              "live"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02620216-v"
+          },
+          {
+            "definition": "have firsthand knowledge of states, situations, emotions, or sensations",
+            "examples": [
+              "I know the feeling!",
+              "have you ever known hunger?",
+              "I have lived a kind of hell when I was a drug addict",
+              "The holocaust survivors have lived a nightmare",
+              "I lived through two divorces"
+            ],
+            "lemmas": [
+              "know",
+              "experience",
+              "live"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-00598039-v"
+          },
+          {
+            "definition": "pursue a positive and satisfying existence",
+            "examples": [
+              "You must accept yourself and others if you really want to live"
+            ],
+            "lemmas": [
+              "live"
+            ],
+            "pos": "v",
+            "synset_id": "oewn-02621023-v"
+          },
+          {
+            "definition": "pertaining to living persons",
+            "examples": [
+              "within living memory"
+            ],
+            "lemmas": [
+              "living"
+            ],
+            "pos": "a",
+            "synset_id": "oewn-02766901-a"
+          },
+          {
+            "definition": "true to life; lifelike",
+            "examples": [
+              "the living image of her mother"
+            ],
+            "lemmas": [
+              "living"
+            ],
+            "pos": "s",
+            "synset_id": "oewn-01947891-s"
+          },
+          {
+            "definition": "(informal) absolute",
+            "examples": [
+              "she is a living doll",
+              "scared the living daylights out of them",
+              "beat the living hell out of him"
+            ],
+            "lemmas": [
+              "living"
+            ],
+            "pos": "s",
+            "synset_id": "oewn-00005838-s"
+          },
+          {
+            "definition": "still in existence",
+            "examples": [
+              "the Wollemi pine found in Australia is a surviving specimen of a conifer thought to have been long extinct and therefore known as a living fossil",
+              "the only surviving frontier blockhouse in Pennsylvania"
+            ],
+            "lemmas": [
+              "surviving",
+              "living"
+            ],
+            "pos": "s",
+            "synset_id": "oewn-00932115-s"
+          },
+          {
+            "definition": "still in active use",
+            "examples": [
+              "a living language"
+            ],
+            "lemmas": [
+              "living"
+            ],
+            "pos": "s",
+            "synset_id": "oewn-00932022-s"
+          },
+          {
+            "definition": "(used of minerals or stone) in its natural state and place; not mined or quarried",
+            "examples": [
+              "carved into the living stone"
+            ],
+            "lemmas": [
+              "living"
+            ],
+            "pos": "s",
+            "synset_id": "oewn-00100425-s"
+          },
+          {
+            "definition": "actually being performed at the time of hearing or viewing",
+            "examples": [
+              "a live television program",
+              "brought to you live from Lincoln Center",
+              "live entertainment involves performers actually in the physical presence of a live audience"
+            ],
+            "lemmas": [
+              "live",
+              "unrecorded"
+            ],
+            "pos": "a",
+            "synset_id": "oewn-01425429-a"
+          },
+          {
+            "definition": "exerting force or containing energy",
+            "examples": [
+              "live coals",
+              "tossed a live cigarette out the window",
+              "got a shock from a live wire",
+              "live ore is unmined ore",
+              "a live bomb",
+              "a live ball is one in play"
+            ],
+            "lemmas": [
+              "live"
+            ],
+            "pos": "a",
+            "synset_id": "oewn-00100143-a"
+          },
+          {
+            "definition": "possessing life",
+            "examples": [
+              "the happiest person alive",
+              "the nerve is alive",
+              "doctors are working hard to keep him alive",
+              "burned alive",
+              "a live canary"
+            ],
+            "lemmas": [
+              "alive",
+              "live"
+            ],
+            "pos": "a",
+            "synset_id": "oewn-00095301-a"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "amod",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "live",
+        "occurrence_id": "oewn-10280403-n:p0:t4",
+        "part_id": "p0",
+        "pos": "v",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00095301-a",
+        "selection_rationale": "Present participle used as adjective modifying 'person'; sense 'possessing life' fits context 'a living person'.",
+        "syntactic_pos": "VERB",
+        "text": "living",
+        "token_id": "t4"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+            "examples": [
+              "there was too much for one person to do"
+            ],
+            "lemmas": [
+              "person",
+              "individual",
+              "someone",
+              "somebody",
+              "mortal",
+              "soul"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-00007846-n"
+          },
+          {
+            "definition": "a human body (usually including the clothing)",
+            "examples": [
+              "a weapon was hidden on his person"
+            ],
+            "lemmas": [
+              "person"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-05224944-n"
+          },
+          {
+            "definition": "a grammatical category used in the classification of pronouns, possessive determiners, and verb forms according to whether they indicate the speaker, the addressee, or a third party",
+            "examples": [
+              "stop talking about yourself in the third person"
+            ],
+            "lemmas": [
+              "person"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06337790-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "attr",
+        "head_index": 2,
+        "in_definition_scope": true,
+        "lemma": "person",
+        "occurrence_id": "oewn-10280403-n:p0:t5",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00007846-n",
+        "selection_rationale": "Core noun in definition; refers to a human being.",
+        "syntactic_pos": "NOUN",
+        "text": "person",
+        "token_id": "t5"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "punct",
+        "head_index": 2,
+        "in_definition_scope": false,
+        "lemma": ".",
+        "occurrence_id": "oewn-10280403-n:p0:t6",
+        "part_id": "p0",
+        "pos": "PUNCT",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Punctuation; no candidates; skipped.",
+        "syntactic_pos": "PUNCT",
+        "text": ".",
+        "token_id": "t6"
+      }
+    ],
+    "selected_wsd": [
+      {
+        "lemma": "individual",
+        "occurrence_id": "oewn-10280403-n:p0:t1",
+        "part_id": "p0",
+        "pos": "n",
+        "synset_id": "oewn-00007846-n",
+        "text": "individual",
+        "token_id": "t1"
+      },
+      {
+        "lemma": "be",
+        "occurrence_id": "oewn-10280403-n:p0:t2",
+        "part_id": "p0",
+        "pos": "v",
+        "synset_id": "oewn-02610777-v",
+        "text": "is",
+        "token_id": "t2"
+      },
+      {
+        "lemma": "live",
+        "occurrence_id": "oewn-10280403-n:p0:t4",
+        "part_id": "p0",
+        "pos": "v",
+        "synset_id": "oewn-00095301-a",
+        "text": "living",
+        "token_id": "t4"
+      },
+      {
+        "lemma": "person",
+        "occurrence_id": "oewn-10280403-n:p0:t5",
+        "part_id": "p0",
+        "pos": "n",
+        "synset_id": "oewn-00007846-n",
+        "text": "person",
+        "token_id": "t5"
+      }
+    ],
+    "parts": {
+      "p0": {
+        "text": "a living person",
+        "wsd": {
+          "assignments": [
+            {
+              "candidate_inventory": [],
+              "decision": "function_word",
+              "dep": "det",
+              "frozen_token_record": {
+                "decision": "function_word",
+                "dep": "det",
+                "end": 3,
+                "head_index": 1,
+                "in_definition_scope": false,
+                "index": 0,
+                "is_alpha": true,
+                "lemma": "the",
+                "rationale": "Determiner; no candidates; skipped.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "spacy_pos": "DET",
+                "spacy_tag": "DT",
+                "start": 0,
+                "text": "The",
+                "token_id": "t0",
+                "wn_pos": null,
+                "wsd_role": "function_word",
+                "wsd_source": "determiner"
+              },
+              "head_index": 1,
+              "identity": null,
+              "in_definition_scope": false,
+              "lemma": "the",
+              "part_id": "p0",
+              "rationale": "Determiner; no candidates; skipped.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "spacy_pos": "DET",
+              "spacy_tag": "DT",
+              "text": "The",
+              "token_id": "t0",
+              "wn_pos": null
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "individual",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                  "examples": [
+                    "there was too much for one person to do"
+                  ],
+                  "identity": "oewn-00007846-n",
+                  "lemmas": [
+                    "person",
+                    "individual",
+                    "someone",
+                    "somebody",
+                    "mortal",
+                    "soul"
+                  ],
+                  "pos": "n"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "individual",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a single organism",
+                  "examples": [],
+                  "identity": "oewn-10223458-n",
+                  "lemmas": [
+                    "individual"
+                  ],
+                  "pos": "n"
+                }
+              ],
+              "decision": "selected",
+              "dep": "nsubj",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "nsubj",
+                "end": 14,
+                "head_index": 2,
+                "in_definition_scope": false,
+                "index": 1,
+                "is_alpha": true,
+                "lemma": "individual",
+                "rationale": "Refers to a human being; matches the context 'a living person'.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": "oewn-00007846-n",
+                "spacy_pos": "NOUN",
+                "spacy_tag": "NN",
+                "start": 4,
+                "text": "individual",
+                "token_id": "t1",
+                "wn_pos": "n",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 2,
+              "identity": "oewn-00007846-n",
+              "in_definition_scope": false,
+              "lemma": "individual",
+              "part_id": "p0",
+              "rationale": "Refers to a human being; matches the context 'a living person'.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "individual",
+                  "pos": "n"
+                },
+                "candidate_source_pos": "primary",
+                "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                "examples": [
+                  "there was too much for one person to do"
+                ],
+                "identity": "oewn-00007846-n",
+                "lemmas": [
+                  "person",
+                  "individual",
+                  "someone",
+                  "somebody",
+                  "mortal",
+                  "soul"
+                ],
+                "pos": "n"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "NOUN",
+              "spacy_tag": "NN",
+              "text": "individual",
+              "token_id": "t1",
+              "wn_pos": "n"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have the quality of being; (copula, used with an adjective or a predicate noun)",
+                  "examples": [
+                    "John is rich",
+                    "This is not a good answer"
+                  ],
+                  "identity": "oewn-02610777-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be identical to; be someone or something",
+                  "examples": [
+                    "The president of the company is John Smith",
+                    "This is my house"
+                  ],
+                  "identity": "oewn-02622439-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "occupy a certain position or area; be somewhere",
+                  "examples": [
+                    "Where is my umbrella?",
+                    "The toolshed is in the back",
+                    "What is behind this behavior?"
+                  ],
+                  "identity": "oewn-02661230-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have an existence, be extant",
+                  "examples": [
+                    "Is there a God?"
+                  ],
+                  "identity": "oewn-02609706-v",
+                  "lemmas": [
+                    "exist",
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be identical or equivalent to",
+                  "examples": [
+                    "One dollar equals 1,000 rubles these days!"
+                  ],
+                  "identity": "oewn-02670846-v",
+                  "lemmas": [
+                    "equal",
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "form or compose",
+                  "examples": [
+                    "This money is my only income",
+                    "The stone wall was the backdrop for the performance",
+                    "These constitute my entire belonging",
+                    "The children made up the chorus",
+                    "This sum represents my entire income for a year",
+                    "These few men comprise his entire army"
+                  ],
+                  "identity": "oewn-02626667-v",
+                  "lemmas": [
+                    "constitute",
+                    "represent",
+                    "make up",
+                    "comprise",
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "work in a specific place, with a specific subject, or in a specific function",
+                  "examples": [
+                    "He is a herpetologist",
+                    "She is our resident philosopher"
+                  ],
+                  "identity": "oewn-02450790-v",
+                  "lemmas": [
+                    "be",
+                    "follow"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "represent, as of a character on stage",
+                  "examples": [
+                    "Derek Jacobi was Hamlet"
+                  ],
+                  "identity": "oewn-02703567-v",
+                  "lemmas": [
+                    "embody",
+                    "be",
+                    "personify"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "spend or use time",
+                  "examples": [
+                    "I may be an hour"
+                  ],
+                  "identity": "oewn-02273091-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have life, be alive",
+                  "examples": [
+                    "Our great leader is no more",
+                    "My grandfather lived until the end of war"
+                  ],
+                  "identity": "oewn-02620216-v",
+                  "lemmas": [
+                    "be",
+                    "live"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "to remain unmolested, undisturbed, or uninterrupted — used only in infinitive form",
+                  "examples": [
+                    "let her be"
+                  ],
+                  "identity": "oewn-02750695-v",
+                  "lemmas": [
+                    "be"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "be",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be priced at",
+                  "examples": [
+                    "These shoes cost $100"
+                  ],
+                  "identity": "oewn-02708368-v",
+                  "lemmas": [
+                    "cost",
+                    "be"
+                  ],
+                  "pos": "v"
+                }
+              ],
+              "decision": "selected",
+              "dep": "ROOT",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "ROOT",
+                "end": 17,
+                "head_index": 2,
+                "in_definition_scope": false,
+                "index": 2,
+                "is_alpha": true,
+                "lemma": "be",
+                "rationale": "Copular be linking subject to predicate noun phrase; definition 'have the quality of being (copula)' fits.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": "oewn-02610777-v",
+                "spacy_pos": "AUX",
+                "spacy_tag": "VBZ",
+                "start": 15,
+                "text": "is",
+                "token_id": "t2",
+                "wn_pos": "v",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 2,
+              "identity": "oewn-02610777-v",
+              "in_definition_scope": false,
+              "lemma": "be",
+              "part_id": "p0",
+              "rationale": "Copular be linking subject to predicate noun phrase; definition 'have the quality of being (copula)' fits.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "be",
+                  "pos": "v"
+                },
+                "candidate_source_pos": "primary",
+                "definition": "have the quality of being; (copula, used with an adjective or a predicate noun)",
+                "examples": [
+                  "John is rich",
+                  "This is not a good answer"
+                ],
+                "identity": "oewn-02610777-v",
+                "lemmas": [
+                  "be"
+                ],
+                "pos": "v"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "AUX",
+              "spacy_tag": "VBZ",
+              "text": "is",
+              "token_id": "t2",
+              "wn_pos": "v"
+            },
+            {
+              "candidate_inventory": [],
+              "decision": "function_word",
+              "dep": "det",
+              "frozen_token_record": {
+                "decision": "function_word",
+                "dep": "det",
+                "end": 19,
+                "head_index": 5,
+                "in_definition_scope": true,
+                "index": 3,
+                "is_alpha": true,
+                "lemma": "a",
+                "rationale": "Determiner; no candidates; skipped.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "spacy_pos": "DET",
+                "spacy_tag": "DT",
+                "start": 18,
+                "text": "a",
+                "token_id": "t3",
+                "wn_pos": null,
+                "wsd_role": "function_word",
+                "wsd_source": "determiner"
+              },
+              "head_index": 5,
+              "identity": null,
+              "in_definition_scope": true,
+              "lemma": "a",
+              "part_id": "p0",
+              "rationale": "Determiner; no candidates; skipped.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "spacy_pos": "DET",
+              "spacy_tag": "DT",
+              "text": "a",
+              "token_id": "t3",
+              "wn_pos": null
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "be an inhabitant of or reside in",
+                  "examples": [
+                    "People lived in Africa millions of years ago",
+                    "The people inhabited the islands that are now deserted",
+                    "this kind of fish dwells near the bottom of the ocean",
+                    "deer are populating the woods"
+                  ],
+                  "identity": "oewn-02655932-v",
+                  "lemmas": [
+                    "populate",
+                    "dwell",
+                    "live",
+                    "inhabit"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "lead a certain kind of life; live in a certain style",
+                  "examples": [
+                    "we had to live frugally after the war"
+                  ],
+                  "identity": "oewn-02620422-v",
+                  "lemmas": [
+                    "live"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "continue to live and avoid dying",
+                  "examples": [
+                    "We went without water and food for 3 days",
+                    "These superstitions survive in the backwaters of America",
+                    "The race car driver lived through several very serious accidents",
+                    "how long can a person last without food and water?",
+                    "one crash victim died, the other lived"
+                  ],
+                  "identity": "oewn-02624202-v",
+                  "lemmas": [
+                    "survive",
+                    "last",
+                    "live",
+                    "live on",
+                    "go",
+                    "endure",
+                    "hold up",
+                    "hold out"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "support oneself",
+                  "examples": [
+                    "he could barely exist on such a low wage",
+                    "Can you live on $2000 a month in New York City?",
+                    "Many people in the world have to subsist on $1 a day"
+                  ],
+                  "identity": "oewn-02622766-v",
+                  "lemmas": [
+                    "exist",
+                    "survive",
+                    "live",
+                    "subsist"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have life, be alive",
+                  "examples": [
+                    "Our great leader is no more",
+                    "My grandfather lived until the end of war"
+                  ],
+                  "identity": "oewn-02620216-v",
+                  "lemmas": [
+                    "be",
+                    "live"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "have firsthand knowledge of states, situations, emotions, or sensations",
+                  "examples": [
+                    "I know the feeling!",
+                    "have you ever known hunger?",
+                    "I have lived a kind of hell when I was a drug addict",
+                    "The holocaust survivors have lived a nightmare",
+                    "I lived through two divorces"
+                  ],
+                  "identity": "oewn-00598039-v",
+                  "lemmas": [
+                    "know",
+                    "experience",
+                    "live"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "v"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "pursue a positive and satisfying existence",
+                  "examples": [
+                    "You must accept yourself and others if you really want to live"
+                  ],
+                  "identity": "oewn-02621023-v",
+                  "lemmas": [
+                    "live"
+                  ],
+                  "pos": "v"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "living",
+                    "pos": "a"
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "pertaining to living persons",
+                  "examples": [
+                    "within living memory"
+                  ],
+                  "identity": "oewn-02766901-a",
+                  "lemmas": [
+                    "living"
+                  ],
+                  "pos": "a"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "living",
+                    "pos": null
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "true to life; lifelike",
+                  "examples": [
+                    "the living image of her mother"
+                  ],
+                  "identity": "oewn-01947891-s",
+                  "lemmas": [
+                    "living"
+                  ],
+                  "pos": "s"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "living",
+                    "pos": null
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "(informal) absolute",
+                  "examples": [
+                    "she is a living doll",
+                    "scared the living daylights out of them",
+                    "beat the living hell out of him"
+                  ],
+                  "identity": "oewn-00005838-s",
+                  "lemmas": [
+                    "living"
+                  ],
+                  "pos": "s"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "living",
+                    "pos": null
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "still in existence",
+                  "examples": [
+                    "the Wollemi pine found in Australia is a surviving specimen of a conifer thought to have been long extinct and therefore known as a living fossil",
+                    "the only surviving frontier blockhouse in Pennsylvania"
+                  ],
+                  "identity": "oewn-00932115-s",
+                  "lemmas": [
+                    "surviving",
+                    "living"
+                  ],
+                  "pos": "s"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "living",
+                    "pos": null
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "still in active use",
+                  "examples": [
+                    "a living language"
+                  ],
+                  "identity": "oewn-00932022-s",
+                  "lemmas": [
+                    "living"
+                  ],
+                  "pos": "s"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "living",
+                    "pos": null
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "(used of minerals or stone) in its natural state and place; not mined or quarried",
+                  "examples": [
+                    "carved into the living stone"
+                  ],
+                  "identity": "oewn-00100425-s",
+                  "lemmas": [
+                    "living"
+                  ],
+                  "pos": "s"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "a"
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "actually being performed at the time of hearing or viewing",
+                  "examples": [
+                    "a live television program",
+                    "brought to you live from Lincoln Center",
+                    "live entertainment involves performers actually in the physical presence of a live audience"
+                  ],
+                  "identity": "oewn-01425429-a",
+                  "lemmas": [
+                    "live",
+                    "unrecorded"
+                  ],
+                  "pos": "a"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "a"
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "exerting force or containing energy",
+                  "examples": [
+                    "live coals",
+                    "tossed a live cigarette out the window",
+                    "got a shock from a live wire",
+                    "live ore is unmined ore",
+                    "a live bomb",
+                    "a live ball is one in play"
+                  ],
+                  "identity": "oewn-00100143-a",
+                  "lemmas": [
+                    "live"
+                  ],
+                  "pos": "a"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "live",
+                    "pos": "a"
+                  },
+                  "candidate_source_pos": "participle_adjective",
+                  "definition": "possessing life",
+                  "examples": [
+                    "the happiest person alive",
+                    "the nerve is alive",
+                    "doctors are working hard to keep him alive",
+                    "burned alive",
+                    "a live canary"
+                  ],
+                  "identity": "oewn-00095301-a",
+                  "lemmas": [
+                    "alive",
+                    "live"
+                  ],
+                  "pos": "a"
+                }
+              ],
+              "decision": "selected",
+              "dep": "amod",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "amod",
+                "end": 26,
+                "head_index": 5,
+                "in_definition_scope": true,
+                "index": 4,
+                "is_alpha": true,
+                "lemma": "live",
+                "rationale": "Present participle used as adjective modifying 'person'; sense 'possessing life' fits context 'a living person'.",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-00095301-a",
+                "spacy_pos": "VERB",
+                "spacy_tag": "VBG",
+                "start": 20,
+                "text": "living",
+                "token_id": "t4",
+                "wn_pos": "v",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 5,
+              "identity": "oewn-00095301-a",
+              "in_definition_scope": true,
+              "lemma": "live",
+              "part_id": "p0",
+              "rationale": "Present participle used as adjective modifying 'person'; sense 'possessing life' fits context 'a living person'.",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "live",
+                  "pos": "a"
+                },
+                "candidate_source_pos": "participle_adjective",
+                "definition": "possessing life",
+                "examples": [
+                  "the happiest person alive",
+                  "the nerve is alive",
+                  "doctors are working hard to keep him alive",
+                  "burned alive",
+                  "a live canary"
+                ],
+                "identity": "oewn-00095301-a",
+                "lemmas": [
+                  "alive",
+                  "live"
+                ],
+                "pos": "a"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "VERB",
+              "spacy_tag": "VBG",
+              "text": "living",
+              "token_id": "t4",
+              "wn_pos": "v"
+            },
+            {
+              "candidate_inventory": [
+                {
+                  "candidate_query": {
+                    "lemma": "person",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                  "examples": [
+                    "there was too much for one person to do"
+                  ],
+                  "identity": "oewn-00007846-n",
+                  "lemmas": [
+                    "person",
+                    "individual",
+                    "someone",
+                    "somebody",
+                    "mortal",
+                    "soul"
+                  ],
+                  "pos": "n"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "person",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a human body (usually including the clothing)",
+                  "examples": [
+                    "a weapon was hidden on his person"
+                  ],
+                  "identity": "oewn-05224944-n",
+                  "lemmas": [
+                    "person"
+                  ],
+                  "pos": "n"
+                },
+                {
+                  "candidate_query": {
+                    "lemma": "person",
+                    "pos": "n"
+                  },
+                  "candidate_source_pos": "primary",
+                  "definition": "a grammatical category used in the classification of pronouns, possessive determiners, and verb forms according to whether they indicate the speaker, the addressee, or a third party",
+                  "examples": [
+                    "stop talking about yourself in the third person"
+                  ],
+                  "identity": "oewn-06337790-n",
+                  "lemmas": [
+                    "person"
+                  ],
+                  "pos": "n"
+                }
+              ],
+              "decision": "selected",
+              "dep": "attr",
+              "frozen_token_record": {
+                "decision": "selected",
+                "dep": "attr",
+                "end": 33,
+                "head_index": 2,
+                "in_definition_scope": true,
+                "index": 5,
+                "is_alpha": true,
+                "lemma": "person",
+                "rationale": "Core noun in definition; refers to a human being.",
+                "requires_definition_wsd": true,
+                "selected_synset_id": "oewn-00007846-n",
+                "spacy_pos": "NOUN",
+                "spacy_tag": "NN",
+                "start": 27,
+                "text": "person",
+                "token_id": "t5",
+                "wn_pos": "n",
+                "wsd_role": "content_word",
+                "wsd_source": "oewn"
+              },
+              "head_index": 2,
+              "identity": "oewn-00007846-n",
+              "in_definition_scope": true,
+              "lemma": "person",
+              "part_id": "p0",
+              "rationale": "Core noun in definition; refers to a human being.",
+              "requires_definition_wsd": true,
+              "selected_candidate": {
+                "candidate_query": {
+                  "lemma": "person",
+                  "pos": "n"
+                },
+                "candidate_source_pos": "primary",
+                "definition": "a human being; person, singular, assertive existential pronoun; pronoun, person, singular; quantifier: assertive existential",
+                "examples": [
+                  "there was too much for one person to do"
+                ],
+                "identity": "oewn-00007846-n",
+                "lemmas": [
+                  "person",
+                  "individual",
+                  "someone",
+                  "somebody",
+                  "mortal",
+                  "soul"
+                ],
+                "pos": "n"
+              },
+              "selected_candidate_inventory_status": "matched",
+              "spacy_pos": "NOUN",
+              "spacy_tag": "NN",
+              "text": "person",
+              "token_id": "t5",
+              "wn_pos": "n"
+            },
+            {
+              "candidate_inventory": [],
+              "decision": "function_word",
+              "dep": "punct",
+              "frozen_token_record": {
+                "decision": "function_word",
+                "dep": "punct",
+                "end": 34,
+                "head_index": 2,
+                "in_definition_scope": false,
+                "index": 6,
+                "is_alpha": false,
+                "lemma": ".",
+                "rationale": "Punctuation; no candidates; skipped.",
+                "requires_definition_wsd": false,
+                "selected_synset_id": null,
+                "spacy_pos": "PUNCT",
+                "spacy_tag": ".",
+                "start": 33,
+                "text": ".",
+                "token_id": "t6",
+                "wn_pos": null,
+                "wsd_role": "function_word",
+                "wsd_source": "none"
+              },
+              "head_index": 2,
+              "identity": null,
+              "in_definition_scope": false,
+              "lemma": ".",
+              "part_id": "p0",
+              "rationale": "Punctuation; no candidates; skipped.",
+              "requires_definition_wsd": false,
+              "selected_candidate": {},
+              "selected_candidate_inventory_status": "missing_or_not_applicable",
+              "spacy_pos": "PUNCT",
+              "spacy_tag": ".",
+              "text": ".",
+              "token_id": "t6",
+              "wn_pos": null
+            }
+          ],
+          "verification": {
+            "fixed_data": {
+              "confidence": 0.95,
+              "sentence_synset_ids": [
+                "oewn-00007846-n",
+                "oewn-02610777-v",
+                "oewn-00095301-a"
+              ],
+              "tokens": [
+                {
+                  "decision": "function_word",
+                  "rationale": "Determiner; no candidates; skipped.",
+                  "selected_synset_id": null,
+                  "text": "The",
+                  "token_id": "t0"
+                },
+                {
+                  "decision": "selected",
+                  "rationale": "Refers to a human being; matches the context 'a living person'.",
+                  "selected_synset_id": "oewn-00007846-n",
+                  "text": "individual",
+                  "token_id": "t1"
+                },
+                {
+                  "decision": "selected",
+                  "rationale": "Copular be linking subject to predicate noun phrase; definition 'have the quality of being (copula)' fits.",
+                  "selected_synset_id": "oewn-02610777-v",
+                  "text": "is",
+                  "token_id": "t2"
+                },
+                {
+                  "decision": "function_word",
+                  "rationale": "Determiner; no candidates; skipped.",
+                  "selected_synset_id": null,
+                  "text": "a",
+                  "token_id": "t3"
+                },
+                {
+                  "decision": "selected",
+                  "rationale": "Present participle used as adjective modifying 'person'; sense 'possessing life' fits context 'a living person'.",
+                  "selected_synset_id": "oewn-00095301-a",
+                  "text": "living",
+                  "token_id": "t4"
+                },
+                {
+                  "decision": "selected",
+                  "rationale": "Core noun in definition; refers to a human being.",
+                  "selected_synset_id": "oewn-00007846-n",
+                  "text": "person",
+                  "token_id": "t5"
+                },
+                {
+                  "decision": "function_word",
+                  "rationale": "Punctuation; no candidates; skipped.",
+                  "selected_synset_id": null,
+                  "text": ".",
+                  "token_id": "t6"
+                }
+              ]
+            },
+            "issues": [
+              {
+                "message": "Token t4 'living' selected sense oewn-02766901-a ('pertaining to living persons') does not fit usage as 'alive'; better candidate oewn-00095301-a ('possessing life') is available and clearly matches the context.",
+                "severity": "error",
+                "type": "semantic_mismatch"
+              }
+            ],
+            "rationale": "The only issue is token t4 'living', which is a required definition-scope token. The originally selected sense (oewn-02766901-a 'pertaining to living persons') is less precise than the available candidate oewn-00095301-a ('possessing life'), which directly matches the meaning 'alive' in 'a living person'. All other tokens are correctly selected or skipped. The fix updates t4's selection and correspondingly adjusts sentence_synset_ids.",
+            "verdict": "fixed"
+          }
+        }
+      }
+    }
+  },
+  "definition_parts": {
+    "parts": {
+      "p0": "a living person"
+    },
+    "logic": {
+      "op": "ATOM",
+      "part_id": "p0"
+    }
+  },
+  "disabled_dependency_occurrences": [],
+  "blocking_issues": [],
+  "source_warnings": []
+}

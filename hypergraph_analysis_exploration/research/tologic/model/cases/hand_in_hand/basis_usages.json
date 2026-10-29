@@ -1,0 +1,31 @@
+{
+  "interfaces": {
+    "oewn-00117495-r::cooperative_event": {
+      "synset_id": "oewn-00117495-r",
+      "usage_id": "cooperative_event",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied event or state in this usage"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "together in the fixed cooperative sense, used as a property of the supplied event: Together(e). The sentence's collective subject and its Agent relation belong to the surrounding context, not this adverb's interface. The modifier does not select a separate participant argument; neither Work nor Worker is definition content.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    }
+  },
+  "interface_assumptions": [],
+  "rhs_supplied": false
+}

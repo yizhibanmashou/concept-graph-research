@@ -1,0 +1,36 @@
+{
+  "schema_version": "v3.enumeration-report/1",
+  "status": "COMPLETE",
+  "complete": true,
+  "exhausted": true,
+  "candidate_count": 130,
+  "input_hash": "75db65b8af842d0c04ce7d265624c9c73f6083dc511ef88b7a9deb4cec11d148",
+  "assumption_mode": "interface-only-symbolic",
+  "semantic_acceptance": false,
+  "published": false,
+  "synset_id": "oewn-02636952-v",
+  "usage_id": "bear_supplied_usage",
+  "max_candidates": null,
+  "output_dir": "[redacted-local-path]",
+  "stats": {
+    "resource_selections": 2,
+    "scope_mode_selections": 2,
+    "region_placements": 2,
+    "structural_atom_selections": 64,
+    "typed_binding_combinations": 159,
+    "rejected_external_coverage": 29,
+    "engine_candidates": 130,
+    "interface_gate_passed": 130
+  },
+  "guarantee": "For validated input, COMPLETE exhausts the declared finite lexical/parameter/scope grammar. Any correct formula satisfying that grammar and the supplied structured constraints has its canonical representative in candidates.jsonl. Provider semantics and input constraints are assumptions.",
+  "v3_gate_is_diagnostic_only": false,
+  "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+  "basis_rhs_status": "pending",
+  "publishable": false,
+  "v3_gate_status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+  "interface_gate_is_diagnostic_only": true,
+  "interface_assumptions": [],
+  "interface_hashes": {
+    "oewn-02208144-v::have_entity": "afaa1af628015ee25097d30a6134c10f3c07a7742d6e8600012fd554c228f416"
+  }
+}

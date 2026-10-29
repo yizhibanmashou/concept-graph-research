@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wordnet-gloss-horn:selected-witness-source-lineage:2",
+  "title": "Selected-witness source lineage audit report",
+  "description": "Successful aggregate-only source-lineage report. The schema checks structure and required integrity assertions; it does not establish gloss semantic support.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "audit_version",
+    "input_sha256",
+    "implementation",
+    "bundle_integrity",
+    "counts",
+    "distribution",
+    "validation",
+    "raw_text_emitted",
+    "identities_or_paths_emitted",
+    "interpretation_limit"
+  ],
+  "properties": {
+    "audit_version": {"const": "selected-witness-source-lineage/2"},
+    "input_sha256": {"$ref": "#/$defs/input_hashes"},
+    "implementation": {"$ref": "#/$defs/implementation"},
+    "bundle_integrity": {"$ref": "#/$defs/bundle_integrity"},
+    "counts": {"$ref": "#/$defs/counts"},
+    "distribution": {"$ref": "#/$defs/distribution"},
+    "validation": {"$ref": "#/$defs/validation"},
+    "raw_text_emitted": {"const": false},
+    "identities_or_paths_emitted": {"const": false},
+    "interpretation_limit": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nonnegative_integer": {"type": "integer", "minimum": 0},
+    "positive_integer": {"type": "integer", "minimum": 1},
+    "input_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest", "graph_rules", "sense_index", "selected_witnesses", "checksums_index", "selected_basis_atoms", "integrity_lock"],
+      "properties": {
+        "manifest": {"$ref": "#/$defs/sha256"},
+        "graph_rules": {"$ref": "#/$defs/sha256"},
+        "sense_index": {"$ref": "#/$defs/sha256"},
+        "selected_witnesses": {"$ref": "#/$defs/sha256"},
+        "checksums_index": {"$ref": "#/$defs/sha256"},
+        "selected_basis_atoms": {"$ref": "#/$defs/sha256"},
+        "integrity_lock": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "sha256", "python_version", "platform"],
+      "properties": {
+        "schema": {"const": "selected-witness-source-lineage-implementation/1"},
+        "sha256": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["src/analysis/selected_witness_source_lineage.py", "src/analysis/frozen_bundle_integrity.py", "src/analysis/frozen_hypergraph_audit.py", "src/analysis/full_source_payload_census.py", "src/analysis/minimum_witness_audit.py"],
+          "properties": {
+            "src/analysis/selected_witness_source_lineage.py": {"$ref": "#/$defs/sha256"},
+            "src/analysis/frozen_bundle_integrity.py": {"$ref": "#/$defs/sha256"},
+            "src/analysis/frozen_hypergraph_audit.py": {"$ref": "#/$defs/sha256"},
+            "src/analysis/full_source_payload_census.py": {"$ref": "#/$defs/sha256"},
+            "src/analysis/minimum_witness_audit.py": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "python_version": {"type": "string", "minLength": 1},
+        "platform": {"type": "string", "minLength": 1}
+      }
+    },
+    "bundle_integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid", "observed_sha256", "selected_basis_matches_checksums"],
+      "properties": {
+        "valid": {"const": true},
+        "observed_sha256": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["manifest.json", "checksums.jsonl", "graph/hypergraph_rules.jsonl", "graph/coverage_witnesses.jsonl", "indexes/senses.jsonl", "provenance/hypergraph_source_contract.json"],
+          "properties": {
+            "manifest.json": {"$ref": "#/$defs/sha256"},
+            "checksums.jsonl": {"$ref": "#/$defs/sha256"},
+            "graph/hypergraph_rules.jsonl": {"$ref": "#/$defs/sha256"},
+            "graph/coverage_witnesses.jsonl": {"$ref": "#/$defs/sha256"},
+            "indexes/senses.jsonl": {"$ref": "#/$defs/sha256"},
+            "provenance/hypergraph_source_contract.json": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "selected_basis_matches_checksums": {"const": true}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graph_head_count", "basis_seed_count", "selected_rule_count", "selected_rules_with_source_links", "selected_rules_without_source_links", "source_document_links_for_selected_rules", "distinct_source_documents_for_selected_rules", "source_documents_linked_to_multiple_selected_rules", "source_document_links_missing_index_source_metadata", "selected_source_payload_bytes_verified", "distinct_selected_source_payloads_verified", "selected_source_payload_identity_mismatches", "selected_source_payload_checksum_mismatches"],
+      "properties": {
+        "graph_head_count": {"$ref": "#/$defs/nonnegative_integer"},
+        "basis_seed_count": {"$ref": "#/$defs/nonnegative_integer"},
+        "selected_rule_count": {"$ref": "#/$defs/nonnegative_integer"},
+        "selected_rules_with_source_links": {"$ref": "#/$defs/nonnegative_integer"},
+        "selected_rules_without_source_links": {"$ref": "#/$defs/nonnegative_integer"},
+        "source_document_links_for_selected_rules": {"$ref": "#/$defs/nonnegative_integer"},
+        "distinct_source_documents_for_selected_rules": {"$ref": "#/$defs/nonnegative_integer"},
+        "source_documents_linked_to_multiple_selected_rules": {"$ref": "#/$defs/nonnegative_integer"},
+        "source_document_links_missing_index_source_metadata": {"$ref": "#/$defs/nonnegative_integer"},
+        "selected_source_payload_bytes_verified": {"$ref": "#/$defs/nonnegative_integer"},
+        "distinct_selected_source_payloads_verified": {"$ref": "#/$defs/nonnegative_integer"},
+        "selected_source_payload_identity_mismatches": {"$ref": "#/$defs/nonnegative_integer"},
+        "selected_source_payload_checksum_mismatches": {"$ref": "#/$defs/nonnegative_integer"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "max", "median", "min", "p90"],
+      "properties": {
+        "count": {"$ref": "#/$defs/nonnegative_integer"},
+        "max": {"$ref": "#/$defs/nonnegative_integer"},
+        "median": {"type": "number", "minimum": 0},
+        "min": {"$ref": "#/$defs/nonnegative_integer"},
+        "p90": {"type": "number", "minimum": 0}
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_documents_per_selected_rule", "selected_rules_per_source_document", "source_document_links_by_witness_depth"],
+      "properties": {
+        "source_documents_per_selected_rule": {"$ref": "#/$defs/summary"},
+        "selected_rules_per_source_document": {"$ref": "#/$defs/summary"},
+        "source_document_links_by_witness_depth": {
+          "type": "object",
+          "propertyNames": {"pattern": "^(1-5|6-25|26-100|101-300|301\\+)$"},
+          "additionalProperties": {"$ref": "#/$defs/nonnegative_integer"}
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frozen_bundle_integrity_lock_valid", "selected_basis_matches_checksums", "selected_witness_graph_valid", "all_selected_rules_have_source_links", "all_source_links_resolve_to_index_source_records", "all_selected_source_payloads_match_checksums", "all_selected_source_payloads_match_witness_head_identity"],
+      "properties": {
+        "frozen_bundle_integrity_lock_valid": {"const": true},
+        "selected_basis_matches_checksums": {"const": true},
+        "selected_witness_graph_valid": {"const": true},
+        "all_selected_rules_have_source_links": {"const": true},
+        "all_source_links_resolve_to_index_source_records": {"const": true},
+        "all_selected_source_payloads_match_checksums": {"const": true},
+        "all_selected_source_payloads_match_witness_head_identity": {"const": true}
+      }
+    }
+  }
+}

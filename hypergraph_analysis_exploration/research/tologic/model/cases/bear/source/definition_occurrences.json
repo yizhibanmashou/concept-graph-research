@@ -1,0 +1,147 @@
+{
+  "text": "have",
+  "coordinate_system": "python_unicode_codepoint_half_open",
+  "tokenization": "word_with_internal_apostrophe_or_hyphen_else_individual_punctuation",
+  "coverage_policy": "every_non_whitespace_character_exactly_once",
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-02636952-v:def:t000",
+      "index": 0,
+      "text": "have",
+      "start": 0,
+      "end": 4,
+      "norm": "have",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-02636952-v:def:u000"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "auxiliary_or_copula"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    }
+  ],
+  "lexical_units": [
+    {
+      "lexical_unit_id": "oewn-02636952-v:def:u000",
+      "text": "have",
+      "start": 0,
+      "end": 4,
+      "occurrence_ids": [
+        "oewn-02636952-v:def:t000"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-02208144-v"
+        ],
+        "selected_synset_id": "oewn-02208144-v",
+        "evidence": [
+          {
+            "source_record_id": "oewn-02636952-v:p0:t2",
+            "source_path": "raw_wsd.lexical_occurrences[2]",
+            "part_id": "p0",
+            "token_id": "t2",
+            "stored_text": "has",
+            "stored_lemma": "have",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-02208144-v"
+            ],
+            "alignment_method": "recorded_lemma_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-02208144-v",
+                "definition": "have or possess, either in a concrete or an abstract sense",
+                "lemmas": [
+                  "have",
+                  "have got",
+                  "hold"
+                ],
+                "pos": "v"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-02636952-v:p0:t2",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[2]",
+            "part_id": "p0",
+            "token_id": "t2",
+            "stored_text": "has",
+            "stored_lemma": "have",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-02208144-v"
+            ],
+            "alignment_method": "recorded_lemma_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-02208144-v",
+                "definition": "have or possess, either in a concrete or an abstract sense",
+                "lemmas": [
+                  "have",
+                  "have got",
+                  "hold"
+                ],
+                "pos": "v"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-02208144-v",
+            "definition": "have or possess, either in a concrete or an abstract sense",
+            "lemmas": [
+              "have",
+              "have got",
+              "hold"
+            ],
+            "pos": "v"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    }
+  ],
+  "unaligned_wsd_evidence": [],
+  "issues": [],
+  "stats": {
+    "occurrences": 1,
+    "word_occurrences": 1,
+    "punctuation_occurrences": 0,
+    "lexical_units": 1,
+    "multiword_lexical_units": 0,
+    "function_word_candidates": 1,
+    "word_wsd_status_counts": {
+      "fixed_identity": 1
+    },
+    "lexical_unit_wsd_status_counts": {
+      "fixed_identity": 1
+    },
+    "confirmed_basis_lexical_units": 1,
+    "excluded_argumentation_support_wsd_records": 10,
+    "unaligned_wsd_evidence": 0,
+    "semantic_formulas_supplied": 0
+  }
+}

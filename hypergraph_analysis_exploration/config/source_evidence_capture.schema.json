@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wordnet-gloss-horn:source-evidence-capture:1",
+  "title": "Source evidence provenance capture record",
+  "description": "Draft forward-only contract for binding one frozen source_evidence object to its local payload and an upstream record/release. It does not retrofit existing records, assess license compatibility, or grant distribution clearance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "captured_at_utc",
+    "producer",
+    "parser",
+    "source",
+    "frozen_binding",
+    "upstream_binding",
+    "identity_binding_status",
+    "release_binding_status",
+    "rights_references",
+    "rights_clearance",
+    "raw_gloss_emitted",
+    "source_paths_emitted"
+  ],
+  "properties": {
+    "schema_version": {"const": "source-evidence-capture/1"},
+    "captured_at_utc": {"type": "string", "format": "date-time"},
+    "producer": {"$ref": "#/$defs/producer"},
+    "parser": {"$ref": "#/$defs/parser"},
+    "source": {"$ref": "#/$defs/source"},
+    "frozen_binding": {"$ref": "#/$defs/frozen_binding"},
+    "upstream_binding": {"$ref": "#/$defs/upstream_binding"},
+    "identity_binding_status": {
+      "enum": ["unbound", "candidate_identity_match", "verified_record_identifier"]
+    },
+    "release_binding_status": {
+      "enum": ["unbound", "candidate_release_label", "verified_artifact_bytes"]
+    },
+    "rights_references": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/rights_reference"}
+    },
+    "rights_clearance": {"const": "not_assessed"},
+    "raw_gloss_emitted": {"const": false},
+    "source_paths_emitted": {"const": false},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nullable_string": {"type": ["string", "null"]},
+    "nullable_sha256": {
+      "oneOf": [
+        {"$ref": "#/$defs/sha256"},
+        {"type": "null"}
+      ]
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["component_name", "component_version", "implementation_sha256", "repository_uri", "revision"],
+      "properties": {
+        "component_name": {"type": "string", "minLength": 1},
+        "component_version": {"type": "string", "minLength": 1},
+        "implementation_sha256": {"$ref": "#/$defs/sha256"},
+        "repository_uri": {"$ref": "#/$defs/nullable_string"},
+        "revision": {"$ref": "#/$defs/nullable_string"}
+      }
+    },
+    "parser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parser_name", "parser_version", "parser_implementation_sha256", "normalizer_implementation_sha256"],
+      "properties": {
+        "parser_name": {"type": "string", "minLength": 1},
+        "parser_version": {"type": "string", "minLength": 1},
+        "parser_implementation_sha256": {"$ref": "#/$defs/sha256"},
+        "normalizer_implementation_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_label",
+        "ontology_id",
+        "record_identifier",
+        "record_locator",
+        "source_version_label",
+        "evidence_type"
+      ],
+      "properties": {
+        "source_label": {"type": "string", "minLength": 1},
+        "ontology_id": {"$ref": "#/$defs/nullable_string"},
+        "record_identifier": {"$ref": "#/$defs/nullable_string"},
+        "record_locator": {"$ref": "#/$defs/nullable_string"},
+        "source_version_label": {"$ref": "#/$defs/nullable_string"},
+        "evidence_type": {"type": "string", "minLength": 1}
+      }
+    },
+    "frozen_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payload_sha256", "evidence_object_ordinal"],
+      "properties": {
+        "payload_sha256": {"$ref": "#/$defs/sha256"},
+        "evidence_object_ordinal": {"type": "integer", "minimum": 0}
+      }
+    },
+    "upstream_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acquisition_kind",
+        "release_label",
+        "version_iri",
+        "serialization_format",
+        "artifact_uri",
+        "artifact_sha256",
+        "record_sha256",
+        "endpoint_uri",
+        "request_sha256",
+        "response_sha256",
+        "retrieved_at_utc",
+        "etag",
+        "last_modified"
+      ],
+      "properties": {
+        "acquisition_kind": {"enum": ["static_artifact", "api_response"]},
+        "release_label": {"$ref": "#/$defs/nullable_string"},
+        "version_iri": {"$ref": "#/$defs/nullable_string"},
+        "serialization_format": {"$ref": "#/$defs/nullable_string"},
+        "artifact_uri": {"$ref": "#/$defs/nullable_string"},
+        "artifact_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "record_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "endpoint_uri": {"$ref": "#/$defs/nullable_string"},
+        "request_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "response_sha256": {"$ref": "#/$defs/nullable_sha256"},
+        "retrieved_at_utc": {"$ref": "#/$defs/nullable_string"},
+        "etag": {"$ref": "#/$defs/nullable_string"},
+        "last_modified": {"$ref": "#/$defs/nullable_string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"acquisition_kind": {"const": "static_artifact"}}},
+          "then": {
+            "properties": {
+              "artifact_uri": {"type": "string", "minLength": 1},
+              "artifact_sha256": {"$ref": "#/$defs/sha256"},
+              "serialization_format": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"acquisition_kind": {"const": "api_response"}}},
+          "then": {
+            "properties": {
+              "endpoint_uri": {"type": "string", "minLength": 1},
+              "request_sha256": {"$ref": "#/$defs/sha256"},
+              "response_sha256": {"$ref": "#/$defs/sha256"},
+              "retrieved_at_utc": {"type": "string", "format": "date-time", "pattern": "Z$"}
+            }
+          }
+        }
+      ]
+    },
+    "rights_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_type", "source_uri", "retrieved_at_utc", "content_sha256"],
+      "properties": {
+        "evidence_type": {
+          "enum": ["license_statement", "terms_and_conditions", "attribution_requirement", "other_provider_notice"]
+        },
+        "source_uri": {"type": "string", "minLength": 1},
+        "retrieved_at_utc": {"type": "string", "format": "date-time"},
+        "content_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"identity_binding_status": {"const": "verified_record_identifier"}}},
+      "then": {"properties": {"source": {"properties": {"record_identifier": {"type": "string", "minLength": 1}}}}}
+    },
+    {
+      "if": {"properties": {"release_binding_status": {"const": "verified_artifact_bytes"}}},
+      "then": {"properties": {"upstream_binding": {"properties": {"artifact_sha256": {"$ref": "#/$defs/sha256"}}}}}
+    }
+  ]
+}

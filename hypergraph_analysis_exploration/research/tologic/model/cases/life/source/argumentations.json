@@ -1,0 +1,884 @@
+[
+  {
+    "argumentation_id": "oewn-10280403-n:argumentation:0",
+    "part_id": "p0",
+    "part_definition": "a living person",
+    "provenance": [
+      {
+        "field_path": "analysis.argument_structure.parts[0].analysis"
+      },
+      {
+        "field_path": "source.definition.parts_by_id.p0.argumentation"
+      }
+    ],
+    "sentence_a": {
+      "text": "The individual is a life.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_a:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 14,
+          "text": "individual",
+          "word_id": "sentence_a:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 15,
+          "end": 17,
+          "text": "is",
+          "word_id": "sentence_a:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "auxiliary_or_copula"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t3",
+          "start": 18,
+          "end": 19,
+          "text": "a",
+          "word_id": "sentence_a:t3",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t4",
+          "start": 20,
+          "end": 24,
+          "text": "life",
+          "word_id": "sentence_a:t4",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "recorded_target_surface_unique_match"
+          ],
+          "origin": "target",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "target_lhs"
+        },
+        {
+          "token_id": "t5",
+          "start": 24,
+          "end": 25,
+          "text": ".",
+          "word_id": "sentence_a:t5",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "text": "The individual",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "sentence_b": {
+      "text": "The individual is a living person.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_b:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t0",
+              "token_id": "t0",
+              "text": "The",
+              "lemma": "the",
+              "selected_synset_id": null,
+              "dependency": "det",
+              "head_index": 1,
+              "syntactic_pos": "DET",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "function_word"
+            }
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article",
+              "frozen_function_pos"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": true
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 14,
+          "text": "individual",
+          "word_id": "sentence_b:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t1",
+              "token_id": "t1",
+              "text": "individual",
+              "lemma": "individual",
+              "selected_synset_id": "oewn-00007846-n",
+              "dependency": "nsubj",
+              "head_index": 2,
+              "syntactic_pos": "NOUN",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "selected"
+            }
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 15,
+          "end": 17,
+          "text": "is",
+          "word_id": "sentence_b:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "outside_definition_shared_template_scaffold"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t2",
+              "token_id": "t2",
+              "text": "is",
+              "lemma": "be",
+              "selected_synset_id": "oewn-02610777-v",
+              "dependency": "ROOT",
+              "head_index": 2,
+              "syntactic_pos": "AUX",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "selected"
+            }
+          ],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "auxiliary_or_copula",
+              "frozen_function_pos"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t3",
+          "start": 18,
+          "end": 19,
+          "text": "a",
+          "word_id": "sentence_b:t3",
+          "definition_occurrence_ids": [
+            "oewn-10280403-n:def:t000"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t3",
+              "token_id": "t3",
+              "text": "a",
+              "lemma": "a",
+              "selected_synset_id": null,
+              "dependency": "det",
+              "head_index": 5,
+              "syntactic_pos": "DET",
+              "in_definition_scope": true,
+              "requires_definition_wsd": false,
+              "decision": "function_word"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article",
+              "frozen_function_pos"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": true
+          },
+          "is_function_word": true,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t4",
+          "start": 20,
+          "end": 26,
+          "text": "living",
+          "word_id": "sentence_b:t4",
+          "definition_occurrence_ids": [
+            "oewn-10280403-n:def:t001"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t4",
+              "token_id": "t4",
+              "text": "living",
+              "lemma": "live",
+              "selected_synset_id": "oewn-00095301-a",
+              "dependency": "amod",
+              "head_index": 5,
+              "syntactic_pos": "VERB",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t5",
+          "start": 27,
+          "end": 33,
+          "text": "person",
+          "word_id": "sentence_b:t5",
+          "definition_occurrence_ids": [
+            "oewn-10280403-n:def:t002"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t5",
+              "token_id": "t5",
+              "text": "person",
+              "lemma": "person",
+              "selected_synset_id": "oewn-00007846-n",
+              "dependency": "attr",
+              "head_index": 2,
+              "syntactic_pos": "NOUN",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t6",
+          "start": 33,
+          "end": 34,
+          "text": ".",
+          "word_id": "sentence_b:t6",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-10280403-n:p0:t6",
+              "token_id": "t6",
+              "text": ".",
+              "lemma": ".",
+              "selected_synset_id": null,
+              "dependency": "punct",
+              "head_index": 2,
+              "syntactic_pos": "PUNCT",
+              "in_definition_scope": false,
+              "requires_definition_wsd": false,
+              "decision": "function_word"
+            }
+          ],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": true
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "text": "The individual",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "parameterized_a": "{Noun_subj} is a life.",
+    "parameterized_b": "{Noun_subj} is a living person.",
+    "template_id": "T1",
+    "template_args": {
+      "SUBJ": "the individual"
+    },
+    "instantiated_args": {
+      "SUBJ": "the individual"
+    },
+    "slots": [
+      {
+        "slot": "SUBJ",
+        "surface": "the individual",
+        "kind": "parameter",
+        "logical_type": null
+      }
+    ],
+    "selected_lemma": "life",
+    "textual_argumentation": {
+      "meaning_sentence": "\"The individual is a life.\" means \"The individual is a living person.\".",
+      "semantic_focus": "a living person",
+      "selection_reason": "life is the only lemma and most neutrally represents the sense of a living person."
+    },
+    "issues": [],
+    "review_status": "source_cleaning_not_usage_certification",
+    "lingua": {
+      "status": "present",
+      "graph_count": 1,
+      "graphs": [
+        {
+          "graph_json": {
+            "meta": {},
+            "words": [
+              "The",
+              " individual",
+              " is",
+              " a",
+              " living",
+              " person",
+              "."
+            ],
+            "graph": {
+              "nodes": [
+                {
+                  "spans": [
+                    [
+                      0,
+                      0
+                    ]
+                  ],
+                  "type": "DeterminerConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      1,
+                      1
+                    ]
+                  ],
+                  "type": "NominalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      2,
+                      2
+                    ]
+                  ],
+                  "type": "FactualPredicator"
+                },
+                {
+                  "spans": [
+                    [
+                      3,
+                      3
+                    ]
+                  ],
+                  "type": "DeterminerConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      4,
+                      4
+                    ]
+                  ],
+                  "type": "ModificationalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      5,
+                      5
+                    ]
+                  ],
+                  "type": "NominalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      6,
+                      6
+                    ]
+                  ],
+                  "type": "PunctuationalConstant"
+                }
+              ],
+              "edges": [
+                {
+                  "start": 0,
+                  "end": 1,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 2,
+                  "end": 0,
+                  "label": "pred.arg.1"
+                },
+                {
+                  "start": 2,
+                  "end": 3,
+                  "label": "pred.arg.2"
+                },
+                {
+                  "start": 3,
+                  "end": 4,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 4,
+                  "end": 5,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 6,
+                  "end": 2,
+                  "label": "as:punctuation"
+                }
+              ]
+            }
+          },
+          "sha256": "68dd786b2df98b8f09179b1340e04079fc1f5f655b69959d2953ac05fafd3bd0",
+          "sources": [
+            {
+              "path": "[redacted-local-path]",
+              "line": 86140,
+              "record_sha256": "3b49fe145ad64ea65124d696fdb65afd7e2e72a34e833f1e8c1f5d30ecc94157",
+              "job_id": "oewn-10280403-n::p0",
+              "part_id": "p0",
+              "source_sentence": "The individual is a living person.",
+              "source_status": "success",
+              "source_graph_field": "graph_json",
+              "match_method": "exact",
+              "error": "",
+              "lingua_conversion_error": ""
+            }
+          ],
+          "validation": {
+            "structurally_valid": true,
+            "semantic_certified": false,
+            "word_count": 7,
+            "node_count": 7,
+            "edge_count": 6,
+            "root_node_indices": [
+              6
+            ],
+            "explicit_root_node_indices": [],
+            "issue_counts": {},
+            "issues": []
+          },
+          "token_alignment": {
+            "status": "aligned",
+            "issues": [],
+            "method": "exact_non_whitespace_codepoints_with_original_sentence_offsets",
+            "graph_word_offsets": [
+              {
+                "word_index": 0,
+                "graph_word": "The",
+                "start": 0,
+                "end": 3,
+                "text": "The"
+              },
+              {
+                "word_index": 1,
+                "graph_word": " individual",
+                "start": 4,
+                "end": 14,
+                "text": "individual"
+              },
+              {
+                "word_index": 2,
+                "graph_word": " is",
+                "start": 15,
+                "end": 17,
+                "text": "is"
+              },
+              {
+                "word_index": 3,
+                "graph_word": " a",
+                "start": 18,
+                "end": 19,
+                "text": "a"
+              },
+              {
+                "word_index": 4,
+                "graph_word": " living",
+                "start": 20,
+                "end": 26,
+                "text": "living"
+              },
+              {
+                "word_index": 5,
+                "graph_word": " person",
+                "start": 27,
+                "end": 33,
+                "text": "person"
+              },
+              {
+                "word_index": 6,
+                "graph_word": ".",
+                "start": 33,
+                "end": 34,
+                "text": "."
+              }
+            ],
+            "word_token_alignment": [
+              {
+                "token_id": "t0",
+                "text": "The",
+                "start": 0,
+                "end": 3,
+                "graph_word_indices": [
+                  0
+                ],
+                "graph_node_indices": [
+                  0
+                ]
+              },
+              {
+                "token_id": "t1",
+                "text": "individual",
+                "start": 4,
+                "end": 14,
+                "graph_word_indices": [
+                  1
+                ],
+                "graph_node_indices": [
+                  1
+                ]
+              },
+              {
+                "token_id": "t2",
+                "text": "is",
+                "start": 15,
+                "end": 17,
+                "graph_word_indices": [
+                  2
+                ],
+                "graph_node_indices": [
+                  2
+                ]
+              },
+              {
+                "token_id": "t3",
+                "text": "a",
+                "start": 18,
+                "end": 19,
+                "graph_word_indices": [
+                  3
+                ],
+                "graph_node_indices": [
+                  3
+                ]
+              },
+              {
+                "token_id": "t4",
+                "text": "living",
+                "start": 20,
+                "end": 26,
+                "graph_word_indices": [
+                  4
+                ],
+                "graph_node_indices": [
+                  4
+                ]
+              },
+              {
+                "token_id": "t5",
+                "text": "person",
+                "start": 27,
+                "end": 33,
+                "graph_word_indices": [
+                  5
+                ],
+                "graph_node_indices": [
+                  5
+                ]
+              },
+              {
+                "token_id": "t6",
+                "text": ".",
+                "start": 33,
+                "end": 34,
+                "graph_word_indices": [
+                  6
+                ],
+                "graph_node_indices": [
+                  6
+                ]
+              }
+            ],
+            "node_word_links": [
+              {
+                "node_index": 0,
+                "graph_word_indices": [
+                  0
+                ],
+                "sentence_token_ids": [
+                  "t0"
+                ],
+                "char_spans": [
+                  {
+                    "start": 0,
+                    "end": 3
+                  }
+                ],
+                "text": "The"
+              },
+              {
+                "node_index": 1,
+                "graph_word_indices": [
+                  1
+                ],
+                "sentence_token_ids": [
+                  "t1"
+                ],
+                "char_spans": [
+                  {
+                    "start": 4,
+                    "end": 14
+                  }
+                ],
+                "text": "individual"
+              },
+              {
+                "node_index": 2,
+                "graph_word_indices": [
+                  2
+                ],
+                "sentence_token_ids": [
+                  "t2"
+                ],
+                "char_spans": [
+                  {
+                    "start": 15,
+                    "end": 17
+                  }
+                ],
+                "text": "is"
+              },
+              {
+                "node_index": 3,
+                "graph_word_indices": [
+                  3
+                ],
+                "sentence_token_ids": [
+                  "t3"
+                ],
+                "char_spans": [
+                  {
+                    "start": 18,
+                    "end": 19
+                  }
+                ],
+                "text": "a"
+              },
+              {
+                "node_index": 4,
+                "graph_word_indices": [
+                  4
+                ],
+                "sentence_token_ids": [
+                  "t4"
+                ],
+                "char_spans": [
+                  {
+                    "start": 20,
+                    "end": 26
+                  }
+                ],
+                "text": "living"
+              },
+              {
+                "node_index": 5,
+                "graph_word_indices": [
+                  5
+                ],
+                "sentence_token_ids": [
+                  "t5"
+                ],
+                "char_spans": [
+                  {
+                    "start": 27,
+                    "end": 33
+                  }
+                ],
+                "text": "person"
+              },
+              {
+                "node_index": 6,
+                "graph_word_indices": [
+                  6
+                ],
+                "sentence_token_ids": [
+                  "t6"
+                ],
+                "char_spans": [
+                  {
+                    "start": 33,
+                    "end": 34
+                  }
+                ],
+                "text": "."
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_certified": false,
+      "matching_policy": "same_synset_and_part_then_exact_or_whitespace_only_sentence; never_part_only",
+      "unavailable_records": []
+    }
+  }
+]

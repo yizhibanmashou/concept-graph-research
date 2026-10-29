@@ -1,0 +1,56 @@
+{
+  "synset_id": "oewn-01765698-a",
+  "usage_id": "impermissible_scope_trial",
+  "parameters": [
+    {
+      "name": "b",
+      "type": "E",
+      "role": "The entity denoted by the noun phrase The behavior; not a verb event"
+    }
+  ],
+  "lhs": {
+    "op": "target",
+    "args": [
+      {
+        "var": "b"
+      }
+    ]
+  },
+  "rhs": {
+    "op": "use",
+    "synset_id": "oewn-00024432-r",
+    "usage_id": "proposition_negation",
+    "interface_hash": "362740c58230e7969cfa5f52e86ff48edb905d30a600bd341b5b8a1426bca0d6",
+    "occurrence_id": "oewn-01765698-a:def:t000",
+    "args": [
+      {
+        "op": "exists",
+        "variables": [
+          {
+            "name": "r",
+            "type": "V"
+          }
+        ],
+        "body": {
+          "op": "use",
+          "synset_id": "oewn-00804608-v",
+          "usage_id": "passive_entity_theme",
+          "interface_hash": "28bd282e1a6e93f0b4d75b1bec98f853d9d7a2677fc2785d883173266c1781f9",
+          "occurrence_id": "oewn-01765698-a:def:t001",
+          "args": [
+            {
+              "var": "r"
+            },
+            {
+              "var": "b"
+            }
+          ]
+        },
+        "origin": "verb_event",
+        "occurrence_id": "oewn-01765698-a:def:t001"
+      }
+    ]
+  },
+  "primitives": [],
+  "schema_version": "v3.interface-formula-candidate/1"
+}

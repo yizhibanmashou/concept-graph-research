@@ -1,0 +1,694 @@
+[
+  {
+    "argumentation_id": "oewn-00246625-r:argumentation:0",
+    "part_id": "p0",
+    "part_definition": "together",
+    "provenance": [
+      {
+        "field_path": "analysis.argument_structure.parts[0]"
+      },
+      {
+        "field_path": "source.definition.parts_by_id.p0.argumentation"
+      }
+    ],
+    "sentence_a": {
+      "text": "The workers work hand in hand.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_a:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 11,
+          "text": "workers",
+          "word_id": "sentence_a:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 12,
+          "end": 16,
+          "text": "work",
+          "word_id": "sentence_a:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "V"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t3",
+          "start": 17,
+          "end": 21,
+          "text": "hand",
+          "word_id": "sentence_a:t3",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "recorded_target_surface_unique_match"
+          ],
+          "origin": "target",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "target_lhs"
+        },
+        {
+          "token_id": "t4",
+          "start": 22,
+          "end": 24,
+          "text": "in",
+          "word_id": "sentence_a:t4",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "recorded_target_surface_unique_match"
+          ],
+          "origin": "target",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "preposition_or_particle"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "target_lhs"
+        },
+        {
+          "token_id": "t5",
+          "start": 25,
+          "end": 29,
+          "text": "hand",
+          "word_id": "sentence_a:t5",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "recorded_target_surface_unique_match"
+          ],
+          "origin": "target",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "target_lhs"
+        },
+        {
+          "token_id": "t6",
+          "start": 29,
+          "end": 30,
+          "text": ".",
+          "word_id": "sentence_a:t6",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 11,
+          "text": "The workers",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        },
+        {
+          "start": 12,
+          "end": 16,
+          "text": "work",
+          "slot": "V",
+          "placeholder": "Verb",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "sentence_b": {
+      "text": "The workers work together.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_b:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 11,
+          "text": "workers",
+          "word_id": "sentence_b:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 12,
+          "end": 16,
+          "text": "work",
+          "word_id": "sentence_b:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "V"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t3",
+          "start": 17,
+          "end": 25,
+          "text": "together",
+          "word_id": "sentence_b:t3",
+          "definition_occurrence_ids": [
+            "oewn-00246625-r:def:t000"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-00246625-r:p0:t3",
+              "token_id": "t3",
+              "text": "together",
+              "lemma": "together",
+              "selected_synset_id": "oewn-00117495-r",
+              "dependency": "advmod",
+              "head_index": 2,
+              "syntactic_pos": "ADV",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "focus_or_degree"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t4",
+          "start": 25,
+          "end": 26,
+          "text": ".",
+          "word_id": "sentence_b:t4",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 11,
+          "text": "The workers",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        },
+        {
+          "start": 12,
+          "end": 16,
+          "text": "work",
+          "slot": "V",
+          "placeholder": "Verb",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "parameterized_a": "{Noun_subj} {Verb} hand in hand.",
+    "parameterized_b": "{Noun_subj} {Verb} together.",
+    "template_id": "T1",
+    "template_args": {
+      "SUBJ": "the workers",
+      "V": "work"
+    },
+    "instantiated_args": {
+      "SUBJ": "the workers",
+      "V": "work"
+    },
+    "slots": [
+      {
+        "slot": "SUBJ",
+        "surface": "the workers",
+        "kind": "parameter",
+        "logical_type": null
+      },
+      {
+        "slot": "V",
+        "surface": "work",
+        "kind": "parameter",
+        "logical_type": null
+      }
+    ],
+    "selected_lemma": "hand in hand",
+    "textual_argumentation": {},
+    "issues": [],
+    "review_status": "source_cleaning_not_usage_certification",
+    "lingua": {
+      "status": "present",
+      "graph_count": 1,
+      "graphs": [
+        {
+          "graph_json": {
+            "meta": {},
+            "words": [
+              "The",
+              " workers",
+              " work",
+              " together",
+              "."
+            ],
+            "graph": {
+              "nodes": [
+                {
+                  "spans": [
+                    [
+                      0,
+                      0
+                    ]
+                  ],
+                  "type": "DeterminerConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      1,
+                      1
+                    ]
+                  ],
+                  "type": "NominalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      2,
+                      2
+                    ]
+                  ],
+                  "type": "FactualPredicator"
+                },
+                {
+                  "spans": [
+                    [
+                      3,
+                      3
+                    ]
+                  ],
+                  "type": "ModificationalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      4,
+                      4
+                    ]
+                  ],
+                  "type": "PunctuationalConstant"
+                }
+              ],
+              "edges": [
+                {
+                  "start": 0,
+                  "end": 1,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 2,
+                  "end": 0,
+                  "label": "pred.arg.1"
+                },
+                {
+                  "start": 3,
+                  "end": 2,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 4,
+                  "end": 3,
+                  "label": "as:punctuation"
+                }
+              ]
+            }
+          },
+          "sha256": "233ba0c263a43a51c141a5fd3ba4d08bc60297440c2ea3526cee3a355d1107d0",
+          "sources": [
+            {
+              "path": "[redacted-local-path]",
+              "line": 117284,
+              "record_sha256": "fa89c496a78213e48ff4973dacbc8ba7e992795faebfebff529bdba993732a33",
+              "job_id": "oewn-00246625-r::p0",
+              "part_id": "p0",
+              "source_sentence": "The workers work together.",
+              "source_status": "success",
+              "source_graph_field": "graph_json",
+              "match_method": "exact",
+              "error": "",
+              "lingua_conversion_error": ""
+            }
+          ],
+          "validation": {
+            "structurally_valid": true,
+            "semantic_certified": false,
+            "word_count": 5,
+            "node_count": 5,
+            "edge_count": 4,
+            "root_node_indices": [
+              4
+            ],
+            "explicit_root_node_indices": [],
+            "issue_counts": {},
+            "issues": []
+          },
+          "token_alignment": {
+            "status": "aligned",
+            "issues": [],
+            "method": "exact_non_whitespace_codepoints_with_original_sentence_offsets",
+            "graph_word_offsets": [
+              {
+                "word_index": 0,
+                "graph_word": "The",
+                "start": 0,
+                "end": 3,
+                "text": "The"
+              },
+              {
+                "word_index": 1,
+                "graph_word": " workers",
+                "start": 4,
+                "end": 11,
+                "text": "workers"
+              },
+              {
+                "word_index": 2,
+                "graph_word": " work",
+                "start": 12,
+                "end": 16,
+                "text": "work"
+              },
+              {
+                "word_index": 3,
+                "graph_word": " together",
+                "start": 17,
+                "end": 25,
+                "text": "together"
+              },
+              {
+                "word_index": 4,
+                "graph_word": ".",
+                "start": 25,
+                "end": 26,
+                "text": "."
+              }
+            ],
+            "word_token_alignment": [
+              {
+                "token_id": "t0",
+                "text": "The",
+                "start": 0,
+                "end": 3,
+                "graph_word_indices": [
+                  0
+                ],
+                "graph_node_indices": [
+                  0
+                ]
+              },
+              {
+                "token_id": "t1",
+                "text": "workers",
+                "start": 4,
+                "end": 11,
+                "graph_word_indices": [
+                  1
+                ],
+                "graph_node_indices": [
+                  1
+                ]
+              },
+              {
+                "token_id": "t2",
+                "text": "work",
+                "start": 12,
+                "end": 16,
+                "graph_word_indices": [
+                  2
+                ],
+                "graph_node_indices": [
+                  2
+                ]
+              },
+              {
+                "token_id": "t3",
+                "text": "together",
+                "start": 17,
+                "end": 25,
+                "graph_word_indices": [
+                  3
+                ],
+                "graph_node_indices": [
+                  3
+                ]
+              },
+              {
+                "token_id": "t4",
+                "text": ".",
+                "start": 25,
+                "end": 26,
+                "graph_word_indices": [
+                  4
+                ],
+                "graph_node_indices": [
+                  4
+                ]
+              }
+            ],
+            "node_word_links": [
+              {
+                "node_index": 0,
+                "graph_word_indices": [
+                  0
+                ],
+                "sentence_token_ids": [
+                  "t0"
+                ],
+                "char_spans": [
+                  {
+                    "start": 0,
+                    "end": 3
+                  }
+                ],
+                "text": "The"
+              },
+              {
+                "node_index": 1,
+                "graph_word_indices": [
+                  1
+                ],
+                "sentence_token_ids": [
+                  "t1"
+                ],
+                "char_spans": [
+                  {
+                    "start": 4,
+                    "end": 11
+                  }
+                ],
+                "text": "workers"
+              },
+              {
+                "node_index": 2,
+                "graph_word_indices": [
+                  2
+                ],
+                "sentence_token_ids": [
+                  "t2"
+                ],
+                "char_spans": [
+                  {
+                    "start": 12,
+                    "end": 16
+                  }
+                ],
+                "text": "work"
+              },
+              {
+                "node_index": 3,
+                "graph_word_indices": [
+                  3
+                ],
+                "sentence_token_ids": [
+                  "t3"
+                ],
+                "char_spans": [
+                  {
+                    "start": 17,
+                    "end": 25
+                  }
+                ],
+                "text": "together"
+              },
+              {
+                "node_index": 4,
+                "graph_word_indices": [
+                  4
+                ],
+                "sentence_token_ids": [
+                  "t4"
+                ],
+                "char_spans": [
+                  {
+                    "start": 25,
+                    "end": 26
+                  }
+                ],
+                "text": "."
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_certified": false,
+      "matching_policy": "same_synset_and_part_then_exact_or_whitespace_only_sentence; never_part_only",
+      "unavailable_records": []
+    }
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "synset_id": "oewn-02636952-v",
+  "usage_id": "bear_supplied_usage",
+  "parameters": [
+    {
+      "name": "e",
+      "type": "V",
+      "role": "The supplied event or state in this usage"
+    },
+    {
+      "name": "s",
+      "type": "E",
+      "role": "The supplied subject-side participant; no intentionality axiom"
+    },
+    {
+      "name": "h",
+      "type": "E",
+      "role": "The supplied object participant"
+    }
+  ],
+  "lhs": {
+    "op": "and",
+    "args": [
+      {
+        "op": "target",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      {
+        "op": "struct",
+        "name": "Agent",
+        "args": [
+          {
+            "var": "e"
+          },
+          {
+            "var": "s"
+          }
+        ]
+      },
+      {
+        "op": "struct",
+        "name": "Theme",
+        "args": [
+          {
+            "var": "e"
+          },
+          {
+            "var": "h"
+          }
+        ]
+      }
+    ]
+  },
+  "rhs": {
+    "op": "use",
+    "synset_id": "oewn-02208144-v",
+    "usage_id": "have_entity",
+    "interface_hash": "afaa1af628015ee25097d30a6134c10f3c07a7742d6e8600012fd554c228f416",
+    "occurrence_id": "oewn-02636952-v:def:t000",
+    "args": [
+      {
+        "var": "e"
+      },
+      {
+        "var": "s"
+      },
+      {
+        "var": "h"
+      }
+    ]
+  },
+  "primitives": [],
+  "schema_version": "v3.interface-formula-candidate/1"
+}

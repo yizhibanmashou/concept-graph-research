@@ -1,0 +1,443 @@
+{
+  "schema_version": "v3.enumeration-interfaces-input/1",
+  "source": {
+    "schema_version": "v3.source/1",
+    "synset_id": "oewn-04783538-n",
+    "lemmas": [
+      "immobility"
+    ],
+    "definition": "the quality of not moving",
+    "is_basis": false,
+    "occurrences": [
+      {
+        "occurrence_id": "oewn-04783538-n:def:t000",
+        "text": "the",
+        "start": 0,
+        "end": 3,
+        "synset_id": "@syntax:the",
+        "kind": "article",
+        "pos": "det"
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t001",
+        "text": "quality",
+        "start": 4,
+        "end": 11,
+        "synset_id": "oewn-04731092-n",
+        "pos": "n"
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t002",
+        "text": "of",
+        "start": 12,
+        "end": 14,
+        "synset_id": "of-6"
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t003",
+        "text": "not",
+        "start": 15,
+        "end": 18,
+        "synset_id": "oewn-00024432-r",
+        "pos": "r"
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t004",
+        "text": "moving",
+        "start": 19,
+        "end": 25,
+        "synset_id": "oewn-01839438-v",
+        "pos": "v"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "definition",
+        "kind": "definition",
+        "text": "the quality of not moving"
+      },
+      {
+        "evidence_id": "oewn-04783538-n:argumentation:0",
+        "kind": "argumentation",
+        "text": "The state is the quality of not moving."
+      }
+    ],
+    "provenance": {
+      "kind": "real_521_scoped_usage_interface_trial",
+      "path": "[redacted-local-path]",
+      "sha256": "fc711711d3b905cce9f07b1fc49801ab0618965d8782c74cf055bbd8c79667e0",
+      "argumentation_id": "oewn-04783538-n:argumentation:0",
+      "full_definition": "the quality of not moving",
+      "definition_projection": "entire_definition",
+      "frozen_wsd_changed": false,
+      "historical_formulas_imported": false,
+      "source_issues_preserved_in_snapshot": [
+        {
+          "stage": "argumentation",
+          "argumentation_id": "oewn-04783538-n:argumentation:0",
+          "code": "WSD_TOKEN_ALIGNMENT_AMBIGUOUS",
+          "raw_occurrence_id": "oewn-04783538-n:p0:t3",
+          "candidate_spans": [
+            [
+              0,
+              3
+            ],
+            [
+              13,
+              16
+            ]
+          ]
+        }
+      ],
+      "source_def_issues_preserved_in_snapshot": [],
+      "lhs_freeze_sha256": "6cb626ddafe871b46c1bfec86a38d0dff0100401a8056ad9471057eb60d53485"
+    }
+  },
+  "usage": {
+    "usage_id": "immobility_scope_trial",
+    "sentence_a": "The state is immobility.",
+    "sentence_b": "The state is the quality of not moving.",
+    "argumentation": "The A/B classifies the external abstract quality q, not q as a moving object. Keep the pre-enumeration LHS Immobility(q:E). The pcomp moving is a gerund nominalization of the unchanged fixed verb sense. It supplies Nom[F](h), an E-valued abstract noun referent with one optional licensed existential. Of relates q:E and h:E. The complete Move(e) AND Agent(e,s) usage stays inside Nom; the event e and formal subject s are bound only by its fixed expansion. Attached not negates existential event closure inside Nom, whereas an outer not negates the nominal/property assertion and is a different reading. Both attachments remain in the enumeration, with the single not occurrence consumed once. NominalRef/Holds are compiler-only, with no world/time dimensions in this approved version.",
+    "parameters": [
+      {
+        "name": "q",
+        "type": "E",
+        "role": "The external state/quality denoted by The state"
+      }
+    ],
+    "target_arguments": [
+      "q"
+    ],
+    "occurrence_ids": [
+      "oewn-04783538-n:def:t000",
+      "oewn-04783538-n:def:t001",
+      "oewn-04783538-n:def:t002",
+      "oewn-04783538-n:def:t003",
+      "oewn-04783538-n:def:t004"
+    ],
+    "parameter_spans": [
+      {
+        "sentence": "sentence_a",
+        "parameter": "q",
+        "start": 0,
+        "end": 9,
+        "text": "The state",
+        "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+      },
+      {
+        "sentence": "sentence_b",
+        "parameter": "q",
+        "start": 0,
+        "end": 9,
+        "text": "The state",
+        "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+      }
+    ],
+    "evidence": [
+      "definition",
+      "oewn-04783538-n:argumentation:0"
+    ],
+    "determiners": [
+      {
+        "kind": "the",
+        "occurrence_id": "oewn-04783538-n:def:t000",
+        "action": "drop",
+        "head_occurrence_id": "oewn-04783538-n:def:t001",
+        "parameter": "q"
+      }
+    ],
+    "witnesses": [],
+    "voice": "active",
+    "reductions": [],
+    "syntax": {
+      "sentence": "sentence_b",
+      "tokens": [
+        {
+          "index": 0,
+          "text": "The",
+          "start": 0,
+          "end": 3,
+          "head": 0,
+          "dependency": "unavailable",
+          "pos": "UNKNOWN",
+          "lemma": "The"
+        },
+        {
+          "index": 1,
+          "text": "state",
+          "start": 4,
+          "end": 9,
+          "head": 1,
+          "dependency": "unavailable",
+          "pos": "UNKNOWN",
+          "lemma": "state"
+        },
+        {
+          "index": 2,
+          "text": "is",
+          "start": 10,
+          "end": 12,
+          "head": 2,
+          "dependency": "unavailable",
+          "pos": "UNKNOWN",
+          "lemma": "is"
+        },
+        {
+          "index": 3,
+          "text": "the",
+          "start": 13,
+          "end": 16,
+          "head": 3,
+          "dependency": "unavailable",
+          "pos": "UNKNOWN",
+          "lemma": "the",
+          "occurrence_id": "oewn-04783538-n:def:t000"
+        },
+        {
+          "index": 4,
+          "text": "quality",
+          "start": 17,
+          "end": 24,
+          "head": 2,
+          "dependency": "attr",
+          "pos": "NOUN",
+          "lemma": "quality",
+          "occurrence_id": "oewn-04783538-n:def:t001"
+        },
+        {
+          "index": 5,
+          "text": "of",
+          "start": 25,
+          "end": 27,
+          "head": 4,
+          "dependency": "prep",
+          "pos": "ADP",
+          "lemma": "of",
+          "occurrence_id": "oewn-04783538-n:def:t002"
+        },
+        {
+          "index": 6,
+          "text": "not",
+          "start": 28,
+          "end": 31,
+          "head": 7,
+          "dependency": "neg",
+          "pos": "PART",
+          "lemma": "not",
+          "occurrence_id": "oewn-04783538-n:def:t003"
+        },
+        {
+          "index": 7,
+          "text": "moving",
+          "start": 32,
+          "end": 38,
+          "head": 5,
+          "dependency": "pcomp",
+          "pos": "VERB",
+          "lemma": "move",
+          "occurrence_id": "oewn-04783538-n:def:t004"
+        },
+        {
+          "index": 8,
+          "text": ".",
+          "start": 38,
+          "end": 39,
+          "head": 8,
+          "dependency": "unavailable",
+          "pos": "UNKNOWN",
+          "lemma": "."
+        }
+      ],
+      "provenance": "Exact cleaned B-token positions and existing dependency/head/POS evidence; unavailable support-token syntax is marked UNKNOWN, never fabricated."
+    }
+  },
+  "interfaces": {
+    "oewn-04731092-n::quality_entity": {
+      "synset_id": "oewn-04731092-n",
+      "usage_id": "quality_entity",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "q",
+          "type": "E",
+          "role": "The supplied quality/state being classified"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "q"
+          }
+        ]
+      },
+      "description": "Quality(q), common-noun classification of the external state/quality referent.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-00024432-r::proposition_negation": {
+      "synset_id": "oewn-00024432-r",
+      "usage_id": "proposition_negation",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "p",
+          "type": "Prop",
+          "role": "The proposition being negated"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "p"
+          }
+        ]
+      },
+      "description": "Not(p), the source word not with its ordinary proposition-negation use. The enumerator never authors native not.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-01839438-v::event_with_subject": {
+      "synset_id": "oewn-01839438-v",
+      "usage_id": "event_with_subject",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The moving event/state"
+        },
+        {
+          "name": "s",
+          "type": "E",
+          "role": "The subject-side participant of that event"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "e"
+              },
+              {
+                "var": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "description": "Move(e) AND Agent(e,s). A concrete event slot and its supplied subject are retained; no event or subject is hidden inside an unprovided RHS.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "of-6::abstract_referent_relation": {
+      "synset_id": "of-6",
+      "usage_id": "abstract_referent_relation",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "q",
+          "type": "E",
+          "role": "The quality referent"
+        },
+        {
+          "name": "h",
+          "type": "E",
+          "role": "The nominalized activity/property referent"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "q"
+          },
+          {
+            "var": "h"
+          }
+        ]
+      },
+      "description": "Of(q:E,h:E) relates the quality to an abstract nominal referent. Neither argument is a function or a concrete movement event.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    }
+  },
+  "enumeration": {
+    "lexical": [
+      {
+        "occurrence_id": "oewn-04783538-n:def:t001",
+        "min_calls": 0,
+        "max_calls": 1
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t002",
+        "min_calls": 0,
+        "max_calls": 1
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t003",
+        "min_calls": 0,
+        "max_calls": 1
+      },
+      {
+        "occurrence_id": "oewn-04783538-n:def:t004",
+        "min_calls": 0,
+        "max_calls": 1
+      }
+    ],
+    "lhs_structures": [],
+    "quantifier_inventory_complete": true,
+    "nominalizations": [
+      {
+        "nominalization_id": "nominal_0",
+        "head_occurrence_id": "oewn-04783538-n:def:t004",
+        "usage_id": "event_with_subject",
+        "event_parameter": "e",
+        "abstract_parameters": [
+          "s"
+        ],
+        "captures": {},
+        "negation_occurrence_ids": [
+          "oewn-04783538-n:def:t003"
+        ],
+        "reason": "Nominal syntax established first; unique supplied verb usage and its V target determine the complete event/role template. Frozen WSD is unchanged."
+      }
+    ],
+    "noun_licenses": [
+      {
+        "occurrence_id": "oewn-04783538-n:def:t004",
+        "origin": "nominalization",
+        "name": "h",
+        "type": "E",
+        "required": false,
+        "reason": "User permits the nominalized verb occurrence to introduce one internal abstract noun referent. This does not bind the external quality q or introduce an actual movement event."
+      }
+    ]
+  },
+  "notice": "Nom construction experiment, approved by user. No fixed RHS binding plan, semantic pruning or candidate cap. All original target parameters are unchanged. Previous no-internal-binding rule is revised only for identified nominalized verb referents and the fixed Nom expansion; plain finite verbs gain no witness license."
+}

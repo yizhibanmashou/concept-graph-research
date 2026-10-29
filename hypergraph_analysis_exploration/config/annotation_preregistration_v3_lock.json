@@ -1,0 +1,60 @@
+{
+  "lock_version": "annotation-preregistration-input-lock/1",
+  "snapshot_date": "2026-10-04",
+  "scope": "Input byte-integrity and schema preflight only; not legal review, protocol signature, external registration, or distribution authorization.",
+  "research_state": {
+    "protocol_signed": false,
+    "external_preregistration_id": null,
+    "distribution_authorized": false
+  },
+  "expected": {
+    "candidate_count": 400,
+    "random_panel_count": 400,
+    "diagnostic_panel_count": 0,
+    "stratum_count": 24,
+    "seed": 20261004,
+    "frame_version": "oewn-annotation-candidate/2",
+    "batch_version": "oewn-blind-annotation-batch/1",
+    "release_name": "Open English WordNet 2025 Plus",
+    "release_date": "2025-12-31",
+    "release_uri": "https://en-word.net/static/english-wordnet-2025-plus-json.zip",
+    "release_archive_sha256": "8832b8fa26a14c0ba8c99bb1ef8db6f9e122a6d9193b65ca9e0ef572580fee7e",
+    "license": "CC BY 4.0",
+    "annotator_file_fields": ["task_id", "pos", "lemmas", "gloss"],
+    "withheld_from_annotators": [
+      "synset_id", "item_id", "graph_features", "release_comparison",
+      "sampling_panel", "stratum", "source_paths"
+    ]
+  },
+  "artifacts": {
+    "frame": {
+      "path": "outputs/phase7/annotation_candidate_frame_v3_400.jsonl",
+      "sha256": "ba17121d29b7c5140a897505a0a245b5964203f75d335e889cd7137bb2b0028d"
+    },
+    "frame_manifest": {
+      "path": "outputs/phase7/annotation_candidate_frame_v3_400_manifest.json",
+      "sha256": "ab91cd6bede5ccdbd202140c34e85988f2616f46985b9b52deff28cffb57e9bb"
+    },
+    "release_crosscheck": {
+      "path": "outputs/phase7/oewn_2025_plus_release_crosscheck_v3_400.json",
+      "sha256": "280b51b4ec96754771af3e738c6bd0fad650ee657a3c09f79eaade5baf955d04"
+    },
+    "blind_batch": {
+      "path": "outputs/phase7/annotation_batch_2025_plus_v3_400_blind.jsonl",
+      "sha256": "dac533223c82bdd95dec6774d15a6350f10a1a9a07411db8bd0ca1c29997b6d5"
+    },
+    "answer_key": {
+      "path": "outputs/phase7/annotation_batch_2025_plus_v3_400_answer_key.json",
+      "sha256": "74eb9fa41cc9fd3950465a0d23b3eb4dd2e45359c7737bb4a287d67e4e2d2072"
+    },
+    "batch_manifest": {
+      "path": "outputs/phase7/annotation_batch_2025_plus_v3_400_manifest.json",
+      "sha256": "b25088d4899c4ddeb6faf88a703d314dee43e93f963509d435e78979d3addc14"
+    },
+    "release_archive": {
+      "path": "tmp/oewn-2025-plus-json.zip",
+      "sha256": "8832b8fa26a14c0ba8c99bb1ef8db6f9e122a6d9193b65ca9e0ef572580fee7e"
+    }
+  },
+  "return_file_glob": "outputs/phase7/annotations_v3_annotator_*.jsonl"
+}

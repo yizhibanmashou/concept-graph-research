@@ -1,0 +1,961 @@
+[
+  {
+    "argumentation_id": "oewn-04783538-n:argumentation:0",
+    "part_id": "p0",
+    "part_definition": "the quality of not moving",
+    "provenance": [
+      {
+        "field_path": "analysis.argument_structure.parts[0]"
+      },
+      {
+        "field_path": "source.definition.parts_by_id.p0.argumentation"
+      }
+    ],
+    "sentence_a": {
+      "text": "The state is immobility.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_a:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 9,
+          "text": "state",
+          "word_id": "sentence_a:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 10,
+          "end": 12,
+          "text": "is",
+          "word_id": "sentence_a:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "auxiliary_or_copula"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t3",
+          "start": 13,
+          "end": 23,
+          "text": "immobility",
+          "word_id": "sentence_a:t3",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "recorded_target_surface_unique_match"
+          ],
+          "origin": "target",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "target_lhs"
+        },
+        {
+          "token_id": "t4",
+          "start": 23,
+          "end": 24,
+          "text": ".",
+          "word_id": "sentence_a:t4",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "text": "The state",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "sentence_b": {
+      "text": "The state is the quality of not moving.",
+      "tokens": [
+        {
+          "token_id": "t0",
+          "start": 0,
+          "end": 3,
+          "text": "The",
+          "word_id": "sentence_b:t0",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t1",
+          "start": 4,
+          "end": 9,
+          "text": "state",
+          "word_id": "sentence_b:t1",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "exact_whole_template_expansion"
+          ],
+          "origin": "parameter",
+          "parameter_slots": [
+            "SUBJ"
+          ],
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_parameter_surface"
+        },
+        {
+          "token_id": "t2",
+          "start": 10,
+          "end": 12,
+          "text": "is",
+          "word_id": "sentence_b:t2",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "template_copula_outside_definition"
+          ],
+          "origin": "scaffold",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "auxiliary_or_copula"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "construction_formula_required"
+        },
+        {
+          "token_id": "t3",
+          "start": 13,
+          "end": 16,
+          "text": "the",
+          "word_id": "sentence_b:t3",
+          "definition_occurrence_ids": [
+            "oewn-04783538-n:def:t000"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "literal_definition_projection"
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "article"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t4",
+          "start": 17,
+          "end": 24,
+          "text": "quality",
+          "word_id": "sentence_b:t4",
+          "definition_occurrence_ids": [
+            "oewn-04783538-n:def:t001"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-04783538-n:p0:t4",
+              "token_id": "t4",
+              "text": "quality",
+              "lemma": "quality",
+              "selected_synset_id": "oewn-04731092-n",
+              "dependency": "attr",
+              "head_index": 2,
+              "syntactic_pos": "NOUN",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t5",
+          "start": 25,
+          "end": 27,
+          "text": "of",
+          "word_id": "sentence_b:t5",
+          "definition_occurrence_ids": [
+            "oewn-04783538-n:def:t002"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-04783538-n:p0:t5",
+              "token_id": "t5",
+              "text": "of",
+              "lemma": "of",
+              "selected_synset_id": "of-6",
+              "dependency": "prep",
+              "head_index": 4,
+              "syntactic_pos": "ADP",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "frozen_function_pos",
+              "preposition_or_particle"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t6",
+          "start": 28,
+          "end": 31,
+          "text": "not",
+          "word_id": "sentence_b:t6",
+          "definition_occurrence_ids": [
+            "oewn-04783538-n:def:t003"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-04783538-n:p0:t6",
+              "token_id": "t6",
+              "text": "not",
+              "lemma": "not",
+              "selected_synset_id": "oewn-00024432-r",
+              "dependency": "neg",
+              "head_index": 7,
+              "syntactic_pos": "PART",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": true,
+            "families": [
+              "frozen_function_pos",
+              "negation"
+            ],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": true,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t7",
+          "start": 32,
+          "end": 38,
+          "text": "moving",
+          "word_id": "sentence_b:t7",
+          "definition_occurrence_ids": [
+            "oewn-04783538-n:def:t004"
+          ],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [
+            "historical_wsd_definition_scope"
+          ],
+          "wsd_evidence": [
+            {
+              "occurrence_id": "oewn-04783538-n:p0:t7",
+              "token_id": "t7",
+              "text": "moving",
+              "lemma": "move",
+              "selected_synset_id": "oewn-01839438-v",
+              "dependency": "pcomp",
+              "head_index": 5,
+              "syntactic_pos": "VERB",
+              "in_definition_scope": true,
+              "requires_definition_wsd": true,
+              "decision": "selected"
+            }
+          ],
+          "origin": "definition",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "definition_formula_required"
+        },
+        {
+          "token_id": "t8",
+          "start": 38,
+          "end": 39,
+          "text": ".",
+          "word_id": "sentence_b:t8",
+          "definition_occurrence_ids": [],
+          "candidate_definition_occurrence_ids": [],
+          "evidence": [],
+          "origin": "punctuation",
+          "function_word": {
+            "is_candidate": false,
+            "families": [],
+            "certainty": "surface_or_frozen_pos_hint_only",
+            "legacy_skip_marker": false
+          },
+          "is_function_word": false,
+          "formula_requirement": "none_punctuation"
+        }
+      ],
+      "parameter_spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "text": "The state",
+          "slot": "SUBJ",
+          "placeholder": "Noun_subj",
+          "evidence": "exact_whole_template_expansion",
+          "semantic_disposition": "parameter_surface"
+        }
+      ],
+      "template_alignment": "exact"
+    },
+    "parameterized_a": "{Noun_subj} is immobility.",
+    "parameterized_b": "{Noun_subj} is the quality of not moving.",
+    "template_id": "T2",
+    "template_args": {
+      "SUBJ": "the state"
+    },
+    "instantiated_args": {
+      "SUBJ": "the state"
+    },
+    "slots": [
+      {
+        "slot": "SUBJ",
+        "surface": "the state",
+        "kind": "parameter",
+        "logical_type": null
+      }
+    ],
+    "selected_lemma": "immobility",
+    "textual_argumentation": {},
+    "issues": [
+      {
+        "code": "WSD_TOKEN_ALIGNMENT_AMBIGUOUS",
+        "raw_occurrence_id": "oewn-04783538-n:p0:t3",
+        "candidate_spans": [
+          [
+            0,
+            3
+          ],
+          [
+            13,
+            16
+          ]
+        ]
+      }
+    ],
+    "review_status": "source_cleaning_not_usage_certification",
+    "lingua": {
+      "status": "present_with_warnings",
+      "graph_count": 1,
+      "graphs": [
+        {
+          "graph_json": {
+            "meta": {},
+            "words": [
+              "The",
+              " state",
+              " is",
+              " the",
+              " quality",
+              " of",
+              " not",
+              " moving",
+              "."
+            ],
+            "graph": {
+              "nodes": [
+                {
+                  "spans": [
+                    [
+                      0,
+                      0
+                    ]
+                  ],
+                  "type": "DeterminerConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      1,
+                      1
+                    ]
+                  ],
+                  "type": "NominalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      2,
+                      2
+                    ]
+                  ],
+                  "type": "FactualPredicator"
+                },
+                {
+                  "spans": [
+                    [
+                      3,
+                      3
+                    ]
+                  ],
+                  "type": "DeterminerConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      4,
+                      4
+                    ]
+                  ],
+                  "type": "NominalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      5,
+                      5
+                    ]
+                  ],
+                  "type": "ModificationalFunctor"
+                },
+                {
+                  "spans": [
+                    [
+                      8,
+                      8
+                    ]
+                  ],
+                  "type": "PunctuationalConstant"
+                },
+                {
+                  "spans": [
+                    [
+                      6,
+                      7
+                    ]
+                  ],
+                  "type": "FactualPredicator"
+                }
+              ],
+              "edges": [
+                {
+                  "start": 0,
+                  "end": 1,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 2,
+                  "end": 0,
+                  "label": "pred.arg.1"
+                },
+                {
+                  "start": 2,
+                  "end": 5,
+                  "label": "pred.arg.2"
+                },
+                {
+                  "start": 3,
+                  "end": 4,
+                  "label": "as:modification"
+                },
+                {
+                  "start": 5,
+                  "end": 3,
+                  "label": "variable"
+                },
+                {
+                  "start": 5,
+                  "end": 7,
+                  "label": "body"
+                },
+                {
+                  "start": 6,
+                  "end": 2,
+                  "label": "as:punctuation"
+                }
+              ]
+            }
+          },
+          "sha256": "f549993a9dda94e19927a253499bbb14e37a07c696f827250cc7e871fc67441c",
+          "sources": [
+            {
+              "path": "[redacted-local-path]",
+              "line": 56102,
+              "record_sha256": "26cb4055e6ac578e49536ee1c6f828c35e522432a3ff91fe3ea37c7f8a68422f",
+              "job_id": "oewn-04783538-n::p0",
+              "part_id": "p0",
+              "source_sentence": "The state is the quality of not moving.",
+              "source_status": "success",
+              "source_graph_field": "graph_json",
+              "match_method": "exact",
+              "error": "",
+              "lingua_conversion_error": ""
+            }
+          ],
+          "validation": {
+            "structurally_valid": false,
+            "semantic_certified": false,
+            "word_count": 9,
+            "node_count": 8,
+            "edge_count": 7,
+            "root_node_indices": [
+              6
+            ],
+            "explicit_root_node_indices": [],
+            "issue_counts": {
+              "FACTUAL_PREDICATOR_MISSING_SUBJECT": 1
+            },
+            "issues": [
+              {
+                "code": "FACTUAL_PREDICATOR_MISSING_SUBJECT",
+                "node": 7
+              }
+            ]
+          },
+          "token_alignment": {
+            "status": "aligned",
+            "issues": [],
+            "method": "exact_non_whitespace_codepoints_with_original_sentence_offsets",
+            "graph_word_offsets": [
+              {
+                "word_index": 0,
+                "graph_word": "The",
+                "start": 0,
+                "end": 3,
+                "text": "The"
+              },
+              {
+                "word_index": 1,
+                "graph_word": " state",
+                "start": 4,
+                "end": 9,
+                "text": "state"
+              },
+              {
+                "word_index": 2,
+                "graph_word": " is",
+                "start": 10,
+                "end": 12,
+                "text": "is"
+              },
+              {
+                "word_index": 3,
+                "graph_word": " the",
+                "start": 13,
+                "end": 16,
+                "text": "the"
+              },
+              {
+                "word_index": 4,
+                "graph_word": " quality",
+                "start": 17,
+                "end": 24,
+                "text": "quality"
+              },
+              {
+                "word_index": 5,
+                "graph_word": " of",
+                "start": 25,
+                "end": 27,
+                "text": "of"
+              },
+              {
+                "word_index": 6,
+                "graph_word": " not",
+                "start": 28,
+                "end": 31,
+                "text": "not"
+              },
+              {
+                "word_index": 7,
+                "graph_word": " moving",
+                "start": 32,
+                "end": 38,
+                "text": "moving"
+              },
+              {
+                "word_index": 8,
+                "graph_word": ".",
+                "start": 38,
+                "end": 39,
+                "text": "."
+              }
+            ],
+            "word_token_alignment": [
+              {
+                "token_id": "t0",
+                "text": "The",
+                "start": 0,
+                "end": 3,
+                "graph_word_indices": [
+                  0
+                ],
+                "graph_node_indices": [
+                  0
+                ]
+              },
+              {
+                "token_id": "t1",
+                "text": "state",
+                "start": 4,
+                "end": 9,
+                "graph_word_indices": [
+                  1
+                ],
+                "graph_node_indices": [
+                  1
+                ]
+              },
+              {
+                "token_id": "t2",
+                "text": "is",
+                "start": 10,
+                "end": 12,
+                "graph_word_indices": [
+                  2
+                ],
+                "graph_node_indices": [
+                  2
+                ]
+              },
+              {
+                "token_id": "t3",
+                "text": "the",
+                "start": 13,
+                "end": 16,
+                "graph_word_indices": [
+                  3
+                ],
+                "graph_node_indices": [
+                  3
+                ]
+              },
+              {
+                "token_id": "t4",
+                "text": "quality",
+                "start": 17,
+                "end": 24,
+                "graph_word_indices": [
+                  4
+                ],
+                "graph_node_indices": [
+                  4
+                ]
+              },
+              {
+                "token_id": "t5",
+                "text": "of",
+                "start": 25,
+                "end": 27,
+                "graph_word_indices": [
+                  5
+                ],
+                "graph_node_indices": [
+                  5
+                ]
+              },
+              {
+                "token_id": "t6",
+                "text": "not",
+                "start": 28,
+                "end": 31,
+                "graph_word_indices": [
+                  6
+                ],
+                "graph_node_indices": [
+                  7
+                ]
+              },
+              {
+                "token_id": "t7",
+                "text": "moving",
+                "start": 32,
+                "end": 38,
+                "graph_word_indices": [
+                  7
+                ],
+                "graph_node_indices": [
+                  7
+                ]
+              },
+              {
+                "token_id": "t8",
+                "text": ".",
+                "start": 38,
+                "end": 39,
+                "graph_word_indices": [
+                  8
+                ],
+                "graph_node_indices": [
+                  6
+                ]
+              }
+            ],
+            "node_word_links": [
+              {
+                "node_index": 0,
+                "graph_word_indices": [
+                  0
+                ],
+                "sentence_token_ids": [
+                  "t0"
+                ],
+                "char_spans": [
+                  {
+                    "start": 0,
+                    "end": 3
+                  }
+                ],
+                "text": "The"
+              },
+              {
+                "node_index": 1,
+                "graph_word_indices": [
+                  1
+                ],
+                "sentence_token_ids": [
+                  "t1"
+                ],
+                "char_spans": [
+                  {
+                    "start": 4,
+                    "end": 9
+                  }
+                ],
+                "text": "state"
+              },
+              {
+                "node_index": 2,
+                "graph_word_indices": [
+                  2
+                ],
+                "sentence_token_ids": [
+                  "t2"
+                ],
+                "char_spans": [
+                  {
+                    "start": 10,
+                    "end": 12
+                  }
+                ],
+                "text": "is"
+              },
+              {
+                "node_index": 3,
+                "graph_word_indices": [
+                  3
+                ],
+                "sentence_token_ids": [
+                  "t3"
+                ],
+                "char_spans": [
+                  {
+                    "start": 13,
+                    "end": 16
+                  }
+                ],
+                "text": "the"
+              },
+              {
+                "node_index": 4,
+                "graph_word_indices": [
+                  4
+                ],
+                "sentence_token_ids": [
+                  "t4"
+                ],
+                "char_spans": [
+                  {
+                    "start": 17,
+                    "end": 24
+                  }
+                ],
+                "text": "quality"
+              },
+              {
+                "node_index": 5,
+                "graph_word_indices": [
+                  5
+                ],
+                "sentence_token_ids": [
+                  "t5"
+                ],
+                "char_spans": [
+                  {
+                    "start": 25,
+                    "end": 27
+                  }
+                ],
+                "text": "of"
+              },
+              {
+                "node_index": 6,
+                "graph_word_indices": [
+                  8
+                ],
+                "sentence_token_ids": [
+                  "t8"
+                ],
+                "char_spans": [
+                  {
+                    "start": 38,
+                    "end": 39
+                  }
+                ],
+                "text": "."
+              },
+              {
+                "node_index": 7,
+                "graph_word_indices": [
+                  6,
+                  7
+                ],
+                "sentence_token_ids": [
+                  "t6",
+                  "t7"
+                ],
+                "char_spans": [
+                  {
+                    "start": 28,
+                    "end": 31
+                  },
+                  {
+                    "start": 32,
+                    "end": 38
+                  }
+                ],
+                "text": "not moving"
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_certified": false,
+      "matching_policy": "same_synset_and_part_then_exact_or_whitespace_only_sentence; never_part_only",
+      "unavailable_records": []
+    }
+  }
+]

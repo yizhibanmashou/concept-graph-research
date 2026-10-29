@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wordnet-gloss-horn:gloss-oewn-relation-link:0.1",
+  "title": "Gloss to OEWN relation link",
+  "description": "One candidate-to-taxonomy mapping record. Cross-file and semantic invariants are enforced by the Python validator and human adjudication protocol.",
+  "type": "object",
+  "required": ["schema_version", "candidate_id", "candidate_record_sha256", "source", "genus_mapping"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "gloss-oewn-relation-link/0.1"},
+    "candidate_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "candidate_record_sha256": {"$ref": "#/$defs/sha256"},
+    "source": {
+      "type": "object",
+      "required": ["resource", "release", "sense_id", "gloss_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "resource": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "release": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "sense_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "gloss_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "genus_mapping": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["status", "span", "ancestor_synset_id", "adjudicator_id", "rationale"],
+          "additionalProperties": false,
+          "properties": {
+            "status": {"const": "adjudicated"},
+            "span": {"$ref": "#/$defs/span"},
+            "ancestor_synset_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+            "adjudicator_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+            "rationale": {"type": "string", "minLength": 1, "pattern": "\\S"}
+          }
+        },
+        {
+          "type": "object",
+          "required": ["status", "rationale"],
+          "additionalProperties": false,
+          "properties": {
+            "status": {"enum": ["ambiguous", "unassessed"]},
+            "span": {"$ref": "#/$defs/span"},
+            "rationale": {"type": "string", "minLength": 1, "pattern": "\\S"}
+          }
+        }
+      ]
+    },
+    "resource_query": {
+      "type": "object",
+      "required": ["relation", "claim_id", "child_synset_id", "ancestor_synset_id"],
+      "additionalProperties": false,
+      "properties": {
+        "relation": {"const": "hypernym"},
+        "claim_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "child_synset_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "ancestor_synset_id": {"type": "string", "minLength": 1, "pattern": "\\S"}
+      }
+    },
+    "verifier_report_sha256": {"$ref": "#/$defs/sha256"},
+    "replay_report_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"genus_mapping": {"properties": {"status": {"const": "adjudicated"}}}}},
+      "then": {"required": ["resource_query", "verifier_report_sha256", "replay_report_sha256"]}
+    },
+    {
+      "if": {"properties": {"genus_mapping": {"properties": {"status": {"enum": ["ambiguous", "unassessed"]}}}}},
+      "then": {"not": {"anyOf": [
+        {"required": ["resource_query"]},
+        {"required": ["verifier_report_sha256"]},
+        {"required": ["replay_report_sha256"]}
+      ]}}
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "span": {
+      "type": "object",
+      "required": ["start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "start": {"type": "integer", "minimum": 0},
+        "end": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

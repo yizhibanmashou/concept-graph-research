@@ -1,0 +1,93 @@
+{
+  "interfaces": {
+    "supplied-all-quantifier::time": {
+      "synset_id": "supplied-all-quantifier",
+      "usage_id": "time",
+      "is_basis": false,
+      "parameters": [
+        {
+          "name": "w",
+          "type": "World",
+          "role": "World in which the complete quantification is interpreted"
+        },
+        {
+          "name": "S",
+          "type": {
+            "arrow": [
+              "Time",
+              "Prop"
+            ]
+          },
+          "role": "Quantification range"
+        },
+        {
+          "name": "P",
+          "type": {
+            "arrow": [
+              "Time",
+              "Prop"
+            ]
+          },
+          "role": "Property asserted of each member of the range"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "S"
+          },
+          {
+            "var": "P"
+          },
+          {
+            "var": "w"
+          }
+        ]
+      },
+      "description": "The user explicitly supplied All_Time^w(S,P). Its interpretation is fixed by that instruction. This record supplies only the LHS, not a replacement RHS, and is not a frozen Basis85 member.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-00028468-n::time_range": {
+      "synset_id": "oewn-00028468-n",
+      "usage_id": "time_range",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "t",
+          "type": "Time",
+          "role": "The time value classified by the noun time"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "t"
+          }
+        ]
+      },
+      "description": "Time(t) means t is a time. It does not introduce a narrower contextual interval. In all along, the full time quantification is evaluated in World(e), which carries the contextual world.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    }
+  },
+  "interface_assumptions": [
+    {
+      "synset_id": "supplied-all-quantifier",
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t000"
+      ],
+      "reason": "The real all occurrence has no frozen semantic WSD; use the user's already supplied All contract as an explicitly local experiment assumption.",
+      "authorization": "User supplied all_alpha^w(S,P) with range S and property P, explicitly instantiated Time/World(e), and now requests LHS-only real all scope enumeration. This is not a new frozen basis member."
+    }
+  ],
+  "rhs_supplied": false
+}

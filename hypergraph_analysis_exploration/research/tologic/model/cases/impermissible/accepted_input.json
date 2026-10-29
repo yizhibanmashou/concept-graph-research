@@ -1,0 +1,297 @@
+{
+  "schema_version": "v3.enumeration-interfaces-input/1",
+  "source": {
+    "schema_version": "v3.source/1",
+    "synset_id": "oewn-01765698-a",
+    "lemmas": [
+      "impermissible"
+    ],
+    "definition": "not permitted",
+    "is_basis": false,
+    "occurrences": [
+      {
+        "occurrence_id": "oewn-01765698-a:def:t000",
+        "text": "not",
+        "start": 0,
+        "end": 3,
+        "synset_id": "oewn-00024432-r",
+        "pos": "r"
+      },
+      {
+        "occurrence_id": "oewn-01765698-a:def:t001",
+        "text": "permitted",
+        "start": 4,
+        "end": 13,
+        "synset_id": "oewn-00804608-v",
+        "pos": "v"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "definition",
+        "kind": "definition",
+        "text": "not permitted"
+      },
+      {
+        "evidence_id": "oewn-01765698-a:argumentation:0",
+        "kind": "argumentation",
+        "text": "The behavior is not permitted."
+      }
+    ],
+    "provenance": {
+      "kind": "real_521_scoped_usage_interface_trial",
+      "path": "[redacted-local-path]",
+      "sha256": "226b7e297a3b2513705933e372d829db3463efc372404dc1e37ac446e10dc57a",
+      "argumentation_id": "oewn-01765698-a:argumentation:0",
+      "full_definition": "not permitted",
+      "definition_projection": "entire_definition",
+      "frozen_wsd_changed": false,
+      "historical_formulas_imported": false,
+      "source_issues_preserved_in_snapshot": [],
+      "source_def_issues_preserved_in_snapshot": [],
+      "lhs_freeze_sha256": "cf9e4b43f8ec7f871677392e91127c381a220b51de6f997aa52c32cd34e87a22"
+    }
+  },
+  "usage": {
+    "usage_id": "impermissible_scope_trial",
+    "sentence_a": "The behavior is impermissible.",
+    "sentence_b": "The behavior is not permitted.",
+    "argumentation": "The noun phrase The behavior supplies an entity b:E, and the target LHS is Impermissible(b). The preserved parse marks permitted as the passive verbal head, with is/auxpass, behavior/nsubjpass and not/neg. The complete permit usage owns an internal permission event r:V, whose implicit subject is ImplicitSubj(r) and whose Theme is b. A source-owned event license binds r inside the proposition negated by not. This licenses no new E participant, no extra target slot, and no Nom construction. The event's existence is within the negated proposition, not an assertion outside not.",
+    "parameters": [
+      {
+        "name": "b",
+        "type": "E",
+        "role": "The entity denoted by the noun phrase The behavior; not a verb event"
+      }
+    ],
+    "target_arguments": [
+      "b"
+    ],
+    "occurrence_ids": [
+      "oewn-01765698-a:def:t000",
+      "oewn-01765698-a:def:t001"
+    ],
+    "parameter_spans": [
+      {
+        "sentence": "sentence_a",
+        "parameter": "b",
+        "start": 0,
+        "end": 12,
+        "text": "The behavior",
+        "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+      },
+      {
+        "sentence": "sentence_b",
+        "parameter": "b",
+        "start": 0,
+        "end": 12,
+        "text": "The behavior",
+        "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+      }
+    ],
+    "evidence": [
+      "definition",
+      "oewn-01765698-a:argumentation:0"
+    ],
+    "determiners": [],
+    "witnesses": [],
+    "voice": "passive",
+    "reductions": [],
+    "syntax": {
+      "sentence": "sentence_b",
+      "tokens": [
+        {
+          "index": 0,
+          "text": "The",
+          "start": 0,
+          "end": 3,
+          "pos": "DET",
+          "dependency": "det",
+          "head": 1,
+          "lemma": "the"
+        },
+        {
+          "index": 1,
+          "text": "behavior",
+          "start": 4,
+          "end": 12,
+          "pos": "NOUN",
+          "dependency": "nsubjpass",
+          "head": 4,
+          "lemma": "behavior"
+        },
+        {
+          "index": 2,
+          "text": "is",
+          "start": 13,
+          "end": 15,
+          "pos": "AUX",
+          "dependency": "auxpass",
+          "head": 4,
+          "lemma": "be"
+        },
+        {
+          "index": 3,
+          "text": "not",
+          "start": 16,
+          "end": 19,
+          "pos": "PART",
+          "dependency": "neg",
+          "head": 4,
+          "lemma": "not",
+          "occurrence_id": "oewn-01765698-a:def:t000"
+        },
+        {
+          "index": 4,
+          "text": "permitted",
+          "start": 20,
+          "end": 29,
+          "pos": "VERB",
+          "dependency": "ROOT",
+          "head": 4,
+          "lemma": "permit",
+          "occurrence_id": "oewn-01765698-a:def:t001"
+        },
+        {
+          "index": 5,
+          "text": ".",
+          "start": 29,
+          "end": 30,
+          "pos": "PUNCT",
+          "dependency": "punct",
+          "head": 4,
+          "lemma": "."
+        }
+      ],
+      "provenance": "Exact existing cleaned WSD token POS/dependency/head records; no new parser or model run."
+    }
+  },
+  "interfaces": {
+    "oewn-00024432-r::proposition_negation": {
+      "synset_id": "oewn-00024432-r",
+      "usage_id": "proposition_negation",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "p",
+          "type": "Prop",
+          "role": "The proposition being negated"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "p"
+          }
+        ]
+      },
+      "description": "Not(p), the source word not with its ordinary proposition-negation use. The enumerator never authors native not.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-00804608-v::passive_entity_theme": {
+      "synset_id": "oewn-00804608-v",
+      "usage_id": "passive_entity_theme",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "r",
+          "type": "V",
+          "role": "The permission event/state, not automatically identical to the permitted behavior"
+        },
+        {
+          "name": "b",
+          "type": "E",
+          "role": "The entity denoted by the passive noun phrase"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "r"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "r"
+              },
+              {
+                "op": "struct",
+                "name": "ImplicitSubj",
+                "args": [
+                  {
+                    "var": "r"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Theme",
+            "args": [
+              {
+                "var": "r"
+              },
+              {
+                "var": "b"
+              }
+            ]
+          }
+        ]
+      },
+      "description": "Permit(r:V) AND Agent(r,ImplicitSubj(r)) AND Theme(r,b:E). The permission event is introduced by the verb; the nominal behavior b is an entity.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ],
+      "voice": "passive"
+    }
+  },
+  "enumeration": {
+    "lexical": [
+      {
+        "occurrence_id": "oewn-01765698-a:def:t000",
+        "min_calls": 0,
+        "max_calls": 1
+      },
+      {
+        "occurrence_id": "oewn-01765698-a:def:t001",
+        "min_calls": 0,
+        "max_calls": 1
+      }
+    ],
+    "lhs_structures": [],
+    "quantifier_inventory_complete": true,
+    "event_bindings": [
+      {
+        "occurrence_id": "oewn-01765698-a:def:t001",
+        "usage_id": "passive_entity_theme",
+        "event_parameter": "r",
+        "mode": "existential",
+        "name": "r",
+        "required": false,
+        "within": {
+          "occurrence_id": "oewn-01765698-a:def:t000",
+          "usage_id": "proposition_negation",
+          "parameter": "p"
+        },
+        "reason": "The source permitted is the ordinary passive verb head, not a nominalized verb. It owns its permission-event slot r. The attached source not negates the closed permission proposition; the existing entity b remains external."
+      }
+    ]
+  },
+  "notice": "User-approved ordinary verb-event closure. Nom owns every nominalized verb occurrence and is mutually exclusive with these ordinary event bindings. Target b is E by the user's argumentation correction. Scope is fixed before enumeration by the attached not; no RHS-derived target interface."
+}

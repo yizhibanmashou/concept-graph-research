@@ -1,0 +1,260 @@
+{
+  "text": "not permitted",
+  "coordinate_system": "python_unicode_codepoint_half_open",
+  "tokenization": "word_with_internal_apostrophe_or_hyphen_else_individual_punctuation",
+  "coverage_policy": "every_non_whitespace_character_exactly_once",
+  "occurrences": [
+    {
+      "occurrence_id": "oewn-01765698-a:def:t000",
+      "index": 0,
+      "text": "not",
+      "start": 0,
+      "end": 3,
+      "norm": "not",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-01765698-a:def:u000"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": true,
+        "families": [
+          "frozen_function_pos",
+          "negation"
+        ],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    },
+    {
+      "occurrence_id": "oewn-01765698-a:def:t001",
+      "index": 1,
+      "text": "permitted",
+      "start": 4,
+      "end": 13,
+      "norm": "permitted",
+      "kind": "word",
+      "lexical_unit_ids": [
+        "oewn-01765698-a:def:u001"
+      ],
+      "ambiguous_wsd_evidence_ids": [],
+      "syntax_anchors": [],
+      "function_word": {
+        "is_candidate": false,
+        "families": [],
+        "certainty": "surface_or_frozen_pos_hint_only",
+        "legacy_skip_marker": false
+      },
+      "wsd_status": "fixed_identity",
+      "semantic_formula_requirement": {
+        "required": true,
+        "status": "awaiting_usage_formula",
+        "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+      }
+    }
+  ],
+  "lexical_units": [
+    {
+      "lexical_unit_id": "oewn-01765698-a:def:u000",
+      "text": "not",
+      "start": 0,
+      "end": 3,
+      "occurrence_ids": [
+        "oewn-01765698-a:def:t000"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00024432-r"
+        ],
+        "selected_synset_id": "oewn-00024432-r",
+        "evidence": [
+          {
+            "source_record_id": "oewn-01765698-a:p0:t3",
+            "source_path": "raw_wsd.lexical_occurrences[3]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "not",
+            "stored_lemma": "not",
+            "syntactic_pos": "PART",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00024432-r"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00024432-r",
+                "definition": "negation of a word or group of words",
+                "lemmas": [
+                  "not",
+                  "non"
+                ],
+                "pos": "r"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-01765698-a:p0:t3",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[3]",
+            "part_id": "p0",
+            "token_id": "t3",
+            "stored_text": "not",
+            "stored_lemma": "not",
+            "syntactic_pos": "PART",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00024432-r"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00024432-r",
+                "definition": "negation of a word or group of words",
+                "lemmas": [
+                  "not",
+                  "non"
+                ],
+                "pos": "r"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00024432-r",
+            "definition": "negation of a word or group of words",
+            "lemmas": [
+              "not",
+              "non"
+            ],
+            "pos": "r"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    },
+    {
+      "lexical_unit_id": "oewn-01765698-a:def:u001",
+      "text": "permitted",
+      "start": 4,
+      "end": 13,
+      "occurrence_ids": [
+        "oewn-01765698-a:def:t001"
+      ],
+      "word_count": 1,
+      "wsd": {
+        "status": "fixed_identity",
+        "identities": [
+          "oewn-00804608-v"
+        ],
+        "selected_synset_id": "oewn-00804608-v",
+        "evidence": [
+          {
+            "source_record_id": "oewn-01765698-a:p0:t4",
+            "source_path": "raw_wsd.lexical_occurrences[4]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "permitted",
+            "stored_lemma": "permit",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00804608-v"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00804608-v",
+                "definition": "allow the presence of or allow (an activity) without opposing or prohibiting",
+                "lemmas": [
+                  "allow",
+                  "permit",
+                  "tolerate"
+                ],
+                "pos": "v"
+              }
+            ]
+          },
+          {
+            "source_record_id": "oewn-01765698-a:p0:t4",
+            "source_path": "raw_wsd.parts.p0.wsd.assignments[4]",
+            "part_id": "p0",
+            "token_id": "t4",
+            "stored_text": "permitted",
+            "stored_lemma": "permit",
+            "syntactic_pos": "VERB",
+            "decision": "selected",
+            "in_definition_scope": true,
+            "selected_identities": [
+              "oewn-00804608-v"
+            ],
+            "alignment_method": "exact_unique_match",
+            "selected_sense_evidence": [
+              {
+                "synset_id": "oewn-00804608-v",
+                "definition": "allow the presence of or allow (an activity) without opposing or prohibiting",
+                "lemmas": [
+                  "allow",
+                  "permit",
+                  "tolerate"
+                ],
+                "pos": "v"
+              }
+            ]
+          }
+        ],
+        "selected_sense_evidence": [
+          {
+            "synset_id": "oewn-00804608-v",
+            "definition": "allow the presence of or allow (an activity) without opposing or prohibiting",
+            "lemmas": [
+              "allow",
+              "permit",
+              "tolerate"
+            ],
+            "pos": "v"
+          }
+        ]
+      },
+      "is_basis_identity": true,
+      "formula_status": "awaiting_usage_formula",
+      "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+      "callable_provider_authorized": false
+    }
+  ],
+  "unaligned_wsd_evidence": [],
+  "issues": [],
+  "stats": {
+    "occurrences": 2,
+    "word_occurrences": 2,
+    "punctuation_occurrences": 0,
+    "lexical_units": 2,
+    "multiword_lexical_units": 0,
+    "function_word_candidates": 1,
+    "word_wsd_status_counts": {
+      "fixed_identity": 2
+    },
+    "lexical_unit_wsd_status_counts": {
+      "fixed_identity": 2
+    },
+    "confirmed_basis_lexical_units": 2,
+    "excluded_argumentation_support_wsd_records": 8,
+    "unaligned_wsd_evidence": 0,
+    "semantic_formulas_supplied": 0
+  }
+}

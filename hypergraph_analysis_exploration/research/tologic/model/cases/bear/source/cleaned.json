@@ -1,0 +1,1072 @@
+{
+  "schema_version": "v3.cleaned-usage-source/1",
+  "synset_id": "oewn-02636952-v",
+  "comparison_index": 55,
+  "lemmas": [
+    "bear"
+  ],
+  "is_basis_target": false,
+  "definition": {
+    "text": "have",
+    "coordinate_system": "python_unicode_codepoint_half_open",
+    "tokenization": "word_with_internal_apostrophe_or_hyphen_else_individual_punctuation",
+    "coverage_policy": "every_non_whitespace_character_exactly_once",
+    "occurrences": [
+      {
+        "occurrence_id": "oewn-02636952-v:def:t000",
+        "index": 0,
+        "text": "have",
+        "start": 0,
+        "end": 4,
+        "norm": "have",
+        "kind": "word",
+        "lexical_unit_ids": [
+          "oewn-02636952-v:def:u000"
+        ],
+        "ambiguous_wsd_evidence_ids": [],
+        "syntax_anchors": [],
+        "function_word": {
+          "is_candidate": true,
+          "families": [
+            "auxiliary_or_copula"
+          ],
+          "certainty": "surface_or_frozen_pos_hint_only",
+          "legacy_skip_marker": false
+        },
+        "wsd_status": "fixed_identity",
+        "semantic_formula_requirement": {
+          "required": true,
+          "status": "awaiting_usage_formula",
+          "granularity": "linked_lexical_unit_or_explicit_construction_not_duplicate_per_word_call"
+        }
+      }
+    ],
+    "lexical_units": [
+      {
+        "lexical_unit_id": "oewn-02636952-v:def:u000",
+        "text": "have",
+        "start": 0,
+        "end": 4,
+        "occurrence_ids": [
+          "oewn-02636952-v:def:t000"
+        ],
+        "word_count": 1,
+        "wsd": {
+          "status": "fixed_identity",
+          "identities": [
+            "oewn-02208144-v"
+          ],
+          "selected_synset_id": "oewn-02208144-v",
+          "evidence": [
+            {
+              "source_record_id": "oewn-02636952-v:p0:t2",
+              "source_path": "raw_wsd.lexical_occurrences[2]",
+              "part_id": "p0",
+              "token_id": "t2",
+              "stored_text": "has",
+              "stored_lemma": "have",
+              "syntactic_pos": "VERB",
+              "decision": "selected",
+              "in_definition_scope": true,
+              "selected_identities": [
+                "oewn-02208144-v"
+              ],
+              "alignment_method": "recorded_lemma_match",
+              "selected_sense_evidence": [
+                {
+                  "synset_id": "oewn-02208144-v",
+                  "definition": "have or possess, either in a concrete or an abstract sense",
+                  "lemmas": [
+                    "have",
+                    "have got",
+                    "hold"
+                  ],
+                  "pos": "v"
+                }
+              ]
+            },
+            {
+              "source_record_id": "oewn-02636952-v:p0:t2",
+              "source_path": "raw_wsd.parts.p0.wsd.assignments[2]",
+              "part_id": "p0",
+              "token_id": "t2",
+              "stored_text": "has",
+              "stored_lemma": "have",
+              "syntactic_pos": "VERB",
+              "decision": "selected",
+              "in_definition_scope": true,
+              "selected_identities": [
+                "oewn-02208144-v"
+              ],
+              "alignment_method": "recorded_lemma_match",
+              "selected_sense_evidence": [
+                {
+                  "synset_id": "oewn-02208144-v",
+                  "definition": "have or possess, either in a concrete or an abstract sense",
+                  "lemmas": [
+                    "have",
+                    "have got",
+                    "hold"
+                  ],
+                  "pos": "v"
+                }
+              ]
+            }
+          ],
+          "selected_sense_evidence": [
+            {
+              "synset_id": "oewn-02208144-v",
+              "definition": "have or possess, either in a concrete or an abstract sense",
+              "lemmas": [
+                "have",
+                "have got",
+                "hold"
+              ],
+              "pos": "v"
+            }
+          ]
+        },
+        "is_basis_identity": true,
+        "formula_status": "awaiting_usage_formula",
+        "call_count_policy": "one_lexical_unit_not_one_call_per_word",
+        "callable_provider_authorized": false
+      }
+    ],
+    "unaligned_wsd_evidence": [],
+    "issues": [],
+    "stats": {
+      "occurrences": 1,
+      "word_occurrences": 1,
+      "punctuation_occurrences": 0,
+      "lexical_units": 1,
+      "multiword_lexical_units": 0,
+      "function_word_candidates": 1,
+      "word_wsd_status_counts": {
+        "fixed_identity": 1
+      },
+      "lexical_unit_wsd_status_counts": {
+        "fixed_identity": 1
+      },
+      "confirmed_basis_lexical_units": 1,
+      "excluded_argumentation_support_wsd_records": 10,
+      "unaligned_wsd_evidence": 0,
+      "semantic_formulas_supplied": 0
+    }
+  },
+  "argumentations": [
+    {
+      "argumentation_id": "oewn-02636952-v:argumentation:0",
+      "part_id": "p0",
+      "part_definition": "have",
+      "provenance": [
+        {
+          "field_path": "source.definition.parts_by_id.p0.argumentation"
+        }
+      ],
+      "sentence_a": {
+        "text": "The person bears the mark.",
+        "tokens": [
+          {
+            "token_id": "t0",
+            "start": 0,
+            "end": 3,
+            "text": "The",
+            "word_id": "sentence_a:t0",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "SUBJ"
+            ],
+            "function_word": {
+              "is_candidate": true,
+              "families": [
+                "article"
+              ],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": true,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t1",
+            "start": 4,
+            "end": 10,
+            "text": "person",
+            "word_id": "sentence_a:t1",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "SUBJ"
+            ],
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": false,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t2",
+            "start": 11,
+            "end": 16,
+            "text": "bears",
+            "word_id": "sentence_a:t2",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion",
+              "recorded_target_surface_unique_match"
+            ],
+            "origin": "target",
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": false,
+            "formula_requirement": "target_lhs"
+          },
+          {
+            "token_id": "t3",
+            "start": 17,
+            "end": 20,
+            "text": "the",
+            "word_id": "sentence_a:t3",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "OBJ"
+            ],
+            "function_word": {
+              "is_candidate": true,
+              "families": [
+                "article"
+              ],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": true,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t4",
+            "start": 21,
+            "end": 25,
+            "text": "mark",
+            "word_id": "sentence_a:t4",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "OBJ"
+            ],
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": false,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t5",
+            "start": 25,
+            "end": 26,
+            "text": ".",
+            "word_id": "sentence_a:t5",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [],
+            "origin": "punctuation",
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": false,
+            "formula_requirement": "none_punctuation"
+          }
+        ],
+        "parameter_spans": [
+          {
+            "start": 0,
+            "end": 10,
+            "text": "The person",
+            "slot": "SUBJ",
+            "placeholder": "Noun_subj",
+            "evidence": "exact_whole_template_expansion",
+            "semantic_disposition": "parameter_surface"
+          },
+          {
+            "start": 17,
+            "end": 25,
+            "text": "the mark",
+            "slot": "OBJ",
+            "placeholder": "Noun_obj",
+            "evidence": "exact_whole_template_expansion",
+            "semantic_disposition": "parameter_surface"
+          }
+        ],
+        "template_alignment": "exact"
+      },
+      "sentence_b": {
+        "text": "The person has the mark.",
+        "tokens": [
+          {
+            "token_id": "t0",
+            "start": 0,
+            "end": 3,
+            "text": "The",
+            "word_id": "sentence_b:t0",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "wsd_evidence": [
+              {
+                "occurrence_id": "oewn-02636952-v:p0:t0",
+                "token_id": "t0",
+                "text": "The",
+                "lemma": "the",
+                "selected_synset_id": null,
+                "dependency": "det",
+                "head_index": 1,
+                "syntactic_pos": "DET",
+                "in_definition_scope": false,
+                "requires_definition_wsd": false,
+                "decision": "function_word"
+              }
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "SUBJ"
+            ],
+            "function_word": {
+              "is_candidate": true,
+              "families": [
+                "article",
+                "frozen_function_pos"
+              ],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": true
+            },
+            "is_function_word": true,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t1",
+            "start": 4,
+            "end": 10,
+            "text": "person",
+            "word_id": "sentence_b:t1",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "wsd_evidence": [
+              {
+                "occurrence_id": "oewn-02636952-v:p0:t1",
+                "token_id": "t1",
+                "text": "person",
+                "lemma": "person",
+                "selected_synset_id": "oewn-00007846-n",
+                "dependency": "nsubj",
+                "head_index": 2,
+                "syntactic_pos": "NOUN",
+                "in_definition_scope": false,
+                "requires_definition_wsd": false,
+                "decision": "selected"
+              }
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "SUBJ"
+            ],
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": false,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t2",
+            "start": 11,
+            "end": 14,
+            "text": "has",
+            "word_id": "sentence_b:t2",
+            "definition_occurrence_ids": [
+              "oewn-02636952-v:def:t000"
+            ],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "historical_wsd_definition_scope"
+            ],
+            "wsd_evidence": [
+              {
+                "occurrence_id": "oewn-02636952-v:p0:t2",
+                "token_id": "t2",
+                "text": "has",
+                "lemma": "have",
+                "selected_synset_id": "oewn-02208144-v",
+                "dependency": "ROOT",
+                "head_index": 2,
+                "syntactic_pos": "VERB",
+                "in_definition_scope": true,
+                "requires_definition_wsd": true,
+                "decision": "selected"
+              }
+            ],
+            "origin": "definition",
+            "function_word": {
+              "is_candidate": true,
+              "families": [
+                "auxiliary_or_copula"
+              ],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": true,
+            "formula_requirement": "definition_formula_required"
+          },
+          {
+            "token_id": "t3",
+            "start": 15,
+            "end": 18,
+            "text": "the",
+            "word_id": "sentence_b:t3",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "wsd_evidence": [
+              {
+                "occurrence_id": "oewn-02636952-v:p0:t3",
+                "token_id": "t3",
+                "text": "the",
+                "lemma": "the",
+                "selected_synset_id": null,
+                "dependency": "det",
+                "head_index": 4,
+                "syntactic_pos": "DET",
+                "in_definition_scope": false,
+                "requires_definition_wsd": false,
+                "decision": "function_word"
+              }
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "OBJ"
+            ],
+            "function_word": {
+              "is_candidate": true,
+              "families": [
+                "article",
+                "frozen_function_pos"
+              ],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": true
+            },
+            "is_function_word": true,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t4",
+            "start": 19,
+            "end": 23,
+            "text": "mark",
+            "word_id": "sentence_b:t4",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [
+              "exact_whole_template_expansion"
+            ],
+            "wsd_evidence": [
+              {
+                "occurrence_id": "oewn-02636952-v:p0:t4",
+                "token_id": "t4",
+                "text": "mark",
+                "lemma": "mark",
+                "selected_synset_id": "oewn-07284884-n",
+                "dependency": "dobj",
+                "head_index": 2,
+                "syntactic_pos": "NOUN",
+                "in_definition_scope": false,
+                "requires_definition_wsd": false,
+                "decision": "selected"
+              }
+            ],
+            "origin": "parameter",
+            "parameter_slots": [
+              "OBJ"
+            ],
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": false
+            },
+            "is_function_word": false,
+            "formula_requirement": "none_parameter_surface"
+          },
+          {
+            "token_id": "t5",
+            "start": 23,
+            "end": 24,
+            "text": ".",
+            "word_id": "sentence_b:t5",
+            "definition_occurrence_ids": [],
+            "candidate_definition_occurrence_ids": [],
+            "evidence": [],
+            "wsd_evidence": [
+              {
+                "occurrence_id": "oewn-02636952-v:p0:t5",
+                "token_id": "t5",
+                "text": ".",
+                "lemma": ".",
+                "selected_synset_id": null,
+                "dependency": "punct",
+                "head_index": 2,
+                "syntactic_pos": "PUNCT",
+                "in_definition_scope": false,
+                "requires_definition_wsd": false,
+                "decision": "function_word"
+              }
+            ],
+            "origin": "punctuation",
+            "function_word": {
+              "is_candidate": false,
+              "families": [],
+              "certainty": "surface_or_frozen_pos_hint_only",
+              "legacy_skip_marker": true
+            },
+            "is_function_word": false,
+            "formula_requirement": "none_punctuation"
+          }
+        ],
+        "parameter_spans": [
+          {
+            "start": 0,
+            "end": 10,
+            "text": "The person",
+            "slot": "SUBJ",
+            "placeholder": "Noun_subj",
+            "evidence": "exact_whole_template_expansion",
+            "semantic_disposition": "parameter_surface"
+          },
+          {
+            "start": 15,
+            "end": 23,
+            "text": "the mark",
+            "slot": "OBJ",
+            "placeholder": "Noun_obj",
+            "evidence": "exact_whole_template_expansion",
+            "semantic_disposition": "parameter_surface"
+          }
+        ],
+        "template_alignment": "exact"
+      },
+      "parameterized_a": "{Noun_subj} {Verb} {Noun_obj}.",
+      "parameterized_b": "{Noun_subj} has {Noun_obj}.",
+      "template_id": "T4",
+      "template_args": {
+        "OBJ": "the mark",
+        "SUBJ": "the person",
+        "V": "bears"
+      },
+      "instantiated_args": {
+        "OBJ": "the mark",
+        "SUBJ": "the person",
+        "V": "bears"
+      },
+      "slots": [
+        {
+          "slot": "OBJ",
+          "surface": "the mark",
+          "kind": "parameter",
+          "logical_type": null
+        },
+        {
+          "slot": "SUBJ",
+          "surface": "the person",
+          "kind": "parameter",
+          "logical_type": null
+        },
+        {
+          "slot": "V",
+          "surface": "bears",
+          "kind": "target",
+          "logical_type": null
+        }
+      ],
+      "selected_lemma": "bear",
+      "textual_argumentation": {
+        "meaning_sentence": "\"The person bears the mark.\" means \"The person has the mark.\".",
+        "semantic_focus": "have",
+        "selection_reason": "only lemma in list"
+      },
+      "issues": [],
+      "review_status": "source_cleaning_not_usage_certification",
+      "lingua": {
+        "status": "present",
+        "graph_count": 1,
+        "graphs": [
+          {
+            "graph_json": {
+              "meta": {},
+              "words": [
+                "The",
+                " person",
+                " has",
+                " the",
+                " mark",
+                "."
+              ],
+              "graph": {
+                "nodes": [
+                  {
+                    "spans": [
+                      [
+                        0,
+                        0
+                      ]
+                    ],
+                    "type": "DeterminerConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        1,
+                        1
+                      ]
+                    ],
+                    "type": "NominalConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "type": "FactualPredicator"
+                  },
+                  {
+                    "spans": [
+                      [
+                        3,
+                        3
+                      ]
+                    ],
+                    "type": "DeterminerConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        4,
+                        4
+                      ]
+                    ],
+                    "type": "NominalConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        5,
+                        5
+                      ]
+                    ],
+                    "type": "PunctuationalConstant"
+                  }
+                ],
+                "edges": [
+                  {
+                    "start": 0,
+                    "end": 1,
+                    "label": "as:modification"
+                  },
+                  {
+                    "start": 2,
+                    "end": 0,
+                    "label": "pred.arg.1"
+                  },
+                  {
+                    "start": 2,
+                    "end": 3,
+                    "label": "pred.arg.2"
+                  },
+                  {
+                    "start": 3,
+                    "end": 4,
+                    "label": "as:modification"
+                  },
+                  {
+                    "start": 5,
+                    "end": 2,
+                    "label": "as:punctuation"
+                  }
+                ]
+              }
+            },
+            "sha256": "dadb9a9fb4d8a99c455ff466fa9face8e3ef3f785822408b3789822c6f635446",
+            "sources": [
+              {
+                "path": "[redacted-local-path]",
+                "line": 138605,
+                "record_sha256": "1a66d2385cdad4e48b2e653f9fbd3b5de1c65ff6ef0f8330528dbd81f599e0ef",
+                "job_id": "oewn-02636952-v::p0",
+                "part_id": "p0",
+                "source_sentence": "The person has the mark.",
+                "source_status": "success",
+                "source_graph_field": "graph_json",
+                "match_method": "exact",
+                "error": "",
+                "lingua_conversion_error": ""
+              }
+            ],
+            "validation": {
+              "structurally_valid": true,
+              "semantic_certified": false,
+              "word_count": 6,
+              "node_count": 6,
+              "edge_count": 5,
+              "root_node_indices": [
+                5
+              ],
+              "explicit_root_node_indices": [],
+              "issue_counts": {},
+              "issues": []
+            },
+            "token_alignment": {
+              "status": "aligned",
+              "issues": [],
+              "method": "exact_non_whitespace_codepoints_with_original_sentence_offsets",
+              "graph_word_offsets": [
+                {
+                  "word_index": 0,
+                  "graph_word": "The",
+                  "start": 0,
+                  "end": 3,
+                  "text": "The"
+                },
+                {
+                  "word_index": 1,
+                  "graph_word": " person",
+                  "start": 4,
+                  "end": 10,
+                  "text": "person"
+                },
+                {
+                  "word_index": 2,
+                  "graph_word": " has",
+                  "start": 11,
+                  "end": 14,
+                  "text": "has"
+                },
+                {
+                  "word_index": 3,
+                  "graph_word": " the",
+                  "start": 15,
+                  "end": 18,
+                  "text": "the"
+                },
+                {
+                  "word_index": 4,
+                  "graph_word": " mark",
+                  "start": 19,
+                  "end": 23,
+                  "text": "mark"
+                },
+                {
+                  "word_index": 5,
+                  "graph_word": ".",
+                  "start": 23,
+                  "end": 24,
+                  "text": "."
+                }
+              ],
+              "word_token_alignment": [
+                {
+                  "token_id": "t0",
+                  "text": "The",
+                  "start": 0,
+                  "end": 3,
+                  "graph_word_indices": [
+                    0
+                  ],
+                  "graph_node_indices": [
+                    0
+                  ]
+                },
+                {
+                  "token_id": "t1",
+                  "text": "person",
+                  "start": 4,
+                  "end": 10,
+                  "graph_word_indices": [
+                    1
+                  ],
+                  "graph_node_indices": [
+                    1
+                  ]
+                },
+                {
+                  "token_id": "t2",
+                  "text": "has",
+                  "start": 11,
+                  "end": 14,
+                  "graph_word_indices": [
+                    2
+                  ],
+                  "graph_node_indices": [
+                    2
+                  ]
+                },
+                {
+                  "token_id": "t3",
+                  "text": "the",
+                  "start": 15,
+                  "end": 18,
+                  "graph_word_indices": [
+                    3
+                  ],
+                  "graph_node_indices": [
+                    3
+                  ]
+                },
+                {
+                  "token_id": "t4",
+                  "text": "mark",
+                  "start": 19,
+                  "end": 23,
+                  "graph_word_indices": [
+                    4
+                  ],
+                  "graph_node_indices": [
+                    4
+                  ]
+                },
+                {
+                  "token_id": "t5",
+                  "text": ".",
+                  "start": 23,
+                  "end": 24,
+                  "graph_word_indices": [
+                    5
+                  ],
+                  "graph_node_indices": [
+                    5
+                  ]
+                }
+              ],
+              "node_word_links": [
+                {
+                  "node_index": 0,
+                  "graph_word_indices": [
+                    0
+                  ],
+                  "sentence_token_ids": [
+                    "t0"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 0,
+                      "end": 3
+                    }
+                  ],
+                  "text": "The"
+                },
+                {
+                  "node_index": 1,
+                  "graph_word_indices": [
+                    1
+                  ],
+                  "sentence_token_ids": [
+                    "t1"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 4,
+                      "end": 10
+                    }
+                  ],
+                  "text": "person"
+                },
+                {
+                  "node_index": 2,
+                  "graph_word_indices": [
+                    2
+                  ],
+                  "sentence_token_ids": [
+                    "t2"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 11,
+                      "end": 14
+                    }
+                  ],
+                  "text": "has"
+                },
+                {
+                  "node_index": 3,
+                  "graph_word_indices": [
+                    3
+                  ],
+                  "sentence_token_ids": [
+                    "t3"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 15,
+                      "end": 18
+                    }
+                  ],
+                  "text": "the"
+                },
+                {
+                  "node_index": 4,
+                  "graph_word_indices": [
+                    4
+                  ],
+                  "sentence_token_ids": [
+                    "t4"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 19,
+                      "end": 23
+                    }
+                  ],
+                  "text": "mark"
+                },
+                {
+                  "node_index": 5,
+                  "graph_word_indices": [
+                    5
+                  ],
+                  "sentence_token_ids": [
+                    "t5"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 23,
+                      "end": 24
+                    }
+                  ],
+                  "text": "."
+                }
+              ]
+            }
+          }
+        ],
+        "semantic_certified": false,
+        "matching_policy": "same_synset_and_part_then_exact_or_whitespace_only_sentence; never_part_only",
+        "unavailable_records": []
+      }
+    }
+  ],
+  "unstructured_argumentation_evidence": [
+    {
+      "field_path": "analysis.argument_structure",
+      "kind": "alternate_argument_structure",
+      "available_fields": [
+        "definition_predicate",
+        "event_coreference",
+        "participants",
+        "target_arguments",
+        "target_carrier",
+        "witness_linkage"
+      ],
+      "content_policy": "reference_only_may_contain_legacy_formulas_or_signatures",
+      "authority": "historical_evidence_not_v3_parameter_certification"
+    }
+  ],
+  "unattached_lingua_records": [],
+  "preparation_status": {
+    "definition_tokens_complete": true,
+    "argumentation_available": true,
+    "word_origins_resolved": true,
+    "usage_lhs_status": "not_constructed",
+    "semantic_formulas_status": "pending_not_imported",
+    "function_words_may_be_ignored": false,
+    "semantic_acceptance": false
+  },
+  "provenance": {
+    "v3_source": {
+      "path": "[redacted-local-path]",
+      "sha256": "b187cc7ff67503bc5a5dc5210c3bc37f5b3b0f5aa09c3b3843f63220eefe8074"
+    },
+    "upstream_evidence": {
+      "path": "[redacted-local-path]",
+      "sha256": "4bafc3fc0b7a77f17a17f87e9df874026685a033cc29e0ea617647c0575e7e74"
+    },
+    "lingua_corpus_sha256": "99154d8bedc89e68d6a9e866e376d0826b81075a1eec9385f3c671007c005a00",
+    "source_blocking_issues_before_cleaning": [],
+    "legacy_formulas_signatures_verdicts_imported": false
+  },
+  "issues": [],
+  "stats": {
+    "definition": {
+      "occurrences": 1,
+      "word_occurrences": 1,
+      "punctuation_occurrences": 0,
+      "lexical_units": 1,
+      "multiword_lexical_units": 0,
+      "function_word_candidates": 1,
+      "word_wsd_status_counts": {
+        "fixed_identity": 1
+      },
+      "lexical_unit_wsd_status_counts": {
+        "fixed_identity": 1
+      },
+      "confirmed_basis_lexical_units": 1,
+      "excluded_argumentation_support_wsd_records": 10,
+      "unaligned_wsd_evidence": 0,
+      "semantic_formulas_supplied": 0
+    },
+    "argumentation": {
+      "argumentations": 1,
+      "unstructured_argument_evidence": 1,
+      "sentence_a_tokens": 6,
+      "sentence_a_parameter": 4,
+      "sentence_a_target": 1,
+      "sentence_a_punctuation": 1,
+      "sentence_b_tokens": 6,
+      "sentence_b_parameter": 4,
+      "sentence_b_definition": 1,
+      "function_word_formula_obligations": 1,
+      "sentence_b_punctuation": 1
+    },
+    "lingua": {
+      "present": 1,
+      "attached_graph_alternatives": 1
+    }
+  }
+}

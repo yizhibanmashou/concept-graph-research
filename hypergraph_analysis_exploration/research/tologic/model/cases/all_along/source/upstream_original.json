@@ -1,0 +1,2190 @@
+{
+  "analysis": {
+    "argument_structure": {
+      "definition_parts": [
+        {
+          "part_id": "p0",
+          "text": "all the time"
+        },
+        {
+          "part_id": "p1",
+          "text": "over a period of time"
+        }
+      ],
+      "parts": [
+        {
+          "argumented_definition": "{Noun_subj} {Verb} all the time.",
+          "argumented_phrase": "{Noun_subj} {Verb} all along.",
+          "instantiated_args": {
+            "SUBJ": "the person",
+            "V": "knows"
+          },
+          "instantiated_definition": "The person knows all the time.",
+          "instantiated_phrase": "The person knows all along.",
+          "part_id": "p0",
+          "selected_lemma": "all along",
+          "template_args": {
+            "SUBJ": "the person",
+            "V": "knows"
+          },
+          "template_id": "T1",
+          "text": "all the time"
+        },
+        {
+          "argumented_definition": "{Noun_subj} {Verb} over a period of time.",
+          "argumented_phrase": "{Noun_subj} {Verb} all along.",
+          "instantiated_args": {
+            "SUBJ": "the person",
+            "V": "works"
+          },
+          "instantiated_definition": "The person works over a period of time.",
+          "instantiated_phrase": "The person works all along.",
+          "part_id": "p1",
+          "selected_lemma": "all along",
+          "template_args": {
+            "SUBJ": "the person",
+            "V": "works"
+          },
+          "template_id": "T1",
+          "text": "over a period of time"
+        }
+      ]
+    },
+    "boolean_structure": {
+      "args": [
+        {
+          "op": "ATOM",
+          "part_id": "p0"
+        },
+        {
+          "op": "ATOM",
+          "part_id": "p1"
+        }
+      ],
+      "op": "OR"
+    },
+    "selected_wsd": [
+      {
+        "lemma": "time",
+        "occurrence_id": "oewn-00068615-r:p0:t5",
+        "part_id": "p0",
+        "pos": "n",
+        "synset_id": "oewn-00028468-n",
+        "text": "time",
+        "token_id": "t5"
+      },
+      {
+        "lemma": "over",
+        "occurrence_id": "oewn-00068615-r:p1:t3",
+        "part_id": "p1",
+        "pos": "prep",
+        "synset_id": "over-4",
+        "text": "over",
+        "token_id": "t3"
+      },
+      {
+        "lemma": "period",
+        "occurrence_id": "oewn-00068615-r:p1:t5",
+        "part_id": "p1",
+        "pos": "n",
+        "synset_id": "oewn-15137796-n",
+        "text": "period",
+        "token_id": "t5"
+      },
+      {
+        "lemma": "of",
+        "occurrence_id": "oewn-00068615-r:p1:t6",
+        "part_id": "p1",
+        "pos": "prep",
+        "synset_id": "of-4",
+        "text": "of",
+        "token_id": "t6"
+      },
+      {
+        "lemma": "time",
+        "occurrence_id": "oewn-00068615-r:p1:t7",
+        "part_id": "p1",
+        "pos": "n",
+        "synset_id": "oewn-00028468-n",
+        "text": "time",
+        "token_id": "t7"
+      }
+    ]
+  },
+  "formula": {
+    "left": {
+      "args": [
+        {
+          "name": "e",
+          "op": "var",
+          "type": "V"
+        }
+      ],
+      "op": "call",
+      "predicate": "ALL_ALONG_00068615R"
+    },
+    "op": "equiv",
+    "right": {
+      "authority": "first-layer-pass-equiv",
+      "notation": "canonical-equation-rhs",
+      "op": "reviewed",
+      "text": "(exists t:E [TIME_00028468N(t) and temporalExtent(t)=I_REF_C and I_REF_C sqsubseteq_T time(e)]) or (exists J:I_T [PERIOD_15137796N(J) and J=I_REF_C and OVER_4(J,e) and J sqsubseteq_T time(e)])"
+    }
+  },
+  "item_id": "oewn-00068615-r",
+  "revision": 1,
+  "schema_version": "tologic-v2-item/2",
+  "source": {
+    "definition": {
+      "logic": null,
+      "normalized_text": "all the time or over a period of time",
+      "part_order": [
+        "p0",
+        "p1"
+      ],
+      "parts_by_id": {
+        "p0": {
+          "argumentation": {
+            "argumented_definition": "{Noun_subj} {Verb} all the time.",
+            "argumented_phrase": "{Noun_subj} {Verb} all along.",
+            "instantiated_args": {
+              "SUBJ": "the person",
+              "V": "knows"
+            },
+            "instantiated_definition": "The person knows all the time.",
+            "instantiated_phrase": "The person knows all along.",
+            "part_id": "p0",
+            "selected_lemma": "all along",
+            "template_args": {
+              "SUBJ": "the person",
+              "V": "knows"
+            },
+            "template_id": "T1",
+            "text": "all the time"
+          },
+          "argumentation_verification": null,
+          "part_id": "p0",
+          "provenance": {
+            "authority": "ToLogicV2.current_item_legacy_part_analysis",
+            "source_item_sha256_before_migration": "0e131f360d2165930e4c3b3488dcb0057c3dc12b33c5a179038436d5c169d7dd",
+            "source_schema_version": "tologic-v2-item/1"
+          },
+          "text": "all the time",
+          "wsd": {
+            "assignments": [
+              {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dependency": "predet",
+                "frozen_token_record": {
+                  "candidate_inventory": [],
+                  "decision": "function_word",
+                  "dependency": "predet",
+                  "head_index": 5,
+                  "in_definition_scope": true,
+                  "lemma": "all",
+                  "occurrence_id": "oewn-00068615-r:p0:t3",
+                  "part_id": "p0",
+                  "pos": "unknown",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": null,
+                  "selection_rationale": "Determiner (predeterminer) with no candidates.",
+                  "syntactic_pos": "DET",
+                  "text": "all",
+                  "token_id": "t3"
+                },
+                "head_index": 5,
+                "identity": null,
+                "in_definition_scope": true,
+                "lemma": "all",
+                "occurrence_id": "oewn-00068615-r:p0:t3",
+                "part_id": "p0",
+                "pos": "unknown",
+                "requires_definition_wsd": false,
+                "selected_candidate": {},
+                "selected_candidate_inventory_status": "missing_or_not_applicable",
+                "selected_synset_id": null,
+                "selection_rationale": "Determiner (predeterminer) with no candidates.",
+                "syntactic_pos": "DET",
+                "text": "all",
+                "token_id": "t3"
+              },
+              {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dependency": "det",
+                "frozen_token_record": {
+                  "candidate_inventory": [],
+                  "decision": "function_word",
+                  "dependency": "det",
+                  "head_index": 5,
+                  "in_definition_scope": true,
+                  "lemma": "the",
+                  "occurrence_id": "oewn-00068615-r:p0:t4",
+                  "part_id": "p0",
+                  "pos": "unknown",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": null,
+                  "selection_rationale": "Determiner with no candidates.",
+                  "syntactic_pos": "DET",
+                  "text": "the",
+                  "token_id": "t4"
+                },
+                "head_index": 5,
+                "identity": null,
+                "in_definition_scope": true,
+                "lemma": "the",
+                "occurrence_id": "oewn-00068615-r:p0:t4",
+                "part_id": "p0",
+                "pos": "unknown",
+                "requires_definition_wsd": false,
+                "selected_candidate": {},
+                "selected_candidate_inventory_status": "missing_or_not_applicable",
+                "selected_synset_id": null,
+                "selection_rationale": "Determiner with no candidates.",
+                "syntactic_pos": "DET",
+                "text": "the",
+                "token_id": "t4"
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "definition": "an instance or single occasion for some event",
+                    "examples": [
+                      "this time he succeeded",
+                      "he called four times",
+                      "he could do ten at a clip"
+                    ],
+                    "lemmas": [
+                      "time",
+                      "clip"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-07324217-n"
+                  },
+                  {
+                    "definition": "a period of time considered as a resource under your control and sufficient to accomplish something",
+                    "examples": [
+                      "take time to smell the roses",
+                      "I didn't have time to finish",
+                      "it took more than half my time",
+                      "he waited for a long time"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15295388-n"
+                  },
+                  {
+                    "definition": "an indefinite period (usually marked by specific attributes or activities)",
+                    "examples": [
+                      "the time of year for planting",
+                      "he was a great actor in his time"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15147173-n"
+                  },
+                  {
+                    "definition": "a suitable moment",
+                    "examples": [
+                      "it is time to go"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15270326-n"
+                  },
+                  {
+                    "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                    "examples": [
+                      "he waited for along time",
+                      "it took some time before he got an answer",
+                      "time flies like an arrow"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-00028468-n"
+                  },
+                  {
+                    "definition": "a person's experience on a particular occasion",
+                    "examples": [
+                      "he had a time holding back the tears",
+                      "they had a good time together"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-07302920-n"
+                  },
+                  {
+                    "definition": "a reading of a point in time as given by a clock",
+                    "examples": [
+                      "do you know what time it is?",
+                      "the time is 10 o'clock"
+                    ],
+                    "lemmas": [
+                      "clock time",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15154879-n"
+                  },
+                  {
+                    "definition": "the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event",
+                    "examples": [],
+                    "lemmas": [
+                      "fourth dimension",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15160774-n"
+                  },
+                  {
+                    "definition": "rhythm as given by division into parts of equal duration",
+                    "examples": [],
+                    "lemmas": [
+                      "meter",
+                      "metre",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-04998860-n"
+                  },
+                  {
+                    "definition": "the period of time a prisoner is imprisoned",
+                    "examples": [
+                      "he served a prison term of 15 months",
+                      "his sentence was 5 to 10 years",
+                      "he is doing time in the county jail"
+                    ],
+                    "lemmas": [
+                      "prison term",
+                      "sentence",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15249488-n"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "dobj",
+                "frozen_token_record": {
+                  "candidate_inventory": [
+                    {
+                      "definition": "an instance or single occasion for some event",
+                      "examples": [
+                        "this time he succeeded",
+                        "he called four times",
+                        "he could do ten at a clip"
+                      ],
+                      "lemmas": [
+                        "time",
+                        "clip"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-07324217-n"
+                    },
+                    {
+                      "definition": "a period of time considered as a resource under your control and sufficient to accomplish something",
+                      "examples": [
+                        "take time to smell the roses",
+                        "I didn't have time to finish",
+                        "it took more than half my time",
+                        "he waited for a long time"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15295388-n"
+                    },
+                    {
+                      "definition": "an indefinite period (usually marked by specific attributes or activities)",
+                      "examples": [
+                        "the time of year for planting",
+                        "he was a great actor in his time"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15147173-n"
+                    },
+                    {
+                      "definition": "a suitable moment",
+                      "examples": [
+                        "it is time to go"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15270326-n"
+                    },
+                    {
+                      "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                      "examples": [
+                        "he waited for along time",
+                        "it took some time before he got an answer",
+                        "time flies like an arrow"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-00028468-n"
+                    },
+                    {
+                      "definition": "a person's experience on a particular occasion",
+                      "examples": [
+                        "he had a time holding back the tears",
+                        "they had a good time together"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-07302920-n"
+                    },
+                    {
+                      "definition": "a reading of a point in time as given by a clock",
+                      "examples": [
+                        "do you know what time it is?",
+                        "the time is 10 o'clock"
+                      ],
+                      "lemmas": [
+                        "clock time",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15154879-n"
+                    },
+                    {
+                      "definition": "the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event",
+                      "examples": [],
+                      "lemmas": [
+                        "fourth dimension",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15160774-n"
+                    },
+                    {
+                      "definition": "rhythm as given by division into parts of equal duration",
+                      "examples": [],
+                      "lemmas": [
+                        "meter",
+                        "metre",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-04998860-n"
+                    },
+                    {
+                      "definition": "the period of time a prisoner is imprisoned",
+                      "examples": [
+                        "he served a prison term of 15 months",
+                        "his sentence was 5 to 10 years",
+                        "he is doing time in the county jail"
+                      ],
+                      "lemmas": [
+                        "prison term",
+                        "sentence",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15249488-n"
+                    }
+                  ],
+                  "decision": "selected",
+                  "dependency": "dobj",
+                  "head_index": 2,
+                  "in_definition_scope": true,
+                  "lemma": "time",
+                  "occurrence_id": "oewn-00068615-r:p0:t5",
+                  "part_id": "p0",
+                  "pos": "n",
+                  "requires_definition_wsd": true,
+                  "selected_synset_id": "oewn-00028468-n",
+                  "selection_rationale": "Noun in 'all the time' meaning continuous duration; best fit is the continuum of experience.",
+                  "syntactic_pos": "NOUN",
+                  "text": "time",
+                  "token_id": "t5"
+                },
+                "head_index": 2,
+                "identity": "oewn-00028468-n",
+                "in_definition_scope": true,
+                "lemma": "time",
+                "occurrence_id": "oewn-00068615-r:p0:t5",
+                "part_id": "p0",
+                "pos": "n",
+                "requires_definition_wsd": true,
+                "selected_candidate": {
+                  "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                  "examples": [
+                    "he waited for along time",
+                    "it took some time before he got an answer",
+                    "time flies like an arrow"
+                  ],
+                  "lemmas": [
+                    "time"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-00028468-n"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "selected_synset_id": "oewn-00028468-n",
+                "selected_wsd_result": {
+                  "lemma": "time",
+                  "occurrence_id": "oewn-00068615-r:p0:t5",
+                  "part_id": "p0",
+                  "pos": "n",
+                  "synset_id": "oewn-00028468-n",
+                  "text": "time",
+                  "token_id": "t5"
+                },
+                "selection_rationale": "Noun in 'all the time' meaning continuous duration; best fit is the continuum of experience.",
+                "syntactic_pos": "NOUN",
+                "text": "time",
+                "token_id": "t5"
+              }
+            ],
+            "verification": null
+          }
+        },
+        "p1": {
+          "argumentation": {
+            "argumented_definition": "{Noun_subj} {Verb} over a period of time.",
+            "argumented_phrase": "{Noun_subj} {Verb} all along.",
+            "instantiated_args": {
+              "SUBJ": "the person",
+              "V": "works"
+            },
+            "instantiated_definition": "The person works over a period of time.",
+            "instantiated_phrase": "The person works all along.",
+            "part_id": "p1",
+            "selected_lemma": "all along",
+            "template_args": {
+              "SUBJ": "the person",
+              "V": "works"
+            },
+            "template_id": "T1",
+            "text": "over a period of time"
+          },
+          "argumentation_verification": null,
+          "part_id": "p1",
+          "provenance": {
+            "authority": "ToLogicV2.current_item_legacy_part_analysis",
+            "source_item_sha256_before_migration": "0e131f360d2165930e4c3b3488dcb0057c3dc12b33c5a179038436d5c169d7dd",
+            "source_schema_version": "tologic-v2-item/1"
+          },
+          "text": "over a period of time",
+          "wsd": {
+            "assignments": [
+              {
+                "candidate_inventory": [
+                  {
+                    "definition": "Above; covering (space).",
+                    "examples": [
+                      "a bridge over the river",
+                      "a blanket over the bed"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "over-1"
+                  },
+                  {
+                    "definition": "Across; movement to the other side.",
+                    "examples": [
+                      "walk over the bridge"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "over-2"
+                  },
+                  {
+                    "definition": "More than (quantity).",
+                    "examples": [
+                      "over 100 people"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "over-3"
+                  },
+                  {
+                    "definition": "During a span; throughout.",
+                    "examples": [
+                      "over the weekend"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "over-4"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "prep",
+                "frozen_token_record": {
+                  "candidate_inventory": [
+                    {
+                      "definition": "Above; covering (space).",
+                      "examples": [
+                        "a bridge over the river",
+                        "a blanket over the bed"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "over-1"
+                    },
+                    {
+                      "definition": "Across; movement to the other side.",
+                      "examples": [
+                        "walk over the bridge"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "over-2"
+                    },
+                    {
+                      "definition": "More than (quantity).",
+                      "examples": [
+                        "over 100 people"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "over-3"
+                    },
+                    {
+                      "definition": "During a span; throughout.",
+                      "examples": [
+                        "over the weekend"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "over-4"
+                    }
+                  ],
+                  "decision": "selected",
+                  "dependency": "prep",
+                  "head_index": 2,
+                  "in_definition_scope": true,
+                  "lemma": "over",
+                  "occurrence_id": "oewn-00068615-r:p1:t3",
+                  "part_id": "p1",
+                  "pos": "prep",
+                  "requires_definition_wsd": true,
+                  "selected_synset_id": "over-4",
+                  "selection_rationale": "Duration sense 'during a span; throughout' matches 'over a period of time'.",
+                  "syntactic_pos": "ADP",
+                  "text": "over",
+                  "token_id": "t3"
+                },
+                "head_index": 2,
+                "identity": "over-4",
+                "in_definition_scope": true,
+                "lemma": "over",
+                "occurrence_id": "oewn-00068615-r:p1:t3",
+                "part_id": "p1",
+                "pos": "prep",
+                "requires_definition_wsd": true,
+                "selected_candidate": {
+                  "definition": "During a span; throughout.",
+                  "examples": [
+                    "over the weekend"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "over-4"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "selected_synset_id": "over-4",
+                "selected_wsd_result": {
+                  "lemma": "over",
+                  "occurrence_id": "oewn-00068615-r:p1:t3",
+                  "part_id": "p1",
+                  "pos": "prep",
+                  "synset_id": "over-4",
+                  "text": "over",
+                  "token_id": "t3"
+                },
+                "selection_rationale": "Duration sense 'during a span; throughout' matches 'over a period of time'.",
+                "syntactic_pos": "ADP",
+                "text": "over",
+                "token_id": "t3"
+              },
+              {
+                "candidate_inventory": [],
+                "decision": "function_word",
+                "dependency": "det",
+                "frozen_token_record": {
+                  "candidate_inventory": [],
+                  "decision": "function_word",
+                  "dependency": "det",
+                  "head_index": 5,
+                  "in_definition_scope": true,
+                  "lemma": "a",
+                  "occurrence_id": "oewn-00068615-r:p1:t4",
+                  "part_id": "p1",
+                  "pos": "unknown",
+                  "requires_definition_wsd": false,
+                  "selected_synset_id": null,
+                  "selection_rationale": "Determiner with no candidates; skipped.",
+                  "syntactic_pos": "DET",
+                  "text": "a",
+                  "token_id": "t4"
+                },
+                "head_index": 5,
+                "identity": null,
+                "in_definition_scope": true,
+                "lemma": "a",
+                "occurrence_id": "oewn-00068615-r:p1:t4",
+                "part_id": "p1",
+                "pos": "unknown",
+                "requires_definition_wsd": false,
+                "selected_candidate": {},
+                "selected_candidate_inventory_status": "missing_or_not_applicable",
+                "selected_synset_id": null,
+                "selection_rationale": "Determiner with no candidates; skipped.",
+                "syntactic_pos": "DET",
+                "text": "a",
+                "token_id": "t4"
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "definition": "an amount of time",
+                    "examples": [
+                      "a time period of 30 years",
+                      "hastened the period of time of his recovery",
+                      "Picasso's blue period"
+                    ],
+                    "lemmas": [
+                      "time period",
+                      "period of time",
+                      "period"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15137796-n"
+                  },
+                  {
+                    "definition": "the interval taken to complete one cycle of a regularly repeating phenomenon",
+                    "examples": [],
+                    "lemmas": [
+                      "period"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15315015-n"
+                  },
+                  {
+                    "definition": "(ice hockey) one of three divisions into which play is divided in hockey games",
+                    "examples": [],
+                    "lemmas": [
+                      "period"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15283092-n"
+                  },
+                  {
+                    "definition": "a unit of geological time during which a system of rocks formed",
+                    "examples": [
+                      "ganoid fishes swarmed during the earlier geological periods"
+                    ],
+                    "lemmas": [
+                      "period",
+                      "geological period"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15272329-n"
+                  },
+                  {
+                    "definition": "the end or completion of something",
+                    "examples": [
+                      "death put a period to his endeavors",
+                      "a change soon put a period to my tranquility"
+                    ],
+                    "lemmas": [
+                      "period"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15169138-n"
+                  },
+                  {
+                    "definition": "the monthly discharge of blood from the uterus of nonpregnant women from puberty to menopause",
+                    "examples": [
+                      "the women were sickly and subject to excessive menstruation",
+                      "a woman does not take the gout unless her menses be stopped",
+                      "the semen begins to appear in males and to be emitted at the same time of life that the catamenia begin to flow in females"
+                    ],
+                    "lemmas": [
+                      "menstruation",
+                      "menses",
+                      "menstruum",
+                      "catamenia",
+                      "period",
+                      "flow"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-13534950-n"
+                  },
+                  {
+                    "definition": "a punctuation mark (‘.’) placed at the end of a declarative sentence to indicate a full stop or after abbreviations",
+                    "examples": [
+                      "in England they call a period a ‘stop’"
+                    ],
+                    "lemmas": [
+                      "period",
+                      "point",
+                      "full stop",
+                      "stop",
+                      "full point"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-06856570-n"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "pobj",
+                "frozen_token_record": {
+                  "candidate_inventory": [
+                    {
+                      "definition": "an amount of time",
+                      "examples": [
+                        "a time period of 30 years",
+                        "hastened the period of time of his recovery",
+                        "Picasso's blue period"
+                      ],
+                      "lemmas": [
+                        "time period",
+                        "period of time",
+                        "period"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15137796-n"
+                    },
+                    {
+                      "definition": "the interval taken to complete one cycle of a regularly repeating phenomenon",
+                      "examples": [],
+                      "lemmas": [
+                        "period"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15315015-n"
+                    },
+                    {
+                      "definition": "(ice hockey) one of three divisions into which play is divided in hockey games",
+                      "examples": [],
+                      "lemmas": [
+                        "period"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15283092-n"
+                    },
+                    {
+                      "definition": "a unit of geological time during which a system of rocks formed",
+                      "examples": [
+                        "ganoid fishes swarmed during the earlier geological periods"
+                      ],
+                      "lemmas": [
+                        "period",
+                        "geological period"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15272329-n"
+                    },
+                    {
+                      "definition": "the end or completion of something",
+                      "examples": [
+                        "death put a period to his endeavors",
+                        "a change soon put a period to my tranquility"
+                      ],
+                      "lemmas": [
+                        "period"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15169138-n"
+                    },
+                    {
+                      "definition": "the monthly discharge of blood from the uterus of nonpregnant women from puberty to menopause",
+                      "examples": [
+                        "the women were sickly and subject to excessive menstruation",
+                        "a woman does not take the gout unless her menses be stopped",
+                        "the semen begins to appear in males and to be emitted at the same time of life that the catamenia begin to flow in females"
+                      ],
+                      "lemmas": [
+                        "menstruation",
+                        "menses",
+                        "menstruum",
+                        "catamenia",
+                        "period",
+                        "flow"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-13534950-n"
+                    },
+                    {
+                      "definition": "a punctuation mark (‘.’) placed at the end of a declarative sentence to indicate a full stop or after abbreviations",
+                      "examples": [
+                        "in England they call a period a ‘stop’"
+                      ],
+                      "lemmas": [
+                        "period",
+                        "point",
+                        "full stop",
+                        "stop",
+                        "full point"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-06856570-n"
+                    }
+                  ],
+                  "decision": "selected",
+                  "dependency": "pobj",
+                  "head_index": 3,
+                  "in_definition_scope": true,
+                  "lemma": "period",
+                  "occurrence_id": "oewn-00068615-r:p1:t5",
+                  "part_id": "p1",
+                  "pos": "n",
+                  "requires_definition_wsd": true,
+                  "selected_synset_id": "oewn-15137796-n",
+                  "selection_rationale": "Sense 'an amount of time' exactly matches 'period of time'.",
+                  "syntactic_pos": "NOUN",
+                  "text": "period",
+                  "token_id": "t5"
+                },
+                "head_index": 3,
+                "identity": "oewn-15137796-n",
+                "in_definition_scope": true,
+                "lemma": "period",
+                "occurrence_id": "oewn-00068615-r:p1:t5",
+                "part_id": "p1",
+                "pos": "n",
+                "requires_definition_wsd": true,
+                "selected_candidate": {
+                  "definition": "an amount of time",
+                  "examples": [
+                    "a time period of 30 years",
+                    "hastened the period of time of his recovery",
+                    "Picasso's blue period"
+                  ],
+                  "lemmas": [
+                    "time period",
+                    "period of time",
+                    "period"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-15137796-n"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "selected_synset_id": "oewn-15137796-n",
+                "selected_wsd_result": {
+                  "lemma": "period",
+                  "occurrence_id": "oewn-00068615-r:p1:t5",
+                  "part_id": "p1",
+                  "pos": "n",
+                  "synset_id": "oewn-15137796-n",
+                  "text": "period",
+                  "token_id": "t5"
+                },
+                "selection_rationale": "Sense 'an amount of time' exactly matches 'period of time'.",
+                "syntactic_pos": "NOUN",
+                "text": "period",
+                "token_id": "t5"
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "definition": "Possession/association.",
+                    "examples": [
+                      "the roof of the house"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-1"
+                  },
+                  {
+                    "definition": "Partitive (one/some/most of).",
+                    "examples": [
+                      "one of the students",
+                      "most of the water"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-2"
+                  },
+                  {
+                    "definition": "Material/composition.",
+                    "examples": [
+                      "made of wood",
+                      "a ring of gold"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-3"
+                  },
+                  {
+                    "definition": "Measure/quantity.",
+                    "examples": [
+                      "a cup of tea",
+                      "three kilos of rice"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-4"
+                  },
+                  {
+                    "definition": "Attribute.",
+                    "examples": [
+                      "a person of courage"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-5"
+                  },
+                  {
+                    "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                    "examples": [
+                      "of cytoplasm",
+                      "of biological origin",
+                      "of local importance"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-6"
+                  },
+                  {
+                    "definition": "Lack, absence, deprivation, or freedom-from complement after adjectives and nouns.",
+                    "examples": [
+                      "devoid of good sense",
+                      "devoid of judgment",
+                      "bereft of hope",
+                      "destitute of resources",
+                      "empty of meaning",
+                      "free of defects",
+                      "lack of evidence",
+                      "absence of evidence"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-7"
+                  },
+                  {
+                    "definition": "Field, subfield, subject-matter, or object-domain relation for nominal scientific, scholarly, or conceptual nouns.",
+                    "examples": [
+                      "branch of neuroscience",
+                      "foundations of mental phenomena",
+                      "study of language",
+                      "science of behavior",
+                      "field of biology",
+                      "foundations of mathematics"
+                    ],
+                    "lemmas": [],
+                    "pos": "prep",
+                    "synset_id": "of-8"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "prep",
+                "frozen_token_record": {
+                  "candidate_inventory": [
+                    {
+                      "definition": "Possession/association.",
+                      "examples": [
+                        "the roof of the house"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-1"
+                    },
+                    {
+                      "definition": "Partitive (one/some/most of).",
+                      "examples": [
+                        "one of the students",
+                        "most of the water"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-2"
+                    },
+                    {
+                      "definition": "Material/composition.",
+                      "examples": [
+                        "made of wood",
+                        "a ring of gold"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-3"
+                    },
+                    {
+                      "definition": "Measure/quantity.",
+                      "examples": [
+                        "a cup of tea",
+                        "three kilos of rice"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-4"
+                    },
+                    {
+                      "definition": "Attribute.",
+                      "examples": [
+                        "a person of courage"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-5"
+                    },
+                    {
+                      "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+                      "examples": [
+                        "of cytoplasm",
+                        "of biological origin",
+                        "of local importance"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-6"
+                    },
+                    {
+                      "definition": "Lack, absence, deprivation, or freedom-from complement after adjectives and nouns.",
+                      "examples": [
+                        "devoid of good sense",
+                        "devoid of judgment",
+                        "bereft of hope",
+                        "destitute of resources",
+                        "empty of meaning",
+                        "free of defects",
+                        "lack of evidence",
+                        "absence of evidence"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-7"
+                    },
+                    {
+                      "definition": "Field, subfield, subject-matter, or object-domain relation for nominal scientific, scholarly, or conceptual nouns.",
+                      "examples": [
+                        "branch of neuroscience",
+                        "foundations of mental phenomena",
+                        "study of language",
+                        "science of behavior",
+                        "field of biology",
+                        "foundations of mathematics"
+                      ],
+                      "lemmas": [],
+                      "pos": "prep",
+                      "synset_id": "of-8"
+                    }
+                  ],
+                  "decision": "selected",
+                  "dependency": "prep",
+                  "head_index": 5,
+                  "in_definition_scope": true,
+                  "lemma": "of",
+                  "occurrence_id": "oewn-00068615-r:p1:t6",
+                  "part_id": "p1",
+                  "pos": "prep",
+                  "requires_definition_wsd": true,
+                  "selected_synset_id": "of-4",
+                  "selection_rationale": "Measure/quantity sense fits 'period of time' (measure of time).",
+                  "syntactic_pos": "ADP",
+                  "text": "of",
+                  "token_id": "t6"
+                },
+                "head_index": 5,
+                "identity": "of-4",
+                "in_definition_scope": true,
+                "lemma": "of",
+                "occurrence_id": "oewn-00068615-r:p1:t6",
+                "part_id": "p1",
+                "pos": "prep",
+                "requires_definition_wsd": true,
+                "selected_candidate": {
+                  "definition": "Measure/quantity.",
+                  "examples": [
+                    "a cup of tea",
+                    "three kilos of rice"
+                  ],
+                  "lemmas": [],
+                  "pos": "prep",
+                  "synset_id": "of-4"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "selected_synset_id": "of-4",
+                "selected_wsd_result": {
+                  "lemma": "of",
+                  "occurrence_id": "oewn-00068615-r:p1:t6",
+                  "part_id": "p1",
+                  "pos": "prep",
+                  "synset_id": "of-4",
+                  "text": "of",
+                  "token_id": "t6"
+                },
+                "selection_rationale": "Measure/quantity sense fits 'period of time' (measure of time).",
+                "syntactic_pos": "ADP",
+                "text": "of",
+                "token_id": "t6"
+              },
+              {
+                "candidate_inventory": [
+                  {
+                    "definition": "an instance or single occasion for some event",
+                    "examples": [
+                      "this time he succeeded",
+                      "he called four times",
+                      "he could do ten at a clip"
+                    ],
+                    "lemmas": [
+                      "time",
+                      "clip"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-07324217-n"
+                  },
+                  {
+                    "definition": "a period of time considered as a resource under your control and sufficient to accomplish something",
+                    "examples": [
+                      "take time to smell the roses",
+                      "I didn't have time to finish",
+                      "it took more than half my time",
+                      "he waited for a long time"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15295388-n"
+                  },
+                  {
+                    "definition": "an indefinite period (usually marked by specific attributes or activities)",
+                    "examples": [
+                      "the time of year for planting",
+                      "he was a great actor in his time"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15147173-n"
+                  },
+                  {
+                    "definition": "a suitable moment",
+                    "examples": [
+                      "it is time to go"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15270326-n"
+                  },
+                  {
+                    "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                    "examples": [
+                      "he waited for along time",
+                      "it took some time before he got an answer",
+                      "time flies like an arrow"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-00028468-n"
+                  },
+                  {
+                    "definition": "a person's experience on a particular occasion",
+                    "examples": [
+                      "he had a time holding back the tears",
+                      "they had a good time together"
+                    ],
+                    "lemmas": [
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-07302920-n"
+                  },
+                  {
+                    "definition": "a reading of a point in time as given by a clock",
+                    "examples": [
+                      "do you know what time it is?",
+                      "the time is 10 o'clock"
+                    ],
+                    "lemmas": [
+                      "clock time",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15154879-n"
+                  },
+                  {
+                    "definition": "the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event",
+                    "examples": [],
+                    "lemmas": [
+                      "fourth dimension",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15160774-n"
+                  },
+                  {
+                    "definition": "rhythm as given by division into parts of equal duration",
+                    "examples": [],
+                    "lemmas": [
+                      "meter",
+                      "metre",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-04998860-n"
+                  },
+                  {
+                    "definition": "the period of time a prisoner is imprisoned",
+                    "examples": [
+                      "he served a prison term of 15 months",
+                      "his sentence was 5 to 10 years",
+                      "he is doing time in the county jail"
+                    ],
+                    "lemmas": [
+                      "prison term",
+                      "sentence",
+                      "time"
+                    ],
+                    "pos": "n",
+                    "synset_id": "oewn-15249488-n"
+                  }
+                ],
+                "decision": "selected",
+                "dependency": "pobj",
+                "frozen_token_record": {
+                  "candidate_inventory": [
+                    {
+                      "definition": "an instance or single occasion for some event",
+                      "examples": [
+                        "this time he succeeded",
+                        "he called four times",
+                        "he could do ten at a clip"
+                      ],
+                      "lemmas": [
+                        "time",
+                        "clip"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-07324217-n"
+                    },
+                    {
+                      "definition": "a period of time considered as a resource under your control and sufficient to accomplish something",
+                      "examples": [
+                        "take time to smell the roses",
+                        "I didn't have time to finish",
+                        "it took more than half my time",
+                        "he waited for a long time"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15295388-n"
+                    },
+                    {
+                      "definition": "an indefinite period (usually marked by specific attributes or activities)",
+                      "examples": [
+                        "the time of year for planting",
+                        "he was a great actor in his time"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15147173-n"
+                    },
+                    {
+                      "definition": "a suitable moment",
+                      "examples": [
+                        "it is time to go"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15270326-n"
+                    },
+                    {
+                      "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                      "examples": [
+                        "he waited for along time",
+                        "it took some time before he got an answer",
+                        "time flies like an arrow"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-00028468-n"
+                    },
+                    {
+                      "definition": "a person's experience on a particular occasion",
+                      "examples": [
+                        "he had a time holding back the tears",
+                        "they had a good time together"
+                      ],
+                      "lemmas": [
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-07302920-n"
+                    },
+                    {
+                      "definition": "a reading of a point in time as given by a clock",
+                      "examples": [
+                        "do you know what time it is?",
+                        "the time is 10 o'clock"
+                      ],
+                      "lemmas": [
+                        "clock time",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15154879-n"
+                    },
+                    {
+                      "definition": "the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event",
+                      "examples": [],
+                      "lemmas": [
+                        "fourth dimension",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15160774-n"
+                    },
+                    {
+                      "definition": "rhythm as given by division into parts of equal duration",
+                      "examples": [],
+                      "lemmas": [
+                        "meter",
+                        "metre",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-04998860-n"
+                    },
+                    {
+                      "definition": "the period of time a prisoner is imprisoned",
+                      "examples": [
+                        "he served a prison term of 15 months",
+                        "his sentence was 5 to 10 years",
+                        "he is doing time in the county jail"
+                      ],
+                      "lemmas": [
+                        "prison term",
+                        "sentence",
+                        "time"
+                      ],
+                      "pos": "n",
+                      "synset_id": "oewn-15249488-n"
+                    }
+                  ],
+                  "decision": "selected",
+                  "dependency": "pobj",
+                  "head_index": 6,
+                  "in_definition_scope": true,
+                  "lemma": "time",
+                  "occurrence_id": "oewn-00068615-r:p1:t7",
+                  "part_id": "p1",
+                  "pos": "n",
+                  "requires_definition_wsd": true,
+                  "selected_synset_id": "oewn-00028468-n",
+                  "selection_rationale": "General continuum of time sense fits 'period of time'.",
+                  "syntactic_pos": "NOUN",
+                  "text": "time",
+                  "token_id": "t7"
+                },
+                "head_index": 6,
+                "identity": "oewn-00028468-n",
+                "in_definition_scope": true,
+                "lemma": "time",
+                "occurrence_id": "oewn-00068615-r:p1:t7",
+                "part_id": "p1",
+                "pos": "n",
+                "requires_definition_wsd": true,
+                "selected_candidate": {
+                  "definition": "the continuum of experience in which events pass from the future through the present to the past",
+                  "examples": [
+                    "he waited for along time",
+                    "it took some time before he got an answer",
+                    "time flies like an arrow"
+                  ],
+                  "lemmas": [
+                    "time"
+                  ],
+                  "pos": "n",
+                  "synset_id": "oewn-00028468-n"
+                },
+                "selected_candidate_inventory_status": "matched",
+                "selected_synset_id": "oewn-00028468-n",
+                "selected_wsd_result": {
+                  "lemma": "time",
+                  "occurrence_id": "oewn-00068615-r:p1:t7",
+                  "part_id": "p1",
+                  "pos": "n",
+                  "synset_id": "oewn-00028468-n",
+                  "text": "time",
+                  "token_id": "t7"
+                },
+                "selection_rationale": "General continuum of time sense fits 'period of time'.",
+                "syntactic_pos": "NOUN",
+                "text": "time",
+                "token_id": "t7"
+              }
+            ],
+            "verification": null
+          }
+        }
+      },
+      "provenance": {
+        "authority": "ToLogicV2.current_item_legacy_part_analysis",
+        "source_item_sha256_before_migration": "0e131f360d2165930e4c3b3488dcb0057c3dc12b33c5a179038436d5c169d7dd",
+        "source_schema_version": "tologic-v2-item/1"
+      },
+      "raw_text": "all the time or over a period of time"
+    },
+    "examples": [
+      "She had known all along",
+      "the hope had been there all along"
+    ],
+    "lemmas": [
+      "all along",
+      "right along"
+    ],
+    "lexical_occurrences": [
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "predet",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "all",
+        "occurrence_id": "oewn-00068615-r:p0:t3",
+        "part_id": "p0",
+        "pos": "unknown",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner (predeterminer) with no candidates.",
+        "syntactic_pos": "DET",
+        "text": "all",
+        "token_id": "t3"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "the",
+        "occurrence_id": "oewn-00068615-r:p0:t4",
+        "part_id": "p0",
+        "pos": "unknown",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner with no candidates.",
+        "syntactic_pos": "DET",
+        "text": "the",
+        "token_id": "t4"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "an instance or single occasion for some event",
+            "examples": [
+              "this time he succeeded",
+              "he called four times",
+              "he could do ten at a clip"
+            ],
+            "lemmas": [
+              "time",
+              "clip"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-07324217-n"
+          },
+          {
+            "definition": "a period of time considered as a resource under your control and sufficient to accomplish something",
+            "examples": [
+              "take time to smell the roses",
+              "I didn't have time to finish",
+              "it took more than half my time",
+              "he waited for a long time"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15295388-n"
+          },
+          {
+            "definition": "an indefinite period (usually marked by specific attributes or activities)",
+            "examples": [
+              "the time of year for planting",
+              "he was a great actor in his time"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15147173-n"
+          },
+          {
+            "definition": "a suitable moment",
+            "examples": [
+              "it is time to go"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15270326-n"
+          },
+          {
+            "definition": "the continuum of experience in which events pass from the future through the present to the past",
+            "examples": [
+              "he waited for along time",
+              "it took some time before he got an answer",
+              "time flies like an arrow"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-00028468-n"
+          },
+          {
+            "definition": "a person's experience on a particular occasion",
+            "examples": [
+              "he had a time holding back the tears",
+              "they had a good time together"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-07302920-n"
+          },
+          {
+            "definition": "a reading of a point in time as given by a clock",
+            "examples": [
+              "do you know what time it is?",
+              "the time is 10 o'clock"
+            ],
+            "lemmas": [
+              "clock time",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15154879-n"
+          },
+          {
+            "definition": "the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event",
+            "examples": [],
+            "lemmas": [
+              "fourth dimension",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15160774-n"
+          },
+          {
+            "definition": "rhythm as given by division into parts of equal duration",
+            "examples": [],
+            "lemmas": [
+              "meter",
+              "metre",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04998860-n"
+          },
+          {
+            "definition": "the period of time a prisoner is imprisoned",
+            "examples": [
+              "he served a prison term of 15 months",
+              "his sentence was 5 to 10 years",
+              "he is doing time in the county jail"
+            ],
+            "lemmas": [
+              "prison term",
+              "sentence",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15249488-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "dobj",
+        "head_index": 2,
+        "in_definition_scope": true,
+        "lemma": "time",
+        "occurrence_id": "oewn-00068615-r:p0:t5",
+        "part_id": "p0",
+        "pos": "n",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00028468-n",
+        "selection_rationale": "Noun in 'all the time' meaning continuous duration; best fit is the continuum of experience.",
+        "syntactic_pos": "NOUN",
+        "text": "time",
+        "token_id": "t5"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "Above; covering (space).",
+            "examples": [
+              "a bridge over the river",
+              "a blanket over the bed"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "over-1"
+          },
+          {
+            "definition": "Across; movement to the other side.",
+            "examples": [
+              "walk over the bridge"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "over-2"
+          },
+          {
+            "definition": "More than (quantity).",
+            "examples": [
+              "over 100 people"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "over-3"
+          },
+          {
+            "definition": "During a span; throughout.",
+            "examples": [
+              "over the weekend"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "over-4"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "prep",
+        "head_index": 2,
+        "in_definition_scope": true,
+        "lemma": "over",
+        "occurrence_id": "oewn-00068615-r:p1:t3",
+        "part_id": "p1",
+        "pos": "prep",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "over-4",
+        "selection_rationale": "Duration sense 'during a span; throughout' matches 'over a period of time'.",
+        "syntactic_pos": "ADP",
+        "text": "over",
+        "token_id": "t3"
+      },
+      {
+        "candidate_inventory": [],
+        "decision": "function_word",
+        "dependency": "det",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "a",
+        "occurrence_id": "oewn-00068615-r:p1:t4",
+        "part_id": "p1",
+        "pos": "unknown",
+        "requires_definition_wsd": false,
+        "selected_synset_id": null,
+        "selection_rationale": "Determiner with no candidates; skipped.",
+        "syntactic_pos": "DET",
+        "text": "a",
+        "token_id": "t4"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "an amount of time",
+            "examples": [
+              "a time period of 30 years",
+              "hastened the period of time of his recovery",
+              "Picasso's blue period"
+            ],
+            "lemmas": [
+              "time period",
+              "period of time",
+              "period"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15137796-n"
+          },
+          {
+            "definition": "the interval taken to complete one cycle of a regularly repeating phenomenon",
+            "examples": [],
+            "lemmas": [
+              "period"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15315015-n"
+          },
+          {
+            "definition": "(ice hockey) one of three divisions into which play is divided in hockey games",
+            "examples": [],
+            "lemmas": [
+              "period"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15283092-n"
+          },
+          {
+            "definition": "a unit of geological time during which a system of rocks formed",
+            "examples": [
+              "ganoid fishes swarmed during the earlier geological periods"
+            ],
+            "lemmas": [
+              "period",
+              "geological period"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15272329-n"
+          },
+          {
+            "definition": "the end or completion of something",
+            "examples": [
+              "death put a period to his endeavors",
+              "a change soon put a period to my tranquility"
+            ],
+            "lemmas": [
+              "period"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15169138-n"
+          },
+          {
+            "definition": "the monthly discharge of blood from the uterus of nonpregnant women from puberty to menopause",
+            "examples": [
+              "the women were sickly and subject to excessive menstruation",
+              "a woman does not take the gout unless her menses be stopped",
+              "the semen begins to appear in males and to be emitted at the same time of life that the catamenia begin to flow in females"
+            ],
+            "lemmas": [
+              "menstruation",
+              "menses",
+              "menstruum",
+              "catamenia",
+              "period",
+              "flow"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-13534950-n"
+          },
+          {
+            "definition": "a punctuation mark (‘.’) placed at the end of a declarative sentence to indicate a full stop or after abbreviations",
+            "examples": [
+              "in England they call a period a ‘stop’"
+            ],
+            "lemmas": [
+              "period",
+              "point",
+              "full stop",
+              "stop",
+              "full point"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-06856570-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "pobj",
+        "head_index": 3,
+        "in_definition_scope": true,
+        "lemma": "period",
+        "occurrence_id": "oewn-00068615-r:p1:t5",
+        "part_id": "p1",
+        "pos": "n",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-15137796-n",
+        "selection_rationale": "Sense 'an amount of time' exactly matches 'period of time'.",
+        "syntactic_pos": "NOUN",
+        "text": "period",
+        "token_id": "t5"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "Possession/association.",
+            "examples": [
+              "the roof of the house"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-1"
+          },
+          {
+            "definition": "Partitive (one/some/most of).",
+            "examples": [
+              "one of the students",
+              "most of the water"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-2"
+          },
+          {
+            "definition": "Material/composition.",
+            "examples": [
+              "made of wood",
+              "a ring of gold"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-3"
+          },
+          {
+            "definition": "Measure/quantity.",
+            "examples": [
+              "a cup of tea",
+              "three kilos of rice"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-4"
+          },
+          {
+            "definition": "Attribute.",
+            "examples": [
+              "a person of courage"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-5"
+          },
+          {
+            "definition": "Relational or pertaining-to association, especially in adjective definitions.",
+            "examples": [
+              "of cytoplasm",
+              "of biological origin",
+              "of local importance"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-6"
+          },
+          {
+            "definition": "Lack, absence, deprivation, or freedom-from complement after adjectives and nouns.",
+            "examples": [
+              "devoid of good sense",
+              "devoid of judgment",
+              "bereft of hope",
+              "destitute of resources",
+              "empty of meaning",
+              "free of defects",
+              "lack of evidence",
+              "absence of evidence"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-7"
+          },
+          {
+            "definition": "Field, subfield, subject-matter, or object-domain relation for nominal scientific, scholarly, or conceptual nouns.",
+            "examples": [
+              "branch of neuroscience",
+              "foundations of mental phenomena",
+              "study of language",
+              "science of behavior",
+              "field of biology",
+              "foundations of mathematics"
+            ],
+            "lemmas": [],
+            "pos": "prep",
+            "synset_id": "of-8"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "prep",
+        "head_index": 5,
+        "in_definition_scope": true,
+        "lemma": "of",
+        "occurrence_id": "oewn-00068615-r:p1:t6",
+        "part_id": "p1",
+        "pos": "prep",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "of-4",
+        "selection_rationale": "Measure/quantity sense fits 'period of time' (measure of time).",
+        "syntactic_pos": "ADP",
+        "text": "of",
+        "token_id": "t6"
+      },
+      {
+        "candidate_inventory": [
+          {
+            "definition": "an instance or single occasion for some event",
+            "examples": [
+              "this time he succeeded",
+              "he called four times",
+              "he could do ten at a clip"
+            ],
+            "lemmas": [
+              "time",
+              "clip"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-07324217-n"
+          },
+          {
+            "definition": "a period of time considered as a resource under your control and sufficient to accomplish something",
+            "examples": [
+              "take time to smell the roses",
+              "I didn't have time to finish",
+              "it took more than half my time",
+              "he waited for a long time"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15295388-n"
+          },
+          {
+            "definition": "an indefinite period (usually marked by specific attributes or activities)",
+            "examples": [
+              "the time of year for planting",
+              "he was a great actor in his time"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15147173-n"
+          },
+          {
+            "definition": "a suitable moment",
+            "examples": [
+              "it is time to go"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15270326-n"
+          },
+          {
+            "definition": "the continuum of experience in which events pass from the future through the present to the past",
+            "examples": [
+              "he waited for along time",
+              "it took some time before he got an answer",
+              "time flies like an arrow"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-00028468-n"
+          },
+          {
+            "definition": "a person's experience on a particular occasion",
+            "examples": [
+              "he had a time holding back the tears",
+              "they had a good time together"
+            ],
+            "lemmas": [
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-07302920-n"
+          },
+          {
+            "definition": "a reading of a point in time as given by a clock",
+            "examples": [
+              "do you know what time it is?",
+              "the time is 10 o'clock"
+            ],
+            "lemmas": [
+              "clock time",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15154879-n"
+          },
+          {
+            "definition": "the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event",
+            "examples": [],
+            "lemmas": [
+              "fourth dimension",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15160774-n"
+          },
+          {
+            "definition": "rhythm as given by division into parts of equal duration",
+            "examples": [],
+            "lemmas": [
+              "meter",
+              "metre",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-04998860-n"
+          },
+          {
+            "definition": "the period of time a prisoner is imprisoned",
+            "examples": [
+              "he served a prison term of 15 months",
+              "his sentence was 5 to 10 years",
+              "he is doing time in the county jail"
+            ],
+            "lemmas": [
+              "prison term",
+              "sentence",
+              "time"
+            ],
+            "pos": "n",
+            "synset_id": "oewn-15249488-n"
+          }
+        ],
+        "decision": "selected",
+        "dependency": "pobj",
+        "head_index": 6,
+        "in_definition_scope": true,
+        "lemma": "time",
+        "occurrence_id": "oewn-00068615-r:p1:t7",
+        "part_id": "p1",
+        "pos": "n",
+        "requires_definition_wsd": true,
+        "selected_synset_id": "oewn-00028468-n",
+        "selection_rationale": "General continuum of time sense fits 'period of time'.",
+        "syntactic_pos": "NOUN",
+        "text": "time",
+        "token_id": "t7"
+      }
+    ],
+    "pos": "r",
+    "synset_id": "oewn-00068615-r"
+  },
+  "status": "EQUIV_ACCEPTED",
+  "status_reason": null,
+  "target_contract": {
+    "argument_types": [
+      "V"
+    ],
+    "name": "ALL_ALONG_00068615R"
+  },
+  "verification": {
+    "decision": "ACCEPT",
+    "summary": "Imported from the manually reviewed first-layer PASS/EQUIV authority."
+  }
+}

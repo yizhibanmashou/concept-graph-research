@@ -1,0 +1,83 @@
+{
+  "synset_id": "oewn-00068615-r",
+  "usage_id": "all_along_scope_trial",
+  "parameters": [
+    {
+      "name": "e",
+      "type": "V",
+      "role": "The supplied knowing event/state modified by all along"
+    }
+  ],
+  "lhs": {
+    "op": "target",
+    "args": [
+      {
+        "var": "e"
+      }
+    ]
+  },
+  "rhs": {
+    "op": "use",
+    "synset_id": "supplied-all-quantifier",
+    "usage_id": "time",
+    "interface_hash": "3acc044206c5b025b251fdb663dd3a24bd1da6c1c0544827e506e033b2d25ffb",
+    "occurrence_id": "oewn-00068615-r:def:t000",
+    "args": [
+      {
+        "op": "struct",
+        "name": "World",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      {
+        "op": "lambda",
+        "parameters": [
+          {
+            "name": "r",
+            "type": "Time"
+          }
+        ],
+        "scope_id": "time_scope",
+        "body": {
+          "op": "use",
+          "synset_id": "oewn-00028468-n",
+          "usage_id": "time_range",
+          "interface_hash": "fc509906b8c86e520652ca8698c963d12cf2b9b867f10250ef53aacecae1790a",
+          "occurrence_id": "oewn-00068615-r:def:t002",
+          "args": [
+            {
+              "var": "r"
+            }
+          ]
+        }
+      },
+      {
+        "op": "lambda",
+        "parameters": [
+          {
+            "name": "t",
+            "type": "Time"
+          }
+        ],
+        "scope_id": "event_scope",
+        "body": {
+          "op": "struct",
+          "name": "Happen",
+          "args": [
+            {
+              "var": "e"
+            },
+            {
+              "var": "t"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "primitives": [],
+  "schema_version": "v3.interface-formula-candidate/1"
+}

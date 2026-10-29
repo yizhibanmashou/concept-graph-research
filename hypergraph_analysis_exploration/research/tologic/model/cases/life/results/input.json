@@ -1,0 +1,185 @@
+{
+  "schema_version": "v3.enumeration-interfaces-input/1",
+  "source": {
+    "schema_version": "v3.source/1",
+    "synset_id": "oewn-10280403-n",
+    "lemmas": [
+      "life"
+    ],
+    "definition": "a living person",
+    "is_basis": false,
+    "occurrences": [
+      {
+        "occurrence_id": "oewn-10280403-n:def:t000",
+        "text": "a",
+        "start": 0,
+        "end": 1,
+        "synset_id": "@syntax:a",
+        "kind": "article",
+        "pos": "det"
+      },
+      {
+        "occurrence_id": "oewn-10280403-n:def:t001",
+        "text": "living",
+        "start": 2,
+        "end": 8,
+        "synset_id": "oewn-00095301-a",
+        "pos": "a"
+      },
+      {
+        "occurrence_id": "oewn-10280403-n:def:t002",
+        "text": "person",
+        "start": 9,
+        "end": 15,
+        "synset_id": "oewn-00007846-n",
+        "pos": "n"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "definition",
+        "kind": "definition",
+        "text": "a living person"
+      },
+      {
+        "evidence_id": "oewn-10280403-n:argumentation:0",
+        "kind": "argumentation",
+        "text": "The individual is a living person."
+      }
+    ],
+    "provenance": {
+      "kind": "real_cleaned_521_manual_interface_trial",
+      "path": "[redacted-local-path]",
+      "sha256": "a3e59d64daaf82e47c9ad561e21a86512b8db68372634b32f2b5ab12dfb037e7",
+      "argumentation_id": "oewn-10280403-n:argumentation:0",
+      "wsd_policy": "preserve_fixed_identities_no_reselection",
+      "article_policy": "reuse_existing_V3_syntax_anchor_not_semantic_WSD",
+      "historical_formulas_imported": false
+    }
+  },
+  "usage": {
+    "usage_id": "life_supplied_usage",
+    "evidence": [
+      "definition",
+      "oewn-10280403-n:argumentation:0"
+    ],
+    "sentence_a": "The individual is a life.",
+    "sentence_b": "The individual is a living person.",
+    "argumentation": "In this count-noun sense, A 'The individual is a life' classifies the supplied individual x as B 'a living person'. Living and person are both definition content and both apply to x. The predicative article a does not introduce a second person or quantify away x: its nominal head person is predicated of the existing parameter x (V3 action parameter). The scaffold is realizes predication, not an extra definition occurrence. Both conditions are required for equivalence, whereas either condition alone is insufficient. No new witness or event is needed.",
+    "parameters": [
+      {
+        "name": "x",
+        "type": "E",
+        "role": "The individual whose classification is being stated"
+      }
+    ],
+    "target_arguments": [
+      "x"
+    ],
+    "occurrence_ids": [
+      "oewn-10280403-n:def:t000",
+      "oewn-10280403-n:def:t001",
+      "oewn-10280403-n:def:t002"
+    ],
+    "parameter_spans": [
+      {
+        "sentence": "sentence_a",
+        "start": 0,
+        "end": 14,
+        "text": "The individual",
+        "parameter": "x",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      },
+      {
+        "sentence": "sentence_b",
+        "start": 0,
+        "end": 14,
+        "text": "The individual",
+        "parameter": "x",
+        "reason": "Source-marked parameter phrase; preserve its referent but add no predicate for its surface wording."
+      }
+    ],
+    "determiners": [
+      {
+        "occurrence_id": "oewn-10280403-n:def:t000",
+        "kind": "a",
+        "action": "parameter",
+        "parameter": "x",
+        "head_occurrence_id": "oewn-10280403-n:def:t002",
+        "reason": "Predicative noun phrase classifies the existing x, not a fresh witness."
+      }
+    ],
+    "witnesses": [],
+    "voice": "active",
+    "reductions": []
+  },
+  "interfaces": {
+    "oewn-00095301-a::alive_entity": {
+      "synset_id": "oewn-00095301-a",
+      "usage_id": "alive_entity",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "x",
+          "type": "E",
+          "role": "The individual whose classification is being stated"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "x"
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "living/alive as an adjective predicated of an existing individual: Alive(x). The frozen adjectival identity is retained despite the old token POS tag VERB.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    },
+    "oewn-00007846-n::person_classification": {
+      "synset_id": "oewn-00007846-n",
+      "usage_id": "person_classification",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "x",
+          "type": "E",
+          "role": "The individual whose classification is being stated"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "x"
+          }
+        ]
+      },
+      "rhs_status": "pending",
+      "description": "person as a common-noun classification of the supplied individual: Person(x). This is not the existential-pronoun usage of someone.",
+      "evidence": [
+        "Manually declared from the frozen definition occurrence and its supplied A/B usage; not a published basis formula."
+      ]
+    }
+  },
+  "enumeration": {
+    "lexical": [
+      {
+        "occurrence_id": "oewn-10280403-n:def:t001",
+        "min_calls": 0,
+        "max_calls": 1
+      },
+      {
+        "occurrence_id": "oewn-10280403-n:def:t002",
+        "min_calls": 0,
+        "max_calls": 1
+      }
+    ],
+    "lhs_structures": [],
+    "quantifier_inventory_complete": true
+  },
+  "notice": "Real first-layer single-usage trial, manually supplied basis LHS only. Deliberately no fixed binding_plan, RHS required_structures, or structural caps. Lexical resources are at most once (zero allowed unless the article head constraint requires a call). All typed candidate bindings and available structural atom subsets are enumerated. No basis RHS or historical formula is supplied. Not publication or all-usages coverage."
+}

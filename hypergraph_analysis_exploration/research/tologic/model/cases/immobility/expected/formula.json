@@ -1,0 +1,86 @@
+{
+  "synset_id": "oewn-04783538-n",
+  "usage_id": "immobility_scope_trial",
+  "parameters": [
+    {
+      "name": "q",
+      "type": "E",
+      "role": "The external state/quality denoted by The state"
+    }
+  ],
+  "lhs": {
+    "op": "target",
+    "args": [
+      {
+        "var": "q"
+      }
+    ]
+  },
+  "rhs": {
+    "op": "and",
+    "args": [
+      {
+        "op": "use",
+        "synset_id": "oewn-04731092-n",
+        "usage_id": "quality_entity",
+        "interface_hash": "9454df089bf20210cef9b74689770c5bcfe617a6e669daae1d00a2caf701e284",
+        "occurrence_id": "oewn-04783538-n:def:t001",
+        "args": [
+          {
+            "var": "q"
+          }
+        ]
+      },
+      {
+        "op": "exists",
+        "variables": [
+          {
+            "name": "h",
+            "type": "E"
+          }
+        ],
+        "body": {
+          "op": "and",
+          "args": [
+            {
+              "op": "nom",
+              "synset_id": "oewn-01839438-v",
+              "usage_id": "event_with_subject",
+              "interface_hash": "b2f6a9882a743cef6e1fed6728b2e89bece60ec07d612a98278c606f4757703e",
+              "occurrence_id": "oewn-04783538-n:def:t004",
+              "nominalization_id": "nominal_0",
+              "construction_hash": "cc0c89bfa2087a835ef69333255306488043b6058dc612401f23012b79572ee9",
+              "negation_occurrence_ids": [
+                "oewn-04783538-n:def:t003"
+              ],
+              "args": [
+                {
+                  "var": "h"
+                }
+              ]
+            },
+            {
+              "op": "use",
+              "synset_id": "of-6",
+              "usage_id": "abstract_referent_relation",
+              "interface_hash": "17455e76fc7793e2272acb36de2cbebd771d4070d6890f965a42db851b57df34",
+              "occurrence_id": "oewn-04783538-n:def:t002",
+              "args": [
+                {
+                  "var": "q"
+                },
+                {
+                  "var": "h"
+                }
+              ]
+            }
+          ]
+        },
+        "origin": "nominalization",
+        "occurrence_id": "oewn-04783538-n:def:t004"
+      }
+    ]
+  },
+  "primitives": [],
+  "schema_version": "v3.interface-formula-candidate/1"
+}

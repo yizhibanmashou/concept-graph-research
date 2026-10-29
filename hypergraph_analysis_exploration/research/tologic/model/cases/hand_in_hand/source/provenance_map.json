@@ -1,0 +1,23 @@
+{
+  "paths_are_historical_not_runtime_dependencies": true,
+  "files": [
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/hand_in_hand/source/cleaned.json",
+      "sha256": "e0c708e56a37fed4c45edc9769b142808a5d41ddf70ee29d646bac9b75676b0a",
+      "bytes_preserved": true
+    },
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/hand_in_hand/source/v3_source.json",
+      "sha256": "237ba270c4a07fd9d78c4eee9a21d1c46ca3fb920618e4fa6939c30e46cf48bf",
+      "bytes_preserved": true
+    },
+    {
+      "original_path": "[redacted-local-path]",
+      "bundle_path": "cases/hand_in_hand/source/upstream_original.json",
+      "sha256": "63ba8904ab188d7401f4f0375e4b57f598d70fcb1cf3c6403bb8209c44d9d411",
+      "bytes_preserved": true
+    }
+  ]
+}

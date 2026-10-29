@@ -1,0 +1,99 @@
+{
+  "interfaces": {
+    "oewn-00024432-r::proposition_negation": {
+      "synset_id": "oewn-00024432-r",
+      "usage_id": "proposition_negation",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "p",
+          "type": "Prop",
+          "role": "The proposition being negated"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "p"
+          }
+        ]
+      },
+      "description": "Not(p), the source word not with its ordinary proposition-negation use. The enumerator never authors native not.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ]
+    },
+    "oewn-00804608-v::passive_entity_theme": {
+      "synset_id": "oewn-00804608-v",
+      "usage_id": "passive_entity_theme",
+      "is_basis": true,
+      "parameters": [
+        {
+          "name": "r",
+          "type": "V",
+          "role": "The permission event/state, not automatically identical to the permitted behavior"
+        },
+        {
+          "name": "b",
+          "type": "E",
+          "role": "The entity denoted by the passive noun phrase"
+        }
+      ],
+      "rhs_status": "pending",
+      "lhs": {
+        "op": "and",
+        "args": [
+          {
+            "op": "target",
+            "args": [
+              {
+                "var": "r"
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Agent",
+            "args": [
+              {
+                "var": "r"
+              },
+              {
+                "op": "struct",
+                "name": "ImplicitSubj",
+                "args": [
+                  {
+                    "var": "r"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "struct",
+            "name": "Theme",
+            "args": [
+              {
+                "var": "r"
+              },
+              {
+                "var": "b"
+              }
+            ]
+          }
+        ]
+      },
+      "description": "Permit(r:V) AND Agent(r,ImplicitSubj(r)) AND Theme(r,b:E). The permission event is introduced by the verb; the nominal behavior b is an entity.",
+      "evidence": [
+        "Manual usage LHS for this real-source composition trial; no historical or fabricated basis RHS.",
+        "User confirmed the explicit-event, binary-of and passive-permit interfaces, with target LHS fixed independently of RHS enumeration."
+      ],
+      "voice": "passive"
+    }
+  },
+  "interface_assumptions": [],
+  "rhs_supplied": false
+}

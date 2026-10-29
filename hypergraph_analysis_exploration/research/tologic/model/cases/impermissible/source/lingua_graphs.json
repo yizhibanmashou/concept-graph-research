@@ -1,0 +1,318 @@
+{
+  "argumentations": [
+    {
+      "argumentation_id": "oewn-01765698-a:argumentation:0",
+      "sentence_b": "The behavior is not permitted.",
+      "lingua": {
+        "status": "present",
+        "graph_count": 1,
+        "graphs": [
+          {
+            "graph_json": {
+              "meta": {},
+              "words": [
+                "The",
+                " behavior",
+                " is",
+                " not",
+                " permitted",
+                "."
+              ],
+              "graph": {
+                "nodes": [
+                  {
+                    "spans": [
+                      [
+                        0,
+                        0
+                      ]
+                    ],
+                    "type": "DeterminerConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        1,
+                        1
+                      ]
+                    ],
+                    "type": "NominalConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        5,
+                        5
+                      ]
+                    ],
+                    "type": "PunctuationalConstant"
+                  },
+                  {
+                    "spans": [
+                      [
+                        2,
+                        4
+                      ]
+                    ],
+                    "type": "FactualPredicator"
+                  }
+                ],
+                "edges": [
+                  {
+                    "start": 0,
+                    "end": 1,
+                    "label": "as:modification"
+                  },
+                  {
+                    "start": 2,
+                    "end": 3,
+                    "label": "as:punctuation"
+                  },
+                  {
+                    "start": 3,
+                    "end": 0,
+                    "label": "pred.arg.1"
+                  }
+                ]
+              }
+            },
+            "sha256": "f9ed1a339c3c322d9d5812312407afb0258ef7c4a8261cfdfc2e11e450670753",
+            "sources": [
+              {
+                "path": "[redacted-local-path]",
+                "line": 12680,
+                "record_sha256": "4e43bece008f9ec8f9014b991f3fb8563808a09ab85d9c0ac48a1eb9ceb21c7b",
+                "job_id": "oewn-01765698-a::p0",
+                "part_id": "p0",
+                "source_sentence": "The behavior is not permitted.",
+                "source_status": "success",
+                "source_graph_field": "graph_json",
+                "match_method": "exact",
+                "error": "",
+                "lingua_conversion_error": ""
+              }
+            ],
+            "validation": {
+              "structurally_valid": true,
+              "semantic_certified": false,
+              "word_count": 6,
+              "node_count": 4,
+              "edge_count": 3,
+              "root_node_indices": [
+                2
+              ],
+              "explicit_root_node_indices": [],
+              "issue_counts": {},
+              "issues": []
+            },
+            "token_alignment": {
+              "status": "aligned",
+              "issues": [],
+              "method": "exact_non_whitespace_codepoints_with_original_sentence_offsets",
+              "graph_word_offsets": [
+                {
+                  "word_index": 0,
+                  "graph_word": "The",
+                  "start": 0,
+                  "end": 3,
+                  "text": "The"
+                },
+                {
+                  "word_index": 1,
+                  "graph_word": " behavior",
+                  "start": 4,
+                  "end": 12,
+                  "text": "behavior"
+                },
+                {
+                  "word_index": 2,
+                  "graph_word": " is",
+                  "start": 13,
+                  "end": 15,
+                  "text": "is"
+                },
+                {
+                  "word_index": 3,
+                  "graph_word": " not",
+                  "start": 16,
+                  "end": 19,
+                  "text": "not"
+                },
+                {
+                  "word_index": 4,
+                  "graph_word": " permitted",
+                  "start": 20,
+                  "end": 29,
+                  "text": "permitted"
+                },
+                {
+                  "word_index": 5,
+                  "graph_word": ".",
+                  "start": 29,
+                  "end": 30,
+                  "text": "."
+                }
+              ],
+              "word_token_alignment": [
+                {
+                  "token_id": "t0",
+                  "text": "The",
+                  "start": 0,
+                  "end": 3,
+                  "graph_word_indices": [
+                    0
+                  ],
+                  "graph_node_indices": [
+                    0
+                  ]
+                },
+                {
+                  "token_id": "t1",
+                  "text": "behavior",
+                  "start": 4,
+                  "end": 12,
+                  "graph_word_indices": [
+                    1
+                  ],
+                  "graph_node_indices": [
+                    1
+                  ]
+                },
+                {
+                  "token_id": "t2",
+                  "text": "is",
+                  "start": 13,
+                  "end": 15,
+                  "graph_word_indices": [
+                    2
+                  ],
+                  "graph_node_indices": [
+                    3
+                  ]
+                },
+                {
+                  "token_id": "t3",
+                  "text": "not",
+                  "start": 16,
+                  "end": 19,
+                  "graph_word_indices": [
+                    3
+                  ],
+                  "graph_node_indices": [
+                    3
+                  ]
+                },
+                {
+                  "token_id": "t4",
+                  "text": "permitted",
+                  "start": 20,
+                  "end": 29,
+                  "graph_word_indices": [
+                    4
+                  ],
+                  "graph_node_indices": [
+                    3
+                  ]
+                },
+                {
+                  "token_id": "t5",
+                  "text": ".",
+                  "start": 29,
+                  "end": 30,
+                  "graph_word_indices": [
+                    5
+                  ],
+                  "graph_node_indices": [
+                    2
+                  ]
+                }
+              ],
+              "node_word_links": [
+                {
+                  "node_index": 0,
+                  "graph_word_indices": [
+                    0
+                  ],
+                  "sentence_token_ids": [
+                    "t0"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 0,
+                      "end": 3
+                    }
+                  ],
+                  "text": "The"
+                },
+                {
+                  "node_index": 1,
+                  "graph_word_indices": [
+                    1
+                  ],
+                  "sentence_token_ids": [
+                    "t1"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 4,
+                      "end": 12
+                    }
+                  ],
+                  "text": "behavior"
+                },
+                {
+                  "node_index": 2,
+                  "graph_word_indices": [
+                    5
+                  ],
+                  "sentence_token_ids": [
+                    "t5"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 29,
+                      "end": 30
+                    }
+                  ],
+                  "text": "."
+                },
+                {
+                  "node_index": 3,
+                  "graph_word_indices": [
+                    2,
+                    3,
+                    4
+                  ],
+                  "sentence_token_ids": [
+                    "t2",
+                    "t3",
+                    "t4"
+                  ],
+                  "char_spans": [
+                    {
+                      "start": 13,
+                      "end": 15
+                    },
+                    {
+                      "start": 16,
+                      "end": 19
+                    },
+                    {
+                      "start": 20,
+                      "end": 29
+                    }
+                  ],
+                  "text": "is not permitted"
+                }
+              ]
+            }
+          }
+        ],
+        "semantic_certified": false,
+        "matching_policy": "same_synset_and_part_then_exact_or_whitespace_only_sentence; never_part_only",
+        "unavailable_records": []
+      }
+    }
+  ],
+  "unattached_lingua_records": []
+}

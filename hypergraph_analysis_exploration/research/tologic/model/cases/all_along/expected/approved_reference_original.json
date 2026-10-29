@@ -1,0 +1,333 @@
+{
+  "fixed_lhs": "AllAlong(e:V)",
+  "lhs_unchanged_in_every_candidate": true,
+  "candidate_count": 20,
+  "search_exhausted": true,
+  "whole_candidate_set_matches_separate_oracle": true,
+  "all_static_gates_passed": true,
+  "input_sha256": "1d82ec0cc685b3562d35dcc66c46af91b2237ed51d8e41b90ca9e16cd3e069e6",
+  "candidates_sha256": "a61dc30c591b51717e43ee6ded8e4d945545ef3f9384fc02228236649c2315f0",
+  "independent_model_review_performed": false,
+  "status": "SELECTED_FROM_COMPLETE_ENUMERATION",
+  "selected_line": 1,
+  "candidate_id": "385a5ac16906dcaca0efc26503bf47cf1cd138e4735de25ece837a0406a7e85a",
+  "candidate": {
+    "candidate_id": "385a5ac16906dcaca0efc26503bf47cf1cd138e4735de25ece837a0406a7e85a",
+    "formula": {
+      "synset_id": "oewn-00068615-r",
+      "usage_id": "all_along_scope_trial",
+      "parameters": [
+        {
+          "name": "e",
+          "type": "V",
+          "role": "The supplied knowing event/state modified by all along"
+        }
+      ],
+      "lhs": {
+        "op": "target",
+        "args": [
+          {
+            "var": "e"
+          }
+        ]
+      },
+      "rhs": {
+        "op": "use",
+        "synset_id": "supplied-all-quantifier",
+        "usage_id": "time",
+        "interface_hash": "3acc044206c5b025b251fdb663dd3a24bd1da6c1c0544827e506e033b2d25ffb",
+        "occurrence_id": "oewn-00068615-r:def:t000",
+        "args": [
+          {
+            "op": "struct",
+            "name": "World",
+            "args": [
+              {
+                "var": "e"
+              }
+            ]
+          },
+          {
+            "op": "lambda",
+            "parameters": [
+              {
+                "name": "r",
+                "type": "Time"
+              }
+            ],
+            "scope_id": "time_scope",
+            "body": {
+              "op": "use",
+              "synset_id": "oewn-00028468-n",
+              "usage_id": "time_range",
+              "interface_hash": "fc509906b8c86e520652ca8698c963d12cf2b9b867f10250ef53aacecae1790a",
+              "occurrence_id": "oewn-00068615-r:def:t002",
+              "args": [
+                {
+                  "var": "r"
+                }
+              ]
+            }
+          },
+          {
+            "op": "lambda",
+            "parameters": [
+              {
+                "name": "t",
+                "type": "Time"
+              }
+            ],
+            "scope_id": "event_scope",
+            "body": {
+              "op": "struct",
+              "name": "Happen",
+              "args": [
+                {
+                  "var": "e"
+                },
+                {
+                  "var": "t"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "primitives": [],
+      "schema_version": "v3.interface-formula-candidate/1"
+    },
+    "inventory": {
+      "synset_id": "oewn-00068615-r",
+      "coverage": {
+        "complete": true,
+        "scope": "supplied_single_usage_only",
+        "rationale": "Covers this supplied single usage only. Proposed enumeration inventory; not certification of all lexical usages.",
+        "evidence_ids": [
+          "definition",
+          "oewn-00068615-r:argumentation:0"
+        ]
+      },
+      "usages": [
+        {
+          "usage_id": "all_along_scope_trial",
+          "sentence_a": "The person knows all along.",
+          "sentence_b": "The person knows all the time.",
+          "argumentation": "The existing A/B modifies the supplied knowing event. The person is surrounding clause context, not an adverb argument. All quantifies every time in World(e): Time(t) means t is a time, without an extra contextual-interval restriction. The source noun remains the range predicate. Happen(e,t) is the nuclear property; slot assignment remains open to enumeration.",
+          "parameters": [
+            {
+              "name": "e",
+              "type": "V",
+              "role": "The supplied knowing event/state modified by all along"
+            }
+          ],
+          "target_arguments": [
+            "e"
+          ],
+          "occurrence_ids": [
+            "oewn-00068615-r:def:t000",
+            "oewn-00068615-r:def:t001",
+            "oewn-00068615-r:def:t002"
+          ],
+          "parameter_spans": [
+            {
+              "sentence": "sentence_a",
+              "parameter": "e",
+              "start": 11,
+              "end": 16,
+              "text": "knows",
+              "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+            },
+            {
+              "sentence": "sentence_b",
+              "parameter": "e",
+              "start": 11,
+              "end": 16,
+              "text": "knows",
+              "reason": "The cleaned argumentation explicitly marks this phrase as a parameter, not definition content."
+            }
+          ],
+          "evidence": [
+            "definition",
+            "oewn-00068615-r:argumentation:0"
+          ],
+          "determiners": [
+            {
+              "kind": "all",
+              "occurrence_id": "oewn-00068615-r:def:t000",
+              "action": "provider"
+            },
+            {
+              "kind": "the",
+              "occurrence_id": "oewn-00068615-r:def:t001",
+              "action": "drop",
+              "head_occurrence_id": "oewn-00068615-r:def:t002",
+              "parameter": "r",
+              "scope_id": "time_scope"
+            }
+          ],
+          "witnesses": [],
+          "voice": "active",
+          "reductions": [],
+          "binding_plan": {
+            "lexical": [
+              {
+                "occurrence_id": "oewn-00068615-r:def:t002",
+                "usage_id": "time_range",
+                "bindings": {
+                  "t": "r"
+                },
+                "scope_id": "time_scope"
+              },
+              {
+                "occurrence_id": "oewn-00068615-r:def:t000",
+                "usage_id": "time",
+                "bindings": {
+                  "w": {
+                    "world_of": "e"
+                  }
+                }
+              }
+            ],
+            "structural": {
+              "lhs": [],
+              "rhs": [
+                {
+                  "name": "Happen",
+                  "arguments": [
+                    "e",
+                    "t"
+                  ],
+                  "scope_id": "event_scope"
+                }
+              ]
+            },
+            "scopes": [
+              {
+                "scope_id": "event_scope",
+                "parent_scope": null,
+                "kind": "lambda",
+                "variables": [
+                  {
+                    "name": "t",
+                    "type": "Time"
+                  }
+                ]
+              },
+              {
+                "scope_id": "time_scope",
+                "parent_scope": null,
+                "kind": "lambda",
+                "variables": [
+                  {
+                    "name": "r",
+                    "type": "Time"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "binding_plan": {
+      "lexical": [
+        {
+          "occurrence_id": "oewn-00068615-r:def:t002",
+          "usage_id": "time_range",
+          "bindings": {
+            "t": "r"
+          },
+          "scope_id": "time_scope"
+        },
+        {
+          "occurrence_id": "oewn-00068615-r:def:t000",
+          "usage_id": "time",
+          "bindings": {
+            "w": {
+              "world_of": "e"
+            }
+          }
+        }
+      ],
+      "structural": {
+        "lhs": [],
+        "rhs": [
+          {
+            "name": "Happen",
+            "arguments": [
+              "e",
+              "t"
+            ],
+            "scope_id": "event_scope"
+          }
+        ]
+      },
+      "scopes": [
+        {
+          "scope_id": "event_scope",
+          "parent_scope": null,
+          "kind": "lambda",
+          "variables": [
+            {
+              "name": "t",
+              "type": "Time"
+            }
+          ]
+        },
+        {
+          "scope_id": "time_scope",
+          "parent_scope": null,
+          "kind": "lambda",
+          "variables": [
+            {
+              "name": "r",
+              "type": "Time"
+            }
+          ]
+        }
+      ]
+    },
+    "resource_counts": {
+      "lexical_calls": 2,
+      "exists": 0,
+      "structures": {
+        "Agent": 0,
+        "Theme": 0,
+        "Happen": 1
+      },
+      "available_structural_atoms": {
+        "Agent": 0,
+        "Theme": 1,
+        "Happen": 2
+      },
+      "generated_scopes": 2
+    },
+    "used_occurrence_ids": [
+      "oewn-00068615-r:def:t000",
+      "oewn-00068615-r:def:t002"
+    ],
+    "readable_formula": "TARGET(e) IFF supplied-all-quantifier::time(World(e), LAMBDA r.oewn-00028468-n::time_range(r), LAMBDA t.Happen(e, t))",
+    "semantic_acceptance": false,
+    "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+    "interface_gate": {
+      "passed": true,
+      "issues": [],
+      "filters_enumeration": false
+    },
+    "assumption_mode": "interface-only-symbolic",
+    "publishable": false,
+    "basis_rhs_status": "pending",
+    "v3_gate": {
+      "passed": false,
+      "status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+      "issues": [],
+      "filters_enumeration": false
+    }
+  },
+  "readable_formula": "AllAlong(e) IFF All_Time^World(e)(lambda r:Time Time(r), lambda t:Time Happen(e,t))",
+  "user_given_expansion": "[forall t:Time (Time(t) -> Happen(e,t))] evaluated in World(e)",
+  "time_interpretation": "Time(t) means t is a time. The world carries context, not a hidden extra restriction on Time(t).",
+  "case": "all_along",
+  "synset_id": "oewn-00068615-r",
+  "run": "revisions/fixed_lhs_event_roles/runs/all_along"
+}

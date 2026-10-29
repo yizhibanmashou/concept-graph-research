@@ -1,0 +1,22 @@
+{
+  "schema_version": "annotation-presentation-plan/1",
+  "status": "draft_not_authorized_for_distribution",
+  "source_batch": {
+    "path": "outputs/phase7/annotation_batch_2025_plus_v3_400_blind.jsonl",
+    "batch_sha256": "dac533223c82bdd95dec6774d15a6350f10a1a9a07411db8bd0ca1c29997b6d5",
+    "candidate_count": 400
+  },
+  "presentation_slots": [
+    {
+      "presentation_id": "slot-01",
+      "seed": 20261006
+    },
+    {
+      "presentation_id": "slot-02",
+      "seed": 20261007
+    }
+  ],
+  "randomization": "independent uniform Fisher-Yates permutation of the stable task IDs per presentation slot; task content and task IDs are unchanged",
+  "return_alignment": "Returns continue to join by task_id; do not join by row position. Record the assigned presentation_id with the pseudonymous annotator ID in the restricted execution log.",
+  "scope": "Schedule generation only. Protocol signature, source rights review, annotator assignment, and distribution authorization remain separate required gates."
+}

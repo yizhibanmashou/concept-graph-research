@@ -1,0 +1,46 @@
+{
+  "schema_version": "v3.enumeration-report/1",
+  "status": "COMPLETE",
+  "complete": true,
+  "exhausted": true,
+  "candidate_count": 20,
+  "input_hash": "967197eb8d7315651291532af701622f8a417f13cb7ce49b60d4cad3c4de588a",
+  "assumption_mode": "interface-only-symbolic",
+  "semantic_acceptance": false,
+  "published": false,
+  "synset_id": "oewn-00068615-r",
+  "usage_id": "all_along_scope_trial",
+  "max_candidates": null,
+  "output_dir": "[redacted-local-path]",
+  "stats": {
+    "resource_selections": 1,
+    "scope_mode_selections": 2,
+    "region_placements": 6,
+    "structural_atom_selections": 64,
+    "typed_binding_combinations": 40,
+    "engine_candidates": 40,
+    "interface_gate_passed": 20,
+    "supplied_constraint_rejections": 20
+  },
+  "guarantee": "For validated input, COMPLETE exhausts the declared finite lexical/parameter/scope grammar. Any correct formula satisfying that grammar and the supplied structured constraints has its canonical representative in candidates.jsonl. Provider semantics and input constraints are assumptions.",
+  "v3_gate_is_diagnostic_only": false,
+  "inventory_status": "PROPOSED_SINGLE_USAGE_NOT_CERTIFIED",
+  "basis_rhs_status": "pending",
+  "publishable": false,
+  "v3_gate_status": "NOT_RUN_REQUIRES_CERTIFIED_FORMULAS",
+  "interface_gate_is_diagnostic_only": true,
+  "interface_assumptions": [
+    {
+      "synset_id": "supplied-all-quantifier",
+      "occurrence_ids": [
+        "oewn-00068615-r:def:t000"
+      ],
+      "reason": "The real all occurrence has no frozen semantic WSD; use the user's already supplied All contract as an explicitly local experiment assumption.",
+      "authorization": "User supplied all_alpha^w(S,P) with range S and property P, explicitly instantiated Time/World(e), and now requests LHS-only real all scope enumeration. This is not a new frozen basis member."
+    }
+  ],
+  "interface_hashes": {
+    "supplied-all-quantifier::time": "3acc044206c5b025b251fdb663dd3a24bd1da6c1c0544827e506e033b2d25ffb",
+    "oewn-00028468-n::time_range": "fc509906b8c86e520652ca8698c963d12cf2b9b867f10250ef53aacecae1790a"
+  }
+}
