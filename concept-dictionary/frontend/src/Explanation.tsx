@@ -87,7 +87,7 @@ export function Explanation({
           查看来源 <ArrowUpRight size={13} />
         </button>
       </div>
-      {node.pos === "prep" && (
+      {(node.pos === "prep" || node.pos === "prep_phrase") && (
         <div className="status-message warning">
           这是介词依赖节点，可能引入广泛关联，也可能表达方向或否定；请结合来源判断。
         </div>
@@ -151,6 +151,7 @@ export function Explanation({
             </div>
           </div>
           <div className="branch-note">
+            同一分支里的前提需要一起考虑（AND）；不同分支是替代的构造路径（OR）。{" "}
             {selected?.complete
               ? "根据当前已知概念，这条分支可以在图中完整展开。"
               : `这条分支仍有 ${selected?.missing.length || 0} 个前提无法从当前已知集合完整展开。`}{" "}
@@ -208,7 +209,9 @@ export function PathTree({
         <span>
           {label(node)}
           <small>
-            {node.pos === "prep" ? "介词依赖 · " : ""}
+            {node.pos === "prep" || node.pos === "prep_phrase"
+              ? "介词依赖 · "
+              : ""}
             {node.known
               ? "已标记理解"
               : node.status === "cycle"

@@ -3,11 +3,47 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { Drawer } from "./Drawer";
 import { SettingsPage } from "./SettingsPage";
-import { PathTree } from "./Explanation";
+import { Explanation, PathTree } from "./Explanation";
 
 afterEach(cleanup);
 
 describe("设置与键盘操作", () => {
+  it("explains AND/OR and warns about preposition phrases", () => {
+    render(
+      <Explanation
+        path="root"
+        depth={0}
+        onKnown={vi.fn()}
+        onExpand={vi.fn()}
+        onChoice={vi.fn()}
+        onSource={vi.fn()}
+        node={{
+          id: "phrase",
+          lemmas: "because of",
+          pos: "prep_phrase",
+          definition: "on account of",
+          known: false,
+          reachable: true,
+          status: "expanded",
+          selected: 0,
+          alternatives: [
+            {
+              index: 0,
+              body: [],
+              sources: [],
+              source_available: true,
+              complete: true,
+              missing: [],
+              cost: 0,
+            },
+          ],
+          children: [],
+        }}
+      />,
+    );
+    expect(screen.getByText(/可能表达方向或否定/)).toBeTruthy();
+    expect(screen.getByText(/不同分支是替代的构造路径/)).toBeTruthy();
+  });
   it("identifies prepositions and the selected alternative in the path view", () => {
     const locate = vi.fn();
     const child = {
