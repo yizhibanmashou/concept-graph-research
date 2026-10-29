@@ -31,4 +31,14 @@ python -B -X utf8 enumerate_one.py --input cases/want_lack/input.json --out ../.
 
 从仓库根目录运行 `python hypergraph_analysis_exploration/research/tologic/rank_baseline.py --out report/tologic_rank_new.json`。基线只按已使用词项 occurrence 的数量评分，参考答案在评分之后读取；并列采用均匀随机打破的期望指标。六例结果仅是同例描述，不证明泛化。
 
+## 准备人工盲审
+
+先固定样本大小和种子，不读取 `expected/` 或按参考答案选择候选。例如从仓库根目录运行：
+
+```powershell
+python hypergraph_analysis_exploration/research/tologic/blind_review.py --input hypergraph_analysis_exploration/research/tologic/model/cases/want_lack/input.json --candidates hypergraph_analysis_exploration/research/tologic/model/cases/want_lack/out/candidates.jsonl --size 20 --seed 17 --out hypergraph_analysis_exploration/outputs/want_review_17
+```
+
+输出目录必须不存在。`review.json` 只含定义、两句使用例、参数与随机抽样的公式；`private-key.json` 保存候选 ID 对照、种子、总体数量和输入摘要，应由组织者单独保管，不交给标注者。为两位标注者分别提供相同的 `review.json`，独立记录可接受／不可接受／不确定及理由，再核对分歧和仲裁；没有人工评审时不得把导出结果说成语义准确率。盲审只隐藏参考答案及候选 ID，标注者仍可推断部分公式优劣，也不能消除任务材料本身的偏差。该工具只提供抽样与审阅材料，不计算一致率、判定真值或建立独立测试集。结果含输入内容，放在忽略的 outputs 内并在分享前审核许可。
+
 项目实际状态、输入限制和后续计划见[总报告](../../../report/project_review_2026-10-29-current.md)与[研究计划](../../docs/research_tracks_2026-10-28.md)。
