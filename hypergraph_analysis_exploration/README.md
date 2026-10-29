@@ -6,6 +6,8 @@
 
 - **依赖超图与概念组合**：`src/analysis/` 与 `src/logic/` 是现有结构审计和形式验证代码；`outputs/` 保存实验结果；[研究计划](docs/research_tracks_2026-10-28.md)讨论介词和来源控制。介词 full-Horn 删除敏感性分析可用 `python -m src.analysis.preposition_horn_relaxation` 复跑，结果写到根 `report/`。
 
+义项 A–D 输入草案可通过 `python -m src.analysis.sense_representation_audit --input outputs/sense_representation_sample_2026-10-29.json --out outputs/sense_audit_new.json` 检查共同目标、释义、依赖清单、成对边及联合分支。输入须先由 `sense_representation_pilot` 生成；输出须为新文件。JSON 字符数仅是序列化长度的描述，不是模型 token 数，不能证明相同输入预算或语义正确。
+
 介词配对审查可先运行 `python -m src.analysis.structure_sampling_pilot --seed 17 --sample-size 5 --out outputs/sample_new.json`，再运行 `python -m src.analysis.preposition_paired_review --bundle ../OEWN --sample outputs/sample_new.json --pos prep --out outputs/paired_review_new.json`。导出按同一目标逐分支展示原依赖和删除后的依赖、空分支及非空分支碰撞，并留出人工审查字段。`--pos prep-and-phrase` 是另一个删除口径；两者须分别报告。源样本和冻结包默认不随 Git 提供，输出必须是新文件。该工具没有构造角色关系或判断语义正确性，也没有遮蔽干预条件；样本仅用于探索，不是确认性评测。
 - **逻辑公式构造**：[ToLogic 支线](research/tologic/README.md)包含整理后的引擎、六例和 `want` 案例；原始 ZIP 与额外重跑输出不上传，公开发布前仍需完成权利审查。
 - **交互词典**：同级目录 `../concept-dictionary/` 是交互原型，见其 README；与本目录一起属于工作区根部的 Git 仓库。
