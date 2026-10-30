@@ -94,6 +94,7 @@
 - 先制定新序列化：B/C/D 对每个目标和候选共享完全相同的依赖概念与释义 token IDs；C 只改变成对投影信息，D 只改变 AND/OR 分区与论元角色；计量实际/截断 token，并让模型看到的词元预算对齐。用合成图展示 pairwise projection 丢失高阶分支分区。
 - 已有 `t04_structure_views.py` 纯合成关系视图；2026-10-31 在该专题分支复核 `python -m unittest discover -s tests -p 'test_t04_structure_views.py' -v`，5 项通过，`py_compile` 与 `git diff --check` 通过。首次从仓库根运行 `python -m unittest tests.test_t04_structure_views` 因测试目录不在根 Python module path 而导入失败；改为项目目录下的 discover 命令后成功。失败是工作目录/测试发现命令不匹配，不是测试断言失败。
 - 不用旧 SemCor dev 选 checkpoint、预算、字段标记或阈值；先做 code-only/synthetic verification 与新增、独立来源 dev 的合法性和映射审计。无合适新评估来源时停止训练，报告可行性而非继续用旧 dev 搜索。
+- 评测来源筛查已写入 `t04_structure_isolation_design.md` 并推送 commit `4c0eddf`：Raganato unified all-words 五个标准子集列为主评测候选，但许可、模型暴露、SenseKey/WN3.0→OEWN 映射仍待审；FEWS 列为长尾次要候选。FEWS 来自 Wiktionary，而图中也有 Kaikki/Wiktextract 来源，因此是潜在来源/内容重叠压力测试，不能预先称为独立来源确认；逐记录匹配尚未进行，数据未下载。
 - 设备：`emotion_xpu` Conda 已验证 torch 2.12.0+xpu / Transformers 5.9.0 / Intel Arc XPU；无需在 base Python 安装 PyTorch。每次训练记录精确环境 lock、驱动、设备、seed、token/padding、步数、运行时和峰值显存。
 
 #### T04-C · 独立评估协议（GATED）
