@@ -72,7 +72,11 @@ def validate_source_record(record: dict[str, Any]) -> None:
                  "branch_id must be non-empty and unique")
         branch_ids.add(bid)
         refs = branch.get("premise_occurrence_ids")
-        _require(isinstance(refs, list) and len(refs) == len(set(refs)),
+        _require(isinstance(refs, list), f"branch {bid}: premise_occurrence_ids must be a list")
+        _require(bool(refs), f"branch {bid}: source premises cannot be empty")
+        _require(all(isinstance(ref, str) and bool(ref.strip()) for ref in refs),
+                 f"branch {bid}: occurrence references must be non-empty strings")
+        _require(len(refs) == len(set(refs)),
                  f"branch {bid}: premise_occurrence_ids must be a duplicate-free list")
         resolved = []
         for ref in refs:

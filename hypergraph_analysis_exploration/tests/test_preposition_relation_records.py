@@ -83,6 +83,29 @@ class PrepositionRelationRecordTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "order must be contiguous"):
             validate_source_record(record)
 
+    def test_empty_source_branch_is_rejected_but_deletion_can_create_one(self):
+        record = fixture_record()
+        record["source_branches"][0]["premise_occurrence_ids"] = []
+        record["occurrences"] = []
+        with self.assertRaisesRegex(ValueError, "source premises cannot be empty"):
+            validate_source_record(record)
+
+        record = fixture_record()
+        record["source_branches"][0]["premise_occurrence_ids"] = ["prep-to", "prep-without"]
+        record["occurrences"] = [row for row in record["occurrences"] if row["occurrence_id"] in {"prep-to", "prep-without"}]
+        for position, occurrence in enumerate(record["occurrences"]):
+            occurrence["branch_position"] = position
+        transformed = transform_record(record)
+        deleted = transformed["conditions"]["prep_delete"]["branches"][0]
+        self.assertEqual(deleted["premise_occurrence_ids"], [])
+        self.assertTrue(deleted["empty_after_transform"])
+
+    def test_non_string_source_occurrence_reference_is_rejected(self):
+        record = fixture_record()
+        record["source_branches"][0]["premise_occurrence_ids"][0] = None
+        with self.assertRaisesRegex(ValueError, "occurrence references must be non-empty strings"):
+            validate_source_record(record)
+
     def test_supported_relation_requires_evidence_and_same_branch_arguments(self):
         record = fixture_record()
         relation = supported_to_relation()[0]
