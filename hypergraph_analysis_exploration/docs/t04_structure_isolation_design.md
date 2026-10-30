@@ -194,6 +194,26 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 
 通过门槛仅为真实 train-only supervision、shared encoder、结构池化、梯度和 optimizer 更新链工作。下一阶段在扩大训练规模前，先审查共同 token/context 序列、图释义编码成本、未覆盖候选的计分规则以及训练失败日志；旧 dev 仍不可用于调参，正式验证 gate 仍是新开发隔离、许可及 WN3.0→OEWN 映射。
 
+### A/B/C/D 完整 train-only 结构 epoch（2026-10-31）
+
+新增 `src/analysis/train_t04_xpu_train_only_structural_epoch.py`，把共享 gloss encoder 与 A/B/C/D 结构池化推进到完整训练分区的一轮训练。输入为固定训练 JSON 中 400 个目标（379 个 gold 可评分、21 个不可评分目标保留为不可训练），seed 17；四条件分别完成 190 个 AdamW 更新，target batch=2、graph-gloss batch=32。每个条件都从同一 pinned BERT-tiny 权重和相同随机 head 初始化开始，使用相同乱序训练目标、相同候选、相同 context+candidate-gloss token 序列；唯一条件差异是图关系通道：A 零关系、B 唯一依赖均值、C pairwise 2-section 均值、D 完整 OR 分支均值。train-only 可评分候选池有 2,008 个唯一义项；每条件处理 3,243 个 context-candidate 输入和 17,265 个 gloss-node 输入实例。
+
+在 `emotion_xpu` / Intel Arc 上，四条件 mean train loss 为 A/B/C/D=1.85719/1.86272/1.86111/1.85932；XPU 峰值 allocated bytes 为 224,224,256/223,901,696/223,901,696/223,901,696；单次 wall-clock 为 29.31/24.70/24.53/23.83 秒。相同输入、样本摘要、训练损失、峰值和四个 checkpoint SHA 在完整重放中完全相同。脚本和结果仅用于确认 379 条训练数据上的完整 optimizer 路径、可复现性与本机资源估算；训练损失不能比较为模型质量，计时仅为单机单次观测，也不构成泛化或公平效果结果。运行未读取 dev/test，也未查看其中标签。
+
+复跑命令（输出目录必须为尚不存在的新目录；输出和 checkpoints 均仅保留本地 ignored）：
+
+```powershell
+conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_structural_epoch `
+  --data outputs/tiny_bert_full_morph_union_centered_20261030 `
+  --nodes ../OEWN/graph/nodes.tsv `
+  --rules ../OEWN/graph/hypergraph_rules.jsonl `
+  --model outputs/models/prajjwal1_bert-tiny_6f75de8b `
+  --out outputs/t04_structural_epoch_seed17_<new-run> `
+  --seed 17 --target-batch-size 2 --graph-batch-size 32
+```
+
+专项检查：`py_compile` 通过；训练 schema、relation aggregation 和 XPU profile 相关 13 项单测通过。下一步不在已复用的旧 dev 上评估或调参；先解决外部 benchmark 权利、模型暴露与 WordNet/OEWN 映射 gate，再冻结一次性的全候选评测协议。若 gate 不能满足，T04 的可报告结论保持为工程可复现性与探索性训练，不声称结构增益。
+
 #### 本机 Conda/XPU 启动方式与复跑
 
 训练依赖已在现有 Conda 环境 `emotion_xpu` 中，不需要切换到 `base` 或重新安装 CPU 版 PyTorch。2026-10-31 实测 Python 3.11.15、PyTorch 2.12.0+xpu、Transformers 5.9.0；`torch.xpu.is_available()` 为真，设备为 Intel(R) Arc(TM) Graphics（报告总显存约 16.8 GB）。从子项目目录以模块方式运行，保证 `src` 可导入：
