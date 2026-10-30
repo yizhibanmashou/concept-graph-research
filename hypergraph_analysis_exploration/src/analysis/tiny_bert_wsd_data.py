@@ -24,6 +24,26 @@ def choose_candidates(instance_id, candidate_ids, maximum=4):
     return ordered if maximum is None else ordered[:maximum]
 
 
+def candidate_ids_for_surface(surface, pos, index, all_morphy):
+    """Union candidates from every morphology analysis of the observed form.
+
+    NLTK's public ``morphy`` returns only its first analysis. The caller supplies
+    an all-analyses function (WordNet 3.0 ``_morphy`` in the pilot) and records
+    the exact NLTK version in run metadata. This function never accepts a gold
+    key or sense ID.
+    """
+    from src.analysis.semcor_dev_pilot import norm, pos_class
+
+    normalized_surface = surface.replace(' ', '_').lower()
+    forms = list(all_morphy(normalized_surface, pos))
+    if not forms:
+        forms = [normalized_surface]
+    candidate_ids = set()
+    for form in forms:
+        candidate_ids.update(index.get((norm(form), pos_class(pos)), {}))
+    return candidate_ids
+
+
 def prepare_candidate_manifest(candidate_ids, prepare):
     """Attempt every candidate and retain success or a specific failure per ID.
 
@@ -185,7 +205,8 @@ def main():
         output = []
         stats = Counter(selected=len(records))
         for record in records:
-            ids = choose_candidates(record['instance_id'], index[record['key']].keys(), maximum=None)
+            ids = choose_candidates(record['instance_id'], candidate_ids_for_surface(
+                record['surface'], record['key'][1], index, wordnet._morphy), maximum=None)
             manifest = prepare_candidate_manifest(ids, candidate)
             element = record['element']
             lemma, lexsn = element.get('lemma'), element.get('lexsn')
@@ -245,6 +266,7 @@ def main():
     metadata = {'counts': counts, 'split_seed': 17, 'candidate_budget': args.candidate_budget,
                 'joint_budget': 128 if args.candidate_budget == 94 else 256,
                 'context_budget': 32, 'context_policy': 'target-centered with [unused0]/[unused1] occurrence markers',
+                'candidate_morphology_policy': 'lowercased observed surface; union of all NLTK WordNet _morphy analyses for POS; normalized-surface fallback if no analysis; gold-independent',
                 'target_marker_ids': {'start': target_start_id, 'end': target_end_id},
                 'nltk_version': nltk.__version__, 'tokenizers_version': tokenizers.__version__,
                 'inputs_sha256': {'semcor.zip': digest(args.nltk_data / 'corpora/semcor.zip'),
