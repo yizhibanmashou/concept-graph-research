@@ -104,6 +104,6 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 
 ### T04 独立评估许可门补充（2026-10-31）
 
-复核 NLTK 官方数据包许可汇总：`semcor`（SemCor 3.0）被列入 “Unclarified, Unknown, Ambiguous, or Citation-Only”，该汇总未给出清晰标准许可；页面同时提醒应回到原始来源核验。故本机已有 SemCor 文件、NLTK 可下载或 Global WordNet 的重标注版本许可，均不能单独证明当前 SemCor 3.0 数据包已获本项目所需使用/再分发权限。已有 SemCor train/dev 结果维持内部探索性历史证据，不再开新切分或继续调参；下一步只做原始数据来源条款核查，或选择有明确许可且通过来源/映射/模型暴露 gate 的新评测来源。不得读取 SemCor 保留测试集。
+复核 NLTK 官方数据包许可汇总后，`semcor`（SemCor 3.0）仍列在 “Unclarified, Unknown, Ambiguous, or Citation-Only”。进一步查看 NLTK 数据仓库公开 issue #250：讨论指出 SemCor 源文本来自 Brown Corpus，许可链有争议；WordNet 项目负责人在讨论中称 Princeton 曾获原编者许可，但具体法律意见仍待核实，并建议默认采取 non-free 处理。该 issue 不是许可文件或法律意见，不能单独证明允许或禁止本项目研究使用；原始 UMich 下载页目前无法从本轮浏览器读取，未获得可核验的 SemCor 3.0 条款文本。Global WordNet 重标注仓库所述 CC BY 4.0 也不能自动证明底层 Brown 文本可再分发。因此本轮结论仍为权利范围 unresolved：不将 SemCor 数据或派生文本放入 Git，不新开 SemCor 切分/调参；已完成 train/dev 结果只保留为内部探索性历史。下一步需取得原始发布方条款/授权，或转向权利清晰且来源、映射和模型暴露 gate 均可审计的新评测源；不得读取 SemCor 保留测试集。
 
-来源：[NLTK `DATASET-LICENSES.md`](https://github.com/nltk/nltk_data/blob/gh-pages/DATASET-LICENSES.md)（SemCor 条目及汇总免责声明）。此处是数据权利 gate 记录，不构成法律意见。
+来源：[NLTK `DATASET-LICENSES.md`](https://github.com/nltk/nltk_data/blob/gh-pages/DATASET-LICENSES.md)（SemCor 分类及汇总免责声明）；[NLTK issue #250](https://github.com/nltk/nltk_data/issues/250)（许可讨论，非正式授权）。此处是数据权利 gate 记录，不构成法律意见。
