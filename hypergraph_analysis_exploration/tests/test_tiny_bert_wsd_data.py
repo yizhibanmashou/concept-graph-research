@@ -1,0 +1,16 @@
+import unittest
+from src.analysis.tiny_bert_wsd_data import choose_candidates, select
+
+
+class TinyBertDataTests(unittest.TestCase):
+    def test_candidate_selection_does_not_accept_gold(self):
+        ids = ['a', 'b', 'c', 'd', 'e']
+        self.assertEqual(choose_candidates('example', ids), choose_candidates('example', list(reversed(ids))))
+        self.assertEqual(len(choose_candidates('example', ids)), 4)
+
+    def test_stable_sample_does_not_use_label(self):
+        rows = [{'sample_id': 'b', 'doc': 'd', 'sentence': 1, 'token': 1, 'gold': 'x'},
+                {'sample_id': 'a', 'doc': 'd', 'sentence': 1, 'token': 2, 'gold': 'y'}]
+        self.assertEqual(select(rows, 1)[0]['sample_id'], 'a')
+        rows[1]['gold'] = 'changed'
+        self.assertEqual(select(rows, 1)[0]['sample_id'], 'a')
