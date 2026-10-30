@@ -4,7 +4,7 @@
 
 ## 研究方向
 
-五条研究线的总目标、当前证据、阶段门槛、协作分工与 PR 工作单见[研究总控路线图](docs/research_program_roadmap_2026-10-30.md)。T02 的已决关系字段和盲审协议见[介词关系 schema 与盲审协议草案](docs/preposition_relation_schema_protocol.md)。路线图强调结构、语义、模型表现和认知证据分开判定，并按总控、T02 介词结构、T04 NLP 的顺序启动；其余支线按门槛进入。
+五条研究线的总目标、当前证据、阶段门槛、协作分工与 PR 工作单见[研究总控路线图](docs/research_program_roadmap_2026-10-30.md)，按优先级滚动维护的[研究执行队列](docs/research_execution_queue_2026-10-31.md)记录下一项任务与停止条件。T02 的已决关系字段和盲审协议见[介词关系 schema 与盲审协议草案](docs/preposition_relation_schema_protocol.md)；T01 的候选语义审阅流程见[ToLogic 盲审协议](research/tologic/semantic_review_protocol.md)。路线图强调结构、语义、模型表现和认知证据分开判定。
 
 - **依赖超图与概念组合**：`src/analysis/` 与 `src/logic/` 是现有结构审计和形式验证代码；`outputs/` 保存实验结果；[研究计划](docs/research_tracks_2026-10-28.md)讨论介词和来源控制。介词 full-Horn 删除敏感性分析可用 `python -m src.analysis.preposition_horn_relaxation` 复跑，结果写到根 `report/`。
 

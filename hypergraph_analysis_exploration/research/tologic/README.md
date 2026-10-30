@@ -37,6 +37,8 @@ python -B -X utf8 enumerate_one.py --input cases/want_lack/input.json --out ../.
 
 ## 准备人工盲审
 
+标注定义、诊断轴、双人流程、仲裁及本次样本的证据边界见[候选语义盲审协议](semantic_review_protocol.md)。协议状态为标注前，当前没有人工标签。
+
 先固定样本大小和种子，不读取 `expected/` 或按参考答案选择候选。例如从仓库根目录运行：
 
 ```powershell

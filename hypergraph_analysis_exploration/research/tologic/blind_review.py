@@ -28,7 +28,17 @@ def prepare(input_path, candidates_path, sample_size, seed):
         'sentence_b': usage['sentence_b'],
         'parameters': usage['parameters'],
         'items': [{'review_id': f'R{i:04d}', 'formula': c['readable_formula'],
-                   'judgment': None, 'reason': ''} for i, c in enumerate(chosen, 1)],
+                   'judgment': None,
+                   'diagnostics': {
+                       'usage_a': None,
+                       'usage_b': None,
+                       'role_direction': None,
+                       'negation_scope': None,
+                       'quantifier_binding': None,
+                       'definition_completeness': None,
+                       'unsupported_conditions': None,
+                   },
+                   'reason': ''} for i, c in enumerate(chosen, 1)],
     }
     key = {
         'seed': seed, 'sample_size': sample_size, 'population_size': len(candidates),
