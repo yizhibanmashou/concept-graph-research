@@ -36,6 +36,16 @@ class PrepositionHornRelaxationTests(unittest.TestCase):
         self.assertEqual(relaxed, [("target", ())])
         self.assertEqual(counts["newly_empty_clauses"], 1)
 
+    def test_phrase_sensitivity_removes_only_prep_and_prep_phrase(self):
+        clauses = [("target", ("prep", "phrase", "noun"))]
+        relaxed, counts = relax_preposition_literals(
+            clauses,
+            {"prep": "prep", "phrase": "prep_phrase", "noun": "n"},
+            {"prep", "prep_phrase"},
+        )
+        self.assertEqual(relaxed, [("target", ("noun",))])
+        self.assertEqual(counts["removed_preposition_literals"], 2)
+
     def test_depth_summary_is_stable_for_empty_and_nonempty_inputs(self):
         self.assertEqual(summarize_depths([]), {
             "count": 0, "min": None, "median": None, "p90": None, "max": None,

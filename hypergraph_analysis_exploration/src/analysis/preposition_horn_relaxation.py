@@ -34,14 +34,15 @@ def _sha256(path: Path) -> str:
 def relax_preposition_literals(
     clauses: list[tuple[str, tuple[str, ...]]],
     pos_by_node: dict[str, str],
+    removed_pos: set[str] | frozenset[str] = frozenset({"prep"}),
 ) -> tuple[list[tuple[str, tuple[str, ...]]], dict[str, int]]:
-    """Drop preposition dependencies while retaining every other literal."""
+    """Drop selected preposition POS dependencies, retaining all other literals."""
     relaxed: list[tuple[str, tuple[str, ...]]] = []
     clauses_with_preposition = 0
     removed_literals = 0
     newly_empty_clauses = 0
     for head, body in clauses:
-        kept = tuple(dep for dep in body if pos_by_node.get(dep) != "prep")
+        kept = tuple(dep for dep in body if pos_by_node.get(dep) not in removed_pos)
         removed = len(body) - len(kept)
         if removed:
             clauses_with_preposition += 1
@@ -112,7 +113,7 @@ def minimum_derivation_depths_allow_unreachable(
     return depths
 
 
-def run(bundle: Path) -> dict:
+def run(bundle: Path, removed_pos: set[str] | frozenset[str] = frozenset({"prep"})) -> dict:
     bundle = bundle.resolve()
     integrity = verify_frozen_bundle_integrity(bundle)
     if not integrity.get("valid"):
@@ -134,7 +135,7 @@ def run(bundle: Path) -> dict:
         raise ValueError("node inventory and Horn rule heads do not align")
 
     original_depths = minimum_derivation_depths(heads, clauses, basis)
-    relaxed_clauses, intervention = relax_preposition_literals(clauses, pos_by_node)
+    relaxed_clauses, intervention = relax_preposition_literals(clauses, pos_by_node, removed_pos)
     # Removing the only conjunct would turn a rule into a fact. Also report a
     # conservative variant that drops only those newly empty alternatives.
     guarded_clauses = [
@@ -168,13 +169,14 @@ def run(bundle: Path) -> dict:
         bundle / "graph" / "selected_basis_atoms.txt",
     ]
     return {
-        "analysis": "preposition-horn-literal-relaxation/1",
+        "analysis": "preposition-horn-literal-relaxation/2",
         "bundle_semantic_fingerprint_sha256": manifest.get("semantic_fingerprint_sha256"),
         "head_count": len(heads),
         "basis_count": len(basis),
         "clause_count": len(clauses),
         "original_literal_count": literal_count,
-        "intervention": "remove every POS=prep dependency literal from every AND clause; preserve heads, all other literals, and OR alternatives",
+        "removed_pos": sorted(removed_pos),
+        "intervention": f"remove dependency literals with POS in {sorted(removed_pos)} from every AND clause; preserve heads, all other literals, and OR alternatives",
         "integrity_lock_valid": integrity.get("valid"),
         "change_counts": intervention,
         "guarded_clause_count": len(guarded_clauses),
@@ -212,8 +214,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bundle", type=Path, default=DEFAULT_BUNDLE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--pos", choices=("prep", "prep-and-phrase"), default="prep")
     args = parser.parse_args()
-    result = run(args.bundle)
+    removed_pos = {"prep"} if args.pos == "prep" else {"prep", "prep_phrase"}
+    result = run(args.bundle, removed_pos)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("w", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
