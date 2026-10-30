@@ -16,7 +16,7 @@
 
 ### 可复核的项目状态
 
-- 队列分支本轮起始 HEAD 为 `aa60876`；T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `abe0c1e`，T04 设计分支 `codex/t04-structure-input-design` 已推进至 `4ec5092`，均已推送。相关 PR 创建/查询工具返回 `Unknown tool`，分支推送不等于 PR 或 CI 完成。
+- 队列分支本轮起始 HEAD 为 `aa60876`；T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `d1ec438`，T04 设计分支 `codex/t04-structure-input-design` 已推进至 `4ec5092`，均已推送。相关 PR 创建/查询工具返回 `Unknown tool`，分支推送不等于 PR 或 CI 完成。
 - 本队列分支 `codex/research-execution-queue-20261031` 当前 HEAD 为 `7cd001d`，本轮新增队列记录后继续推送。此前 PR 搜索/创建调用返回 `Unknown tool`；PR 尚未创建，不把比较页称作 PR。
 - T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `4ec5092fb28783d67f9ac7f90faea3481dd967d0`；这两个专题工作目前不在本队列分支中。
 - T04 最近几条候选打包/文档簇/结构输入分支的 PR 状态未能通过当前 GitHub MCP 连接核实；旧线程也记有 `Unknown tool`。在 PR 面板或有效 API 可用前，队列只记远端分支和 commit，不声称 PR 已创建或 CI 已通过。
@@ -54,7 +54,7 @@
 
 - 输入范围固定为索引中的 5,625 条记录；只做来源元数据聚合，不导出 gloss、释义、sense ID、路径、locator、URL 或人工标签。
 - 既有审计：3,444 条记录带 evidence，3,645 evidence item，82 个精确自报标签；1,512 条无 provenance object，669 条无 evidence list；evidence item 无显式 license 字段。新建保守标签 join 后，原样匹配 6/82 标签、143/3,645 项；仅规范大小写、下划线和空格后唯一匹配 17/82 标签、2,395/3,645 项，无歧义；4 个匹配标签的日志有状态字段（2,270 项），另 13 个没有状态；65 个标签/1,250 项未匹配，主要剩余缺口是 Kaikki/Wiktextract 的 1,082 项。该工作是日志可定位性，不是清权。复算脚本、2 项合成测试和协议已提交 `9220354` 并推送；T02 目标测试共 10 项通过。
-- Kaikki/Wiktextract 标签定向审计已更新：5,625/5,625 个 payload 可解析；两类标签共 1,082 evidence items。所有 `source_version` 均呈 `raw-sha256:<64 hex>` 格式，两个标签各只有一个且彼此相同的指纹；与 1,082 条合法 `definition_text_sha256` 均不相同。故可确认字段是摘要形态，不能确认其哈希对象或上游版本绑定。locator 不是 URL，ontology 字段缺失；`evidence_type` 为 `definition` 881 项、`related_definition` 201 项。目标测试 13 项通过；T02 分支 commit `abe0c1e` 已推送。来源版本和许可仍 unresolved；这不是清权结论。
+- Kaikki/Wiktextract 标签定向审计已更新：5,625/5,625 个 payload 可解析；两类标签共 1,082 evidence items。所有 `source_version` 均呈 `raw-sha256:<64 hex>` 格式，两个标签各只有一个且彼此相同的指纹；与 1,082 条合法 `definition_text_sha256` 均不相同。故可确认字段是摘要形态，不能确认其哈希对象或上游版本绑定。随后核对 Kaikki 官方 raw-data 页和主索引：可见 Wiktionary dump 日期 2026-10-01、处理抽取日期 2026-10-25 及 extractor commit 标识，但 raw-data 页未列出可将本地 `raw-sha256` 绑定至具体对象的 checksum。日期/处理器版本不是本地摘要的来源证明。locator 不是 URL，ontology 字段缺失；`evidence_type` 为 `definition` 881 项、`related_definition` 201 项。目标测试 13 项通过；T02 分支 commit `d1ec438` 已推送。来源版本和许可仍 unresolved；这不是清权结论。
 - 继续工作：将已有 Phase 24/25/50–52/124–127 的 source-rights 日志与原始 exact label 对齐；明确这是标签交叉表而非清权。对 OLS provider 标签按 ontology ID 区分，保留 `unresolved` 和上游 payload 未绑定状态；优先核对 GCIDE、MeSH 与 OLS 记录，并为 Kaikki/Wiktextract 查找可验证的本地生成流水线或 snapshot checksum。若绑定证据不存在，明确记为无法消解，不强行赋 family 或许可状态。
 - PR 验收：输入 index/payload 摘要、聚合计数、精确标签 join/miss 分母、官方证据链接、版本绑定状态与失败案例；不提交源文本/许可受限数据。必须跑合成测试和 scoped audit，验证输出不含 forbidden fields。
 
@@ -126,7 +126,7 @@
 - 确认训练依赖位于 Conda 环境 `emotion_xpu` 而非默认 `base`；复核 Python/PyTorch/Transformers/Accelerate 版本、XPU 可用性和设备内存字段。另做 4 条 train 记录的 A-only smoke，checkpoint 成功保存；不读 dev、不报性能分数。新输出留在 ignored `outputs/tiny_bert_wsd_smoke_conda_20261031`。这不是重新训练 A–D，也不改变旧开发集已被重复使用、不可继续调参的研究 gate。
 - 将近期 T02、T04、T03、T05 和结构探索线程的结论压缩为当前队列，并同远端分支 HEAD 对照；单个线程中的计划和结果仅作线索，已存在的提交/文件为准。
 - 尝试创建 T02 PR；GitHub MCP 返回 `Unknown tool`，因此没有创建 PR，也没有声称 CI 运行。
-- T02 审计再扫 5,625/5,625 个 payload，并修正版本形态分类，核验共享摘要与定义文本哈希关系；限定输出只记录计数、不泄漏摘要。目标 T02 合成测试 13 项通过，`git diff --check` 通过；commit `abe0c1e` 已推送到 `codex/t02-source-evidence-audit`。PR 状态仍未创建/未核实。
+- T02 审计再扫 5,625/5,625 个 payload，并修正版本形态分类，核验共享摘要与定义文本哈希关系；限定输出只记录计数、不泄漏摘要。进一步核对 Kaikki 官方下载/索引页面，发现页面列出上游日期和 extractor commit，但没有本地摘要的对象绑定 checksum；因此仍无法确定冻结 payload 的 release。目标 T02 合成测试 13 项通过，`git diff --check` 通过；commit `d1ec438` 已推送到 `codex/t02-source-evidence-audit`。PR 状态仍未创建/未核实。
 - T04 来源与映射设计补充：核对 Raganato 官方 WN3.0 评测口径和 Global WordNet SemCor reannotation 的双 key 格式/许可；明确其可交叉核验映射但不构成独立来源，并把逐资源映射分母、许可与测试隔离加入 gate。设计 commit `4ec5092` 已推送至 `codex/t04-structure-input-design`；未下载 benchmark 或读取测试标签。
 
 ## 4. 当晚退出交接标准
