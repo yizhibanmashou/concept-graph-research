@@ -166,10 +166,28 @@ python -m unittest tests.test_audit_preposition_source_provenance -v
 3. **T02-3**：在许可审核通过后生成正式盲审抽样框和访问隔离流程；试标 40 条单独保存。
 4. **T02-4**：只有独立双标、抽样计划和来源隔离冻结后，才做定义保真估计与结构结果并列分析。
 
-本轮未读取人工试标标签、未读取保留测试标签、未转换真实图条目、未生成数据包、未运行实验。协议/示例的后续实现需保持这些隔离。
+本协议初稿只定义 schema，不含真实图变换或标注。后续来源字段与 frame overlap audit 是单独记录的聚合元数据计算；均未读取人工试标标签、未读取保留测试标签、未输出释义或生成分发包。后续实现需继续保持这些隔离。
 
 ## 8. 来源证据字段审计及其方法含义（2026-10-31）
 
 对冻结包 `sources/Synset/alternative_or_definition_wsd_frozen/` 的来源索引执行只报聚合数的字段审计：5,625 条索引记录均成功解析，包含 3,645 个 source-evidence 对象；3,444 条记录有来源证据列表，669 条没有 evidence list，1,512 条没有 provenance。82 个精确来源标签中，审计到的 evidence 对象里许可证字段为 0；显式 predicate/relation type、argument/role、evidence span locator、polarity/negation scope 四组字段覆盖也都为 0。输入 SHA、计数及字段定义见本机 ignored 产物 `outputs/t02_source_relation_field_coverage_20261031.json`。
 
 这只是对 source-evidence 对象顶层字段名的覆盖检查：没有读取字段值、释义、引文或 locator；字段缺失不能证明上游页面不存在相关材料，也不能证明记录的语义不正确。但它说明**当前冻结记录本身不足以直接支持**把 `prep` occurrence 自动标成空间、路径、角色或否定关系。故四条件的 `typed_relation` 必须逐项附带可复核的原始证据定位；没有定位时仍为 `unresolved`。来源标签与权利日志的规范化匹配只能找到待核查日志行，不能证明精确上游对象、版本、文本哈希绑定、许可兼容或独立来源家族。正式抽样和盲审材料仍暂停，直到可复算的记录级 crosswalk 和权利审查完成。
+
+## 9. OEWN 原始释义与 `prep` 影响框重叠（2026-10-31）
+
+新增只报聚合值的 `src/analysis/audit_t02_oewn_prep_overlap.py`，把已有 200 条 OEWN 2025 Plus annotation frame 与同一 frame 的官方发布版 raw-gloss cross-check、冻结图规则连接。程序验证 frame SHA、发布版归档 SHA 和 200/200 raw-gloss exact-match 证据；只输出摘要计数与 SHA，不输出 sense ID、lemma、释义或标签。其结果在本地 ignored `outputs/t02_oewn_prep_overlap_20261031_v2.json`。
+
+这 200 条中，160 条属于既有 `random_stratified` panel，40 条属于 `diagnostic_not_for_population_estimates`。在随机分层 panel 的 160 个 target 中，132 个至少有一个 `prep` occurrence；233 个原始分支中 190 个被改变，删除 318 个 occurrence，产生 2 个新空分支、涉及 2 个 target 的非空分支碰撞。40 条诊断面板中 36 个 target 受影响，55/66 个分支改变，未产生新空分支。将 `prep_phrase` 并入删除口径后，这个 200-item frame 的聚合数完全不变，说明该 frame 中没有额外的 `prep_phrase` 影响。
+
+**解释边界：**此 frame 原用于 OEWN 释义结构标注，不是依照 T02 的介词影响层抽样，也不构成 T02 总体抽样或结构变化估计。此前 40 条诊断材料继续仅作流程试标；所有计数都只是图结构变化，不是定义保真标签。此 audit 仅证明存在一个可精确追溯到公开 OEWN 原始释义的候选子集，不授权分发 blind batch、不替代许可/归属复核，也不允许据此报告语义结论。正式 T02 样本仍需从目标总体重新抽样，且遵从负责人确定的精度、对比和审阅工时决策。
+
+复算命令（在 `hypergraph_analysis_exploration` 目录运行；输出路径必须尚不存在）：
+
+```powershell
+python -m src.analysis.audit_t02_oewn_prep_overlap `
+  --frame outputs/phase7/annotation_sampling_frame.jsonl `
+  --crosscheck outputs/phase7/oewn_2025_plus_release_crosscheck.json `
+  --bundle ../OEWN `
+  --out outputs/t02_oewn_prep_overlap_<new-run>.json
+```
