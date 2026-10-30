@@ -114,10 +114,12 @@ def main():
         inputs, labels = [], []
         for row in rows:
             candidates = row['inputs'][version]
-            if len(candidates) != len(row['scorable_candidate_ids']) or any(len(x) != max_len for x in candidates):
+            # Archived pilot rows have no manifest; all stored candidates are scorable.
+            expected_count = len(row.get('scorable_candidate_ids', candidates))
+            if len(candidates) != expected_count or any(len(x) != max_len for x in candidates):
                 raise ValueError('unexpected candidate shape')
             inputs.append(torch.tensor(candidates, dtype=torch.long, device=args.device))
-            labels.append(None if row['label'] == -1 else row['label'])
+            labels.append(None if row.get('candidate_ids') is not None and row['label'] == -1 else row['label'])
         return inputs, labels
 
     def score_target(scorer, values):
