@@ -1,9 +1,15 @@
 import unittest
-from src.analysis.tiny_bert_wsd_data import (candidate_ids_for_surface, choose_candidates,
+from src.analysis.tiny_bert_wsd_data import (candidate_ids_for_surface, choose_candidates, document_cluster_id,
                                              encode_target_centered_context, select)
 
 
 class TinyBertDataTests(unittest.TestCase):
+    def test_document_cluster_id_is_stable_and_pseudonymous(self):
+        value = document_cluster_id('sample_doc.xml')
+        self.assertEqual(value, document_cluster_id('sample_doc.xml'))
+        self.assertEqual(len(value), 64)
+        self.assertNotIn('sample_doc.xml', value)
+
     def test_candidate_selection_does_not_accept_gold(self):
         ids = ['a', 'b', 'c', 'd', 'e']
         self.assertEqual(choose_candidates('example', ids), choose_candidates('example', list(reversed(ids))))

@@ -18,6 +18,11 @@ def stable_hash(value):
     return hashlib.sha256(value.encode('utf-8')).hexdigest()
 
 
+def document_cluster_id(document_id):
+    """Return a stable, pseudonymous join key for document-cluster analysis."""
+    return stable_hash('semcor-document:' + document_id)
+
+
 def choose_candidates(instance_id, candidate_ids, maximum=4):
     """Return the complete deterministic candidate order (or a legacy bounded view)."""
     ordered = sorted(set(candidate_ids), key=lambda value: (stable_hash(instance_id + ':' + value), value))
@@ -274,7 +279,11 @@ def main():
             else:
                 stats['gold_not_encodable'] += 1
             ready_label = ready_ids.index(gold) if gold in ready_ids else -1
-            output.append({'sample_id': record['sample_id'], 'candidate_ids': ids,
+            output.append({'sample_id': record['sample_id'],
+                           # Generated outputs are local/ignored; this pseudonymous key
+                           # supports cluster-aware analysis without storing source names.
+                           'document_cluster_id': document_cluster_id(record['doc']),
+                           'candidate_ids': ids,
                            'candidates': [{k: v for k, v in item.items() if k != 'payload'}
                                           for item in manifest],
                            'scorable_candidate_ids': ready_ids,
