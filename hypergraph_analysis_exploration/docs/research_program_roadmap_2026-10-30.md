@@ -13,7 +13,7 @@
 | T01 ToLogic | 六例 455 候选枚举重放；want 的 130 候选及 `without` 外部接口检查；已有结构化盲审协议草案 | 仍是候选枚举与接口工程证据，没有已完成语义标签。先审独立盲标和裁决协议，再考虑候选排序；不可用现有试标作训练和评估 |
 | T02 介词与组合 | 全图结构统计、频数对照、目标级分层与工作量/精度情景；四条件 schema/validator 已有合并版本；目标等权、`prep` 主分析等关键口径已由用户决定 | 当前 PR #35 后续修复已推送为 `codex/t02-nonempty-source-branch`（提交 `9c13465`、`c3d49fe`、`03d3838`）。来源家族 gate 未通过：source-root 是构建阶段标签，索引缺 provider/version/license；不要创建确认性盲审样本，先核资源交叉表及许可 |
 | T03 知径 | 现有 Demo 的 API/功能测试和任务化验收文档；尚无真实学习效果 | 继续在原 Demo 上做来源回指与任务页面核验；真实用户研究须另行批准，不能把模拟交互写成学习收益 |
-| T04 NLP/WSD | PR #28、#31、#34 的覆盖/候选/上下文管线已在本地记录为合并；完整候选、独立文档 dev、三种子旧输入运行已有本地机器结果。旧三种子 A/B/C/D 正确数 80/82/90/82 因旧 C 无 pairwise adjacency 而不能回答结构比较。C 已修为 AND 分支的简单无向 2-section；以固定 train-only 数据重建后 379/400 gold 可评分，A/B/C/D 四条件各训 379 目标；同 seed 重放的 loss 和 checkpoint SHA 全部一致。未读 dev/test 样本或标签；不报告模型效果。 | `emotion_xpu` Conda 环境和 Intel Arc XPU 可用。修复分支 `codex/t04-pairwise-2section`；首批提交已推送，train-only 重建器与可复现运行文档正在同分支追加。GitHub PR/CI 查询接口仍返回 `Unknown tool`，手动创建页见下方。C 定义仍待负责人审定。旧 dev 已反复用于方案选择，不再调参；先找许可明确且独立的新开发来源，冻结完整候选、共同 token/信息预算、强基线与主要比较后才开展效果评估 |
+| T04 NLP/WSD | PR #28、#31、#34 的覆盖/候选/上下文管线已在本地记录为合并；完整候选、独立文档 dev、三种子旧输入运行已有本地机器结果。旧三种子 A/B/C/D 正确数 80/82/90/82 因旧 C 无 pairwise adjacency 而不能回答结构比较。C 已修为 AND 分支的简单无向 2-section；以固定 train-only 数据重建后 379/400 gold 可评分，A/B/C/D 四条件各训 379 目标；同 seed 重放的 loss 和 checkpoint SHA 全部一致。未读 dev/test 样本或标签；不报告模型效果。 | `emotion_xpu` Conda 环境和 Intel Arc XPU 可用。分支 `codex/t04-pairwise-2section` 最新提交 `8d0c624` 已推送（含先前表示修正和 train-only 重放）；GitHub PR/CI 查询接口仍返回 `Unknown tool`，手动创建页见下方。C 定义仍待负责人审定。旧 dev 已反复用于方案选择，不再调参；先找许可明确且独立的新开发来源，冻结完整候选、共同 token/信息预算、强基线与主要比较后才开展效果评估 |
 | T05 认知发展 | 缓存模拟和随机重连对照只支持当前图的计算结构结论；Wordbank/CHILDES/AoA 数据可行性、HTE 少量年代样例已盘点 | 先完成逐数据集许可/字段/义项映射可行性。HTE 最早已知词形引证不等于概念诞生时间；没有授权与可靠 sense 对齐前不扩展到全图，也不做认知因果主张 |
 
 PR 工具目前通过 Git connector 返回 `Unknown tool`，`gh` CLI 未安装；已推送分支可供审阅，但不得记为 PR 已创建或 CI 通过。用户此前同意工程检查无误后不强制一人批准并可合并；仍须在线核实目标分支、head、保护规则和检查结果，科学 gate 不由工程检查代替。
@@ -155,8 +155,8 @@ PR 工具目前通过 Git connector 返回 `Unknown tool`，`gh` CLI 未安装�
 | T04-0（已合并） | PR #28 完整候选覆盖审计 | 历史记录为 CI 通过并合并；开展后续工作前仍需在线复核当前 PR/CI 事实 |
 | T04-1（已合并基线） | PR #31 全候选数据管线与目标级打分 | 提交完整候选，区分映射与编码失败，失败目标保留分母；不表示完整评测完成 |
 | T04-1a | 旧/新 schema batching 兼容 | `codex/t04-full-candidate-packing`：纯数据 helper 覆盖旧记录、unscorable gold 与候选计数错配；7 项针对性测试通过；PR/CI 状态待在线处理 |
-| T04-1b | 修复 C 成对关系对照的 2-section 编码 | `codex/t04-pairwise-2section` / `fd5280c` 已推送；[创建 PR](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-pairwise-2section)。C 由各 AND 分支内部节点对构成简单无向图，跨 OR 分支边去重；测试明确 C 丢失高阶分支分组而 D 保留。14 项相关单测通过；无语料/标签/训练参与，等待代码审阅及科学口径确认 |
-| T04-1c | 修正 C 的 train-only 数据重建与 XPU 工程重放 | 同分支待追加：只读训练样本重建 A–D；379 条可评分、21 条未评分不补标签；2,051 个唯一候选中 3,560 条原分支在共同预算下保留 1,676 条。seed 17 的 A–D 训练两次，loss 与 checkpoint SHA 完全相同；无 dev/test 读取和评估。仅确认可复现训练工程，不是任务效果证据 |
+| T04-1b | 修复 C 成对关系对照的 2-section 编码 | `codex/t04-pairwise-2section` / `fd5280c` 已推送；[创建 PR](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-pairwise-2section)。C 由各 AND 分支内部节点对构成简单无向图，跨 OR 分支边去重；测试明确 C 丢失高阶分支分组而 D 保留。17 项相关单测已累计通过；无语料/标签/训练评估参与，等待代码审阅及科学口径确认 |
+| T04-1c | 修正 C 的 train-only 数据重建与 XPU 工程重放 | `8d0c624` 已推送到同分支：只读训练样本重建 A–D；379 条可评分、21 条未评分不补标签；2,051 个唯一候选中 3,560 条原分支在共同预算下保留 1,676 条。seed 17 的 A–D 训练两次，loss 与 checkpoint SHA 完全相同；无 dev/test 读取和评估。仅确认可复现训练工程，不是任务效果证据 |
 | T04-2 | 预算公平、分支装配、训练/推断一致性 | A–D 共享输入候选/依赖；不截断半个分支；报告实际 token、padding、步数、时间、显存和分支覆盖 |
 | T04-3 | 冻结的多种子开发比较与评估脚本 | 先锁代码/配置/主要对比/区间分析；不能读取独立保留标签调参 |
 | T04-4 | 新来源/FEWS/独立评估 | 资源许可与映射通过，覆盖充分；测试只在协议冻结后一次评分 |
