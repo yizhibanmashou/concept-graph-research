@@ -1,5 +1,6 @@
 import unittest
-from src.analysis.tiny_bert_wsd_data import choose_candidates, encode_target_centered_context, select
+from src.analysis.tiny_bert_wsd_data import (candidate_ids_for_surface, choose_candidates,
+                                             encode_target_centered_context, select)
 
 
 class TinyBertDataTests(unittest.TestCase):
@@ -14,6 +15,27 @@ class TinyBertDataTests(unittest.TestCase):
         self.assertEqual(select(rows, 1)[0]['sample_id'], 'a')
         rows[1]['gold'] = 'changed'
         self.assertEqual(select(rows, 1)[0]['sample_id'], 'a')
+
+    def test_candidate_inventory_unions_all_gold_independent_morphology_analyses(self):
+        index = {
+            ('year', 'n'): {'sense-year': {}},
+            ('years', 'n'): {'sense-years': {}},
+            ('other', 'n'): {'sense-other': {}},
+        }
+        calls = []
+
+        def all_morphy(surface, pos):
+            calls.append((surface, pos))
+            return ['years', 'year', 'years']
+
+        candidates = candidate_ids_for_surface('Years', 'n', index, all_morphy)
+        self.assertEqual(candidates, {'sense-year', 'sense-years'})
+        self.assertEqual(calls, [('years', 'n')])
+
+    def test_candidate_inventory_falls_back_to_normalized_surface(self):
+        index = {('at the same time', 'r'): {'sense-1': {}}}
+        candidates = candidate_ids_for_surface('At_the_same_Time', 'r', index, lambda _surface, _pos: [])
+        self.assertEqual(candidates, {'sense-1'})
 
     def test_centered_context_brackets_actual_occurrence_and_respects_budget(self):
         words = ['left'] * 20 + ['pivot'] + ['right'] * 20
