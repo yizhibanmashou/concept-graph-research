@@ -176,18 +176,18 @@ python -m unittest tests.test_audit_preposition_source_provenance -v
 
 ## 9. OEWN 原始释义与 `prep` 影响框重叠（2026-10-31）
 
-新增只报聚合值的 `src/analysis/audit_t02_oewn_prep_overlap.py`，把已有 200 条 OEWN 2025 Plus annotation frame 与同一 frame 的官方发布版 raw-gloss cross-check、冻结图规则连接。程序验证 frame SHA、发布版归档 SHA 和 200/200 raw-gloss exact-match 证据；只输出摘要计数与 SHA，不输出 sense ID、lemma、释义或标签。其结果在本地 ignored `outputs/t02_oewn_prep_overlap_20261031_v2.json`。
+新增只报聚合值的 `src/analysis/audit_t02_oewn_prep_overlap.py`，把已有 400 条 OEWN 2025 Plus candidate frame 与官方发布版 raw-gloss cross-check、冻结图规则连接。程序核验 frame SHA、发布版归档 SHA 和 400/400 raw-gloss exact-match 证据；只输出摘要计数与 SHA，不输出 sense ID、lemma、释义或标签。结果在本地 ignored `outputs/t02_oewn_prep_overlap_v3_400_20261031.json`，文件 SHA-256 为 `8379a3b11a33ac1a46c1a17497192abd27c1ba87c374976f7091b0f99d0ba7c5`。
 
-这 200 条中，160 条属于既有 `random_stratified` panel，40 条属于 `diagnostic_not_for_population_estimates`。在随机分层 panel 的 160 个 target 中，132 个至少有一个 `prep` occurrence；233 个原始分支中 190 个被改变，删除 318 个 occurrence，产生 2 个新空分支、涉及 2 个 target 的非空分支碰撞。40 条诊断面板中 36 个 target 受影响，55/66 个分支改变，未产生新空分支。将 `prep_phrase` 并入删除口径后，这个 200-item frame 的聚合数完全不变，说明该 frame 中没有额外的 `prep_phrase` 影响。
+此 400 条均来自 `random_stratified` panel，但抽样层是 POS × 原始释义长度 × 标点，不是 T02 介词影响层。559 个源分支中，`prep` 主口径删除 748 个 occurrence、改变 443 个分支并影响 329 个 target；没有新空分支，5 个 target 出现非空分支碰撞。将 `prep_phrase` 并入后删除 750 个 occurrence、改变 444 个分支，target 影响数和碰撞数不变：该敏感性口径仅额外改变 2 个 occurrence 和 1 个分支。与 200 条 frame 的早期聚合复算一样，这批数据只说明公开 OEWN 原始释义覆盖和图结构干预可在一批固定候选上联结；不是 T02 目标总体抽样，不能将 329/400 当作总体率或定义保真结果。
 
-**解释边界：**此 frame 原用于 OEWN 释义结构标注，不是依照 T02 的介词影响层抽样，也不构成 T02 总体抽样或结构变化估计。此前 40 条诊断材料继续仅作流程试标；所有计数都只是图结构变化，不是定义保真标签。此 audit 仅证明存在一个可精确追溯到公开 OEWN 原始释义的候选子集，不授权分发 blind batch、不替代许可/归属复核，也不允许据此报告语义结论。正式 T02 样本仍需从目标总体重新抽样，且遵从负责人确定的精度、对比和审阅工时决策。
+**分发状态与解释边界：**400 条候选 frame 的完整性 preflight 通过，但 `distribution_authorized=false`、`protocol_signed=false`、无外部预注册编号且无 annotation returns。不得分发现有 blind batch，也不得将其回填为 T02 的正式样本。40 条原诊断试标继续独立隔离。此次 audit 证明存在一个具有逐项 OEWN 2025 Plus 原始释义精确匹配证据的候选子集；正式 T02 样本仍须按负责人批准的精度、对比和工时要求，从目标总体重新抽样，并完成权利/归属及盲审流程门槛。
 
 复算命令（在 `hypergraph_analysis_exploration` 目录运行；输出路径必须尚不存在）：
 
 ```powershell
 python -m src.analysis.audit_t02_oewn_prep_overlap `
-  --frame outputs/phase7/annotation_sampling_frame.jsonl `
-  --crosscheck outputs/phase7/oewn_2025_plus_release_crosscheck.json `
+  --frame outputs/phase7/annotation_candidate_frame_v3_400.jsonl `
+  --crosscheck outputs/phase7/oewn_2025_plus_release_crosscheck_v3_400.json `
   --bundle ../OEWN `
-  --out outputs/t02_oewn_prep_overlap_<new-run>.json
+  --out outputs/t02_oewn_prep_overlap_v3_400_<new-run>.json
 ```
