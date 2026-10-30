@@ -84,10 +84,21 @@ def run(frame_path: Path, crosscheck_path: Path, bundle: Path) -> dict[str, Any]
     per_sense = crosscheck.get("per_sense")
     if not isinstance(per_sense, list):
         raise ValueError("cross-check lacks per-sense evidence")
+    if any(not isinstance(row, dict) for row in per_sense):
+        raise ValueError("cross-check contains a malformed per-sense row")
+    per_sense_by_id = {row.get("sense_id"): row for row in per_sense}
+    if None in per_sense_by_id or len(per_sense_by_id) != len(per_sense):
+        raise ValueError("cross-check has missing or duplicate sense IDs")
     exact_ids = {
-        row.get("sense_id")
-        for row in per_sense
-        if isinstance(row, dict) and row.get("raw_gloss_exact_match") is True
+        sense_id for sense_id, row in per_sense_by_id.items()
+        if row.get("raw_gloss_exact_match") is True
+    }
+    effective_exact_ids = {
+        sense_id for sense_id, row in per_sense_by_id.items()
+        if row.get("effective_gloss_exact_match") is True
+    }
+    effective_unmatched_ids = {
+        sense_id for sense_id in exact_ids if sense_id not in effective_exact_ids
     }
     frame_rows = _read_jsonl(frame_path)
     target_ids = [row.get("sense_id") for row in frame_rows]
@@ -110,6 +121,10 @@ def run(frame_path: Path, crosscheck_path: Path, bundle: Path) -> dict[str, Any]
             rules[target] = branches
 
     targets = set(target_ids)
+    if not targets <= exact_ids:
+        raise ValueError("frame includes a target without an exact raw-gloss match")
+    if not targets <= per_sense_by_id.keys():
+        raise ValueError("frame targets are missing from release cross-check")
     panel_targets: dict[str, set[str]] = {}
     for row in frame_rows:
         panel = row.get("panel")
@@ -128,6 +143,22 @@ def run(frame_path: Path, crosscheck_path: Path, bundle: Path) -> dict[str, Any]
         },
         "frame_targets": len(targets),
         "release_exact_raw_gloss_targets": len(exact_ids),
+        "effective_definition_match_groups": {
+            "exact_match": {
+                "target_count": len(targets & effective_exact_ids),
+                "prep_primary": _condition_summary(targets & effective_exact_ids, rules, pos, {"prep"}),
+                "prep_phrase_sensitivity": _condition_summary(
+                    targets & effective_exact_ids, rules, pos, {"prep", "prep_phrase"}
+                ),
+            },
+            "different_or_blank": {
+                "target_count": len(targets & effective_unmatched_ids),
+                "prep_primary": _condition_summary(targets & effective_unmatched_ids, rules, pos, {"prep"}),
+                "prep_phrase_sensitivity": _condition_summary(
+                    targets & effective_unmatched_ids, rules, pos, {"prep", "prep_phrase"}
+                ),
+            },
+        },
         "targets_by_panel": {
             panel: len(panel_items) for panel, panel_items in sorted(panel_targets.items())
         },

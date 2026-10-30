@@ -176,9 +176,9 @@ python -m unittest tests.test_audit_preposition_source_provenance -v
 
 ## 9. OEWN 原始释义与 `prep` 影响框重叠（2026-10-31）
 
-新增只报聚合值的 `src/analysis/audit_t02_oewn_prep_overlap.py`，把已有 400 条 OEWN 2025 Plus candidate frame 与官方发布版 raw-gloss cross-check、冻结图规则连接。程序核验 frame SHA、发布版归档 SHA 和 400/400 raw-gloss exact-match 证据；只输出摘要计数与 SHA，不输出 sense ID、lemma、释义或标签。结果在本地 ignored `outputs/t02_oewn_prep_overlap_v3_400_20261031.json`，文件 SHA-256 为 `8379a3b11a33ac1a46c1a17497192abd27c1ba87c374976f7091b0f99d0ba7c5`。
+新增只报聚合值的 `src/analysis/audit_t02_oewn_prep_overlap.py`，把已有 400 条 OEWN 2025 Plus candidate frame 与官方发布版 raw-gloss cross-check、冻结图规则连接。程序核验 frame SHA、发布版归档 SHA 和 400/400 raw-gloss exact-match 证据；只输出摘要计数与 SHA，不输出 sense ID、lemma、释义或标签。进一步按 cross-check 中 effective definition 是否精确匹配分层：376 条精确匹配；余下 24 条中，23 条不同、1 条为空。最新聚合结果在本地 ignored `outputs/t02_oewn_prep_overlap_v3_400_20261031_v2.json`，文件 SHA-256 为 `7afb0df27a42a8b2bb1b18b53413b42316efe7130535759385f48f63150428ea`。
 
-此 400 条均来自 `random_stratified` panel，但抽样层是 POS × 原始释义长度 × 标点，不是 T02 介词影响层。559 个源分支中，`prep` 主口径删除 748 个 occurrence、改变 443 个分支并影响 329 个 target；没有新空分支，5 个 target 出现非空分支碰撞。将 `prep_phrase` 并入后删除 750 个 occurrence、改变 444 个分支，target 影响数和碰撞数不变：该敏感性口径仅额外改变 2 个 occurrence 和 1 个分支。与 200 条 frame 的早期聚合复算一样，这批数据只说明公开 OEWN 原始释义覆盖和图结构干预可在一批固定候选上联结；不是 T02 目标总体抽样，不能将 329/400 当作总体率或定义保真结果。
+此 400 条均来自 `random_stratified` panel，但抽样层是 POS × 原始释义长度 × 标点，不是 T02 介词影响层。全体 559 个源分支中，`prep` 主口径删除 748 个 occurrence、改变 443 个分支并影响 329 个 target；没有新空分支，5 个 target 出现非空分支碰撞。将 `prep_phrase` 并入后删除 750 个 occurrence、改变 444 个分支，target 影响数和碰撞数不变：敏感性口径额外改变 2 个 occurrence 和 1 个分支。effective definition 精确匹配的 376 个 target 中，306 个受 `prep` 影响（693 个被删 occurrence、408/516 个分支改变、2 个 target 有非空分支碰撞）；加入 `prep_phrase` 后该组再多 2 个被删 occurrence 和 1 个改变分支。其余 24 个 target 中，23 个受影响（55 个 occurrence、35/43 个分支改变、3 个碰撞 target），没有新空分支。该 frame 只证明 OEWN 原始释义和图结构干预可以联结，并揭示 effective 改写是需记录的分层变量；它不是 T02 目标总体抽样，不能将任何比例当作总体率或定义保真结果。
 
 **分发状态与解释边界：**400 条候选 frame 的完整性 preflight 通过，但 `distribution_authorized=false`、`protocol_signed=false`、无外部预注册编号且无 annotation returns。不得分发现有 blind batch，也不得将其回填为 T02 的正式样本。40 条原诊断试标继续独立隔离。此次 audit 证明存在一个具有逐项 OEWN 2025 Plus 原始释义精确匹配证据的候选子集；正式 T02 样本仍须按负责人批准的精度、对比和工时要求，从目标总体重新抽样，并完成权利/归属及盲审流程门槛。
 
