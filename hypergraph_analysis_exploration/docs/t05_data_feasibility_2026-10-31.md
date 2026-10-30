@@ -35,6 +35,21 @@ T05 不能把以下指标混成一个“概念习得年龄”：
 
 官方 [datapage 源码仓库](https://github.com/langcog/wordbank-datapage)的 schema 文档把核心表粒度说明为：`instruments` = language × form，`datasets` = contributed dataset（含 `license`），`administrations` = child × test，`items` = item × instrument，`item_responses` = administration × item。官网当前 contributors 构建从 `datasets` 表展示 language、form、dataset name、contributor、citation、license、administration 数；当前页面不在静态 HTML 中列出全部行。源码说明这些核心表从 Redivis 加载，程序化取表需要 Redivis API token。因此本轮可以确认字段和获取路径，但没有逐数据集许可、英语 form 及 n 的清单；没有用户授权的 Redivis 访问时不得从本机凭证推断权限。后续只需获得官方公开页面可见的元数据或经用户授权的只读访问即可完成这张清单，不需要提取 child-by-word 响应表。
 
+### 官方页面复核与变量使用限制（2026-10-31）
+
+本轮重新核对 [Wordbank Data 页面](https://langcog.github.io/wordbank-datapage/data.html)、[FAQ](https://langcog.github.io/wordbank-datapage/faq.html) 和[贡献者清单](https://langcog.github.io/wordbank-datapage/contributors.html)：
+
+- 当前贡献者清单标注其 `datasets` 元数据构建于 2026-10-20，要求记录 Redivis release/download date 并引用所用数据集的相关论文；若使用 full English dataset 可引用 Wordbank 数据库，normative English data 还应引 Fenson et al. (2007)。此规则不能代替逐项目 license 字段核对。
+- 官方 Data 页面明确：by-word proportion 把 missing responses 当作 negative；`prop_understands` 只对包含 comprehension 的 Words & Gestures (WG) form 可用，其他 form 只提供 produces。若建模比例或行级响应，必须固定 form/measure，报告 missingness 及这个计分口径；不能把“缺失”解释成经过观察的“不理解/不产出”。
+- Elison English (American) WG 因 item 导入问题暂未进入 word-level views 和常规 exports，但仍在 vocab norms 与 Redivis 数据集中。候选清单应标为“该视图暂缺/需查 Redivis”，不能算作零覆盖。
+- FAQ 说明英文 CDI form 可向 Brookes Publishing 购买；数据集可用许可不代表可以将问卷全文、题项或量表材料复制进本仓库。后续仓库只保存 item ID、必要的非版权元数据、映射状态和许可允许的聚合结果。
+
+Brysbaert–Biemiller 的 [UGent 官方书目记录](https://biblio.ugent.be/publication/8535511)说明论文讨论的是来自 Living Word Vocabulary 的约 44,000 meanings、31,000 多个 word forms/多词表达的测试知识估计；该记录列出的下载是论文 PDF，并标 `Copyright statement: No license (in copyright)`。因此，开放获取论文可读不等于原始 Living Word Vocabulary 行数据可自由复制或再分发；当前仍没有行级数据许可/获取证据，义项级 AoA 映射保持停止状态，需由权利方确认。
+
+TalkBank 当前[官方访问等级页](https://talkbank.org/0share/access.html)区分 open access、registration required、approved access 和 controlled access；具体 CHILDES corpus 的注册要求和许可需逐语料检查。通用 [TalkBank 使用规则](https://talkbank.org/0share/rules.html)注明默认 CC BY-NC-SA 3.0，除非该语料另有说明，并限制受控/可识别材料的存放与分享。不能只用“CHILDES 是公开数据”作为整个语料集的授权结论。
+
+上述复核仅读取公开页面与论文书目信息，没有导出 Wordbank 响应、儿童级记录、CDI 题项或 TalkBank 转录。逐 dataset 的 license、form 数量、管理数及实际访问等级仍需单独清单。
+
 ## 3. 路线选择：B+C，不把词形结果伪装成义项结果
 
 ### B：可计算的外部预测
@@ -61,7 +76,7 @@ T05 不能把以下指标混成一个“概念习得年龄”：
 | T05-D 构造特征增量 | baseline vs baseline+超图特征；独立 source/lemma-family 预测 | coverage、license、split、missingness 与有效样本精度过关 | 增益不稳定或区间不支持有意义改进，则停止该特征方案 |
 | T05-E 认知解释 | 可审计的受限结论或新的行为实验协议 | 独立发展测量支持；区分预测、描述、因果；用户批准参与者研究 | 仅计算模拟或词形级报告时，不得写成儿童义项习得机制 |
 
-**下一项可自主执行工作**：完成 Wordbank 英语 item/instrument/license 元数据清单，以及 AoA 官方权利方访问方式核实；只形成覆盖与访问可行性，不下载响应级数据。**当前用户决策 gate**：是否接受 Wordbank 词形层面结果作为独立的次要预测任务；不论回答为何，它都不能代替义项层面问题。
+**下一项可自主执行工作**：在不读取任何本机 token 的前提下，判断 Wordbank 官方页面/API 是否能匿名读取 dataset 表的纯元数据；如不能，则继续保留逐 dataset license/form/administration 清单为 waiting-for-access，不尝试账户授权。并核实 Living Word Vocabulary 原始行数据的权利方获取途径；只形成覆盖与访问可行性，不下载响应级数据。**当前用户决策 gate**：是否接受 Wordbank 词形层面结果作为独立的次要预测任务；不论回答为何，它都不能代替义项层面问题。
 
 ## 5. 复现、隐私和 Git 约定
 
