@@ -20,3 +20,7 @@ The pilot takes the first 32 WordPieces of `target: ... context: ...` rather tha
 # Post-hoc target-centered window
 
 Reconstruct only the previously covered train and development sample IDs, use XML offsets to locate the annotated sentence occurrence, and keep it inside a 32-WordPiece prefix-plus-sentence budget. Preserve the original target-form prefix, all sample IDs, labels, candidate order and candidate token tails across A–D; reject a sample if the target cannot fit or if the old prepared input cannot be reconstructed. Candidate and joint budgets do not change. The data builder records original prepared hashes and per-split target coverage. Use the existing tiny BERT trainer with the same settings to compare windows, and identify seeds added after observing results as post-hoc. The development set is reused and cannot establish a final performance claim; held-out documents are not read.
+
+# Post-hoc candidate coverage audit
+
+Reconstruct the same 400 train and 120 development target sample IDs. Obtain candidate identities from surface form, provided POS and WordNet morphology before consulting the gold key. Compare gold coverage in the full graph candidate set and the original hash-selected maximum of four, count invalid or unmapped annotations, and report candidate-set sizes. This is an index coverage audit only; it does not establish that all candidates fit the representation budget or predict model accuracy. Test documents stay unread, and samples excluded by the original encoder must not be silently treated as model successes.
