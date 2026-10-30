@@ -258,7 +258,9 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 
 全库存另有 378 个 WordNet synset 仅部分成员 key 映射到单一 OEWN synset；116,714 个 synset 的所有成员 key 都指向同一个 OEWN synset。没有发现一个 WordNet sense key 在 OEWN 中对应多个目标。**这证明的是标识符覆盖，不是义项语义等价。**241 个 WordNet synset 的成员 key 分裂到多个 OEWN synset，benchmark 不能把 synset 层面强制压成一对一；应以 sense-key 逐例审计，并报告该 benchmark 自身的 exact/partial/multi/unmapped 分母。FEWS 的 Wiktionary sense IDs 不是 WN3 sense keys，因此 99.54% 不能解释成 FEWS 覆盖率，也没有解决 FEWS 来源家族、许可或泄漏门槛。
 
-复现命令（从子项目目录运行）：`python -m src.analysis.audit_wn30_oewn_sense_key_crosswalk --wordnet-tar tmp/phase256_inputs/WordNet-3.0.tar.gz --oewn-zip tmp/oewn-2025-plus-json.zip --output outputs/t04_wn30_oewn_sensekey_audit_20261031.json`。结果只保存在 ignored `outputs/`。本次新增 POS 分层输出，4 项 synthetic/unit tests 通过。下一门槛仍是：在数据许可和独立性 gate 通过后，对候选 benchmark 的实际标注身份做一次锁定 coverage audit；不得因库存级覆盖率高而推断测试覆盖或解封测试集。
+同次审计还用 WN30-LFS schema 的 `lemma#POS#sense_number` 通过 WN3 `index.sense` 身份连接 OEWN：104,357 条记录中 103,829 条精确连通，174 条没有对应 WN3 sense key，354 条有 WN3 key 但该 key 未出现在 OEWN，格式错误 0。WN30-LFS archive SHA-256 为 `635e65f6c9dda84475ac7ac1f08a45b3d46925426dc011cdf19ea61e4ffeab6e`；与 2026-10-28 的机器记录输入哈希相同，计数完全重现。另存的 text-free root-cause 分析对174个无 WN3 key 项给出类别计数：23 个只在同 lemma/POS 下有唯一 exact gloss candidate，38 个 exact gloss candidate 属其他 lemma/同 POS，1 个同 lemma/POS gloss 命中有歧义，38 个同 lemma/POS 有词条但无 exact gloss，74 个无 exact lemma/POS/gloss。精确释义匹配只是候选证据，不证明该记录来自哪个 OEWN release，也不授权对缺失项做近似修补；当前仍全部保留 unmapped。
+
+复现命令（从子项目目录运行）：`python -m src.analysis.audit_wn30_oewn_sense_key_crosswalk --wordnet-tar tmp/phase256_inputs/WordNet-3.0.tar.gz --oewn-zip tmp/oewn-2025-plus-json.zip --lfs-zip tmp/phase256_inputs/wn30-lfs.zip --output outputs/t04_wn30_oewn_sensekey_lfs_audit_20261031.json`。结果只保存在 ignored `outputs/`。本次新增 POS 分层输出，4 项 synthetic/unit tests 通过；WN30-LFS 计数与旧机器记录完全一致。下一门槛仍是：在数据许可和独立性 gate 通过后，对候选 benchmark 的实际标注身份做一次锁定 coverage audit；不得因库存级覆盖率高而推断测试覆盖或解封测试集。
 
 #### 评测候选源与许可门槛复核（2026-10-31）
 

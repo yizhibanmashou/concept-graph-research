@@ -77,7 +77,7 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 
 ### T04-3 词典库存级 crosswalk（2026-10-31）
 
-仅读取 WordNet 3.0 `index.sense` 与 OEWN 2025+ entry `sense.id/synset`，按大小写折叠的 exact sense-key 匹配；没有打开 benchmark 句子或标签。总计 206,941 个 WN3 keys 中 205,989 个 exact 匹配（99.5400%），未匹配 952；POS 覆盖：形容词 99.3467%（29,806/30,002）、名词 99.6200%（145,756/146,312）、副词 98.9247%（5,520/5,580）、动词 99.4411%（24,907/25,047）。Synset 层面 116,714 全成员映射到同一 OEWN synset、378 部分映射到单一目标、241 多目标、326 无目标；无单一 sense key 多目标冲突。此为 inventory identifier coverage，不能推出义项同义或 FEWS 映射覆盖。输入 hash 已写入专项协议；机器 JSON 在 ignored outputs。4 项 crosswalk 单测通过。
+仅读取 WordNet 3.0 `index.sense` 与 OEWN 2025+ entry `sense.id/synset`，按大小写折叠的 exact sense-key 匹配；没有打开 benchmark 句子或标签。总计 206,941 个 WN3 keys 中 205,989 个 exact 匹配（99.5400%），未匹配 952；POS 覆盖：形容词 99.3467%（29,806/30,002）、名词 99.6200%（145,756/146,312）、副词 98.9247%（5,520/5,580）、动词 99.4411%（24,907/25,047）。Synset 层面 116,714 全成员映射到同一 OEWN synset、378 部分映射到单一目标、241 多目标、326 无目标；无单一 sense key 多目标冲突。此为 inventory identifier coverage，不能推出义项同义或 FEWS 映射覆盖。WN30-LFS 同次复算 104,357 项中 103,829 精确连接，174 项缺 WN3 key、354 项 key 不在 OEWN、格式错 0，与旧机器输出计数和 archive hashes 一致。输入 hash、POS 与 failure 类别已写入专项协议；机器 JSON 留在 ignored outputs。4 项 crosswalk 单测通过。
 
 **研究决策影响：**对于基于 WN3 labels 的数据，可以继续评估 exact-key 层级的覆盖，而不必因“整个库存完全不可映射”而放弃；但必须按目标报告多目标/无映射失败，并保留共同可评分分母。FEWS 的 Wiktionary sense ID、同源风险、数据包许可及 test 保护仍各自独立 unresolved，不能解封数据。下一动作是只读盘点其他公开基准的数据/标签许可、原模型训练暴露和现有 splits；若没有一个满足 gate 的未用开发集，本支线暂时维持 train-only 工程阶段。
 
