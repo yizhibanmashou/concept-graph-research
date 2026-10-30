@@ -1,6 +1,6 @@
 # 五条研究线执行队列
 
-更新时间：2026-10-31（本机状态复核）  
+更新时间：2026-10-31（跨线程状态复核；Conda/XPU 环境现场复核）
 用途：作为总控的可持续更新队列；记录可验证的下一步、依赖、停止条件和 GitHub 交付边界。本文不把计划写成结果，也不授权测试数据解封、标注数据分发或人类参与者研究。
 
 ## 总控问题与证据级别
@@ -35,7 +35,7 @@
 
 **下一动作**
 
-1. 标签级来源排查与既有资源专项结果已整理为 [`t02_source_family_crosswalk_status_2026-10-31.md`](t02_source_family_crosswalk_status_2026-10-31.md)。5,625/5,625 条 payload 重读成功，3,645 项/82 个标签；只有 17/82 个标签与本地权利日志唯一规范化匹配，涉及 2,395/3,645 项。GCIDE 归档和部分图 witness、MeSH/OLS 查询快照存在更强的局部内容/身份链接，但仍不覆盖全部 occurrence、不证明语义支持或清权；逐记录 source-family crosswalk 仍未完成。
+1. 标签级来源排查与既有资源专项结果已整理为 [`t02_source_family_crosswalk_status_2026-10-31.md`](t02_source_family_crosswalk_status_2026-10-31.md)。5,625/5,625 条 payload 重读成功，3,645 项/82 个标签；只有 17/82 个标签与本地权利日志唯一规范化匹配，涉及 2,395/3,645 项。GCIDE 归档和部分图 witness、MeSH/OLS 查询快照存在更强的局部内容/身份链接，但仍不覆盖全部 occurrence、不证明语义支持或清权；逐记录 source-family crosswalk 仍未完成。另核对生成边界：当前冻结包只含 `tools/read_graph.py`，没有 source-evidence producer；恢复历史只提供 `Wn2Lingua/KaikkiBasisHeldoutEvaluation` 标签，producer 实现哈希及所引用输入缺失。因此不能把恢复历史标签提升为已复现的来源链；下一步先从本机受控归档/生成记录定位确切 producer 与输入，否则保留 `source_unresolved` 并停止确认性抽样。
 2. 官方 OEWN 仓库说明 2025 Plus 发布版于 2025-12-31 发布，并将 OEWN 许可标为 CC BY 4.0；其 license 文件要求对 Princeton WordNet 与 OEWN team 署名。CC BY 4.0 还要求提供合理署名、许可链接并说明修改。对 raw gloss 与发布版精确匹配的目标，这提供了一个可追溯的释义文本使用路径；它**不自动清除**混合来源冻结 payload、图规则或其它嵌入材料的权利，也不证明结构分解来自该条 OEWN 释义。外部依据：[OEWN 仓库](https://github.com/globalwordnet/english-wordnet)、[OEWN LICENSE](https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md)、[CC BY 4.0 条款](https://creativecommons.org/licenses/by/4.0/)。
 3. 从可确认的上游记录建立 `target → graph rule/source occurrence → source payload → 原始 provider/release/version → license/attribution → source family` crosswalk；精确 OEWN 释义命中单独记录，不能据此推断 frozen payload 的唯一上游来源或具体 rule 的来源。
 4. 为 crosswalk 增加互斥失败类别：`exact_release_match`、`normalized_only`、`different`、`missing_identity`、`source_unresolved`、`rights_unresolved`。只输出聚合结果和哈希；标识符/释义仅在本机访问受控材料中使用。
@@ -46,15 +46,15 @@
 
 ### Q2 — T04 新开发/确认性 WSD 门
 
-**已有事实**：训练所用 `emotion_xpu` Conda 有 PyTorch 2.12.0+xpu 与可用 Intel Arc XPU；379 条 gold-covered train 目标上的 A/B/C/D 结构 epoch 可重复，训练输入和 checkpoint SHA 相同。这证明训练工程路径，不证明 WSD 增益。全候选编码、token alignment、训练/推断接口与文档簇不确定性已分步实现；既有 SemCor dev 经多轮试点重复使用，开发结果只能算探索。
+**已有事实**：现场通过 `conda run -n emotion_xpu` 复核 Conda 环境，PyTorch `2.12.0+xpu`，`torch.xpu.is_available()` 为 true，设备为 Intel Arc；因此不存在“本机没有 PyTorch”这一阻塞。T04 完整候选打分与兼容路径已实现；最近纠正了 C 条件的拓扑编码：C 是每条完整 AND 分支内依赖节点的无向 2-section，D 保留完整分支。修正后的 A/B/C/D 仅对 379 条 gold-covered SemCor train 目标完成 train-only 训练，seed 17 完整重放的 loss 与 checkpoint SHA 一致；这是训练工程可复现证据，不是 WSD 效果。旧 C 曾是无邻接信息的依赖别名平铺；此前 3-seed 的 80/82/90/82 正确数不构成有效 A/B/C/D 结构比较，必须保留为历史结果且不得重新解释。SemCor dev 已多次用于设计，不能再次调参或作为确认性结果；保留测试未读取。
 
 **下一动作**：
 
-1. 完成新候选语料/评测的许可和来源家族审查，禁止因“公开可下载”推断可训练/再分发。
-2. 冻结 WN3.0 sense key ↔ OEWN ID mapping 表版本、覆盖分母、拆分/异常类别；不使用 gloss 模糊匹配补 gold。
-3. 预先固定新开发数据、候选构造、不评分失败处理、共同 token/算力预算、A/B/C/D 序列化、种子、主要比较 D−B、置信区间和停止规则。
-4. 仅在新开发集做一次计划内调试；报告按目标配对、按来源/文档簇重采样的区间、不同种子波动、全候选/缺失候选分母、长尾/相近义项子组与失败分析。
-5. 只有独立来源、许可、映射和协议都通过后，才解封一次保留评估。外部 LLM 基线须固定版本、输入、成本及许可；旧 dev 和测试数据不得用于阈值选择。
+1. 先解决可用的独立数据来源门：逐资源确认许可、来源家族、构造图/模型预训练暴露；“公开可下载”不等于可训练、再分发或与图独立。当前 SemCor 权利/独立性不满足新确认性实验条件；WiC 与图方法存在 WordNet 来源限制冲突，WiC-TSV 数据许可未确认，GrainWiC 是 WordNet 邻近且 test-only 的次要候选，不能用其唯一测试集开发调参。
+2. 冻结 WN3.0 sense key ↔ OEWN ID mapping 表版本、覆盖分母、拆分/异常类别；不使用 gloss 模糊匹配补 gold。已有 21/400 训练实例保留为不可评分，不可从候选/标签缺口中猜补。
+3. 在取得许可清楚、独立的新开发来源后，预先固定候选构造、候选失败分母、A/B/C/D 序列化（包括共同可用 token/算力预算）、模型与种子、主要比较 D−B、区间和停止规则；成对 C 使用 2-section，不能把历史平铺 C 当成该对照。
+4. 仅在新开发集做协议允许的一次计划内调试；按目标配对并按文档/来源簇重采样，报告种子波动、全候选与不可评分分母、长尾/结构相近子组和错误分析。若来源、许可或预算不可核实，先停在数据可行性与工程验证，不运行新的效果比较。
+5. 只有独立来源、许可、映射和协议均通过后，才一次性解封保留评估。外部 LLM 基线须固定版本、输入、成本及许可；旧 dev 和测试数据不得用于阈值选择。
 
 **PR 切分**：当前候选兼容与数据接口变更各自留在对应 `codex/t04-*` 主题分支；后续 source/rights audit、冻结协议、评估器和最终一次性评分分支分开。PR 状态必须从当前 GitHub 事实核验，分支推送不等同 PR。
 
