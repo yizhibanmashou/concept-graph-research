@@ -35,7 +35,7 @@
 
 **下一动作**
 
-1. 标签级来源排查已整理为 [`t02_source_family_crosswalk_status_2026-10-31.md`](t02_source_family_crosswalk_status_2026-10-31.md)。5,625/5,625 条 payload 重读成功，3,645 项/82 个标签；只有 17/82 个标签与本地权利日志唯一规范化匹配，涉及 2,395/3,645 项。此处仅是标签 triage，不是逐记录 source-family crosswalk，也未清权。
+1. 标签级来源排查与既有资源专项结果已整理为 [`t02_source_family_crosswalk_status_2026-10-31.md`](t02_source_family_crosswalk_status_2026-10-31.md)。5,625/5,625 条 payload 重读成功，3,645 项/82 个标签；只有 17/82 个标签与本地权利日志唯一规范化匹配，涉及 2,395/3,645 项。GCIDE 归档和部分图 witness、MeSH/OLS 查询快照存在更强的局部内容/身份链接，但仍不覆盖全部 occurrence、不证明语义支持或清权；逐记录 source-family crosswalk 仍未完成。
 2. 官方 OEWN 仓库说明 2025 Plus 发布版于 2025-12-31 发布，并将 OEWN 许可标为 CC BY 4.0；其 license 文件要求对 Princeton WordNet 与 OEWN team 署名。CC BY 4.0 还要求提供合理署名、许可链接并说明修改。对 raw gloss 与发布版精确匹配的目标，这提供了一个可追溯的释义文本使用路径；它**不自动清除**混合来源冻结 payload、图规则或其它嵌入材料的权利，也不证明结构分解来自该条 OEWN 释义。外部依据：[OEWN 仓库](https://github.com/globalwordnet/english-wordnet)、[OEWN LICENSE](https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md)、[CC BY 4.0 条款](https://creativecommons.org/licenses/by/4.0/)。
 3. 从可确认的上游记录建立 `target → graph rule/source occurrence → source payload → 原始 provider/release/version → license/attribution → source family` crosswalk；精确 OEWN 释义命中单独记录，不能据此推断 frozen payload 的唯一上游来源或具体 rule 的来源。
 4. 为 crosswalk 增加互斥失败类别：`exact_release_match`、`normalized_only`、`different`、`missing_identity`、`source_unresolved`、`rights_unresolved`。只输出聚合结果和哈希；标识符/释义仅在本机访问受控材料中使用。
