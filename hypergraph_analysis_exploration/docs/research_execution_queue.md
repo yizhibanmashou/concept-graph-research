@@ -90,3 +90,5 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 ### 2026-10-31 合成结构池化 XPU 反向 smoke
 
 在 `emotion_xpu` 的 Intel Arc 上，将可训练标量作用于合成节点向量，经 A/B/C/D 权重矩阵聚合、标量平方损失、反向和 SGD step；loss=11.5733、梯度=23.1466，参数由 1.0 更新到 0.7685，均为有限数。此项只验证 XPU autograd/optimizer 可执行，不读图数据、训练标签、上下文或 dev/test，也不是完整模型训练；下一门槛是在真实冻结 train-only gloss 向量上做一个小批结构前向与反向，并确认内存峰值。
+
+实图文本 smoke 由 `src/analysis/smoke_t04_xpu_train_only_backward.py` 固化：首个 train candidate 的 18 个 OEWN 图 gloss、4 个 OR 分支输入 pinned BERT-tiny，在 XPU 上经过共享编码、A/B/C/D 池化、surrogate loss、37 个参数梯度及 AdamW 更新；surrogate loss=0.8871，peak allocated=87,755,264 bytes。该脚本仅读 candidate_ids 与 graph definitions/rules，不读 labels/context/dev/test。surrogate 目标不是真实 WSD 损失，因此这仍是可复现工程 smoke，不是模型质量或训练有效性证据。

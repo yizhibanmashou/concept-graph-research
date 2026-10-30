@@ -244,3 +244,5 @@
 B/C/D 的均值聚合已改写为 3×N 权重矩阵乘法；合成直接均值对照通过，梯度可回传。length-sort/pad-1 的 train-only XPU profile 两次池化为 5.724/5.680 秒、额外峰值 25,088 bytes；此前直接逐分支实现为 6.94–8.35 秒、339,456 bytes，初步减少约 18%–32% 时间与约 93% 峰值增量。重复次数有限，仍需在新训练批次集成时复核。此优化没有训练或 WSD 质量证据。下一步执行小批反向/优化器工程 smoke。
 
 合成结构池化的 XPU backward/SGD smoke 已在 Intel Arc 通过：有限 loss/gradient，参数更新正常。此项不含新模型参数、真实 WSD 标签或上下文，仅证明算子链支持反向与优化器；端到端小批训练仍待验证。
+
+进一步以首个 train candidate 的 18 条实际 OEWN gloss/4 个分支完成 XPU 编码—A/B/C/D 池化—反向—AdamW 单步 smoke，峰值分配 87.8 MB、37 个参数张量收到梯度。使用的是非监督 surrogate loss，只验证执行链，不构成 WSD 训练或效果证据。脚本为 `src/analysis/smoke_t04_xpu_train_only_backward.py`。

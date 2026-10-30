@@ -181,3 +181,7 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 ### XPU 反向传播与优化器工程 smoke（2026-10-31）
 
 在 `emotion_xpu` / Intel Arc 上用合成节点向量验证权重矩阵池化的 autograd：可训练标量乘节点输入，计算 A/B/C/D 聚合和平方损失，执行 backward 与 SGD step。loss=11.5733，梯度=23.1466，参数从 1.0 更新到 0.7685，均为有限值。该 smoke 只证明合成结构路径的 XPU 反向及 optimizer 可运行；没有加载/训练新模型、没有使用真实目标标签或上下文，也不证明端到端训练资源/效果。下一步在不读 dev/test 的前提下，用真实 train-only gloss 编码的小批次做完整参数更新并测峰值内存。
+
+### 实图释义单候选反向与更新烟测（2026-10-31）
+
+新增 `src/analysis/smoke_t04_xpu_train_only_backward.py`，只从冻结 train JSON 取 candidate IDs，从 OEWN 图读取对应定义和构造分支；不读取 gold labels、句子上下文、dev/test。用 pinned BERT-tiny 对首个候选及其 17 个依赖 gloss（共 18 条、4 个分支；batch 形状 18×30）编码，A/B/C/D 经权重矩阵池化后用明确标注的 surrogate squared-norm objective 反传并执行 AdamW。Intel Arc XPU 返回有限 loss=0.8871、37 个梯度张量，峰值 allocated=87,755,264 bytes，step 正常。此结果只证明真实词典释义输入下小规模编码器—结构池化梯度路径可运行；surrogate loss 无 WSD 监督意义，不能称为训练结果、效果评估或足够支撑全数据训练的资源证明。完整命令由脚本 CLI 提供。
