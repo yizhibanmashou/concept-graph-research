@@ -63,3 +63,33 @@ The variation across seeds is large relative to the between-condition difference
 The comparison uses a common padded 256-token tensor budget and identical candidate inventories, but candidate text lengths are not equal: on the full 3,404 train candidate-target pairs, mean actual candidate tokens were A 49.0, B 132.43, C 152.53, D 156.20; on 910 dev pairs, A 48.64, B 132.92, C 153.15, D 156.83. Thus padding/sequence dimensions are controlled, while the amount of lexical information differs by treatment, especially A versus the structured variants. No held-out test data were read. Checkpoints, predictions, and source inputs remain local under ignored `outputs/` and `tmp/`; they must not be committed.
 
 **Conclusion at this stage:** Conda/XPU local execution is feasible for the tiny pilot. These runs do not support an incremental benefit from D over raw gloss or over the weak frequency baseline; because of repeated development use, seed variance, unequal lexical token content, and absence of a strong comparator, this is not evidence that the full-structure hypothesis is false. The next valid step is to freeze a fresh, source-separated development protocol and token/accounting policy before any further comparative training; do not keep tuning on this reused dev set.
+
+# Fresh document-disjoint SemCor development pilot (protocol frozen before scoring; 2026-10-31)
+
+The old 120-row dev set is retired for model selection because it was reused during pipeline development. A new internal dev set is drawn only from the official SemCor train-document partition (the official SemCor test partition remains untouched). Across all local prepared `train.json` files, the prior selected training set contains 400 unique target IDs (SHA-256 of sorted IDs: `6a444ed9823392840efded96b793121e0f9b272d762dff21c2c468c7851a6aa6`) across 185 documents. Of 246 official SemCor train documents, 61 have no previously selected training target. The first `ceil(0.20 * 61)=13` are reserved for dev by sorting on SHA-256 of `t04-fresh-dev-v1:` plus document ID; the exact IDs and SemCor archive checksum are in `docs/semcor_fresh_dev_document_manifest_2026-10-31.json`. The remaining official-train documents form the training pool. A code-level assertion rejects any overlap between selected train/dev target documents.
+
+Eligibility is determined from annotated-instance availability, observed surface/Penn POS, and at least two candidates in the graph index using the existing first-analysis morphology key; it does not inspect the gold sense key. An audit found 4,678 eligible contexts in the 13 held-out documents, enough for the fixed 120-row dev sample; train pool count was 117,153. The deterministic fixed sample sizes remain 400 train / 120 dev. Candidate identities use the already implemented all-WordNet-morphology union, independent of gold. The source is still SemCor, so this is a document-disjoint development set, not an independent-source benchmark or final test.
+
+Before looking at any new dev labels or scores, freeze the existing exploratory settings: candidate budget 222, joint tensor budget 256, target-centered 32-WordPiece context, `bert-tiny`, one epoch, batch size 4, learning rate `2e-5`, and seeds 17/23/31 across A–D. Primary descriptive contrast D−B; secondary contrasts D−C and B−A, with A–D full table. Report target coverage, all-selected and scorable denominators, token-length distributions, train/dev document hashes, and per-seed paired target outcomes. No hyperparameter, representation, or sample rule may be chosen based on these dev results. Because candidate budget 222 was selected after prior exploration, the comparison remains exploratory even though the document set is new. Held-out official test documents and labels remain unread.
+
+Rebuild locally (from `hypergraph_analysis_exploration/`; output directory must be new):
+
+```powershell
+python src/analysis/tiny_bert_wsd_data.py --nltk-data tmp/nltk_data --oewn-zip tmp/oewn-2025-plus-json.zip --bundle ../OEWN --vocab tmp/models/bert-tiny/vocab.txt --candidate-budget 222 --document-manifest docs/semcor_fresh_dev_document_manifest_2026-10-31.json --out outputs/tiny_bert_fresh_doc_dev_20261031
+```
+
+The manifest lists public corpus document identifiers only; raw SemCor, labels, OEWN contents, token arrays, predictions and model weights stay local and ignored. Treat the manifest hash and all generated data hashes as required run inputs. If the installed corpus hash or document eligibility differs, stop and review rather than silently substituting data.
+
+## Fresh-split preparation result (2026-10-31; before model scoring)
+
+The frozen manifest was consumed successfully. Train and dev selected targets are document-disjoint (enforced in code); 400 train targets reproduce the old train sample ID hash `6a444ed9823392840efded96b793121e0f9b272d762dff21c2c468c7851a6aa6`, while the new 120-row dev sample has hash `0353dc63199e934e0fb694c0cff4c8fd57351e63dd944ebe4abd5cfd91b902ab`. The selected dev targets span 12 of the 13 reserved documents. Full-candidate counts are 3,404 train and 1,158 dev, with zero candidate encoding failures; 379/400 train and 111/120 fresh dev targets are scoreable. Sentence windows are truncated for 250/400 train and 68/120 dev targets, with target occurrences retained. The 9 unscorable dev items remain in the selected denominator and are excluded from scorable accuracy only; report both denominators. This is a newly held-out internal dev by document, not external-source validation. The prepared files are local/ignored at `outputs/tiny_bert_fresh_doc_dev_20261031/`; exact input and document hashes are in its local `metadata.json`.
+
+Only after this protocol and prepared input were frozen may the already specified seeds be run:
+
+```powershell
+conda run -n emotion_xpu python src/analysis/tiny_bert_wsd_train.py --data outputs/tiny_bert_fresh_doc_dev_20261031 --model tmp/models/bert-tiny --out outputs/tiny_bert_fresh_doc_xpu_seed17_20261031 --device xpu --seed 17
+conda run -n emotion_xpu python src/analysis/tiny_bert_wsd_train.py --data outputs/tiny_bert_fresh_doc_dev_20261031 --model tmp/models/bert-tiny --out outputs/tiny_bert_fresh_doc_xpu_seed23_20261031 --device xpu --seed 23
+conda run -n emotion_xpu python src/analysis/tiny_bert_wsd_train.py --data outputs/tiny_bert_fresh_doc_dev_20261031 --model tmp/models/bert-tiny --out outputs/tiny_bert_fresh_doc_xpu_seed31_20261031 --device xpu --seed 31
+```
+
+No training result is recorded here until these runs actually finish. Do not change the protocol in response to these scores; if an implementation defect is found, stop, preserve the result, document the defect, and prepare a new version before rerunning.

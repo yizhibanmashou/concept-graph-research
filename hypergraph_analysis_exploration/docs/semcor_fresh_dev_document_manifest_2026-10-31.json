@@ -1,0 +1,31 @@
+{
+  "manifest_version": "t04-semcor-doc-holdout-v1",
+  "corpus": "SemCor",
+  "source_partition": "official train documents only",
+  "official_document_split_seed": 17,
+  "selection_policy": "Among official SemCor train documents with no target in any existing local prepared train.json, sort by SHA-256('t04-fresh-dev-v1:' + document_id) and reserve the first ceil(20% * eligible_document_count) as fresh development documents. Eligibility is based on surface/POS having at least two graph candidates; no gold sense key participates.",
+  "prior_prepared_train_documents": 185,
+  "prior_prepared_train_target_ids": 400,
+  "prior_prepared_train_sample_ids_sha256": "6a444ed9823392840efded96b793121e0f9b272d762dff21c2c468c7851a6aa6",
+  "previously_untouched_documents": 61,
+  "fresh_development_documents": [
+    "brownv/tagfiles/br-b14.xml",
+    "brown2/tagfiles/br-l13.xml",
+    "brownv/tagfiles/br-d16.xml",
+    "brownv/tagfiles/br-a37.xml",
+    "brown2/tagfiles/br-f22.xml",
+    "brownv/tagfiles/br-a44.xml",
+    "brown1/tagfiles/br-j18.xml",
+    "brown1/tagfiles/br-k11.xml",
+    "brownv/tagfiles/br-j24.xml",
+    "brownv/tagfiles/br-m05.xml",
+    "brownv/tagfiles/br-g07.xml",
+    "brownv/tagfiles/br-a26.xml",
+    "brownv/tagfiles/br-m04.xml"
+  ],
+  "fresh_development_document_set_sha256": "a3fda57c5375c1ee12500e5c0cfe20f49319ab03857874c85d8e709a24196930",
+  "semcor_archive_sha256": "126fa2e829ab63edd5b3fd9de45ef1d60d6880e01e25abc55b5ac7918a824655",
+  "expected_eligible_contexts_without_gold_key": 4678,
+  "target_count": 120,
+  "limitations": "This is an internal document-disjoint development subset drawn only from SemCor's official train partition. It is not an independent source or final test set. The document IDs and selection manifest contain no text or sense labels."
+}

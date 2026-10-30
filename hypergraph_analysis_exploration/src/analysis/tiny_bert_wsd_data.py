@@ -130,6 +130,8 @@ def main():
     parser.add_argument('--bundle', type=Path, required=True)
     parser.add_argument('--vocab', type=Path, required=True)
     parser.add_argument('--candidate-budget', type=int, choices=(94, 222), default=94)
+    parser.add_argument('--document-manifest', type=Path,
+                        help='optional document-disjoint train/dev manifest using official SemCor train docs')
     parser.add_argument('--out', type=Path, required=True, help='new directory')
     args = parser.parse_args()
     import nltk
@@ -139,6 +141,26 @@ def main():
     if wordnet.get_version() != '3.0':
         raise ValueError('expected WordNet 3.0')
     split = partition(semcor.fileids())
+    document_manifest = None
+    document_manifest_sha256 = None
+    if args.document_manifest:
+        document_manifest = json.loads(args.document_manifest.read_text(encoding='utf-8'))
+        if document_manifest.get('manifest_version') != 't04-semcor-doc-holdout-v1':
+            raise ValueError('unsupported document manifest version')
+        dev_docs = document_manifest.get('fresh_development_documents')
+        if not isinstance(dev_docs, list) or not dev_docs or len(dev_docs) != len(set(dev_docs)):
+            raise ValueError('fresh development documents must be a nonempty unique list')
+        official_train_docs = set(split['train'])
+        if not set(dev_docs).issubset(official_train_docs):
+            raise ValueError('fresh development documents must be from official SemCor train only')
+        if document_manifest.get('semcor_archive_sha256') != digest(args.nltk_data / 'corpora/semcor.zip'):
+            raise ValueError('SemCor archive hash does not match the document manifest')
+        expected_doc_hash = stable_hash('\n'.join(dev_docs))
+        if document_manifest.get('fresh_development_document_set_sha256') != expected_doc_hash:
+            raise ValueError('fresh development document-list hash does not match the manifest')
+        split = {'train': [doc for doc in split['train'] if doc not in set(dev_docs)],
+                 'dev': dev_docs}
+        document_manifest_sha256 = digest(args.document_manifest)
     with zipfile.ZipFile(args.oewn_zip) as archive:
         mapping = _load_oewn_sense_keys(archive)
     nodes_file = args.bundle / 'graph/nodes.tsv'
@@ -197,11 +219,14 @@ def main():
 
     results = {}
     counts = {}
+    selected_document_ids = {}
+    eligible_target_pool = {subset: len(collected[subset]) for subset in ('train', 'dev')}
     excluded_targets = {'train': [], 'dev': []}
     for subset, size in (('train', 400), ('dev', 120)):
         records = select(collected[subset], size)
         if len(records) < size:
             raise ValueError(f'not enough eligible {subset} targets')
+        selected_document_ids[subset] = sorted({record['doc'] for record in records})
         output = []
         stats = Counter(selected=len(records))
         for record in records:
@@ -258,12 +283,21 @@ def main():
                            'inputs': versions})
         results[subset] = output
         counts[subset] = dict(stats)
+    if set(selected_document_ids['train']) & set(selected_document_ids['dev']):
+        raise ValueError('selected train and dev targets overlap by document')
     args.out.mkdir(parents=True, exist_ok=False)
     for subset in ('train', 'dev'):
         (args.out / (subset + '.json')).write_text(json.dumps(results[subset], sort_keys=True, separators=(',', ':')), encoding='utf-8')
     (args.out / 'excluded_targets.json').write_text(
         json.dumps(excluded_targets, sort_keys=True, indent=2), encoding='utf-8')
     metadata = {'counts': counts, 'split_seed': 17, 'candidate_budget': args.candidate_budget,
+                'eligible_target_pool': eligible_target_pool,
+                'document_counts': {subset: len(split[subset]) for subset in ('train', 'dev')},
+                'document_ids_sha256': {subset: stable_hash('\n'.join(split[subset])) for subset in ('train', 'dev')},
+                'selected_document_counts': {subset: len(selected_document_ids[subset]) for subset in ('train', 'dev')},
+                'document_split_policy': ('official SemCor split seed 17' if document_manifest is None else
+                    'official SemCor train documents repartitioned by frozen T04 document manifest; train/dev document-disjoint'),
+                'document_manifest_sha256': document_manifest_sha256,
                 'joint_budget': 128 if args.candidate_budget == 94 else 256,
                 'context_budget': 32, 'context_policy': 'target-centered with [unused0]/[unused1] occurrence markers',
                 'candidate_morphology_policy': 'lowercased observed surface; union of all NLTK WordNet _morphy analyses for POS; normalized-surface fallback if no analysis; gold-independent',
