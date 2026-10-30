@@ -25,12 +25,15 @@ SAFE_TOKEN = re.compile(r"^[A-Za-z0-9_.:/-]{1,48}$")
 DATE_LIKE = re.compile(r"\b20\d{2}[-/.]\d{1,2}(?:[-/.]\d{1,2})?\b")
 SEMVER_LIKE = re.compile(r"^v?\d+\.\d+(?:\.\d+)?(?:[-+][A-Za-z0-9.-]+)?$")
 HASH_LIKE = re.compile(r"^[0-9a-fA-F]{40}(?:[0-9a-fA-F]{24})?$")
+RAW_SHA256_LIKE = re.compile(r"^raw-sha256:([0-9a-fA-F]{64})$")
 
 
 def _version_shape(value: Any) -> str:
     if not isinstance(value, str) or not value.strip():
         return "missing"
     value = value.strip()
+    if RAW_SHA256_LIKE.fullmatch(value):
+        return "raw_sha256_fingerprint"
     if HASH_LIKE.fullmatch(value):
         return "hash_like"
     if DATE_LIKE.search(value):
@@ -77,6 +80,9 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
             "evidence_items": 0,
             "records": 0,
             "version_shape": Counter(),
+            "source_version_fingerprints": set(),
+            "definition_hash_valid": 0,
+            "source_version_equals_definition_hash": 0,
             "evidence_type": Counter(),
             "locator_host": Counter(),
             "ontology_host": Counter(),
@@ -117,6 +123,19 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
             aggregate["evidence_items"] += 1
             seen.add(label)
             aggregate["version_shape"][_version_shape(item.get("source_version"))] += 1
+            version_value = item.get("source_version")
+            version_match = (
+                RAW_SHA256_LIKE.fullmatch(version_value)
+                if isinstance(version_value, str)
+                else None
+            )
+            definition_hash = item.get("definition_text_sha256")
+            if version_match:
+                aggregate["source_version_fingerprints"].add(version_match.group(1).lower())
+                if isinstance(definition_hash, str) and HASH_LIKE.fullmatch(definition_hash):
+                    aggregate["definition_hash_valid"] += 1
+                    if version_match.group(1).lower() == definition_hash.lower():
+                        aggregate["source_version_equals_definition_hash"] += 1
             aggregate["evidence_type"][_safe_enum(item.get("evidence_type"))] += 1
             aggregate["locator_host"][_host(item.get("source_locator"))] += 1
             aggregate["ontology_host"][_host(item.get("source_ontology"))] += 1
@@ -132,13 +151,16 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
             "evidence_items": aggregate["evidence_items"],
             "records": aggregate["records"],
             "version_shape": dict(sorted(aggregate["version_shape"].items())),
+            "unique_source_version_fingerprints": len(aggregate["source_version_fingerprints"]),
+            "definition_hash_valid": aggregate["definition_hash_valid"],
+            "source_version_equals_definition_hash": aggregate["source_version_equals_definition_hash"],
             "evidence_type": dict(sorted(aggregate["evidence_type"].items())),
             "locator_host": dict(sorted(aggregate["locator_host"].items())),
             "ontology_host": dict(sorted(aggregate["ontology_host"].items())),
             "field_presence": dict(sorted(aggregate["field_presence"].items())),
         }
     return {
-        "schema_version": "t02-targeted-source-metadata-audit/1",
+        "schema_version": "t02-targeted-source-metadata-audit/2",
         "summary": {"indexed_records": len(rows), "payloads_read": payloads_read,
                     "payload_errors": dict(sorted(errors.items())),
                     "target_labels": len(TARGET_LABELS),
@@ -146,6 +168,20 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
         "inputs_sha256": {"source_records_index": hashlib.sha256(index_bytes).hexdigest(),
                           "scoped_payload_set": payload_digest.hexdigest()},
         "labels": labels,
+        "target_labels_share_source_version_fingerprint": (
+            len(TARGET_LABELS) == 2
+            and all(len(by_label[label]["source_version_fingerprints"]) == 1 for label in TARGET_LABELS)
+            and all(
+                by_label[label]["version_shape"].get("raw_sha256_fingerprint", 0)
+                == by_label[label]["evidence_items"]
+                for label in TARGET_LABELS
+            )
+            and len(
+                set.intersection(
+                    *(by_label[label]["source_version_fingerprints"] for label in TARGET_LABELS)
+                )
+            ) == 1
+        ),
         "limits": "Metadata shape and hostname counts do not bind the local records to an upstream dump/version or establish rights clearance.",
     }
 

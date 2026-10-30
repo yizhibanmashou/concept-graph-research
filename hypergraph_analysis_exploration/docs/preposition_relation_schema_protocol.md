@@ -119,18 +119,18 @@ python -m unittest tests.test_reconcile_t02_source_label_rights -v
 
 ### 5.2.3 Kaikki/Wiktextract 高占比标签版本形态核查（2026-10-31）
 
-为追查未匹配的两个高频标签，新增 `src/analysis/audit_t02_targeted_source_metadata.py`，只对这两个原样标签汇总 `source_version` 形态、`evidence_type` 枚举、locator/ontology 主机名与字段覆盖；不输出原始版本值、locator、URL、定义、义项 ID 或本地路径。全量复扫指定子集 5,625/5,625 个 payload 无解析错误，两个标签共 1,082 个 evidence item：targeted gap 881 项（878 条记录），relaxed fallback 201 项（201 条记录）。两标签的 `source_version` 均有值，但 1,082/1,082 都落在“其他非空字符串”形态，而不是可识别日期、语义版本号或提交哈希；`source_locator` 全部不是 HTTP(S) URL，`source_ontology` 全部缺失。`evidence_type` 分别为 `definition`（881）和 `related_definition`（201）。因此当前包内字段不足以确认具体 dump snapshot 或将本地证据绑定到其字节版本；这些标签继续保持 `unresolved`，不进入独立 source-family holdout 或许可放行。
+为追查未匹配的两个高频标签，新增 `src/analysis/audit_t02_targeted_source_metadata.py`，只对这两个原样标签汇总 `source_version` 形态、`evidence_type` 枚举、locator/ontology 主机名与字段覆盖；不输出原始版本值、摘要、locator、URL、定义、义项 ID 或本地路径。全量复扫指定子集 5,625/5,625 个 payload 无解析错误，两个标签共 1,082 个 evidence item：targeted gap 881 项（878 条记录），relaxed fallback 201 项（201 条记录）。后续对安全字段的二次比对发现，1,082/1,082 的 `source_version` 均为 `raw-sha256:<64 hex>` 形态；两个标签分别只有一个不同的摘要，且二者相同。字段名和格式只能说明它是一个 SHA-256 标记，**不能说明被哈希的对象是什么**。两标签中 881/881 与 201/201 条记录均有格式合法的 `definition_text_sha256`，但 `source_version` 摘要与该定义文本哈希 0/1,082 相等。因此该摘要不是此处定义文本哈希的直接复写；尚无本地生成器、清单或上游发行字节将其绑定到确定的数据对象/版本。`source_locator` 全部不是 HTTP(S) URL，`source_ontology` 全部缺失；`evidence_type` 分别为 `definition`（881）和 `related_definition`（201）。Kaikki 来源快照、逐记录来源身份和许可仍为 `unresolved`，不进入独立 source-family holdout 或许可放行。
 
 这与 Kaikki 官方 raw-data 页面当前列出的 enwiktionary dump 日期（2026-10-01）并不矛盾：网页说明的是当前公开 raw extraction，不能反向证明冻结包中的这 1,082 项来自同一日期或同一字节版本。[Kaikki raw downloads](https://kaikki.org/dictionary/rawdata.html)。Wiktionary 声明贡献者文本按 CC BY-SA 与 GFDL 发布，同时提醒外部来源内容可能有单独版权条款；这也不能替代逐记录来源和条款核验。[Wiktionary copyrights](https://en.wiktionary.org/wiki/Wiktionary%3ACopyrights)。
 
 重放（输出必须是新路径）：
 
 ```powershell
-python -m src.analysis.audit_t02_targeted_source_metadata --bundle ../OEWN --out outputs/t02_targeted_source_metadata_20261031.json
+python -m src.analysis.audit_t02_targeted_source_metadata --bundle ../OEWN --out outputs/t02_targeted_source_metadata_20261031_v2.json
 python -m unittest tests.test_audit_t02_targeted_source_metadata -v
 ```
 
-本机 ignored 聚合结果 `outputs/t02_targeted_source_metadata_20261031.json` 的输入摘要：index `b24d7484aa4364f002c05b8a20687e266dcb7868ee97c241d10a2b28b69b4195`；scoped payload set `a18721c319f2deee70168deda60f4deb48f4f2a296975bcb3e36996900246852`。两项合成测试覆盖版本分类、host 提取、目标标签筛选及私密字段不泄漏。该分析只补强来源可追溯性检查，不构成清权或定义语义验证。
+本机 ignored 聚合结果 `outputs/t02_targeted_source_metadata_20261031_v2.json` 的输入摘要：index `b24d7484aa4364f002c05b8a20687e266dcb7868ee97c241d10a2b28b69b4195`；scoped payload set `a18721c319f2deee70168deda60f4deb48f4f2a296975bcb3e36996900246852`。更新后的三项合成测试覆盖摘要格式识别、跨标签相同摘要检测、与定义文本哈希相等/不等判定、host 提取、标签筛选及摘要/私密字段不泄漏。该分析只补强来源可追溯性检查，不构成清权或定义语义验证。
 
 ### 5.3 盲化、双标与仲裁（执行前需负责人确认）
 
