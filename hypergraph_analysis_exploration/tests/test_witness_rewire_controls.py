@@ -22,6 +22,15 @@ class RewireTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             rewire({'a': ('a', 'a')}, 1)
 
+    def test_group_preservation_per_source(self):
+        graph = {'a': ('b', 'c'), 'b': ('a', 'd'), 'c': ('a',), 'd': ('b',), 'e': ('e',)}
+        groups = {'a': 'x', 'b': 'x', 'c': 'y', 'd': 'y', 'e': 'x'}
+        changed, _ = rewire(graph, 101, 100, groups=groups)
+        for head in graph:
+            self.assertEqual(Counter(groups[x] for x in graph[head]), Counter(groups[x] for x in changed[head]))
+        with self.assertRaises(ValueError):
+            rewire(graph, 101, groups={'a': 'x'})
+
 
 if __name__ == '__main__':
     unittest.main()
