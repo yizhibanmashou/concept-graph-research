@@ -21,7 +21,7 @@
 | T02 | `codex/t02-sampling-precision` / `fe02bef`；schema dry-run `codex/t02-schema-dry-run` / `9e1ef8e` | 抽样框、分层成本和精度敏感性脚本已推送；PR 创建/查询接口仍返回 `Unknown tool`，尚无确认 PR | [打开抽样方案 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t02-sampling-precision)；正式样本仍等待目标精度/工时决策 |
 | T03 | `codex/t03-demo-task-audit` / `f4b0454` | 五任务验收文档及只读真实图 API smoke 已推送；PR 创建 connector 返回 `Unknown tool`，未确认 PR/CI | [打开知径验收 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t03-demo-task-audit)；后续做来源内容人工回查与窄屏/键盘核查 |
 | T04 | `codex/t04-structure-input-design` / `2bb56c5`（含 `38b5595`、`f679af7`、`ec24055`）；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计、Conda/XPU 训练记录、合成关系 view checker 和硬件烟测已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
-| T05 | `codex/t05-data-feasibility` / `59edb70` | Wordbank schema/访问 gate 已补；PR 创建/查询仍返回 `Unknown tool`，尚无确认的 PR 编号 | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 编号与 CI |
+| T05 | `codex/t05-data-feasibility` / `d8f1a17` | Wordbank schema/许可边界与 missingness 风险已补；PR 创建/查询仍返回 `Unknown tool`，尚无确认 PR | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 与 CI |
 
 GitHub connector 本轮 `create_pull_request` 调用实际返回 `Unknown tool`；不是代码或远端 push 失败。工具恢复前，分支已经在线，PR 创建链接可直接使用。不得在报告里把远端分支说成 PR，也不得据此声称 CI 通过。
 
@@ -69,8 +69,8 @@ GitHub connector 本轮 `create_pull_request` 调用实际返回 `Unknown tool`�
 
 ### Q5 · T05 外部数据盘点
 
-- **已完成：** 官方 Wordbank、CHILDES/TalkBank、Brysbaert–Biemiller 页面审查；Wordbank 官方 Data 页及 datapage schema 源码核对出 child/word/child-by-word 粒度、item 字段和 `datasets.license`，未下载儿童级响应。见 [T05 可行性文档](https://github.com/yizhibanmashou/concept-graph-research/blob/codex/t05-data-feasibility/hypergraph_analysis_exploration/docs/t05_data_feasibility_2026-10-31.md)。
-- **下一步：** 完成 Wordbank 英语工具、表单、年龄范围、item 定义、逐数据集 license 和固定 release 表；schema 暴露 Redivis API token 依赖，本轮未尝试从本机凭证获取访问。向 AoA 权利方确认数据访问与衍生义项映射权。CHILDES 只筛选许可证明确且时间密度合适的具体语料。
+- **已完成：** 官方 Wordbank、CHILDES/TalkBank、Brysbaert–Biemiller 页面审查；Wordbank 官方 Data 页及 datapage schema 源码核对出 child/word/child-by-word 粒度、item 字段和 `datasets.license`，未下载儿童级响应。10-31 页面复核新增关键变量限制：by-word proportion 将 missing response 计作 negative；理解变量仅在相应 WG 表单可用；Elison English WG 暂不在部分导出视图但仍在 Redivis/词汇常模。英文 CDI 表单与响应数据许可须区分。T05 文档更新至 `d8f1a17`，见 [可行性文档](https://github.com/yizhibanmashou/concept-graph-research/blob/codex/t05-data-feasibility/hypergraph_analysis_exploration/docs/t05_data_feasibility_2026-10-31.md)。
+- **下一步：** 判断官方页面/API能否匿名读取仅含 datasets/instruments 的元数据；如果访问要求账户授权，则登记为 waiting-for-access，不读取本机凭证、不提取 child-by-word 表。按 Wordbank release 固定英语工具、form、item、逐 dataset license、administration 数。向 AoA 权利方确认 Living Word Vocabulary 原始行数据访问/衍生映射权；UGent 论文条目标注 in-copyright，开放论文不等于开放数据。CHILDES 逐 corpus 核对许可证、注册/批准级别和纵向密度。
 - **放行：** 每个 dataset/corpus 有明确版本、访问权、license、单位定义和可再分发限制；义项映射指南和 source/lemma split 先冻结。
 - **停止：** 没有合法可用的义项级数据时，继续报告图计算性质；不把词形 norm 冒充义项习得，也不使用未授权第三方副本。
 
