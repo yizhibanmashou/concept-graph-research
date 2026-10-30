@@ -27,7 +27,7 @@ def operators(value):
 def lexical_uses(value):
     if isinstance(value, dict):
         if value.get('op') == 'use':
-            yield value.get('occurrence_id')
+            yield value
         for child in value.values():
             yield from lexical_uses(child)
     elif isinstance(value, list):
@@ -55,8 +55,15 @@ def audit(source, candidates):
             raise ValueError('unexpected lexical occurrence')
         if set(row['used_occurrence_ids']) != {v['occurrence_id'] for v in lexical}:
             raise ValueError('used occurrence bookkeeping mismatch')
-        if Counter(lexical_uses(row['formula']['rhs'])) != Counter(v['occurrence_id'] for v in lexical):
+        uses = list(lexical_uses(row['formula']['rhs']))
+        if Counter(v.get('occurrence_id') for v in uses) != Counter(v['occurrence_id'] for v in lexical):
             raise ValueError('formula and binding plan disagree')
+        for use in uses:
+            interface = source['interfaces'][f"{use['synset_id']}::{use['usage_id']}"]
+            names = [parameter['name'] for parameter in interface['parameters']]
+            plan = next(item for item in lexical if item['occurrence_id'] == use['occurrence_id'])
+            if [arg.get('var') for arg in use['args']] != [plan['bindings'][name] for name in names]:
+                raise ValueError('formula arguments and binding plan disagree')
         if matching:
             binding = matching[0]['bindings']
             key = tuple(sorted(binding.items()))
