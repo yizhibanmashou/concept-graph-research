@@ -269,3 +269,19 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 [SemEval 官方 FAQ](https://semeval.github.io/faq.html) 说明过往任务数据由各任务组织方分发；2020 年起才要求任务组织者在评测结束后归档至 Zenodo。故后续应按 Senseval-2、Senseval-3、SemEval-2007 Task 17、SemEval-2013 Task 12、SemEval-2015 Task 13 分别找组织方/原始 task 许可和允许的研究用途，不能从某个 task 的许可推广到其他 task。当前 web 检索中 SemEval-2007 的一条“需签许可”页面实际属于 Task 9（多层语义标注），不是 WSD Task 17，已排除，不用其许可结论替代 Task 17 权利核查。
 
 实施上的下一步是先只建立包含原始发布者、任务编号、官方数据入口、许可/署名条款、是否可缓存、是否允许再分发、模型既往暴露、数据是否曾在本项目中打开的 metadata 表；不拉取 xml/gold 文件。只有至少一个子集的权利、隔离和可评分映射 gate 均有书面证据，且实验协议冻结后，才考虑将其纳入一次性评测。当前无需再追求“先跑一个 benchmark 数字”。
+
+#### 五个英语 WSD 子集的逐任务权利边界（2026-10-31）
+
+本轮只查阅任务/发布者页面和数据发布仓库说明，不下载、不解压、不打开任何 benchmark XML、gold key 或测试实例。核查结果如下：
+
+| 子集 | 已核实的发布/来源事实 | 本轮找到的许可证据 | 当前判定 |
+| --- | --- | --- | --- |
+| Senseval-2 English all-words | Senseval-3 官方历史页的任务表可定位 all-words 测试数据；Raganato 框架将该子集统一用于 WN3.0 评测 | 页面未呈现足以判断缓存、修改或再分发的明确条款 | 权利 unresolved；不得因下载按钮推断开放许可 |
+| Senseval-3 English all-words | Senseval-3 官方历史页列出 English all-words test data 下载项 | 当前检索到的任务/数据页没有明确授权范围 | 权利 unresolved；尚未确认是否允许本地研究缓存 |
+| SemEval-2007 Task 17 subtask 3 | ACL Anthology 确认 Task 17 包含 English all-words；Raganato 页面提供统一版本 | 检索到的“需签使用许可”官方说明实际属于 SemEval-2007 Task 9，不适用于此处；Task 17 的具体数据条款尚未找到 | 权利 unresolved；Task 9 条款不得移植 |
+| SemEval-2013 Task 12 English | 原任务是 multilingual WSD；SapienzaNLP 更新仓库说明，英语 WSD 数据已由 Raganato et al. 收集 | SapienzaNLP 仓库的 CC BY-NC 4.0 仅能证明其明确发布的数据/代码条款；其 README 明确该仓库只含法、德、意、西语更新数据，不含英语 | 不能用该仓库许可覆盖 Raganato 英语子集；权利 unresolved |
+| SemEval-2015 Task 13 English | 官方 Task 13 页面列出 trial/test 数据和组织者；Raganato 框架收录英语 all-words 部分 | 官方任务页页脚保留版权，但没有给出可复用数据许可；SapienzaNLP 更新仓库同样排除英语子集 | 权利 unresolved；需任务组织者/原始发布方确认 |
+
+这次检索没有任何一个英语子集达到“许可可确认、可缓存用途明确、可公开再分发明确”的完整 gate。SemEval 官方 FAQ 也说明旧任务数据由任务组织者分发，而不是由 SemEval 统一授权；因此 Raganato 的统一打包和公开下载只解决技术访问，不自动解决原始数据权利。NLTK 的 `senseval` 包许可摘要是另一个独立分发包，不能仅凭同名就认定为 Raganato English all-words 文件的许可。当前不打开测试资源；下一步优先向各原任务发布方核对书面条款，并单独查模型预训练/历史暴露及项目内既往访问记录。若始终无法确认任何英语子集权利，应更换有明确许可和可追溯身份的评测来源，或将外部测试标为不可执行，不从可下载性倒推授权。
+
+依据：[Raganato evaluation data](https://lcl.uniroma1.it/wsdeval/evaluation-data)、[Senseval-3 官方数据页](https://web.eecs.umich.edu/~mihalcea/senseval/senseval3/data.html)、[SemEval 官方 FAQ](https://semeval.github.io/faq.html)、[SemEval-2015 Task 13 官方数据页](https://alt.qcri.org/semeval2015/task13/index.php?id=data-and-tools)、[SapienzaNLP multilingual WSD release 说明及许可](https://github.com/SapienzaNLP/mwsd-datasets)、[NLTK 数据许可摘要（仅作同名包边界核对）](https://github.com/nltk/nltk_data/blob/gh-pages/DATASET-LICENSES.md)、[SemEval-2007 Task 17 论文记录](https://aclanthology.org/S07-1016/)。其中“当前页面未找到明确许可”表示本轮公开页面审查未能确认，不等于断言不存在其他许可文件或法律授权。
