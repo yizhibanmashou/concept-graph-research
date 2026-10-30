@@ -49,4 +49,5 @@ PR/CI/合并的在线核验链接：
 ## 本轮新增记录
 
 - T01 新增 `research/tologic/semantic_review_protocol.md`，导出器提供结构化诊断字段。它只把流程准备推进到可交审阅状态；没有生成或提交人工标签，也没有新增语义结果。
+- T01-0 本地提交 `d83acd3` 已推送至 `codex/t01-semantic-review-protocol`；尝试通过 GitHub connector 创建 PR 时服务返回 `Unknown tool`，因此当前没有 PR。可从[分支创建 PR](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t01-semantic-review-protocol)。
 - 本地 XPU 环境由 `conda run -n emotion_xpu` 调用，实测 PyTorch `2.12.0+xpu`、Intel Arc Graphics、`torch.xpu.is_available() == True`。这只证明环境可见，不等于当前 T01/T04 训练方案已完成资源/预算验收。
