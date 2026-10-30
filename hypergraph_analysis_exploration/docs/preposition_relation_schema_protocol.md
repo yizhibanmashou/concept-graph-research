@@ -194,9 +194,11 @@ python -m src.analysis.audit_t02_oewn_prep_overlap `
 
 ## 10. 全部 eligible OEWN 目标的释义来源与 `prep` 结构影响（2026-10-31）
 
-新增 `src/analysis/audit_t02_full_oewn_prep_overlap.py`，在冻结图全部 eligible OEWN 目标上逐条校验来源 payload checksum 和 synset identity，再将同一记录的 raw/effective definition 与固定 OEWN 2025 Plus 发布包比对。脚本只写聚合计数及输入 SHA，不写 target ID、lemma、释义、标注或标签。完整 ignored 输出为 `outputs/t02_full_oewn_prep_overlap_20261031.json`，SHA-256 `969c908f796eff082c51dc141b8f9e68c0abedcee4e4437bf1d769d853bda3cc`。
+新增 `src/analysis/audit_t02_full_oewn_prep_overlap.py`，在冻结图全部 eligible OEWN 目标上逐条校验来源 payload checksum 和 synset identity，再将同一记录的 raw/effective definition 与固定 OEWN 2025 Plus 发布包比对。随后扩展检查每条活动图分支的 `active_clause_sources`，验证分支数与规则分支一一对应、clause index 连续，且每个 source-document 引用均绑定至 checksum 和 synset identity 已核验的同目标 payload。脚本只写聚合计数及输入 SHA，不写 target ID、lemma、释义、标注或标签。带分支回链的完整 ignored 输出为 `outputs/t02_full_oewn_prep_overlap_lineage_20261031.json`，schema `/2`，SHA-256 `571937a72af641d606034cb39d45bb8d15ceff30245627ee1cb878d5d3fd8082`。
 
 总体包含 104,907 个标准 POS（n/v/a/r）且冻结节点定义非空的 OEWN 目标；104,907/104,907 个目标都找到唯一的 `indexes/senses.jsonl` 身份行，并校验了 109,497 个唯一来源 payload 的包内 checksum 与 payload synset identity。104,886 个目标至少有一条 raw definition 与官方发布版释义精确匹配，21 个未精确匹配。effective definition 中 101,354 个精确匹配，3,553 个非空但不同；该结果是字符串来源匹配状态，不代表定义改写正确或错误。
+
+**构造分支级来源回链结果：**104,907 个目标共含 145,991 条活动图分支、146,134 条分支—来源 payload 引用；每个分支的来源引用均通过同一 synset 身份和 payload checksum 核验。140,170/146,134 条引用的来源 raw definition 与固定发布版逐字匹配；140,109/145,991 条分支至少有一个 raw-exact 来源 payload。共有 101,753/104,907 个目标满足“每一条活动分支至少有一个 raw-exact 来源 payload”，另有 3,133 个整体 raw definition 命中发布版、但未达到逐分支覆盖条件的目标。effective-definition 口径对应 98,323 个全分支覆盖目标。由此，104,886 个整体释义命中不能直接当成所有分支均有释义来源支持的样本框；101,753 只是更严格的**候选覆盖总体**，不是已批准的盲审总体，也不证明分支语义忠实或冻结结构的许可已解决。
 
 同一总体有 145,991 个原始 OR 分支。移除 `pos=prep` occurrence：删去 198,543 个 occurrence，改变 116,616 个分支，产生 358 个新空分支；84,976 个目标受影响，462 个目标出现新增非空分支碰撞，新增碰撞 excess 为 566。`prep_phrase` 敏感性口径相对主口径额外删去 303 个 occurrence、改变 85 个分支、增加 9 个新空分支和 1 个碰撞 excess；受影响目标从 84,976 增至 85,028。该分母不同于旧报告中包含非 OEWN 项目的 110,425 个全图节点，两个总体不可互换。
 
@@ -209,4 +211,4 @@ python -m src.analysis.audit_t02_full_oewn_prep_overlap `
   --out outputs/t02_full_oewn_prep_overlap_<new-run>.json
 ```
 
-此全量审计补齐了结构影响总体分母和 release-string overlap，却没有解决上游来源家族、许可、人工盲审或精度/工时决定。它不是定义保真实验，也不授权分发样本。下一步应在来源许可可确认的范围内建立来源家族 crosswalk，再依据用户决定的目标等权估计量与资源上限冻结独立盲审样本；没有可核实证据的关系类型仍标 `unresolved`。
+此全量审计补齐了结构影响总体分母、release-string overlap 和分支到来源 payload 的身份回链，却没有解决原始 provider/release/source family、结构来源权利、人工盲审或精度/工时决定。它不是定义保真实验，也不授权分发样本。下一步应在来源许可可确认的范围内建立 source-family/right crosswalk，再由负责人从合格覆盖总体中确定抽样框，并依据目标等权估计量与资源上限冻结独立盲审样本；没有可核实证据的关系类型仍标 `unresolved`。

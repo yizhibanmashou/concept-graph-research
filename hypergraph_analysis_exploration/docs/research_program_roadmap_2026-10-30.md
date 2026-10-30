@@ -221,7 +221,7 @@
 
 ## 11. 2026-10-31 总控增量：T02 OEWN 全量影响框
 
-本地新增 `src/analysis/audit_t02_full_oewn_prep_overlap.py`，完整审计 104,907 个 eligible OEWN 目标，并校验 104,907 个 index identity 及 109,497 个来源 payload 的 bundle checksum 和 synset identity。固定 OEWN 2025 Plus release-string exact match 覆盖 raw definition 104,886/104,907；effective definition 101,354/104,907 精确、3,553 条非空但不同。
+本地新增 `src/analysis/audit_t02_full_oewn_prep_overlap.py`，完整审计 104,907 个 eligible OEWN 目标，并校验 104,907 个 index identity 及 109,497 个来源 payload 的 bundle checksum 和 synset identity。固定 OEWN 2025 Plus release-string exact match 覆盖 raw definition 104,886/104,907；effective definition 101,354/104,907 精确、3,553 条非空但不同。追加分支级回链后，确认 145,991 条活动分支含 146,134 条 source-payload 引用且全部绑定到已核验的同目标 payload；140,109 条分支至少有一个 raw-exact 来源，101,753 个目标的每条活动分支都有 raw-exact 来源支持。3,133 个整体 raw gloss 命中目标没有达到全分支覆盖。此 101,753 只能作为来源文本覆盖的候选总体，不能视为许可已清、语义已验证或盲审样本已获批；新版聚合输出 SHA-256 为 `571937a72af641d606034cb39d45bb8d15ceff30245627ee1cb878d5d3fd8082`。
 
 `prep` 主消融影响 84,976/104,907 个目标，删除 198,543 个 occurrence、改变 116,616/145,991 个分支，产生 358 个新空分支；462 个目标出现新增非空碰撞（collision excess 566）。`prep_phrase` 敏感性额外影响 52 个目标、删去 303 个 occurrence、改变 85 个分支、增加 9 个新空分支和 1 个碰撞 excess。以上是有限总体结构和发布版字符串匹配证据，不是语义保真结论；全量聚合输出只在 ignored 本机路径，细节见 T02 protocol §10 和 execution queue Q1。
 
