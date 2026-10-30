@@ -63,7 +63,7 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 
 复算结果：400 个训练目标包含 3,404 个候选出现次、2,051 个不同候选义项；2,051/2,051 均有目标节点、规则、非空分支和依赖定义，图关系视图失败为 0。按不同候选义项统计，分支数中位数 1、nearest-rank P90 为 3、最大 16；依赖数中位数 5、P90 为 10、最大 28；pairwise 边最大 327，D 的 branch-node incidence cells 最大 112。范围仅是既有训练候选池，不是模型候选覆盖率或全图分布，也不表示每个候选都满足相同 tokenizer 预算。
 
-该环境的图清单复算不使用 tokenizer。精确 token-ID 一致审计仍需恢复与既有输入 manifest 同版本的 BERT `vocab.txt`/tokenizers 版本；当前 `emotion_xpu` 可 import tokenizers 0.22.2，而冻结训练输入 metadata 记录 0.23.1，故不得将新词表或版本混用后称为逐字复现。下一步先绑定确切 vocabulary hash 和 tokenizer 版本，再在 train-only 候选上复算统一节点释义序列与 B/C/D 结构输入；不读取旧 dev 或测试标签。
+该环境的图清单复算不使用 tokenizer。环境交叉核对发现：`emotion_xpu` 有 PyTorch/XPU、tokenizers 0.22.2，但没有 NLTK；`base` 有 tokenizers 0.23.1 和 NLTK 包，但 NLTK `wordnet.zip`/`semcor.zip` 不在默认数据路径。冻结训练 JSON 仍可在 XPU 环境用于训练入口；重新生成 SemCor 样本则还需获取正确 NLTK 语料。冻结输入 metadata 记录 tokenizer 0.23.1 与 vocab SHA-256；本地搜索没有找到摘要匹配的 vocab，找到的其他 `vocab.txt` 哈希不匹配，不能代用。下一步先恢复并校验确切 vocabulary bytes，再在 train-only 候选上复算统一节点释义序列与 B/C/D 结构输入；不读取旧 dev 或测试标签，不因重现旧数据而安装未经记录的替代语料。
 
 ## 5. 数据、切分与指标
 
