@@ -89,6 +89,21 @@
 
 样本量不在本文臆定。负责人需先选择主要估计量、区间置信水平、最大可接受半宽或最小可辨差异、来源家族数量与工作量上限。之后按有限总体及分层/配对结构计算需要量，并对未响应和无法判断率做预先预留。40 条可估计流程耗时，不用于估计保真率。若有效来源家族或样本不足以达到预定精度，结果降级为探索性，不通过反复追加样本追求理想方向。
 
+### 5.2.1 冻结来源证据子集审计（2026-10-31）
+
+进一步检查包内 source payload 后，需区分“索引字段”与 payload 中的嵌套来源证据：索引本身仍不含 provider/version/license 列，但 `sources/Synset/alternative_or_definition_wsd_frozen/` 子集有 `alternative_definition_provenance.source_evidence`。新增的只读工具 `src/analysis/audit_preposition_source_provenance.py` 仅输出聚合字段，不输出定义、释义、义项 ID、路径、URL 或原始 locator；结果保存在被忽略的本地文件 `outputs/t02_source_provenance_audit_20261031_v3.json`，并记录 source index 与所读 payload 集的摘要。
+
+该子集的 5,625 条 indexed source records 均成功读取；3,444 条记录含非空 `source_evidence`，合计 3,645 个 evidence item、82 个原样 `source` 标签。按 evidence item 计，频数最高的标签是 GCIDE 0.54（1,580）、Kaikki/Wiktextract targeted OEWN gap（881）、MeSH 2026 descriptors（356）、EMBL-EBI OLS（275）及 Kaikki/Wiktextract relaxed definition-term fallback（201）。另有 1,512 条记录没有 provenance object，669 条有 provenance object 但无 evidence list。现有 evidence item 没有 license/licence 字段。以上标签是冻结包自报来源字符串，不是已规范化、已验证独立性或已完成许可核查的 82 个 source family；evidence item 数也不是目标数。
+
+这项审计修正了“该路径下没有来源线索”的过宽判断，但**没有通过来源家族 gate**：多数有证据项含 source version、locator 与定义哈希，仍须逐来源核验身份、版本和许可；混合来源标签还需在人工规则下归并或标 `unresolved`。5,625 条只是此处理目录的记录子集，不能外推到全冻结图。下一步可建立“源记录 → 原始来源/版本 → 归一化 family → 许可状态/证据 → unresolved 原因”的可审阅交叉表，并先报告各家族可覆盖的结构 strata。正式确认性抽样仍需负责人审定来源纳入范围、未解析项的处理及工作量预算。
+
+从 `hypergraph_analysis_exploration/` 运行复算（输出路径必须不存在）：
+
+```powershell
+python -m src.analysis.audit_preposition_source_provenance --bundle ../OEWN --out outputs/t02_source_provenance_audit_20261031_v3.json
+python -m unittest tests.test_audit_preposition_source_provenance -v
+```
+
 ### 5.3 盲化、双标与仲裁（执行前需负责人确认）
 
 - 两名审阅者独立标注；隐藏条件名称、机器结构统计、抽样层、另一名审阅者结果及训练/测试用途。
