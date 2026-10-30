@@ -18,7 +18,7 @@
 
 | 支线 | 远端分支/提交 | PR 状态 | 下一步 |
 |---|---|---|---|
-| T02 | `codex/t02-schema-dry-run` / `9e1ef8e` | PR 创建接口返回 `Unknown tool`；未确认存在 PR | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t02-schema-dry-run)，创建后记录 PR 编号、diff、CI 与结果 |
+| T02 | `codex/t02-sampling-precision` / `e893756`；schema dry-run `codex/t02-schema-dry-run` / `9e1ef8e` | 抽样精度与分层工作量记录已推送；PR 创建/查询接口仍返回 `Unknown tool`，尚无确认 PR | [打开抽样方案 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t02-sampling-precision)；正式样本仍等待目标精度/工时决策 |
 | T04 | `codex/t04-structure-input-design` / `f679af7`；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计和 Conda/XPU 可复现说明已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
 | T05 | `codex/t05-data-feasibility` / `59edb70` | Wordbank schema/访问 gate 已补；PR 创建/查询仍返回 `Unknown tool`，尚无确认的 PR 编号 | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 编号与 CI |
 
@@ -35,6 +35,7 @@ GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unkno
 ### Q1 · T02 正式盲审前的设计 gate
 
 - **已完成证据：** 冻结全图结构敏感性：`prep` 删除 623 个新空分支/633 collision excess；`prep_phrase` 单独删除 12/1；联合删除 638/634。schema v0 在 40 条试标样本完成 text-free dry-run，语义关系均 unresolved。
+- **工作量复核：** 五个 prep 影响 strata 的目标/分支分别为新空 508/1,102、碰撞 501/1,599、两者 4/19、其他受影响 88,045/123,823、未受影响 21,367/27,663；六项合成测试与冻结图 audit 通过。高风险层仅占 0.918% 目标，分层抽样的人工成本不能用统一全图均值代表。
 - **状态：** 结构描述可复现；正式人工保真尚未启动。来源总体、同一项目多条件的盲化呈现、置信区间精度与工作量仍待研究负责人审定。
 - **下一步（不依赖标签）：** 对候选来源做许可/数据字段盘点；用目标数而不是分支数做精度/资源方案；设计随机匿名呈现、条件顺序/记忆控制和双标仲裁流程。
 - **放行：** 只有总体、抽样概率、簇结构、最小精度目标、双人标注流程和来源许可明确后才抽正式样本；40 条 pilot 不进入正式分析。
