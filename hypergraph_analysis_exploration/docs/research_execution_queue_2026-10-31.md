@@ -14,15 +14,16 @@
 
 ## 当前 GitHub 交付清单
 
-远端 `main` 在本次核验时为 `2416f5f`。三个研究分支均已从本机推送后再次以 `git ls-remote` 核对：
+远端 `main` 在本次核验时为 `2416f5f`。四个研究分支均已从本机推送后再次以 `git ls-remote` 核对：
 
 | 支线 | 远端分支/提交 | PR 状态 | 下一步 |
 |---|---|---|---|
 | T02 | `codex/t02-sampling-precision` / `fe02bef`；schema dry-run `codex/t02-schema-dry-run` / `9e1ef8e` | 抽样框、分层成本和精度敏感性脚本已推送；PR 创建/查询接口仍返回 `Unknown tool`，尚无确认 PR | [打开抽样方案 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t02-sampling-precision)；正式样本仍等待目标精度/工时决策 |
-| T04 | `codex/t04-structure-input-design` / `38b5595`；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计、Conda/XPU 记录及合成关系 view checker 已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
+| T03 | `codex/t03-demo-task-audit` / `f4b0454` | 五任务验收文档及只读真实图 API smoke 已推送；PR 创建 connector 返回 `Unknown tool`，未确认 PR/CI | [打开知径验收 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t03-demo-task-audit)；后续做来源内容人工回查与窄屏/键盘核查 |
+| T04 | `codex/t04-structure-input-design` / `2bb56c5`（含 `38b5595`、`f679af7`、`ec24055`）；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计、Conda/XPU 训练记录、合成关系 view checker 和硬件烟测已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
 | T05 | `codex/t05-data-feasibility` / `59edb70` | Wordbank schema/访问 gate 已补；PR 创建/查询仍返回 `Unknown tool`，尚无确认的 PR 编号 | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 编号与 CI |
 
-GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unknown tool`；不是代码或远端 push 失败。工具恢复前，分支已经在线，PR 创建链接可直接使用。不得在报告里把远端分支说成 PR，也不得据此声称 CI 通过。
+GitHub connector 本轮 `create_pull_request` 调用实际返回 `Unknown tool`；不是代码或远端 push 失败。工具恢复前，分支已经在线，PR 创建链接可直接使用。不得在报告里把远端分支说成 PR，也不得据此声称 CI 通过。
 
 ## P0：当前关键路径
 
@@ -46,7 +47,7 @@ GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unkno
 
 - **已完成证据：** SemCor 官方 train 内 13 文档隔离 dev，120 选中/111 可评分；XPU Conda `emotion_xpu` 上三种子 A/B/C/D 均值 24.02/24.62/27.03/24.62%；MFS 36.94%。D 对 B 配对净差为 0；对 C 为 −8/333。描述性审计发现 D 每目标每候选非 padding tokens 比 B 多约 18.1%。
 - **状态：** 当前 tiny BERT 与输入序列化不支持完整结构有增益；样本小、同源、候选预算事后选择、长度不平衡，不能外推或证伪更一般假设。旧和新 dev 均不得再调参；测试分区未读。
-- **下一步：** 已有 `t04_structure_isolation_design.md` v0.1 和纯合成关系 view checker；5 项测试证明节点/分支重排不变、B 丢弃分组、C 两两边投影会丢失高阶分支区分。checker 不读取真实图/语料、不含编码器。草案仍待负责人确认估计对象与评估来源；下一步先做真实图的只读共同节点覆盖、文本 token 同一性和稀疏结构规模审计，再冻结方案。尚未改造训练器或重训。
+- **下一步：** 已有 `t04_structure_isolation_design.md` v0.1 和纯合成关系 view checker；5 项测试证明节点/分支重排不变、B 丢弃分组、C 两两边投影会丢失高阶分支区分。checker 不读取真实图/语料、不含编码器。本轮在 `emotion_xpu` 中通过 512×512 XPU 矩阵乘烟测；运行时报告约 16.8GB，但不是专用显存测量。BERT-tiny corrected-context 三种子已经训练，现有同源开发集 A/B/C/D 汇总 24.02/24.62/27.03/24.62%，D−B 为 0；这是复用开发集上的探索结果，不是独立结论。新结构隔离 v0.1 的真实图只读 coverage/token/sparsity 审计仍等待负责人对审计对象和评估来源确认；确认后再冻结 estimator 和实现对照，当前不动测试集或在旧 dev 调参。
 - **放行：** 数据许可、候选映射、独立开发来源、模型权重/硬件、预算、强基线、主要估计量和停止规则全部冻结。
 - **停止：** 若无法建立输入信息公平对照或拿不到独立开发来源，停止 tiny-BERT 结构增益宣传，保留负面试点作为工程/方法结果。
 
@@ -61,8 +62,8 @@ GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unkno
 
 ### Q4 · T03 知径现有 Demo 的任务化核查
 
-- **已完成：** 现有 `concept-dictionary/` Demo 提供义项搜索、OR 分支和 AND 依赖展示；功能构建/既有测试记录可在本地报告追溯。模拟通过不等于真实理解效果。
-- **下一步：** 建立五项固定任务清单：直接定义、两层展开、OR 分支选择、循环/不可达、方向/否定介词；每项记录源图版本、预期路径、UI 实际展示、无法解释/误导点。对现有原型做代码级路径与移动端检查，避免新建替代系统。
+- **已完成：** 新增 `concept-dictionary/docs/task_based_evaluation.md`，定义义项搜索消歧、定义与来源、AND/OR 多步、循环/缺失、介词方向/否定五类任务和功能/认知两类证据门。后端 14、前端 9 项测试通过，构建通过；格式检查因两份未改的 TSX 文件失败。对冻结指纹 `6a26db5d…` 本机只读 API smoke：square 搜索返回72候选并含多个不同 POS/sense，square/about-1/in-5 共8分支均标记 source available；指定 `in-5 → oewn-04937655-n → in-5` 返回 cycle。未人工审阅来源释义、未开浏览器、未招募用户。分支 `codex/t03-demo-task-audit` / `f4b0454` 已推送。
+- **下一步：** 逐条回查来源文件的实际文本与目标义项/依赖 occurrence；重点记录 square 案例已知的 `right` 义项风险。再做浏览器端窄屏、键盘可达性和真实 UI 任务核查；原协议 Gate C 的理解/学习研究须先经伦理、同意、隐私和样本设计批准。模拟与 API 通过不等于理解效果。
 - **放行：** 每个界面解释能回溯目标、完整分支和依赖 occurrence；错误与边界状态有可见说明。用户体验确认后，才讨论小规模访谈/学习任务。
 - **停止：** 只有功能模拟时，仅报告路径展示正确性与可用性风险，不作“用户学会/理解”的主张；未获伦理、同意和保存方案，不招募真实参与者。
 
