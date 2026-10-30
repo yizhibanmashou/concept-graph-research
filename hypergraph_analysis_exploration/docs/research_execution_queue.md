@@ -54,13 +54,13 @@
 
 | 分支 | 主题 | 检查 | PR 状态 |
 |---|---|---|---|
-| `codex/t04-structure-input-design` | train-only B/C/D 共享释义 token、关系池化实现与两类 XPU profile | 28 项专项/合成测试在 `emotion_xpu` 通过；随机结构 profile 与真实 gloss text+structure profile 均只用 train candidate IDs/图定义；模型和结果留在 ignored outputs | 结构 pooling 与随机 profile 已推送 `eecab14`；真实前向 profile 实现待提交。GitHub connector search/create 返回 `Unknown tool`，未确认 PR 已创建 |
+| `codex/t04-structure-input-design` | train-only B/C/D 共享释义 token、关系池化实现与两类 XPU profile | 28 项专项/合成测试在 `emotion_xpu` 通过；随机结构 profile 与真实 gloss text+structure profile 均只用 train candidate IDs/图定义；模型和结果留在 ignored outputs | 全部代码与协议已推送至 `e1b8ed2`；GitHub connector search/create 返回 `Unknown tool`，PR 未创建。当前分支比较：[main...codex/t04-structure-input-design](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1) |
 
 ## 状态覆盖（2026-10-31，优先于上方 T04-2b 表格中的“下一动作”）
 
 T04 已完成的工程门槛：训练候选图结构覆盖 2,051/2,051；共同目标/依赖 gloss WordPiece 清单对齐 2,051/2,051；最长单条 gloss 77 token；无参数 A/B/C/D 聚合器和 train-only XPU 关系算子 profile 已完成。对 2,051 候选的随机向量 profile 有 13,526 relation-node、3,560 branches、41,316 edges；重复 3.7316/3.8978 秒。固定 BERT-tiny revision 的 config/weight/vocab 哈希已逐项匹配既有训练日志；真实 train-only gloss encoder + A/B/C/D pooling profile 覆盖 5,592 个唯一节点释义与 2,051 候选，重复两次：编码 4.883/4.920 秒，池化 7.206/7.958 秒，ID 顺序动态 batching padding 58.4%，编码/池化峰值增量分别 90,208,768/339,456 bytes。该前向未含上下文、候选打分、反向传播或优化器，不能称新模型训练已完成。28 项专项/合成测试已在 `emotion_xpu` 通过。旧序列化 A/B/C/D 已在 `emotion_xpu` 完成 seed 17/23/31：每条件 379 train，dev 111/120 可评分；各 seed 正确数 `32/33/31/28`、`23/23/31/28`、`25/26/28/26`，汇总 `80/82/90/82`（同一批目标重复三次），D−B 净差 0。旧 dev 已被探索，不再用于调参，旧 C/D 也不等于新关系池化。下一步：先等价优化 padding 和逐候选小算子开销，重跑 train-only profile，再做不读 dev 的单批反向/优化器 smoke；效果评估需另行冻结未复用 dev、来源/许可和 sense-key 映射。
 
-本轮 T04 聚合器、XPU profile、协议和队列更新都在 `codex/t04-structure-input-design` 专题分支；既有 token audit commits 为 `ee43ce2`、`8c63298`，总控队列此前 commits 为 `caeb2c3`、`cfdc9ed`。本轮新变更待提交。GitHub PR connector 仍无法提供 PR 创建确认。
+本轮 T04 聚合器、两种 XPU profile、协议和队列更新都在 `codex/t04-structure-input-design` 专题分支；代码与协议提交 `eecab14`、`e1b8ed2` 均已推送，既有 token audit commits 为 `ee43ce2`、`8c63298`。GitHub PR connector 仍返回 `Unknown tool`，且本机未安装 GitHub CLI，因此尚无 PR；可从 [分支比较页](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1)创建。CI 未核实。
 
 ## 下一轮建议执行顺序
 
