@@ -183,7 +183,7 @@
 | T02-1 | 用户已决关系表示与盲审协议 | 用户确认类别、主口径、标签轴与试标边界 | PR #32、#33 已合并 |
 | T02-2 | 合成校验器及只读转换 | T02-1 schema 定稿 | PR #35 已合并；329 项本机全套测试通过；只验证结构，不证明语义 |
 | T02-2a | 拒绝空源分支、保留变换后空分支 | T02-2 validator | commit `9c13465` 已推送到 `codex/t02-nonempty-source-branch`；目标合成检查 6 项通过；PR connector 返回 `Unknown tool`，尚未创建 |
-| T02-2b | 对 Kaikki/Wiktextract 两个高频标签做来源版本元数据形态聚合 | T02-1 provenance audit 与原始标签 crosswalk | 更新只读审计器：5,625/5,625 payload 成功；1,082 项均为同一 `raw-sha256` 指纹，且与 1,082 个合法定义文本 SHA-256 均不相同；哈希对象/生成器未绑定，来源版本与许可仍 unresolved；合成测试复核后提交；PR 尚未创建 |
+| T02-2b | 对 Kaikki/Wiktextract 两个高频标签做来源版本元数据形态聚合 | T02-1 provenance audit 与原始标签 crosswalk | 5,625/5,625 payload 成功；1,082 项均为同一 `raw-sha256` 指纹，与合法定义文本 SHA-256 均不相同。Kaikki 官方页面当前列出 dump/extraction 日期与 extractor commits，但 raw-data 页未列 checksum；候选 snapshot 不能绑定本地未知哈希对象，来源与许可仍 unresolved；PR 尚未创建 |
 | T04-2 | 公平预算下的新开发比较 | T04-1 接口、来源隔离和开发集冻结 | 后续；先冻结开发集方案，不读取测试标签 |
 | T02-3/4 / T04-3 | 独立盲审 / 独立模型评估 | 许可、抽样框、精度与用户决策、代码/协议锁定 | 不能提前承诺日期或正向结果 |
 
