@@ -55,7 +55,8 @@
 
 - 输入范围固定为索引中的 5,625 条记录；只做来源元数据聚合，不导出 gloss、释义、sense ID、路径、locator、URL 或人工标签。
 - 既有审计：3,444 条记录带 evidence，3,645 evidence item，82 个精确自报标签；1,512 条无 provenance object，669 条无 evidence list；evidence item 无显式 license 字段。新建保守标签 join 后，原样匹配 6/82 标签、143/3,645 项；仅规范大小写、下划线和空格后唯一匹配 17/82 标签、2,395/3,645 项，无歧义；4 个匹配标签的日志有状态字段（2,270 项），另 13 个没有状态；65 个标签/1,250 项未匹配，主要剩余缺口是 Kaikki/Wiktextract 的 1,082 项。该工作是日志可定位性，不是清权。复算脚本、2 项合成测试和协议已提交 `9220354` 并推送；T02 目标测试共 10 项通过。
-- 继续工作：将已有 Phase 24/25/50–52/124–127 的 source-rights 日志与本次 T02 audit 的原始 exact label 对齐；明确这是标签交叉表而非清权。对 OLS provider 标签按 ontology ID 区分，保留 `unresolved`、source version 不确定和上游 payload 未绑定状态；优先核对高频的 GCIDE、Kaikki/Wiktextract、MeSH 与 OLS 记录。
+- Kaikki/Wiktextract 标签定向审计已完成：5,625/5,625 个 payload 可解析；两类标签共 1,082 evidence items。所有条目虽有 `source_version`，值都不能被识别为日期、semver 或提交哈希；locator 不是 URL，ontology 字段缺失。`evidence_type` 为 `definition` 881 项、`related_definition` 201 项。新增脚本与两项合成隐私测试，六项来源审计目标测试通过；T02 分支 commit `03ca156` 已推送。官方 Kaikki 当前页面所列 dump 日期不能绑定本地这些条目，因此版本与许可仍 unresolved；这不是清权结论。
+- 继续工作：将已有 Phase 24/25/50–52/124–127 的 source-rights 日志与原始 exact label 对齐；明确这是标签交叉表而非清权。对 OLS provider 标签按 ontology ID 区分，保留 `unresolved` 和上游 payload 未绑定状态；优先核对 GCIDE、MeSH 与 OLS 记录，并为 Kaikki/Wiktextract 查找可验证的本地生成流水线或 snapshot checksum。若绑定证据不存在，明确记为无法消解，不强行赋 family 或许可状态。
 - PR 验收：输入 index/payload 摘要、聚合计数、精确标签 join/miss 分母、官方证据链接、版本绑定状态与失败案例；不提交源文本/许可受限数据。必须跑合成测试和 scoped audit，验证输出不含 forbidden fields。
 
 #### T02-B · 四条件结构转换与合成审查（READY）
