@@ -13,7 +13,7 @@
 
 | 优先级 | 研究线 | 当前阶段 | 近期交付 | 主要阻塞/停止条件 |
 |---|---|---|---|---|
-| P0 | T02 介词与概念组合 | 全量结构、释义与分支级 payload 回链已跑；语义保真尚未观测 | 先核实分支来源家族/权利，再确定覆盖总体和盲审资源 | 来源/许可/独立来源家族未核实前，不生成或分发正式审阅包；结构数据不作为保真结论 |
+| P0 | T02 介词与概念组合 | 全量结构、释义与分支级 payload 回链已跑；完成标签级来源排查，逐记录家族/权利与语义保真仍未核实 | 追溯高占比标签到冻结包生成器、具体上游快照和权利条款；报告覆盖/未解析类别 | 来源/许可/独立来源家族未核实前，不生成或分发正式审阅包；结构数据不作为保真结论 |
 | P0 | T04 NLP/WSD | train-only 全候选工程链可重放；独立评估来源与预注册协议未冻结 | 核对候选训练源许可、模型预训练暴露与 WN3.0→OEWN 映射；冻结一套新开发协议 | 保留测试不读；多轮使用过的 SemCor dev 不作确认性评估；新来源许可不明则不评分 |
 | P1 | T01 ToLogic | 六例枚举和 want 外部 without 接口的候选复现完成；语义标签未建立 | 审定有限候选与参数绑定标注手册，封存 20 项试标，再独立双标/仲裁 | 不用既有试标训练后再在同一试标上报告效果；没有 gold 只报告候选覆盖/重放 |
 | P1 | T03 知径 | 现有 Demo 功能链和解释路径已有工程检查 | 基于固定任务案例做路径正确性、状态保持、循环/断点与移动端检查；交付一个可复核体验问题 PR | 不另建替代 Demo；模拟交互不说成学习效果；真实用户研究需负责人批准 |
@@ -35,11 +35,12 @@
 
 **下一动作**
 
-1. 官方 OEWN 仓库说明 2025 Plus 发布版于 2025-12-31 发布，并将 OEWN 许可标为 CC BY 4.0；其 license 文件要求对 Princeton WordNet 与 OEWN team 署名。CC BY 4.0 还要求提供合理署名、许可链接并说明修改。对 raw gloss 与发布版精确匹配的目标，这提供了一个可追溯的释义文本使用路径；它**不自动清除**混合来源冻结 payload、图规则或其它嵌入材料的权利，也不证明结构分解来自该条 OEWN 释义。外部依据：[OEWN 仓库](https://github.com/globalwordnet/english-wordnet)、[OEWN LICENSE](https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md)、[CC BY 4.0 条款](https://creativecommons.org/licenses/by/4.0/)。
-2. 从可确认的上游记录建立 `target → graph rule/source occurrence → source payload → 原始 provider/release/version → license/attribution → source family` crosswalk；精确 OEWN 释义命中单独记录，不能据此推断 frozen payload 的唯一上游来源或具体 rule 的来源。
-3. 为 crosswalk 增加互斥失败类别：`exact_release_match`、`normalized_only`、`different`、`missing_identity`、`source_unresolved`、`rights_unresolved`。只输出聚合结果和哈希；标识符/释义仅在本机访问受控材料中使用。
-4. 仅作计划量级参考：若之后负责人批准以 101,753 个“每条活动分支均有 raw-exact 来源”的候选覆盖总体进行简单随机抽样，按单一比例 95% CI、最坏比例 p=.5、有限总体修正，不含来源聚类/多重比较/无法判断修正，半宽 ±5、±7.5、±10 个百分点约需 383、171、96 个目标。工作量暂不估成确定值，因为尚未汇总这个子集的目标内分支数和 source-family 结构。此为无标签情景，不是功效保证或已选精度。
-5. 用户确定精度/资源上限后，按目标等权和目标内分支比例均值冻结总体、来源层、纳入概率、配对估计与 CI、双标/仲裁和呈现盲化方案。若来源家族未知或相关性无法处理，则不得声称已达到来源独立的置信区间；抽样前核验许可和预注册状态。未通过时停在 crosswalk 与匿名聚合，不导出任务包。
+1. 标签级来源排查已整理为 [`t02_source_family_crosswalk_status_2026-10-31.md`](t02_source_family_crosswalk_status_2026-10-31.md)。5,625/5,625 条 payload 重读成功，3,645 项/82 个标签；只有 17/82 个标签与本地权利日志唯一规范化匹配，涉及 2,395/3,645 项。此处仅是标签 triage，不是逐记录 source-family crosswalk，也未清权。
+2. 官方 OEWN 仓库说明 2025 Plus 发布版于 2025-12-31 发布，并将 OEWN 许可标为 CC BY 4.0；其 license 文件要求对 Princeton WordNet 与 OEWN team 署名。CC BY 4.0 还要求提供合理署名、许可链接并说明修改。对 raw gloss 与发布版精确匹配的目标，这提供了一个可追溯的释义文本使用路径；它**不自动清除**混合来源冻结 payload、图规则或其它嵌入材料的权利，也不证明结构分解来自该条 OEWN 释义。外部依据：[OEWN 仓库](https://github.com/globalwordnet/english-wordnet)、[OEWN LICENSE](https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md)、[CC BY 4.0 条款](https://creativecommons.org/licenses/by/4.0/)。
+3. 从可确认的上游记录建立 `target → graph rule/source occurrence → source payload → 原始 provider/release/version → license/attribution → source family` crosswalk；精确 OEWN 释义命中单独记录，不能据此推断 frozen payload 的唯一上游来源或具体 rule 的来源。
+4. 为 crosswalk 增加互斥失败类别：`exact_release_match`、`normalized_only`、`different`、`missing_identity`、`source_unresolved`、`rights_unresolved`。只输出聚合结果和哈希；标识符/释义仅在本机访问受控材料中使用。
+5. 仅作计划量级参考：若之后负责人批准以 101,753 个“每条活动分支均有 raw-exact 来源”的候选覆盖总体进行简单随机抽样，按单一比例 95% CI、最坏比例 p=.5、有限总体修正，不含来源聚类/多重比较/无法判断修正，半宽 ±5、±7.5、±10 个百分点约需 383、171、96 个目标。工作量暂不估成确定值，因为尚未汇总这个子集的目标内分支数和 source-family 结构。此为无标签情景，不是功效保证或已选精度。
+6. 用户确定精度/资源上限后，按目标等权和目标内分支比例均值冻结总体、来源层、纳入概率、配对估计与 CI、双标/仲裁和呈现盲化方案。若来源家族未知或相关性无法处理，则不得声称已达到来源独立的置信区间；抽样前核验许可和预注册状态。未通过时停在 crosswalk 与匿名聚合，不导出任务包。
 
 **PR 切分**：`codex/t02-source-evidence-audit` 当前承载 T02 聚合审计代码与 protocol；本次新增 full-population audit 仍待独立审阅与 PR。crosswalk 实现另开单主题 PR，正式标注工具及盲审结果再分别拆 PR。每个 PR 均附有限总体、输入摘要、复算命令和语义/权利限制。
 
