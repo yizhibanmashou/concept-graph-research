@@ -16,9 +16,9 @@
 
 ### 可复核的项目状态
 
-- 队列分支最近记录提交为 `ab1c318`；T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `d1ec438`，T04 设计分支 `codex/t04-structure-input-design` 已推进至 `988a36e`，均已推送。GitHub PR 查询工具与本机 gh CLI 调用均返回不可用；分支推送不等于 PR 或 CI 完成。
+- T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `d1ec438`，T04 设计分支 `codex/t04-structure-input-design` 已推进至 `949acfa`，均已推送。GitHub PR 查询工具与本机 gh CLI 调用均返回不可用；分支推送不等于 PR 或 CI 完成。
 - 本队列分支 `codex/research-execution-queue-20261031` 的 `ab1c318` 已推送；本轮再同步训练图候选覆盖结果。此前 PR 搜索调用返回 `Unknown tool`；PR 尚未创建，不把比较页称作 PR。
-- T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `988a36e`，包含共享节点索引的 B/C/D ID-only 结构掩码和 train-only 真实图候选覆盖审计；这两个专题工作目前不在本队列分支中。
+- T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `949acfa`，包含共享节点索引的 B/C/D ID-only 结构掩码、train-only 图覆盖审计和 tokenizer 环境交叉核对；这两个专题工作目前不在本队列分支中。
 - T04 最近几条候选打包/文档簇/结构输入分支的 PR 状态未能通过当前 GitHub MCP 连接核实；旧线程也记有 `Unknown tool`。在 PR 面板或有效 API 可用前，队列只记远端分支和 commit，不声称 PR 已创建或 CI 已通过。
 - 本机 Conda 环境 `emotion_xpu`：Python 3.11.15、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Accelerate `1.13.0`、Intel Arc XPU。`conda run -n emotion_xpu` 下 `torch.xpu.is_available()` 为 `True`、设备数 1，64×64 运算成功；设备属性报告约 16.45 GB。新建 ignored 输出 `outputs/tiny_bert_wsd_smoke_conda_20261031` 做了 4 个 train 记录、仅 A 条件的一批 smoke（seed 17）：checkpoint 保存成功，loss 1.5541；脚本 `--smoke` 路径不读取 dev，也不产生 WSD 准确率。该烟测证明当前 Conda/XPU/权重/训练入口连通，不证明研究效果或更大模型的预算。此前 base 环境缺少 PyTorch 与 `emotion_xpu` 已有 PyTorch 并不矛盾；运行应使用 `conda activate emotion_xpu` 或 `conda run -n emotion_xpu ...`。
 - 最新五个相关 Codex 专项线程已查看：T04 数据兼容、候选分块、错误分析与 XPU 记录；T02 用户已决口径和未决来源/抽样 gate；T03 现有 Demo 的功能可靠性和许可/用户研究边界；T05 HTE 词形歧义与许可限制；结构探索的汇报数字边界。线程内容已与当前仓库状态交叉核对，旧线程报告不能覆盖当前 Git 状态。
@@ -92,7 +92,7 @@
 - 当前旧 C 的 `edges` 只是重复 B 的依赖别名表；旧 D 与 B 的文本长度不同，不能隔离 pairwise topology 或完整分支结构效应。不得沿用它们作结构增益证据。
 - 先制定新序列化：B/C/D 对每个目标和候选共享完全相同的依赖概念与释义 token IDs；C 只改变成对投影信息，D 只改变 AND/OR 分区与论元角色；计量实际/截断 token，并让模型看到的词元预算对齐。用合成图展示 pairwise projection 丢失高阶分支分区。
 - 已有 `t04_structure_views.py` 纯合成关系视图；进一步实现 `build_aligned_relation_tensors()`，返回同一 canonical node inventory 上的 B dependency mask、C pairwise adjacency matrix 和 D branch-node incidence matrix。合成比较确认节点/分支顺序不影响张量，且可构造 B/C 完全相同而 D 不同的高阶分区例子。随后只用冻结的 400 条 train 输入中的 candidate IDs，审计真实图 inventory：3,404 个候选出现次、2,051 个唯一义项，2,051/2,051 均有目标/依赖定义和规则，结构视图失败 0；分支数中位数/P90/最大值为 1/3/16，依赖数为 5/10/28，pairwise edges 最大 327，D incidence cells 最大 112。结果保存在 ignored `outputs/t04_train_graph_inventory_20261031.json`，不访问 label/context/dev/test，亦不证明语义或 token 对齐。相关 12 项专项测试通过，`py_compile` 与 `git diff --check` 通过；commit `04faf33` 已推送至 `codex/t04-structure-input-design`。
-- 精确 token-ID 对齐仍未完成：当前 `emotion_xpu` 中可导入 tokenizers 0.22.2，冻结训练输入 metadata 记录 0.23.1；Conda 中 `import nltk` 失败。已有冻结 train JSON 可直接供训练 smoke 使用，故 NLTK 缺失不影响已证明的训练入口；但重新生成 SemCor 样本需要 NLTK/WordNet 语料，逐字复现输入还需原 vocab SHA-256 与 tokenizer 版本。先绑定这些数据/软件版本，再只在训练分区构建共享节点 gloss 序列；不得从旧 dev 选预算或裁切参数。
+- 精确 token-ID 对齐仍未完成：`emotion_xpu` 中 tokenizers 0.22.2、无 NLTK；`base` 中 tokenizers 0.23.1、有 NLTK 包，但 WordNet/ SemCor NLTK corpora 均不在默认数据路径。已有冻结 train JSON 可直接供 XPU 训练 smoke 使用，故缺少 NLTK 语料不影响已证明的训练入口；重生成 SemCor 样本仍需语料。冻结输入记录的 vocab SHA-256 在已查本机缓存/环境中没有匹配文件，其他词表不得代用。先恢复确切词表并核 hash，再只在训练分区构建共享节点 gloss 序列；不得从旧 dev 选预算或裁切参数。
 - 不用旧 SemCor dev 选 checkpoint、预算、字段标记或阈值；先做 code-only/synthetic verification 与新增、独立来源 dev 的合法性和映射审计。无合适新评估来源时停止训练，报告可行性而非继续用旧 dev 搜索。
 - 评测来源筛查已写入 `t04_structure_isolation_design.md`：Raganato 五套标准子集列为主评测候选但各自许可、模型暴露及 sense-key 映射覆盖仍待审；FEWS 列为长尾次要候选，并有 Wiktionary 来源重叠风险。新增映射方案：使用冻结 OEWN entry archive crosswalk 审核 WN3.0 keys 的零/唯一/多映射和 POS/lemma 等失败分母；Global WordNet SemCor reannotation 可交叉核对 wn30/oewn keys，但同源于 SemCor/Brown，不能算独立来源确认。其许可证包括 Princeton WordNet 条款与 CC BY 4.0 署名。设计更新 commit `4ec5092` 已推送；未下载 benchmark、未读取测试句/标签。
 - 设备：`emotion_xpu` Conda 已验证 torch 2.12.0+xpu / Transformers 5.9.0 / Intel Arc XPU；无需在 base Python 安装 PyTorch。每次训练记录精确环境 lock、驱动、设备、seed、token/padding、步数、运行时和峰值显存。
@@ -129,7 +129,7 @@
 - 尝试创建 T02 PR；GitHub MCP 返回 `Unknown tool`，因此没有创建 PR，也没有声称 CI 运行。
 - T02 审计再扫 5,625/5,625 个 payload，并修正版本形态分类，核验共享摘要与定义文本哈希关系；限定输出只记录计数、不泄漏摘要。进一步核对 Kaikki 官方下载/索引页面，发现页面列出上游日期和 extractor commit，但没有本地摘要的对象绑定 checksum；因此仍无法确定冻结 payload 的 release。目标 T02 合成测试 13 项通过，`git diff --check` 通过；commit `d1ec438` 已推送到 `codex/t02-source-evidence-audit`。PR 状态仍未创建/未核实。
 - T04 来源与映射设计补充：核对 Raganato 官方 WN3.0 评测口径和 Global WordNet SemCor reannotation 的双 key 格式/许可；明确其可交叉核验映射但不构成独立来源，并把逐资源映射分母、许可与测试隔离加入 gate。设计 commit `4ec5092` 已推送至 `codex/t04-structure-input-design`；未下载 benchmark 或读取测试标签。
-- T04 结构实现进展：先新增 ID-only B/C/D masks（`d68e9c2`），再用训练候选 ID 完成真实冻结图覆盖审计（逻辑提交 `04faf33`，范围说明修正 `988a36e`）：2,051 个唯一候选全部可构造关系视图；12 项专项测试通过。仍需恢复确切 tokenizer/vocab 输入以审计 token-ID 对齐、长度及共同裁切失败分母，然后才评估结构编码器参数/算力公平；不触碰旧 dev 或测试标签。
+- T04 结构实现进展：新增 ID-only B/C/D masks（`d68e9c2`），训练候选图覆盖审计（`04faf33`），环境范围说明修正（`988a36e`），环境交叉核对（`949acfa`）。2,051 个唯一训练候选全部可构造关系视图；12 项专项测试通过。`base` 恰有锁定 tokenizers 0.23.1，但没有 NLTK 语料；`emotion_xpu` 可训练但 tokenizers 为 0.22.2。精确 vocab 未找到匹配摘要。下一步先恢复该 vocab，再完成训练集 token-ID 对齐、长度与共同裁切失败分母，不触碰旧 dev 或测试标签。
 
 ## 4. 当晚退出交接标准
 
