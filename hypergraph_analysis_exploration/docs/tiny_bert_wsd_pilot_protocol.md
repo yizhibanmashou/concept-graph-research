@@ -31,6 +31,25 @@ The full-candidate builder now locates the annotated target by its original XML 
 
 This is an input-pipeline correction only. It has not been run on SemCor, does not establish model performance, and does not make the repeatedly used development set independent. Before any training, record the exact SemCor/XML, OEWN, graph, vocabulary hashes and candidate budget; report selected targets, excluded target-context failures, sentence-window truncation, gold mapping, candidate encoding failures and scorable targets separately. No held-out test documents or labels are used.
 
+## Correction: corrected-context pilot and Conda/XPU runtime (2026-10-31)
+
+The preceding paragraph records the status when the input-pipeline note was first written; the statement that it had not been run on SemCor is now superseded. Subsequent local outputs under ignored `outputs/tiny_bert_fresh_doc_*_20261031/` show the corrected-context A/B/C/D comparison ran on three seeds. Do not upload these output directories or checkpoints.
+
+- Conda environment: `emotion_xpu`; Python 3.11.15; PyTorch `2.12.0+xpu`; Transformers `5.9.0`; Intel Arc Graphics through oneAPI Level Zero.
+- The base Conda environment has no PyTorch, but `conda run -n emotion_xpu ...` imports the XPU build. Keep the training command bound to this named environment; installing another PyTorch into `base` is unnecessary.
+- A separate hardware smoke test allocated XPU tensors, multiplied two 512×512 matrices, synchronized the device, and returned `512.0`. `torch.xpu.is_available()` was true and one device was visible. The runtime reported `total_memory=16844MB`; this is a PyTorch/oneAPI device property, not a measurement of dedicated VRAM, so do not use it as a guaranteed model-memory budget.
+- The checked-in pilot configuration is deliberately small: `prajjwal1/bert-tiny`, batch size 4, one epoch, learning rate `2e-5`, joint input budget 256, seeds 17/23/31. Local result metadata confirms all twelve A/B/C/D runs used `device=xpu`; each trained on 379 examples and scored 111 of 120 selected development targets.
+- Across the three repeated runs on the same development set, correct counts were A 80/333, B 82/333, C 90/333, D 82/333. This is a seed-sensitivity summary on one reused, same-source development sample, not three independent evaluations. It does not show an aggregate D-over-B gain; it also cannot rule out gains under a better controlled representation or independent evaluation.
+- This verifies that the local workstation can run the current tiny model and execute XPU kernels in the Conda environment. It does not verify BERT-base or larger-model memory use, a different batch/context budget, or portability to another Arc driver. Test larger configurations only after a single-batch memory smoke test and preserve the frozen data and held-out test boundary.
+
+Reproduce the environment/kernel check without changing environments:
+
+```powershell
+conda run -n emotion_xpu python -c "import torch, transformers; a=torch.ones((512,512),device='xpu'); b=a@a; torch.xpu.synchronize(); print(torch.__version__, transformers.__version__, torch.xpu.get_device_name(0), float(b[0,0].cpu()))"
+```
+
+Do not infer that the GUI-selected interpreter or an IDE terminal uses this environment: verify `sys.executable` inside the actual training process or invoke the entry point with `conda run -n emotion_xpu`.
+
 # Local Conda + Intel XPU runtime (observed 2026-10-31)
 
 The maintained pilot has already trained in the local Conda environment `emotion_xpu`; the earlier `ModuleNotFoundError: torch` came from the unrelated `base` environment. Observed runtime: Python 3.11.15, `torch 2.12.0+xpu`, `torchvision 0.27.0+xpu`, `torchaudio 2.11.0+xpu`, `transformers 5.9.0`; `torch.xpu.is_available()` returned true and the device was reported as Intel Arc Graphics. PyTorch and the XPU packages are pip builds installed inside Conda, so the environment name alone is not a portable environment specification. Do not install an NVIDIA CUDA build for this machine.
