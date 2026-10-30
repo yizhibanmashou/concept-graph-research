@@ -19,8 +19,8 @@ T05 不能把以下指标混成一个“概念习得年龄”：
 
 | 数据源 | 可用观测与潜在价值 | 与 OEWN 义项对齐的困难 | 访问、许可与风险 | 当前决定 |
 |---|---|---|---|---|
-| Wordbank / CDI | CDI 是家长报告的早期词汇理解/产出量表；官方数据页提供 child、word、child-by-word 三种层级及不同年龄、人口学/工具信息。适合估计**词形/问卷词项层面**年龄曲线，可作为 B+C 外部预测的次要任务。 | CDI item 不自带 OEWN sense key；`uni_lemma` 是跨语言条目的概念性 gloss 映射，不是 WordNet/OEWN synset ID。家长报告的词项掌握不能证明儿童只知道一个义项。复合词、变体、同形异义词、具体问卷措辞均需核查。 | 官方页面说明数据可免费下载且 Redivis 版本化；具体数据集许可由 `datasets.license` 字段区分，主页默认 CC BY 4.0 不覆盖标为 CC BY-NC 的条目。当前公开说明未确认登录要求，获取时再核实。 | **可先做许可与词项元数据盘点；** 若用于可公开研究，固定 Redivis release、工具版本、逐数据集许可、CDI 表单版本。结果只能称词项层面，除非另有义项标注。 |
-| CHILDES / TalkBank | 自然会话转录、说话者年龄/对话语境和纵向语料可能帮助人工判断语境中的词义使用，或分析词形表达出现轨迹。 | 语料记录词语使用，不直接测量理解或习得；单次首现受采样、对话机会、转录和家庭差异影响。需按语境人工映射到 OEWN 义项，并保存不确定/多义情况。纵向且可比的样本可能较小。 | 官方说明有公开网页、注册后数据、受控数据三个访问级别；大多数转录需注册，部分语料/媒体受控。TalkBank 一般规则为 CC BY-NC-SA 3.0，除非具体语料另有规定；不应把原始转录、个人信息或不可再分发内容上传 GitHub。 | **暂不下载。** 若走该路，先选一个具备明确语料级许可、年龄元数据及足够纵向密度的语料，提交数据保护与用途审查，再做本地-only sense coding feasibility pilot。不能以 transcript 首现替代理解年龄。 |
+| Wordbank / CDI | CDI 是家长报告的早期词汇理解/产出量表；官方数据页提供 child、word、child-by-word 三种层级及不同年龄、人口学/工具信息。适合估计**词形/问卷词项层面**年龄曲线，可作为 B+C 外部预测的次要任务。 | CDI item 不自带 OEWN sense key；`uni_lemma` 是跨语言条目的概念性 gloss 映射，不是 WordNet/OEWN synset ID。家长报告的词项掌握不能证明儿童只知道一个义项。复合词、变体、同形异义词、具体问卷措辞均需核查。 | 数据按 Redivis release 版本化并可免费下载；官方 `wordbankr` 说明指出下载需 Redivis 免费账户。`datasets.license` 按贡献数据集区分，不能用默认 CC BY 推广到带 CC BY-NC 的条目。当前未授权登录或使用账户/API token。 | **可先做许可与词项元数据盘点；** 若用于可公开研究，固定 Redivis release、工具版本、逐数据集许可、CDI 表单版本。结果只能称词项层面，除非另有义项标注。 |
+| CHILDES / TalkBank | 自然会话转录、说话者年龄/对话语境和纵向语料可能帮助人工判断语境中的词义使用，或分析词形表达出现轨迹。 | 语料记录词语使用，不直接测量理解或习得；单次首现受采样、对话机会、转录和家庭差异影响。需按语境人工映射到 OEWN 义项，并保存不确定/多义情况。纵向且可比的样本可能较小。 | CHILDES 专页列三类访问：网页信息开放、转录/媒体需注册、部分语料或媒体受控；TalkBank 通用规则默认 CC BY-NC-SA 3.0，但具体语料可能另有许可。 | **暂不下载。** 若走该路，先选一个具备明确语料级许可、年龄元数据及足够纵向密度的语料，提交数据保护与用途审查，再做本地-only sense coding feasibility pilot。不能以 transcript 首现替代理解年龄。 |
 | Brysbaert & Biemiller 2017 / Living Word Vocabulary | 论文描述约 44,000 个词义、来自 31,000 多个词形/多词表达；以儿童不同年级的知识测试构造 test-based AoA，是当前最接近**意义级**的公开常用测量路线。 | 测试记录与 OEWN synset 不一定一一对应；原始词义拆分、定义和图义项粒度不同。需检查同词多行、词性、多词表达、测试来源及空缺。 | UGent 论文条目将出版物版权状态标为 “No license (in copyright)”。第三方文件或 R 包中的许可声明不足以代替权利人/官方来源确认；数据的再分发及衍生映射权利目前未厘清。原指标是年级测试标准，不是幼儿首学时间。 | **科学问题匹配度高，权利门槛未过。** 先核对官方数据可取得方式、逐字段授权和许可；未确认前不抓取、镜像、提交或据第三方 CSV 建模。即使获准，也只能称年级测试知识/AoA proxy。 |
 
 来源与可核事实：Wordbank 当前主页说明其 CDI 数据规模、家长报告性质及默认许可；FAQ 说明 Redivis 版本/下载方式、CC BY 与部分 CC BY-NC 的差异。[Wordbank](https://langcog.github.io/wordbank-datapage/), [FAQ](https://langcog.github.io/wordbank-datapage/faq.html), [Data page](https://langcog.github.io/wordbank-datapage/data.html)。CHILDES 的访问分级和 TalkBank 使用规则见[官方访问说明](https://talkbank.org/childes/access.html)与[版权/使用规则](https://talkbank.org/0share/rules.html)。Brysbaert & Biemiller 数据规模、论文和权利字段见[UGent 官方书目条目](https://biblio.ugent.be/publication/8535511)；其“年级测试测得的词义知识”定义也应以原文为准，而不能简写成幼儿首次习得时间。
@@ -49,6 +49,15 @@ Brysbaert–Biemiller 的 [UGent 官方书目记录](https://biblio.ugent.be/pub
 TalkBank 当前[官方访问等级页](https://talkbank.org/0share/access.html)区分 open access、registration required、approved access 和 controlled access；具体 CHILDES corpus 的注册要求和许可需逐语料检查。通用 [TalkBank 使用规则](https://talkbank.org/0share/rules.html)注明默认 CC BY-NC-SA 3.0，除非该语料另有说明，并限制受控/可识别材料的存放与分享。不能只用“CHILDES 是公开数据”作为整个语料集的授权结论。
 
 上述复核仅读取公开页面与论文书目信息，没有导出 Wordbank 响应、儿童级记录、CDI 题项或 TalkBank 转录。逐 dataset 的 license、form 数量、管理数及实际访问等级仍需单独清单。
+
+### 官方访问要求与 T05 可执行边界补核（2026-10-31）
+
+- Wordbank Data 页面将数据描述为 Redivis 上版本化、可免费下载的数据集，并说明大多数贡献数据集为 CC BY、部分为 CC BY-NC；许可需读 `datasets.license`。官方 [`wordbankr` 访问指南](https://langcog.github.io/wordbankr/)补充：数据集虽为 public，Redivis 下载仍需免费账户认证；本项目本轮没有使用或检查本机凭证。故可直接确认“公开发布/免费下载”和“匿名 API 可读”不是同一回事，后者尚未验证。
+- Wordbank 的 by-word proportion 把缺失回答计作 negative；这是产品提供的汇总定义，不应直接当成观察到的儿童否定响应。原始 child-by-word 研究需保留缺失状态和 form-specific measure，并按儿童/问卷设计处理重复测量。
+- CHILDES 专属 [`Data Access Levels`](https://talkbank.org/childes/access.html)列出三个级别：网页说明开放、转录/媒体注册后访问、受控内容需身份审核/研究审批/数据使用协议。通用 TalkBank 页面可能另列其它级别；本项目应以所选 CHILDES corpus 的实际入口与许可为准，不把两个网站层级方案混写。
+- Brysbaert–Biemiller 的 UGent 记录确认论文覆盖约 44,000 个词义、来自超过 31,000 个词形/多词表达，并明确版权字段为 `No license (in copyright)`；公开论文 PDF 可读不等于原始行级 Living Word Vocabulary 数据可下载、复制或衍生映射。
+
+本补核只改进访问/测量边界，不改变科学问题或启动数据下载。当前可执行的下一步仍是：只用公开静态页面补足元数据；逐数据集许可与表单/管理量需要免费账户访问 Redivis `datasets`/`instruments` 等元数据表时，先取得用户明确授权；不得读取已有 token、响应或 CHILDES transcript。
 
 ## 3. 路线选择：B+C，不把词形结果伪装成义项结果
 
