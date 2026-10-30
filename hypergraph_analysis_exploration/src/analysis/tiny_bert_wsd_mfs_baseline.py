@@ -18,12 +18,15 @@ def digest(path):
     return value.hexdigest()
 
 
-def source_keys(nltk_data, wanted_ids, subset):
+def source_keys(nltk_data, wanted_ids, subset=None, documents=None):
     import nltk
     nltk.data.path = [str(nltk_data.resolve())]
     from nltk.corpus import semcor, wordnet
 
-    documents = partition(semcor.fileids())[subset]
+    if documents is None:
+        if subset not in {'train', 'dev'}:
+            raise ValueError('provide a valid SemCor subset or explicit document list')
+        documents = partition(semcor.fileids())[subset]
     keys = {}
     with zipfile.ZipFile(nltk_data / 'corpora/semcor.zip') as archive:
         for document in documents:
@@ -48,6 +51,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--nltk-data', type=Path, required=True)
     parser.add_argument('--prepared', type=Path, required=True)
+    parser.add_argument('--document-manifest', type=Path,
+                        help='document manifest used to build a fresh SemCor train/dev split')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
 
@@ -55,8 +60,25 @@ def main():
     train = json.loads((prepared / 'train.json').read_text(encoding='utf-8'))
     dev = json.loads((prepared / 'dev.json').read_text(encoding='utf-8'))
     metadata = json.loads((prepared / 'metadata.json').read_text(encoding='utf-8'))
-    train_keys, nltk_version, wn_version = source_keys(args.nltk_data, {row['sample_id'] for row in train}, 'train')
-    dev_keys, _nltk_version, _wn_version = source_keys(args.nltk_data, {row['sample_id'] for row in dev}, 'dev')
+    if args.document_manifest:
+        import nltk
+        nltk.data.path = [str(args.nltk_data.resolve())]
+        from nltk.corpus import semcor
+        manifest = json.loads(args.document_manifest.read_text(encoding='utf-8'))
+        official_train = partition(semcor.fileids())['train']
+        dev_documents = manifest['fresh_development_documents']
+        if not set(dev_documents).issubset(set(official_train)):
+            raise ValueError('fresh development documents must be in official SemCor train')
+        train_documents = [doc for doc in official_train if doc not in set(dev_documents)]
+        train_keys, nltk_version, wn_version = source_keys(
+            args.nltk_data, {row['sample_id'] for row in train}, documents=train_documents)
+        dev_keys, _nltk_version, _wn_version = source_keys(
+            args.nltk_data, {row['sample_id'] for row in dev}, documents=dev_documents)
+    else:
+        train_keys, nltk_version, wn_version = source_keys(
+            args.nltk_data, {row['sample_id'] for row in train}, 'train')
+        dev_keys, _nltk_version, _wn_version = source_keys(
+            args.nltk_data, {row['sample_id'] for row in dev}, 'dev')
 
     counts = defaultdict(Counter)
     for row in train:

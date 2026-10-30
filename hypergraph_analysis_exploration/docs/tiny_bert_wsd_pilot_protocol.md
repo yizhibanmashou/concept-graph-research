@@ -92,4 +92,18 @@ conda run -n emotion_xpu python src/analysis/tiny_bert_wsd_train.py --data outpu
 conda run -n emotion_xpu python src/analysis/tiny_bert_wsd_train.py --data outputs/tiny_bert_fresh_doc_dev_20261031 --model tmp/models/bert-tiny --out outputs/tiny_bert_fresh_doc_xpu_seed31_20261031 --device xpu --seed 31
 ```
 
-No training result is recorded here until these runs actually finish. Do not change the protocol in response to these scores; if an implementation defect is found, stop, preserve the result, document the defect, and prepare a new version before rerunning.
+The three frozen runs completed on the local `emotion_xpu` Conda environment. Each condition used the same 379 scorable train targets; each run scored the same 111 scorable targets out of 120 selected dev targets. Results:
+
+| Seed | A raw gloss | B + dependency glosses | C + pairwise dependencies | D + full branches |
+|---:|---:|---:|---:|---:|
+| 17 | 32/111 (28.83%) | 33/111 (29.73%) | 31/111 (27.93%) | 28/111 (25.23%) |
+| 23 | 23/111 (20.72%) | 23/111 (20.72%) | 31/111 (27.93%) | 28/111 (25.23%) |
+| 31 | 25/111 (22.52%) | 26/111 (23.42%) | 28/111 (25.23%) | 26/111 (23.42%) |
+| Mean (scorable denominator) | 24.02% | 24.62% | 27.03% | 24.62% |
+| Mean (all selected denominator, 120 per seed) | 22.22% | 22.78% | 25.00% | 22.78% |
+
+A train-sample lemma/POS frequency baseline, counting only the 400 selected training labels and breaking ties by candidate ID, scored 41/111 (36.94%) on scorable dev targets and 41/120 (34.17%) when the 9 unscorable targets were counted wrong. It achieved 25/50 (50.0%) for keys with a training gold key and 16/61 (26.23%) for keys unseen in the selected train sample. The baseline is simple but materially stronger than this tiny neural pilot on this sample.
+
+Across 333 paired target-seed observations, D vs B had 25 D-only and 25 B-only correct outcomes (net zero); D vs C had 17 D-only and 25 C-only outcomes (net D −8). Per seed, D−B correct-count differences were −5, +5, 0; D−C differences were −3, −3, −2. These are descriptive paired counts, not a significance test; seeds repeat the same targets and must not be treated as independent observations.
+
+**Exploratory conclusion:** On this new document-disjoint but same-source SemCor development subset, the tested `bert-tiny` serialization provides no observed incremental advantage for D over B; C has the highest three-seed mean, and the training-sample frequency baseline is higher than all four learned conditions. This is evidence against continuing this exact tiny-model / current-input configuration as a demonstration of full-structure gains. It does not falsify the broader hypothesis that complete concept structure can help machine understanding: the dev has only 111 scorable instances, the candidate budget was chosen after earlier exploration, the model is very small, candidate lexical token content differs by condition, and no modern strong encoder, independent source or human fidelity label was used. Do not tune against this dev. Next, report error strata and decide whether to stop this configuration or test one separately preregistered, stronger encoder/input method on a new independent source; do not add seeds or adjust budgets to chase a positive result.
