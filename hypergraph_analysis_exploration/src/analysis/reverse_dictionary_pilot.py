@@ -41,7 +41,7 @@ class GlossIndex:
             raise ValueError('limit must be positive')
         scores = defaultdict(float)
         n = len(self.rows)
-        for term in set(tokenize(query)):
+        for term in sorted(set(tokenize(query))):
             postings = self.postings.get(term, ())
             if not postings:
                 continue
