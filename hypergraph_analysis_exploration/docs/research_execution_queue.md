@@ -21,7 +21,7 @@
 |---|---|---|---|---|---|
 | P0 | 总控：队列和五线依赖管理 | 路线图已有总问题、分工和阶段门槛；本文件补充逐项工作包、阻塞和 PR 状态 | 每轮先核对实际 Git 状态，再更新本表与根本地报告 | 计划和结果分开；旧日期、提交和 PR 状态以当前仓库及 GitHub 实际返回为准 | 本文件随总控或当轮主题 PR 更新；本轮新增在 T04 分支 |
 | P0 | T02-1：介词关系保真与结构消融 | 全图 `prep` 删除、`prep_phrase` 敏感性、配对/分层结构对照已运行；结构变化不是语义保真。40 条只允许试标。现有源记录的上游版本指纹无法绑定到特定 payload/release，来源家族与许可 unresolved | 先做来源记录到实际上游对象的可复算 crosswalk；并准备非文本的抽样框精度/工时方案草案。不得导出正式释义审查包 | 在总体/来源家族、盲呈现、多条件重复判定、目标等权区间及精度门槛、权限都明确前，不启动正式双盲标注；任何自动关系分类无证据均为 `unresolved` | 专项实现分支包含多个已推送子主题；各 PR 是否存在需在线核实，不能因分支已推送标记为已建 PR |
-| P0 | T04-2b：共同文本与真实图输入审计 | 冻结训练候选 3,404 次出现/2,051 唯一候选，B/C/D 释义 token 对齐；旧序列化 A/B/C/D 三种子完成但 D−B=0，已复用 dev 不再调参 | 长度排序/pad-1 为 XPU profile 最优；向量化池化通过均值等价和梯度检查；两个 train 目标的 A/B/C/D 监督微批各完成一次 AdamW 更新并精确重放 | 微批仅工程/可复现性证据，不是效果估计。下一步审计覆盖失败与共同预算后扩大 train-only 训练，不读 dev/test；正式评测仍受许可、sense-key 映射和新来源隔离约束 | `codex/t04-structure-input-design` 已推送至 `863b5ae`；PR 工具返回 `Unknown tool`，尚无 PR/CI 状态 |
+| P0 | T04-2b：共同文本与真实图输入审计 | 冻结训练候选 3,404 次出现/2,051 唯一候选，B/C/D 释义 token 对齐；旧序列化 A/B/C/D 三种子完成但 D−B=0，已复用 dev 不再调参 | 长度排序/pad-1 为 XPU profile 最优；向量化池化通过均值等价和梯度检查；两个 train 目标的 A/B/C/D 监督微批可在 `emotion_xpu` 重放；新审计发现 21 条不可评分 gold 均属映射/元数据问题，候选编码失败为 0 | 微批仅工程/可复现性证据，不是效果估计。下一步冻结 exact sense-key 缺失/无效 gold 的处理口径，分析 250/400 上下文窗截断和共同 token 预算；不扩张到 dev/test，也不做未经审计的模糊映射。正式评测仍受许可、sense-key 映射和新来源隔离约束 | `codex/t04-structure-input-design` 已推送；本轮改动待提交；PR 工具返回 `Unknown tool`，尚无 PR/CI 状态 |
 | P0 | T04-3：WSD 映射、许可和新评估 | SemCor 内部文档隔离试点已重复使用，不能继续调参；Raganato 使用 WN3.0；FEWS 与图中 Wiktionary 来源可能重叠。完整候选和输入映射需逐目标报告 | 只处理不含测试文本/标签的来源、许可、模型暴露和 WN3.0→OEWN crosswalk 元数据；按子集列零/唯一/多映射、POS/lemma 异常和候选覆盖 | 先冻结子集、许可和映射规则；不满足授权或映射覆盖条件时不解封测试集。确认性评测只能在代码/配置/模型/分析锁定后执行一次 | 后续单独 `codex/t04-frozen-wsd-eval`；不可把旧 dev 结果移名为新评估 |
 | P1 | T01：ToLogic 编译与语义审核 | 六例有限枚举和 want/without 重放/静态结构审计可复现；候选覆盖不等于公式语义正确，without 是外部接口且不在原 85 basis | 保持六例作回归；先把语义标签说明、双人独立判定、参数绑定与作用域协议准备齐；由负责人确认外部接口语义再做盲审 | 没有独立语义标签前只报告候选枚举、绑定和语法；不训练 ranker、不声称概念学习或泛化 | `codex/t01-semantic-review-protocol` 等分支已推送；逐 PR 状态需 GitHub 核查 |
 | P1 | T03：知径交互原型 | 现有 `concept-dictionary/` Demo 是唯一产品基线；功能测试不代表理解或学习 | 继续在现有 Demo 做固定案例的路径正确性/解释完整性核对，聚焦介词方向、否定、OR 备选、循环和无路径；先用程序断言和无参与者模拟 | 不重建替代系统；真实用户理解/学习实验须由用户决定并完成伦理、招募、同意和数据处理审批 | 小型功能修复单独 PR；不以模拟用户作学习证据 |
@@ -54,13 +54,13 @@
 
 | 分支 | 主题 | 检查 | PR 状态 |
 |---|---|---|---|
-| `codex/t04-structure-input-design` | train-only B/C/D 输入、2×2 batching、向量化池化、XPU 反传和监督微批烟测 | 22 项 T04 专项测试通过；微批两次精确重放一致；代码与协议在 `863b5ae` 已推送；输出保持本地 ignored | GitHub PR 工具返回 `Unknown tool`，尚无 PR；比较页：[main...codex/t04-structure-input-design](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1) |
+| `codex/t04-structure-input-design` | train-only B/C/D 输入、2×2 batching、向量化池化、XPU 反传、监督微批与映射覆盖审计 | 23 项 T04 专项测试通过；train-only 复跑一致；映射问题分解为 18 个无 exact key、2 个 invalid gold、1 个图中缺失；代码/协议已有推送，本轮审计待提交；模型、数据和输出保持本地 ignored | GitHub PR 工具返回 `Unknown tool`，尚无 PR；比较页：[main...codex/t04-structure-input-design](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1) |
 
 ## 状态覆盖（2026-10-31，优先于上方 T04-2b 表格中的“下一动作”）
 
-T04 工程状态：训练候选图覆盖 2,051/2,051；冻结模型/训练数据摘要核验通过。长度排序/pad-1 的真实 gloss 前向相比 ID/pad-1 降低 padding、时延和内存；B/C/D 权重矩阵池化合成均值等价，XPU 池化 profile 初步快约 18%–32%，峰值增量少约 93%。在同一冻结 train-only 两个目标、14 候选、87 图节点上，A/B/C/D 使用共同 `inputs.A` 和相同 BERT-tiny/head 初始化，各完成一步监督 CE/AdamW 更新，39 个梯度张量正常。两次复跑的 sample/train/model hashes、四个更新前 train loss 与 XPU 峰值完全一致。当前证据只说明结构聚合和小批训练执行链可复现；小样本 loss 不能当 WSD 效果，未读 dev/test。此前旧序列化三种子结果 A/B/C/D=80/82/90/82、D−B=0，复用 dev，仅作历史探索。下一步审计候选编码失败与预算，再扩大 train-only 训练；效果评估仍需独立开发集、许可与 WordNet/OEWN 映射。
+T04 工程状态：训练候选图覆盖 2,051/2,051；冻结模型/训练数据摘要核验通过。长度排序/pad-1 的真实 gloss 前向相比 ID/pad-1 降低 padding、时延和内存；B/C/D 权重矩阵池化合成均值等价，XPU 池化 profile 初步快约 18%–32%，峰值增量少约 93%。在同一冻结 train-only 两个目标、14 候选、87 图节点上，A/B/C/D 使用共同 `inputs.A` 和相同 BERT-tiny/head 初始化，各完成一步监督 CE/AdamW 更新，39 个梯度张量正常；本轮通过 Conda `emotion_xpu` 在 Intel Arc 上复跑，结果摘要完全一致。train-only 覆盖审计显示 400 条中 379 条 gold 可评分、21 条不可评分（18 个无 exact sense-key、2 个 invalid gold、1 个图中缺失），但候选编码失败为 0，候选图覆盖仍为 2,051/2,051。上下文窗 250/400 被截断，目标标记 400/400 保留；旧 A/B/C/D 序列化每行文本均不一致，所以后续公平比较固定共同 `inputs.A`，只改图结构聚合。当前证据只说明结构聚合和小批训练执行链可复现；小样本 loss 不能当 WSD 效果，审计仅访问 train。此前旧序列化三种子结果 A/B/C/D=80/82/90/82，D−B=0，复用 dev，仅作历史探索。下一步先定 exact mapping failure 处理口径并分析截断/预算；不做未经审核的模糊映射、不读 dev/test。效果评估仍需独立开发集、许可与 WordNet/OEWN 映射。
 
-T04 代码、协议与队列更新推送至 `codex/t04-structure-input-design`，最新提交 `863b5ae`。GitHub PR 工具返回 `Unknown tool`，本机 `gh` 不可用，因此未创建 PR，也未核实 CI；[分支比较页](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1)可手动打开。
+T04 代码、协议与队列此前已推送至 `codex/t04-structure-input-design`；本轮新增审计尚未提交。GitHub PR 工具返回 `Unknown tool`，本机 `gh` 不可用，因此未创建 PR，也未核实 CI；[分支比较页](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1)可手动打开。
 
 ### 2026-10-31 XPU profile batching 复测（覆盖此前不完整预热测量）
 

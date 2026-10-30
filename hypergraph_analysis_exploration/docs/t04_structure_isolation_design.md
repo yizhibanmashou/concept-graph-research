@@ -193,3 +193,26 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 重复两次输出完全一致：selected sample hash=`b14406e815160c5428a2923ae0d00ffe70ec6da138f76431124724bacf075136`，train SHA=`e31e39e8b8ba1360ef89ff20ae13bfc9c7a7a05ac8797814ce69c2ca8167b4d7`，更新前 loss A/B/C/D=`2.008603/1.955209/1.985051/1.981746`；39 个参数张量均有有限梯度，优化器步正常。XPU peak allocated bytes A/B/C/D=`164270080/194585600/195894272/194585600`。以上是一个仅两目标、每条件一次更新的工程 smoke；四个训练 loss 受极小样本和随机 minibatch 支配，**不能比较或解释为 WSD 质量**。没有开发/测试评测，不产生模型 checkpoint。完整命令可由脚本 CLI 运行；profile JSON 留在 ignored `outputs/`。
 
 通过门槛仅为真实 train-only supervision、shared encoder、结构池化、梯度和 optimizer 更新链工作。下一阶段在扩大训练规模前，先审查共同 token/context 序列、图释义编码成本、未覆盖候选的计分规则以及训练失败日志；旧 dev 仍不可用于调参，正式验证 gate 仍是新开发隔离、许可及 WN3.0→OEWN 映射。
+
+#### 本机 Conda/XPU 启动方式与复跑
+
+训练依赖已在现有 Conda 环境 `emotion_xpu` 中，不需要切换到 `base` 或重新安装 CPU 版 PyTorch。2026-10-31 实测 Python 3.11.15、PyTorch 2.12.0+xpu、Transformers 5.9.0；`torch.xpu.is_available()` 为真，设备为 Intel(R) Arc(TM) Graphics（报告总显存约 16.8 GB）。从子项目目录以模块方式运行，保证 `src` 可导入：
+
+```powershell
+Set-Location D:\大学资料\大三\科研实践2026\hypergraph_analysis_exploration
+conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microbatch `
+  --data outputs/tiny_bert_fresh_doc_dev_20261031 `
+  --nodes ../OEWN/graph/nodes.tsv `
+  --rules ../OEWN/graph/hypergraph_rules.jsonl `
+  --model outputs/models/prajjwal1_bert-tiny_6f75de8b `
+  --examples 2 --seed 17 `
+  --out outputs/t04_train_microbatch_conda_replay_20261031.json
+```
+
+此命令已在本轮实际复跑成功：样本、训练集和模型摘要与前次记录一致，四种条件均完成一次 optimizer step。输出 JSON 与模型权重留在 ignored `outputs/`，不进入 Git。`transformers` 对预训练文件中未用于 `BertModel` 的分类/MLM 头报告 `UNEXPECTED`；当前结构编码使用的是匹配哈希的 BERT 主干，这些多余任务头是已知且预期的。两目标单步仅是管线 smoke，不代表训练收敛、资源足够支撑完整训练或任何 WSD 效果。
+
+#### Train-only 覆盖与映射失败审计（2026-10-31）
+
+新增 `src/analysis/audit_t04_train_only_coverage.py`，只读取 `train.json`、其 metadata 和冻结 OEWN nodes/rules；输出汇总数、哈希与截断/标记统计，不记录例句、ID，也不打开 dev/test。400 条训练记录中 379 条有可评分 gold、21 条没有：18 条 exact sense-key 映射缺失、2 条 gold 本身无效、1 条目标不在图中。与此相对，3,404 个候选出现全部通过编码准备状态检查，2,051/2,051 个唯一候选均在图中，候选编码失败为 0。因此当前不可评分样本的瓶颈是 gold 身份映射/数据元信息，不是 XPU 或候选编码器失败；不得临时用模糊映射补标签。
+
+共同输入预算为 256 tokens；A 条件上下文 piece 中位数/P90/最大值为 32/32/32，候选释义为 16/24/85，padding 槽中位数为 207；400 条中有 250 条句窗发生截断，目标起止标记在 400/400 条中均各出现一次。旧序列化 B/C/D 与 A 每行都有差异，因此后续模型对照应继续用当前已定义的共享 `inputs.A` 文本输入，只改变图结构聚合；截断窗口的公平性和 token 总预算需在扩大训练前分析。机器摘要留在 `outputs/t04_train_only_coverage_audit_20261031.json`，不提交。专项审计测试与既有 T04 测试共 23 项通过。
