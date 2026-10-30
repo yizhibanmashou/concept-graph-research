@@ -19,7 +19,32 @@ def stable_hash(value):
 
 
 def choose_candidates(instance_id, candidate_ids, maximum=4):
-    return sorted(candidate_ids, key=lambda value: (stable_hash(instance_id + ':' + value), value))[:maximum]
+    """Return the complete deterministic candidate order (or a legacy bounded view)."""
+    ordered = sorted(set(candidate_ids), key=lambda value: (stable_hash(instance_id + ':' + value), value))
+    return ordered if maximum is None else ordered[:maximum]
+
+
+def prepare_candidate_manifest(candidate_ids, prepare):
+    """Attempt every candidate and retain success or a specific failure per ID.
+
+    ``prepare`` returns the candidate payload on success and may raise an
+    exception; exception text is retained as the failure reason.
+    """
+    manifest = []
+    for candidate_id in candidate_ids:
+        try:
+            payload = prepare(candidate_id)
+        except Exception as exc:  # candidate-local failures must not erase the target
+            manifest.append({'candidate_id': candidate_id, 'status': 'failed',
+                             'failure_reason': f'{type(exc).__name__}: {exc}'})
+        else:
+            if payload is None:
+                manifest.append({'candidate_id': candidate_id, 'status': 'failed',
+                                 'failure_reason': 'preparation returned no payload'})
+            else:
+                manifest.append({'candidate_id': candidate_id, 'status': 'ready',
+                                 'failure_reason': None, 'payload': payload})
+    return manifest
 
 
 def select(records, n):
@@ -61,11 +86,13 @@ def main():
     def candidate(candidate_id):
         if candidate_id not in cache:
             if candidate_id not in rules:
-                return None
+                raise ValueError('candidate has no graph rule')
+            if candidate_id not in nodes:
+                raise ValueError('candidate has no node definition')
             item = build(candidate_id, nodes[candidate_id]['definition'], rules[candidate_id], definitions)
             result = pack(item, lambda text: tokenizer.encode(text).ids, args.candidate_budget)
             if result['status'] == 'base_over_budget':
-                return None
+                raise ValueError('base representation exceeds candidate budget')
             branches = [item['D']['branches'][i] for i in result['selected_indices']]
             forms, _ = representations(item, branches)
             encoded = {v: tokenizer.encode(json.dumps(forms[v], sort_keys=True, ensure_ascii=False,
@@ -101,23 +128,14 @@ def main():
         output = []
         stats = Counter(selected=len(records))
         for record in records:
-            ids = choose_candidates(record['instance_id'], index[record['key']].keys())
-            prepared = [candidate(identity) for identity in ids]
-            if any(value is None for value in prepared):
-                stats['excluded_budget_or_graph'] += 1
-                continue
+            ids = choose_candidates(record['instance_id'], index[record['key']].keys(), maximum=None)
+            manifest = prepare_candidate_manifest(ids, candidate)
             element = record['element']
             lemma, lexsn = element.get('lemma'), element.get('lexsn')
-            if not lemma or not lexsn or ';' in lexsn:
-                stats['excluded_invalid_gold'] += 1
-                continue
-            gold, issue = mapped_target(lemma + '%' + lexsn, mapping, nodes)
+            gold, issue = (None, 'invalid_gold') if not lemma or not lexsn or ';' in lexsn else mapped_target(lemma + '%' + lexsn, mapping, nodes)
             if issue:
-                stats['excluded_' + issue] += 1
-                continue
-            if gold not in ids:
-                stats['excluded_gold_not_selected'] += 1
-                continue
+                stats['gold_' + issue] += 1
+            gold_index = ids.index(gold) if gold in ids else None
             ctx = tokenizer.encode('target: ' + record['surface'].replace('_', ' ') + ' context: ' + record['context'],
                                    add_special_tokens=False).ids
             if len(ctx) > 32:
@@ -126,16 +144,32 @@ def main():
             versions = {}
             for version in 'ABCD':
                 pairs = []
-                for encoded, _status in prepared:
+                for candidate_record in manifest:
+                    if candidate_record['status'] != 'ready':
+                        continue
+                    encoded, _status = candidate_record['payload']
                     seq = [cls_id] + ctx + [sep_id] + encoded[version] + [sep_id]
                     joint_budget = 128 if args.candidate_budget == 94 else 256
                     if len(seq) > joint_budget:
                         raise ValueError('joint sequence exceeds budget')
                     pairs.append(seq + [pad_id] * (joint_budget - len(seq)))
                 versions[version] = pairs
-            stats['included'] += 1
-            stats['gold_candidate_no_branch'] += prepared[ids.index(gold)][1] == 'none'
-            output.append({'sample_id': record['sample_id'], 'label': ids.index(gold), 'inputs': versions})
+            ready_ids = [item['candidate_id'] for item in manifest if item['status'] == 'ready']
+            stats['encodable_candidates'] += len(ready_ids)
+            stats['failed_candidates'] += len(ids) - len(ready_ids)
+            if gold_index is not None and gold in ready_ids:
+                stats['gold_candidate_no_branch'] += manifest[gold_index]['payload'][1] == 'none'
+                stats['trainable_or_scorable'] += 1
+            else:
+                stats['gold_not_encodable'] += 1
+            ready_label = ready_ids.index(gold) if gold in ready_ids else -1
+            output.append({'sample_id': record['sample_id'], 'candidate_ids': ids,
+                           'candidates': [{k: v for k, v in item.items() if k != 'payload'}
+                                          for item in manifest],
+                           'scorable_candidate_ids': ready_ids,
+                           'gold_candidate_id': gold, 'gold_candidate_index': gold_index,
+                           'label': ready_label,
+                           'inputs': versions})
         results[subset] = output
         counts[subset] = dict(stats)
     args.out.mkdir(parents=True, exist_ok=False)
