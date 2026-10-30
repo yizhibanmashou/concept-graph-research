@@ -87,6 +87,16 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 
 这三组 checkpoint 对应先前 JSON 序列化 cross-encoder，不是本设计的逐 gloss shared encoder + relation pooling。其历史 C/D 输入没有按本设计分开构造 pairwise 2-section 和 branch-incidence 结构；各条件实际 token 长度不同。新 pooling 尚未训练或在 dev 评估。下一步使用已记录的固定模型权重摘要在 train-only 输入上做共享文本编码器 + 新关系池化的单批前向资源 profile；若无法恢复原权重文件，才从 pin revision 恢复并复核哈希。后续效果评估必须另行冻结未复用的开发/测试方案、映射与许可，不得回头利用此 dev 选设置。
 
+### T04-2d train-only BERT-tiny + 新关系池化前向资源 profile（2026-10-31）
+
+固定 revision 的模型文件已恢复至本地 ignored `outputs/models/prajjwal1_bert-tiny_6f75de8b/`；`config.json`、`pytorch_model.bin`、`vocab.txt` 的 SHA-256 分别为 `cf3179684f7c360dd6185962d480e7d426ceb8fe49f5db7b64bdc15dba0b8798`、`dab2c2bddcfb48ea430ef63fd76d46d67d704487844d967256a50dd7d7fd0a66`、`07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3`，与既有训练记录和冻结词表一致。新增 `src/analysis/profile_t04_xpu_text_structure.py`，仅读取 400 条 train JSON 中的 `candidate_ids`、对应 OEWN 定义和规则；未访问 label、context、dev/test。对 5,592 个唯一目标/依赖释义用同一 BERT-tiny 单独编码，再对 2,051 个目标候选计算 A/B/C/D 参数无关结构池化。
+
+batch size 32、按节点 ID 顺序动态 padding、2 个 warmup batch 的两次运行，文本编码 wall-clock 为 4.883/4.920 秒（约 1,145/1,137 gloss nodes/s），A/B/C/D 关系池化总计 7.206/7.958 秒（约 285/258 candidates/s）。65,370 个实际 token 被填充到 157,168 个 token 槽，padding 占 58.4%；动态峰值增量为文本编码 90,208,768 bytes、池化 339,456 bytes（后者在模型和节点向量仍驻留时测量）。四种输出均有限。两次摘要中的模型与输入哈希一致，数据结果仅保存在 ignored `outputs/t04_xpu_text_structure_profile_20261031.json` 与 `_v2.json`。
+
+结论限于该 Intel Arc、该 TinyBERT revision、该固定 train 图规模和推理前向：本机确实能够执行共享 gloss 编码与新结构池化；旧序列化训练也已证明小模型 XPU 微调可运行。此 profile 不含 context 编码、打分头、反向传播、优化器或完整训练批次，因此不构成新结构 WSD 训练/精度结果，也不外推更大模型。资源上值得优先优化的是 ID 顺序 batching 导致的高 padding（58.4%）和逐候选 Python/Torch 小算子开销（A–D 池化耗时高于本次 gloss 前向）；下一步只做不看 dev 的等价实现优化与重测，然后再冻结共享上下文/候选打分及训练配置。效果评估仍须先有未复用开发集及许可、映射和统计协议。
+
+真实前向 profile 的候选/节点读取、padding helper 与聚合行为新增 4 项测试；连同此前 24 项输入审计、结构聚合及 profile 测试，本轮 28 项在 `emotion_xpu` 通过。`python -m py_compile src/analysis/profile_t04_xpu_text_structure.py` 通过。数据、模型文件、输出 JSON 和 checkpoint 均保留在本机 ignored outputs，不加入 PR。
+
 ## 5. 数据、切分与指标
 
 1. **旧 SemCor 开发集冻结。** 已反复用于方案开发的 120 条样本及其文档隔离子集不得再用于选择上限、池化器、超参数、停止点或主结果。历史结果只作为探索记录。
