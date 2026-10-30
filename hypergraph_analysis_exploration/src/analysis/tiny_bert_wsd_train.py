@@ -76,6 +76,8 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--device', choices=('cpu', 'xpu'), default='xpu')
     parser.add_argument('--seed', type=int, default=17)
+    parser.add_argument('--train-only', action='store_true',
+                        help='do not open development data or evaluate checkpoints')
     parser.add_argument('--smoke', action='store_true', help='train one batch of A without reading dev')
     args = parser.parse_args()
     import torch
@@ -175,8 +177,10 @@ def main():
               'inputs_sha256': {'train.json': digest(train_path), 'metadata.json': digest(args.data / 'metadata.json'),
                                 'model_config': digest(args.model / 'config.json'),
                                 'model_weights': digest(args.model / 'pytorch_model.bin')},
-              'limits': 'Exploratory small-data train/dev pilot; development was used in prior design, no test read; no significance or semantic validation.'}
-    if not args.smoke:
+              'limits': ('Exploratory train-only optimization run; no development/test data read; no significance or semantic validation.'
+                         if args.train_only or args.smoke else
+                         'Exploratory small-data train/dev pilot; development was used in prior design, no test read; no significance or semantic validation.')}
+    if not args.smoke and not args.train_only:
         dev_path = args.data / 'dev.json'
         dev = json.loads(dev_path.read_text(encoding='utf-8'))
         if train_ids & validate(dev, max_len):

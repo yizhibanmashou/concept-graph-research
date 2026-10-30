@@ -1,5 +1,7 @@
 import unittest
-from src.analysis.tiny_bert_wsd_data import choose_candidates, encode_target_centered_context, select
+from src.analysis.tiny_bert_wsd_data import (
+    choose_candidates, encode_target_centered_context, observed_candidate_keys, select,
+)
 
 
 class TinyBertDataTests(unittest.TestCase):
@@ -7,6 +9,18 @@ class TinyBertDataTests(unittest.TestCase):
         ids = ['a', 'b', 'c', 'd', 'e']
         self.assertEqual(choose_candidates('example', ids), choose_candidates('example', list(reversed(ids))))
         self.assertEqual(len(choose_candidates('example', ids)), 4)
+
+    def test_candidate_morphology_keeps_all_same_pos_lemmas(self):
+        morphs = lambda surface, pos: {
+            ('found', 'v'): ['found', 'find'],
+            ('years', 'n'): ['years', 'year'],
+        }.get((surface, pos), [surface])
+        self.assertEqual(observed_candidate_keys('found', 'VB', morphs),
+                         (('find', 'v'), ('found', 'v')))
+        self.assertEqual(observed_candidate_keys('years', 'NN', morphs),
+                         (('year', 'n'), ('years', 'n')))
+        self.assertEqual(observed_candidate_keys('found', 'NN', morphs),
+                         (('found', 'n'),))
 
     def test_stable_sample_does_not_use_label(self):
         rows = [{'sample_id': 'b', 'doc': 'd', 'sentence': 1, 'token': 1, 'gold': 'x'},

@@ -216,3 +216,19 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 新增 `src/analysis/audit_t04_train_only_coverage.py`，只读取 `train.json`、其 metadata 和冻结 OEWN nodes/rules；输出汇总数、哈希与截断/标记统计，不记录例句、ID，也不打开 dev/test。400 条训练记录中 379 条有可评分 gold、21 条没有：18 条 exact sense-key 映射缺失、2 条 gold 本身无效、1 条目标不在图中。与此相对，3,404 个候选出现全部通过编码准备状态检查，2,051/2,051 个唯一候选均在图中，候选编码失败为 0。因此当前不可评分样本的瓶颈是 gold 身份映射/数据元信息，不是 XPU 或候选编码器失败；不得临时用模糊映射补标签。
 
 共同输入预算为 256 tokens；A 条件上下文 piece 中位数/P90/最大值为 32/32/32，候选释义为 16/24/85，padding 槽中位数为 207；400 条中有 250 条句窗发生截断，目标起止标记在 400/400 条中均各出现一次。旧序列化 B/C/D 与 A 每行都有差异，因此后续模型对照应继续用当前已定义的共享 `inputs.A` 文本输入，只改变图结构聚合；截断窗口的公平性和 token 总预算需在扩大训练前分析。机器摘要留在 `outputs/t04_train_only_coverage_audit_20261031.json`，不提交。专项审计测试与既有 T04 测试共 23 项通过。
+
+#### Exact sense-key 缺失的 train-only 根因敏感性（2026-10-31）
+
+新增 `src/analysis/audit_t04_train_gold_mapping.py`，仅打开确定性划分中的 SemCor train 文档、WordNet 3.0 词典、OEWN 2025+ sense index 与冻结 nodes，不读取 dev/test 文档。它复现原 400 条固定 train 选例，并核对样本 hash 与已准备 metadata 一致；输出仅含聚合数、输入 hash、训练文档成员 hash，不含句子、sense key、文档名、目标 ID 或标签修复。
+
+结果为：379 条 exact 唯一映射且目标在图中；2 条源标注无效；18 条没有 OEWN exact sense-key 对应。其中 **14 条连 WordNet 3.0 `lemma_from_key` 都无法解析**；另 **4 条是有效 WN3 key，但其 WN3 synset 所有成员 key 均无 OEWN exact crosswalk**，因此连 synset 成员投票也没有可用证据。另有 1 条 exact crosswalk 的目标不在冻结 graph。对 4 条 valid-but-unmapped key，synset-level 敏感性中 4/4 均为 `synset_no_oewn_member_match`。所以“18 条不匹配”不能笼统说成 OEWN 义项映射遗漏，更不能通过模糊词形或邻近义项自动补齐；当前应将它们列为不可评分，并在未来 benchmark 中预先制定明确的跨资源覆盖规则。
+
+在 `tmp/nltk_data`、`tmp/oewn-2025-plus-json.zip`、冻结 `nodes.tsv` 和 `outputs/tiny_bert_fresh_doc_dev_20261031/metadata.json` 上复跑，选例哈希 `6a444ed9823392840efded96b793121e0f9b272d762dff21c2c468c7851a6aa6` 与准备数据一致；解析 246 个 train 文档，dev/test 文档计数均为 0。输出 `outputs/t04_train_gold_mapping_audit_20261031.json` 留在本机 ignored 目录。该分析是覆盖/身份诊断，不评价 SemCor 标签语义，也不授权改变正式评测分母。
+
+#### 词形候选覆盖修复与上下文预算（2026-10-31）
+
+排查发现单一 `wordnet.morphy(surface, pos)` 只返回首选形态，会漏掉仍具词形歧义的词：train 样本中 `found` 没有把 `find` 的候选义项带入，`years` 没有把 `year` 带入，`felt` 没有把 `feel` 带入，共导致 4 个本可 exact 映射的 gold 义项不在候选池。候选构造现改为使用 WordNet 同词性下全部 `_morphy` 形态并集；目标样本排序仍由无标签的固定 sample ID 决定，形态候选不读取 SemCor gold 来增补。候选池恢复为 3,404 次出现、2,051 个唯一义项；379/400 exact 可映射 gold 均进入候选池。另 21 条映射/元数据问题依然不可评分，不自动修标签。
+
+上下文 budget 审计按全部 A/B/C/D 及 13,616 个候选—条件输入对统计，不再只看 A。固定候选序列预算 222，加目标上下文 cap 128 与特殊符号，统一张量宽度为 352；A/B/C/D 的实际最大序列长度 351，均低于 BERT-Tiny 位置上限 512。128-token cap 下只有 3/400 句窗截断，起止目标标记错误为 0。32/64/96/128 cap 的截断目标数分别为 250/48/9/3；对应最大序列为 255/287/319/351，全部条件均在各自共同预算内。128 cap 比 32 cap 多约 9.6% 的候选—条件 token 出现量（1,828,331 vs 1,668,395）；这是计算成本，不是效果增益。
+
+训练环境使用 Conda `emotion_xpu`：Python 3.11、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Intel Arc XPU 可用；`nltk` 不在该环境内，因此数据构造/审计通过本机研究环境运行，模型训练只通过 `conda run -n emotion_xpu ... tiny_bert_wsd_train` 读取已冻结 JSON。train-only 四条件一轮训练已完成并以相同 seed 重放，启动时不读取 dev/test。每条件 379 条，mean loss A/B/C/D=1.859496/1.853116/1.853980/1.862553；checkpoint SHA 在完整重放中逐项一致。该结果只验证工程训练链与确定性，不把 loss 或小样本训练表现解释为 WSD 质量提升。训练命令增加 `--train-only`，避免访问 dev/test。
