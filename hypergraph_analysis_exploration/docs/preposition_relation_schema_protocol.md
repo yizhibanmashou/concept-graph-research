@@ -104,6 +104,19 @@ python -m src.analysis.audit_preposition_source_provenance --bundle ../OEWN --ou
 python -m unittest tests.test_audit_preposition_source_provenance -v
 ```
 
+### 5.2.2 T02 来源标签与权利日志的保守对账（2026-10-31）
+
+来源证据覆盖审计的 82 个 exact label 与本地 `sources/source_release_rights_evidence_2026-10-06.json` 做了两种 join：原样字面匹配命中 6/82 个标签、143/3,645 个 evidence item；随后只对大小写、下划线/空格和重复空白做确定性规范（不做模糊匹配或人工别名推断），命中 17/82 个标签、2,395/3,645 个 evidence item。唯一规范化匹配中 4 个标签有权利日志状态字段，涉及 2,270 个 evidence item；其余 13 个匹配标签无该字段。没有规范化标签碰撞；仍有 65 个标签、1,250 个 evidence item 未匹配。该结果说明历史权利日志的覆盖很大程度受标签写法影响，同时 Kaikki/Wiktextract 两个高频标签（881 + 201 = 1,082 evidence items）仍未与现有权利日志标签对上。
+
+复算代码 `src/analysis/reconcile_t02_source_label_rights.py` 只读两份聚合 JSON，输出精确标签、item/record 计数、匹配状态、日志中的类别状态与输入 SHA-256；不读取源记录释义，不输出 URL、locator、sense ID、source text 或权利证据正文。命令（从本项目目录运行；输出必须是新路径）：
+
+```powershell
+python -m src.analysis.reconcile_t02_source_label_rights --audit outputs/t02_source_provenance_audit_20261031_v3.json --rights-log sources/source_release_rights_evidence_2026-10-06.json --out outputs/t02_source_label_rights_reconciliation_20261031_v2.json
+python -m unittest tests.test_reconcile_t02_source_label_rights -v
+```
+
+匹配只表示能定位到一条已有权利日志记录；GCIDE 状态仍写明 payload/version alignment 未验证，MeSH 状态只记录提供方重用条款而未指派标准许可证，OLS 不是单一许可证。剩余标签或有日志状态字段都不证明上游发行版与冻结 payload 的逐条对应、可再分发兼容性、来源独立性或语义保真。该对账不改变 `not_cleared_for_public_release` 状态，不能据此启动正式盲审。
+
 ### 5.3 盲化、双标与仲裁（执行前需负责人确认）
 
 - 两名审阅者独立标注；隐藏条件名称、机器结构统计、抽样层、另一名审阅者结果及训练/测试用途。
