@@ -31,6 +31,10 @@ python -B -X utf8 enumerate_one.py --input cases/want_lack/input.json --out ../.
 
 从仓库根目录运行 `python hypergraph_analysis_exploration/research/tologic/rank_baseline.py --out report/tologic_rank_new.json`。基线只按已使用词项 occurrence 的数量评分，参考答案在评分之后读取；并列采用均匀随机打破的期望指标。六例结果仅是同例描述，不证明泛化。
 
+## `without` 接口结构审计
+
+在 `hypergraph_analysis_exploration` 目录中运行 `python research/tologic/without_interface_audit.py --input research/tologic/model/cases/want_lack/input.json --candidates research/tologic/model/cases/want_lack/out/candidates.jsonl --out outputs/tologic_without_interface_audit_new.json`。工具核对候选公式树与词汇 occurrence 绑定，再计数不调用接口、同名参数绑定和其他绑定。它只检查结构：`without` 是用户提供的外部接口，RHS 尚未认证，不是 85 个基准词；无独立 gold，不能据此计算语义准确率或认定同名绑定一定正确。
+
 ## 准备人工盲审
 
 先固定样本大小和种子，不读取 `expected/` 或按参考答案选择候选。例如从仓库根目录运行：
