@@ -39,6 +39,12 @@
 - [GBIF Data User Agreement](https://www.gbif.org/terms/data-user)要求保留权属标识、引用发布者、遵守发布者所选许可，明确 GBIF 不拥有或托管所有记录的权利。
 - [OEWN 2025 release](https://github.com/globalwordnet/english-wordnet/releases/tag/2025-edition)及 [OEWN license](https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md)能支撑匹配发布版释义文本的署名/许可路径，但不能自动覆盖混合冻结 payload、被改写文本或超图构造规则。
 
+## 当前工作区的历史 producer 路径核验（2026-10-31）
+
+对本地冻结 OEWN source records 中保留的历史 `Wn2Lingua` pipeline/path 字段做只读检索后，发现记录指向的旧 producer 根目录当前不存在。仓库已有 producer-boundary audit 也显示本 checkout 只有图读取器和 source-evidence 消费/审计代码，没有原始 producer 实现或其引用的全部输入。因此，历史记录中的 pipeline 名称及旧路径只能作为 provenance 线索，不能证明具体实现版本、输入快照、生成参数或每条活动规则的来源；本次工作也没有从别处恢复代码。
+
+该检查确认的是**当前工作区无法按保留路径重放**，不证明文件在历史上从未存在或从未公开。解除此缺口需要取得与冻结记录绑定的 producer commit/源码、输入清单及校验和、配置/版本、生成日志，并在隔离副本上重放后逐 occurrence 对账。在这些材料到位前继续将对应记录标为 `source_unresolved`，不用于来源独立性抽样或正式盲审包。
+
 ## 可执行 crosswalk 规格与状态
 
 下一版记录以 `source occurrence` 为最小单位，按下列字段分层；字段缺失要保留缺失状态，不可由标签猜填：
