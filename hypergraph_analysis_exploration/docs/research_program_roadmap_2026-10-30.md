@@ -183,6 +183,7 @@
 | T02-1 | 用户已决关系表示与盲审协议 | 用户确认类别、主口径、标签轴与试标边界 | PR #32、#33 已合并 |
 | T02-2 | 合成校验器及只读转换 | T02-1 schema 定稿 | PR #35 已合并；329 项本机全套测试通过；只验证结构，不证明语义 |
 | T02-2a | 拒绝空源分支、保留变换后空分支 | T02-2 validator | commit `9c13465` 已推送到 `codex/t02-nonempty-source-branch`；目标合成检查 6 项通过；PR connector 返回 `Unknown tool`，尚未创建 |
+| T02-2b | 对 Kaikki/Wiktextract 两个高频标签做来源版本元数据形态聚合 | T02-1 provenance audit 与原始标签 crosswalk | 本轮新增只读审计器；5,625/5,625 payload 成功，1,082 个目标 evidence item 的版本值均无法分类为日期/semver/commit，locator 无 URL host，许可与上游版本绑定仍 unresolved；6 项合成审计测试通过；PR 尚未创建 |
 | T04-2 | 公平预算下的新开发比较 | T04-1 接口、来源隔离和开发集冻结 | 后续；先冻结开发集方案，不读取测试标签 |
 | T02-3/4 / T04-3 | 独立盲审 / 独立模型评估 | 许可、抽样框、精度与用户决策、代码/协议锁定 | 不能提前承诺日期或正向结果 |
 
