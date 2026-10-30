@@ -45,6 +45,7 @@ def summarize_shared_token_inputs(
 
     failed: Counter[str] = Counter()
     total_tokens: list[int] = []
+    longest_single_gloss_tokens: list[int] = []
     target_tokens: list[int] = []
     dependency_tokens: list[int] = []
     dependency_counts: list[int] = []
@@ -108,6 +109,7 @@ def summarize_shared_token_inputs(
         target_length = len(inventories["B"][0][1])
         dep_length = sum(token_lengths[1:])
         total_tokens.append(sum(token_lengths))
+        longest_single_gloss_tokens.append(max(token_lengths))
         target_tokens.append(target_length)
         dependency_tokens.append(dep_length)
         dependency_counts.append(len(inventories["B"]) - 1)
@@ -136,6 +138,7 @@ def summarize_shared_token_inputs(
             "target_gloss": _distribution(target_tokens),
             "all_dependency_glosses_per_candidate": _distribution(dependency_tokens),
             "target_plus_dependency_glosses_per_candidate": _distribution(total_tokens),
+            "longest_single_gloss_per_candidate": _distribution(longest_single_gloss_tokens),
         },
         "structure_sizes_per_candidate": {
             "dependency_nodes": _distribution(dependency_counts),

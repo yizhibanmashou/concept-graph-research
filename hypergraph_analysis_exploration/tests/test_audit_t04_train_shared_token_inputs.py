@@ -20,6 +20,12 @@ class T04TrainSharedTokenInputTests(unittest.TestCase):
         self.assertEqual(report["shared_text_token_hashes"]["conditions_equal_for_all_valid_candidates"], 1)
         self.assertEqual(report["structure_sizes_per_candidate"]["branches"]["max"], 2)
         self.assertEqual(report["structure_sizes_per_candidate"]["pairwise_edges"]["max"], 3)
+        self.assertEqual(
+            report["token_piece_counts_without_special_tokens_or_truncation"][
+                "longest_single_gloss_per_candidate"
+            ]["max"],
+            2,
+        )
         self.assertNotIn("label", report)
 
     def test_missing_graph_data_stays_in_failure_denominator(self):
