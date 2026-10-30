@@ -1,6 +1,7 @@
 """Audit a compact local-alias serialization for shared branch budgets."""
 import argparse
 import hashlib
+from itertools import combinations
 import json
 from pathlib import Path
 
@@ -12,7 +13,15 @@ def representations(item, branches):
     aliases = {node: f'd{i}' for i, node in enumerate(ids)}
     a = {'gloss': item['A']['gloss']}
     b = {**a, 'deps': [{'id': aliases[node], 'gloss': definitions[node]} for node in ids]}
-    c = {**b, 'edges': [aliases[node] for node in ids]}
+    # C is the simple undirected 2-section of the selected AND branches:
+    # connect two dependencies iff they co-occur in at least one branch.
+    # D retains the branch partition that this projection intentionally loses.
+    edges = {
+        tuple(sorted((aliases[left], aliases[right])))
+        for branch in branches
+        for left, right in combinations(sorted(set(branch)), 2)
+    }
+    c = {**b, 'edges': [list(edge) for edge in sorted(edges)]}
     d = {**b, 'branches': [[aliases[node] for node in branch] for branch in branches]}
     return {'A': a, 'B': b, 'C': c, 'D': d}, aliases
 

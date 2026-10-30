@@ -27,6 +27,14 @@ The machine-local artifacts `outputs/tiny_bert_fresh_doc_xpu_seed{17,23,31}_2026
 
 The run metadata records candidate budget 222 and joint budget 256, a fixed BERT-tiny initialization, one epoch, batch size 4, and learning rate 2e-5. Coverage is asymmetric at the gold-candidate level: 379/400 train and 111/120 dev are scoreable; all three seeds share the same recorded train/dev/metadata hashes. The result JSON explicitly says development data were used in prior design and no test was read. Do not tune against this dev again. Before a new performance experiment, fix the C condition so it actually encodes pairwise topology distinct from B, equalize usable token/information budgets, and obtain a new independent evaluation source. The full local package/model paths and checkpoints are ignored and must stay local; no corpus, model weights, or predictions belong in Git.
 
+# C-condition representation audit and fix (2026-10-31)
+
+The prior `compact_sense_budget.representations()` encoded C as a flat list of all dependency aliases. That list contains no adjacency information, so the 80/82/90/82 three-seed scores above are not a valid A/B/C/D comparison for the intended pairwise-graph treatment. Preserve those outputs as historical engineering artifacts; do not reinterpret C as pairwise, overwrite them, or rerun the repeatedly used development set.
+
+The proposed operationalization now defines C as the simple undirected 2-section of each candidate's complete AND branches: add one unordered dependency pair when both nodes co-occur in any branch, then deduplicate pairs across OR branches. C carries no direction, argument roles, multiplicity, or target-to-dependency edge. D still serializes the complete branch partition. Thus C intentionally loses which pairs belonged to the same higher-order branch. The same selected dependency glosses are shared by B, C, and D; branch retention and actual token counts must be reported because the corrected C can consume more budget. See `compact_sense_budget_protocol.md` for the full definition and limitations.
+
+Four synthetic tests now cover alias consistency, pair generation, duplicate-edge collapse, and two different hypergraphs that share the same 2-section but have different D branch partitions. No SemCor rows or labels were read for this correction, and no data were regenerated or model retrained. The 2-section is a proposed control representation; obtain scientific sign-off before any new performance run.
+
 The active environment is a Conda environment named `emotion_xpu`, not the default `base` interpreter. On this machine it reports Python 3.11.15, PyTorch `2.12.0+xpu`, Transformers `5.9.0`, and an available Intel Arc XPU. To check the environment without GUI use:
 
 ```powershell
