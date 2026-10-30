@@ -51,16 +51,15 @@ def aggregate_relation_views(
 
     import torch
 
-    vectors = {node_id: node_vectors[node_id] for node_id in needed}
-    if any(not isinstance(vector, torch.Tensor) or vector.ndim != 1 for vector in vectors.values()):
+    node_ids = tuple(sorted(needed))
+    vectors = [node_vectors[node_id] for node_id in node_ids]
+    if any(not isinstance(vector, torch.Tensor) or vector.ndim != 1 for vector in vectors):
         raise ValueError("node vectors must be one-dimensional torch tensors")
-    widths = {int(vector.shape[0]) for vector in vectors.values()}
+    widths = {int(vector.shape[0]) for vector in vectors}
     if len(widths) != 1:
         raise ValueError("node vectors must have equal width")
 
-    target = vectors[target_id]
-    b_relation = torch.stack([vectors[node_id] for node_id in dependency_ids]).mean(dim=0)
-
+    node_index = {node_id: index for index, node_id in enumerate(node_ids)}
     pair_ids = tuple(sorted({
         tuple(sorted((left, right)))
         for branch in canonical
@@ -68,19 +67,38 @@ def aggregate_relation_views(
         for index, left in enumerate(clique)
         for right in clique[index + 1:]
     }))
-    c_relation = torch.stack([
-        (vectors[left] + vectors[right]) / 2 for left, right in pair_ids
-    ]).mean(dim=0)
 
-    branch_vectors = [torch.stack([target, *(vectors[node_id] for node_id in branch)]).mean(dim=0)
-                      for branch in canonical]
-    d_relation = torch.stack(branch_vectors).mean(dim=0)
+    # Each relation view is a weighted mean over the same packed node matrix.
+    # Building weights in Python avoids many tiny device-side stack/add/mean
+    # launches for each candidate; one matrix multiply computes B/C/D together.
+    weights = [[0.0] * len(node_ids) for _ in range(3)]
+    if not dependency_ids:
+        raise ValueError("branches must contain at least one dependency")
+    for node_id in dependency_ids:
+        weights[0][node_index[node_id]] = 1.0 / len(dependency_ids)
+    if not pair_ids:
+        raise ValueError("pairwise projection must contain at least one edge")
+    pair_weight = 1.0 / (2 * len(pair_ids))
+    for left, right in pair_ids:
+        weights[1][node_index[left]] += pair_weight
+        weights[1][node_index[right]] += pair_weight
+    branch_weight = 1.0 / len(canonical)
+    for branch in canonical:
+        member_weight = branch_weight / (len(branch) + 1)
+        weights[2][node_index[target_id]] += member_weight
+        for node_id in branch:
+            weights[2][node_index[node_id]] += member_weight
+
+    matrix = torch.stack(vectors)
+    weight_tensor = torch.tensor(weights, dtype=matrix.dtype, device=matrix.device)
+    target = matrix[node_index[target_id]]
+    relation_vectors = weight_tensor @ matrix
 
     return {
         "A": torch.cat([target, torch.zeros_like(target)]),
-        "B": torch.cat([target, b_relation]),
-        "C": torch.cat([target, c_relation]),
-        "D": torch.cat([target, d_relation]),
+        "B": torch.cat([target, relation_vectors[0]]),
+        "C": torch.cat([target, relation_vectors[1]]),
+        "D": torch.cat([target, relation_vectors[2]]),
         "dependency_ids": dependency_ids,
         "pair_ids": pair_ids,
         "canonical_branches": canonical,

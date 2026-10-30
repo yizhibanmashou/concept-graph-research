@@ -238,3 +238,9 @@
 完整预热后的 train-only profile 显示，在本机 Intel Arc XPU 上，5,592 个 gloss、2,051 个 train 候选的 BERT-tiny 编码：ID 顺序/pad-to-1 为 1.252 秒、58.4% padding、90.2 MB 峰值增量；按长度排序/pad-to-8 为 0.858/0.885 秒（两次）、23.2% padding、53.6 MB。池化约 6.94–7.08 秒。基线仅一次且两项 batch 设置同时变化，故仅作为工程线索；不代表新模型训练或 WSD 效果。下一步分别消融排序和 padding multiple，并向量化池化、检查数值等价。
 
 2×2 复核进一步拆分了排序与 padding：length-sort/pad-1 两次编码 0.759/0.810 秒、padding 1.8%、编码峰值增量 43,971,072 bytes；ID/pad-1 两次 1.252/1.144 秒、padding 58.4%、90,208,768 bytes。pad-to-8 在两类顺序下都无优势，因此 profile 默认采用 length-sort/pad-1。该工程结论未经训练/下游效果验证。
+
+### T04 关系池化工程更新（2026-10-31）
+
+B/C/D 的均值聚合已改写为 3×N 权重矩阵乘法；合成直接均值对照通过，梯度可回传。length-sort/pad-1 的 train-only XPU profile 两次池化为 5.724/5.680 秒、额外峰值 25,088 bytes；此前直接逐分支实现为 6.94–8.35 秒、339,456 bytes，初步减少约 18%–32% 时间与约 93% 峰值增量。重复次数有限，仍需在新训练批次集成时复核。此优化没有训练或 WSD 质量证据。下一步执行小批反向/优化器工程 smoke。
+
+合成结构池化的 XPU backward/SGD smoke 已在 Intel Arc 通过：有限 loss/gradient，参数更新正常。此项不含新模型参数、真实 WSD 标签或上下文，仅证明算子链支持反向与优化器；端到端小批训练仍待验证。

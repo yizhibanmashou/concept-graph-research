@@ -171,3 +171,13 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 | length / 8 | 0.858 / 0.885 秒 | 23.2% | 53,596,160 bytes |
 
 同为 pad-to-1 时，length-sort 比 ID-sort 的均值编码时延低约 35%，padding 低 56.6 个百分点，峰值增量内存低约 51%。pad-to-8 没有收益。profile 默认采用 length-sort/pad-to-1。该选择只依据本机工程资源；profile 未读取标签、上下文、dev/test，也不含反向传播和优化器。计时重复有限，应在训练 pipeline 集成后再次复核；关系池化仍比释义编码更慢，接下来优先向量化池化并做数值等价测试。
+
+### B/C/D 关系池化的权重矩阵实现（2026-10-31）
+
+关系均值均可表示为同一节点向量矩阵上的线性加权：B 对唯一依赖节点等权；C 对 pairwise 边的两端累计半权后按边数归一；D 对每个分支（含目标）先取均值，再对 OR 分支等权。实现将三种系数构成 3×N 权重矩阵，一次矩阵乘法得到 B/C/D 向量，A 仍为目标向量拼接零关系通道。分支/节点 canonicalization 与 `pair_ids` 保持不变。
+
+验证：合成例逐项对照原直接均值实现，B/C/D `torch.allclose`；带 `requires_grad` 的向量反传梯度均存在；T04 相关 22 项测试通过。在 `emotion_xpu` 上固定 train-only 输入 2,051 候选、5,592 gloss、length-sort/pad-1，向量化池化两次 5.724/5.680 秒，额外峰值 25,088 bytes。原实现的同设置有限次 profile 为 6.94–8.35 秒及 339,456 bytes。初步观察约 18%–32% 更快、额外峰值下降约 93%；样本量小，Python 图遍历仍在计时内，需在真实训练集成后复核。这仅是资源改进，不支持模型质量结论，也不代表已做新架构反向训练。
+
+### XPU 反向传播与优化器工程 smoke（2026-10-31）
+
+在 `emotion_xpu` / Intel Arc 上用合成节点向量验证权重矩阵池化的 autograd：可训练标量乘节点输入，计算 A/B/C/D 聚合和平方损失，执行 backward 与 SGD step。loss=11.5733，梯度=23.1466，参数从 1.0 更新到 0.7685，均为有限值。该 smoke 只证明合成结构路径的 XPU 反向及 optimizer 可运行；没有加载/训练新模型、没有使用真实目标标签或上下文，也不证明端到端训练资源/效果。下一步在不读 dev/test 的前提下，用真实 train-only gloss 编码的小批次做完整参数更新并测峰值内存。

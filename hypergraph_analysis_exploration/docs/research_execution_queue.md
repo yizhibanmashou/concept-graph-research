@@ -82,3 +82,11 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 ### 2026-10-31 2×2 batching 消融更正
 
 完整预热的 2×2 profile 已完成，排序与 padding 倍数分别对照。ID/pad-1 编码 1.252/1.144 秒、padding 58.4%、额外峰值 90,208,768 bytes；ID/pad-8 为 1.232 秒、63.3%、101,390,336 bytes；length/pad-1 为 0.759/0.810 秒、1.8%、43,971,072 bytes；length/pad-8 为 0.858/0.885 秒、23.2%、53,596,160 bytes。length-sort/pad-1 相比 ID/pad-1 均值快约 35%，padding 低 56.6 个百分点，峰值少约 51%。pad-8 在两种顺序下都无优势；当前 profile 默认值改为 length/pad-1。关系池化 6.94–8.35 秒仍主导耗时。所有输入仍为 train candidate IDs 与图 gloss/rules，不读 labels/context/dev/test；不含反向或优化器。运行次数有限，结论是本机工程优选，非通用性能保证或 WSD 效果证据。
+
+### 2026-10-31 B/C/D 向量化池化初测
+
+把每个候选的 B/C/D 关系均值写成共同节点矩阵上的三行权重，再用一次矩阵乘法求出三种关系向量，减少逐分支/逐边的设备端小算子。与原直接均值定义的合成对照 `torch.allclose` 一致，autograd 梯度可回传；T04 相关 22 项测试通过。按长度排序/pad-to-1、同一 train-only 2,051 候选 profile，新池化 5.724/5.680 秒、峰值增量 25,088 bytes；向量化前数次同设置 profile 为 6.94–8.35 秒、峰值增量 339,456 bytes。粗略时延改善约 18%–32%，峰值增量减少约 93%。计时来自少量重复且池化含 Python 图遍历，仍是工程初测；在固定内存/时钟条件下应继续复测，不能视为 WSD 效果或全训练时长结论。当前下一步为 train-only 单小批反向/优化器 smoke，并记录显存峰值。
+
+### 2026-10-31 合成结构池化 XPU 反向 smoke
+
+在 `emotion_xpu` 的 Intel Arc 上，将可训练标量作用于合成节点向量，经 A/B/C/D 权重矩阵聚合、标量平方损失、反向和 SGD step；loss=11.5733、梯度=23.1466，参数由 1.0 更新到 0.7685，均为有限数。此项只验证 XPU autograd/optimizer 可执行，不读图数据、训练标签、上下文或 dev/test，也不是完整模型训练；下一门槛是在真实冻结 train-only gloss 向量上做一个小批结构前向与反向，并确认内存峰值。
