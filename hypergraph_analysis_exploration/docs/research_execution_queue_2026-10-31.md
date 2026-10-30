@@ -16,9 +16,9 @@
 
 ### 可复核的项目状态
 
-- 队列分支本轮检查 HEAD 为 `aa60876`；T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `abe0c1e` 并推送。T02 审计分支仍未创建 PR：GitHub PR 工具调用返回 `Unknown tool`。分支推送不等于 PR 或 CI 完成。
-- 本队列分支 `codex/research-execution-queue-20261031` 起始提交 `aa60876` 已推送；本轮准备更新后继续推送。PR 搜索/创建调用此前均返回 `Unknown tool`，因此 PR 尚未创建。分支已具备可审阅文档，不把比较页称作 PR。
-- T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `2bb56c57f70a3ab84cfcec7f69649b42704fac8f`；这两个专题工作目前不在本队列分支中。
+- 队列分支本轮起始 HEAD 为 `aa60876`；T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `abe0c1e`，T04 设计分支 `codex/t04-structure-input-design` 已推进至 `4ec5092`，均已推送。相关 PR 创建/查询工具返回 `Unknown tool`，分支推送不等于 PR 或 CI 完成。
+- 本队列分支 `codex/research-execution-queue-20261031` 当前 HEAD 为 `7cd001d`，本轮新增队列记录后继续推送。此前 PR 搜索/创建调用返回 `Unknown tool`；PR 尚未创建，不把比较页称作 PR。
+- T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `4ec5092fb28783d67f9ac7f90faea3481dd967d0`；这两个专题工作目前不在本队列分支中。
 - T04 最近几条候选打包/文档簇/结构输入分支的 PR 状态未能通过当前 GitHub MCP 连接核实；旧线程也记有 `Unknown tool`。在 PR 面板或有效 API 可用前，队列只记远端分支和 commit，不声称 PR 已创建或 CI 已通过。
 - 本机 Conda 环境 `emotion_xpu`：Python 3.11.15、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Accelerate `1.13.0`、Intel Arc XPU。`conda run -n emotion_xpu` 下 `torch.xpu.is_available()` 为 `True`、设备数 1，64×64 运算成功；设备属性报告约 16.45 GB。新建 ignored 输出 `outputs/tiny_bert_wsd_smoke_conda_20261031` 做了 4 个 train 记录、仅 A 条件的一批 smoke（seed 17）：checkpoint 保存成功，loss 1.5541；脚本 `--smoke` 路径不读取 dev，也不产生 WSD 准确率。该烟测证明当前 Conda/XPU/权重/训练入口连通，不证明研究效果或更大模型的预算。此前 base 环境缺少 PyTorch 与 `emotion_xpu` 已有 PyTorch 并不矛盾；运行应使用 `conda activate emotion_xpu` 或 `conda run -n emotion_xpu ...`。
 - 最新五个相关 Codex 专项线程已查看：T04 数据兼容、候选分块、错误分析与 XPU 记录；T02 用户已决口径和未决来源/抽样 gate；T03 现有 Demo 的功能可靠性和许可/用户研究边界；T05 HTE 词形歧义与许可限制；结构探索的汇报数字边界。线程内容已与当前仓库状态交叉核对，旧线程报告不能覆盖当前 Git 状态。
@@ -93,7 +93,7 @@
 - 先制定新序列化：B/C/D 对每个目标和候选共享完全相同的依赖概念与释义 token IDs；C 只改变成对投影信息，D 只改变 AND/OR 分区与论元角色；计量实际/截断 token，并让模型看到的词元预算对齐。用合成图展示 pairwise projection 丢失高阶分支分区。
 - 已有 `t04_structure_views.py` 纯合成关系视图；2026-10-31 在该专题分支复核 `python -m unittest discover -s tests -p 'test_t04_structure_views.py' -v`，5 项通过，`py_compile` 与 `git diff --check` 通过。首次从仓库根运行 `python -m unittest tests.test_t04_structure_views` 因测试目录不在根 Python module path 而导入失败；改为项目目录下的 discover 命令后成功。失败是工作目录/测试发现命令不匹配，不是测试断言失败。
 - 不用旧 SemCor dev 选 checkpoint、预算、字段标记或阈值；先做 code-only/synthetic verification 与新增、独立来源 dev 的合法性和映射审计。无合适新评估来源时停止训练，报告可行性而非继续用旧 dev 搜索。
-- 评测来源筛查已写入 `t04_structure_isolation_design.md` 并推送 commit `4c0eddf`：Raganato unified all-words 五个标准子集列为主评测候选，但许可、模型暴露、SenseKey/WN3.0→OEWN 映射仍待审；FEWS 列为长尾次要候选。FEWS 来自 Wiktionary，而图中也有 Kaikki/Wiktextract 来源，因此是潜在来源/内容重叠压力测试，不能预先称为独立来源确认；逐记录匹配尚未进行，数据未下载。
+- 评测来源筛查已写入 `t04_structure_isolation_design.md`：Raganato 五套标准子集列为主评测候选但各自许可、模型暴露及 sense-key 映射覆盖仍待审；FEWS 列为长尾次要候选，并有 Wiktionary 来源重叠风险。新增映射方案：使用冻结 OEWN entry archive crosswalk 审核 WN3.0 keys 的零/唯一/多映射和 POS/lemma 等失败分母；Global WordNet SemCor reannotation 可交叉核对 wn30/oewn keys，但同源于 SemCor/Brown，不能算独立来源确认。其许可证包括 Princeton WordNet 条款与 CC BY 4.0 署名。设计更新 commit `4ec5092` 已推送；未下载 benchmark、未读取测试句/标签。
 - 设备：`emotion_xpu` Conda 已验证 torch 2.12.0+xpu / Transformers 5.9.0 / Intel Arc XPU；无需在 base Python 安装 PyTorch。每次训练记录精确环境 lock、驱动、设备、seed、token/padding、步数、运行时和峰值显存。
 
 #### T04-C · 独立评估协议（GATED）
@@ -127,6 +127,7 @@
 - 将近期 T02、T04、T03、T05 和结构探索线程的结论压缩为当前队列，并同远端分支 HEAD 对照；单个线程中的计划和结果仅作线索，已存在的提交/文件为准。
 - 尝试创建 T02 PR；GitHub MCP 返回 `Unknown tool`，因此没有创建 PR，也没有声称 CI 运行。
 - T02 审计再扫 5,625/5,625 个 payload，并修正版本形态分类，核验共享摘要与定义文本哈希关系；限定输出只记录计数、不泄漏摘要。目标 T02 合成测试 13 项通过，`git diff --check` 通过；commit `abe0c1e` 已推送到 `codex/t02-source-evidence-audit`。PR 状态仍未创建/未核实。
+- T04 来源与映射设计补充：核对 Raganato 官方 WN3.0 评测口径和 Global WordNet SemCor reannotation 的双 key 格式/许可；明确其可交叉核验映射但不构成独立来源，并把逐资源映射分母、许可与测试隔离加入 gate。设计 commit `4ec5092` 已推送至 `codex/t04-structure-input-design`；未下载 benchmark 或读取测试标签。
 
 ## 4. 当晚退出交接标准
 
