@@ -243,3 +243,19 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 上下文 budget 审计按全部 A/B/C/D 及 13,616 个候选—条件输入对统计，不再只看 A。固定候选序列预算 222，加目标上下文 cap 128 与特殊符号，统一张量宽度为 352；A/B/C/D 的实际最大序列长度 351，均低于 BERT-Tiny 位置上限 512。128-token cap 下只有 3/400 句窗截断，起止目标标记错误为 0。32/64/96/128 cap 的截断目标数分别为 250/48/9/3；对应最大序列为 255/287/319/351，全部条件均在各自共同预算内。128 cap 比 32 cap 多约 9.6% 的候选—条件 token 出现量（1,828,331 vs 1,668,395）；这是计算成本，不是效果增益。
 
 训练环境使用 Conda `emotion_xpu`：Python 3.11、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Intel Arc XPU 可用；`nltk` 不在该环境内，因此数据构造/审计通过本机研究环境运行，模型训练只通过 `conda run -n emotion_xpu ... tiny_bert_wsd_train` 读取已冻结 JSON。train-only 四条件一轮训练已完成并以相同 seed 重放，启动时不读取 dev/test。每条件 379 条，mean loss A/B/C/D=1.859496/1.853116/1.853980/1.862553；checkpoint SHA 在完整重放中逐项一致。该结果只验证工程训练链与确定性，不把 loss 或小样本训练表现解释为 WSD 质量提升。训练命令增加 `--train-only`，避免访问 dev/test。
+
+#### WordNet 3.0 → OEWN 2025+ 词典库存级映射审计（2026-10-31）
+
+为量化跨资源映射的基础覆盖，本次只读取 WordNet 3.0 发布包中的 `index.sense` 与 OEWN 2025+ entry JSON 的 `sense.id/synset` 字段，按大小写折叠后的 sense-key 完全相等建立 crosswalk；没有读取 WSD benchmark 的文本或标签。输入 SHA-256：WordNet 包 `640db279c949a88f61f851dd54ebbb22d003f8b90b85267042ef85a3781d3a52`，OEWN entry 包 `8832b8fa26a14c0ba8c99bb1ef8db6f9e122a6d9193b65ca9e0ef572580fee7e`。后者与项目已锁定的 OEWN release archive hash 一致。
+
+| POS | WN3 sense keys | exact key matches | key coverage | WN3 synsets with multiple OEWN targets | no OEWN target |
+|---|---:|---:|---:|---:|---:|
+| adjective | 30,002 | 29,806 | 99.3467% | 10 | 92 |
+| noun | 146,312 | 145,756 | 99.6200% | 225 | 160 |
+| adverb | 5,580 | 5,520 | 98.9247% | 1 | 17 |
+| verb | 25,047 | 24,907 | 99.4411% | 5 | 57 |
+| total | 206,941 | 205,989 | 99.5400% | 241 | 326 |
+
+全库存另有 378 个 WordNet synset 仅部分成员 key 映射到单一 OEWN synset；116,714 个 synset 的所有成员 key 都指向同一个 OEWN synset。没有发现一个 WordNet sense key 在 OEWN 中对应多个目标。**这证明的是标识符覆盖，不是义项语义等价。**241 个 WordNet synset 的成员 key 分裂到多个 OEWN synset，benchmark 不能把 synset 层面强制压成一对一；应以 sense-key 逐例审计，并报告该 benchmark 自身的 exact/partial/multi/unmapped 分母。FEWS 的 Wiktionary sense IDs 不是 WN3 sense keys，因此 99.54% 不能解释成 FEWS 覆盖率，也没有解决 FEWS 来源家族、许可或泄漏门槛。
+
+复现命令（从子项目目录运行）：`python -m src.analysis.audit_wn30_oewn_sense_key_crosswalk --wordnet-tar tmp/phase256_inputs/WordNet-3.0.tar.gz --oewn-zip tmp/oewn-2025-plus-json.zip --output outputs/t04_wn30_oewn_sensekey_audit_20261031.json`。结果只保存在 ignored `outputs/`。本次新增 POS 分层输出，4 项 synthetic/unit tests 通过。下一门槛仍是：在数据许可和独立性 gate 通过后，对候选 benchmark 的实际标注身份做一次锁定 coverage audit；不得因库存级覆盖率高而推断测试覆盖或解封测试集。

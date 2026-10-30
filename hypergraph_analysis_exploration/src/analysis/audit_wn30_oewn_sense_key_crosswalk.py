@@ -68,7 +68,7 @@ def _load_oewn_sense_keys(archive: zipfile.ZipFile) -> dict[str, set[str]]:
     return result
 
 
-def _synset_alignment(wordnet: dict[str, tuple[str, str]], oewn: dict[str, set[str]]) -> dict[str, int]:
+def _synset_alignment_counts(wordnet: dict[str, tuple[str, str]], oewn: dict[str, set[str]]) -> dict[str, int]:
     keys_by_wn_synset: dict[tuple[str, str], set[str]] = defaultdict(set)
     targets_by_wn_synset: dict[tuple[str, str], set[str]] = defaultdict(set)
     matched_keys = 0
@@ -106,6 +106,19 @@ def _synset_alignment(wordnet: dict[str, tuple[str, str]], oewn: dict[str, set[s
         "synsets_with_no_oewn_target": unmatched,
         "sense_keys_with_multiple_oewn_targets": conflicting_key_targets,
     }
+
+
+def _synset_alignment(wordnet: dict[str, tuple[str, str]], oewn: dict[str, set[str]]) -> dict:
+    """Return aggregate and POS-stratified identifier coverage statistics."""
+    aggregate = _synset_alignment_counts(wordnet, oewn)
+    by_pos = {
+        pos: _synset_alignment_counts(
+            {key: identity for key, identity in wordnet.items() if identity[0] == pos}, oewn
+        )
+        for pos in sorted({identity[0] for identity in wordnet.values()})
+    }
+    aggregate["by_pos"] = by_pos
+    return aggregate
 
 
 def audit(wordnet_tar: Path, oewn_zip: Path, lfs_zip: Path | None = None) -> dict:

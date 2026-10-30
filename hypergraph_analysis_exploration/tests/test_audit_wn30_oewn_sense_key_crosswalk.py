@@ -42,6 +42,15 @@ class WordNetOewnSenseKeyCrosswalkTests(unittest.TestCase):
         self.assertEqual(result["sense_keys_with_multiple_oewn_targets"], 1)
         self.assertEqual(result["synsets_with_multiple_oewn_targets"], 1)
 
+    def test_alignment_reports_pos_stratified_coverage(self):
+        wordnet = {
+            "one%1:00:00::": ("n", "00000001"),
+            "run%2:00:00::": ("v", "00000002"),
+        }
+        result = _synset_alignment(wordnet, {"one%1:00:00::": {"oewn-00000001-n"}})
+        self.assertEqual(result["by_pos"]["n"]["sense_key_coverage_percent"], 100.0)
+        self.assertEqual(result["by_pos"]["v"]["sense_key_coverage_percent"], 0.0)
+
 
 if __name__ == "__main__":
     unittest.main()
