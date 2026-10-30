@@ -129,3 +129,32 @@ python src/analysis/tiny_bert_wsd_error_analysis.py --data outputs/tiny_bert_fre
 ```
 
 The script outputs aggregate counts only; it does not export target text, predictions, gold labels or per-example errors. Hash checks establish that all runs use the same prepared dev file, not that the sample is representative or independent of SemCor.
+
+## Document-cluster uncertainty and exact replay (2026-10-31)
+
+The three XPU runs reuse the same 120 selected development targets. Treating the 333 target-by-seed outcomes as independent would understate uncertainty. `src/analysis/tiny_bert_document_cluster_analysis.py` maps each frozen `sample_id` back to its XML source document, verifies that every run's recorded development-file hash matches the supplied prepared file, averages repeated-seed correctness within each target, then resamples document clusters (20,000 replicates, seed 20261031). It confirms all 120 IDs map to 12 selected documents from the 13-document frozen development manifest. Hashed document keys are pseudonymous and linkable, not anonymization; row-level data and results remain in ignored local outputs.
+
+Observed accuracy averaged across seeds 17/23/31 is A/B/C/D = 24.02% / 24.62% / 27.03% / 24.62% on the 111 covered targets; with all 120 selected targets as denominator it is 22.22% / 22.78% / 25.00% / 22.78%. The paired D−B difference is 0.00 percentage points observed. Its exploratory document-cluster percentile interval is −5.31 to +4.05 points on covered accuracy and −5.05 to +3.73 points on all selected targets. The intervals are wide, use only 12 selected clusters, and come from a repeatedly inspected development set; they are not a confirmatory significance test. This analysis provides no evidence of an incremental D-over-B gain.
+
+Exact replay was verified using the source branch that contains the frozen manifest support and the tracked `docs/semcor_fresh_dev_document_manifest_2026-10-31.json`. The output's input hashes, train/dev sample-ID hashes, counts and every model-facing train/dev field matched the archived outputs exactly after ignoring only the newly added `document_cluster_id` metadata field. The manifest SHA-256 was `29c2e908d71a6386fb4338f0a53f23a02586f2daeaf2c87c2cb83678ebca600c`. A preliminary run from the older structure-design branch omitted this manifest and produced 115/120 scorable dev targets; that run used the wrong split and is superseded, not evidence of drift in the frozen experiment. No model was retrained.
+
+Reproduce the data and cluster analyses from the subproject root (outputs stay ignored):
+
+```powershell
+python -m src.analysis.tiny_bert_wsd_data `
+  --nltk-data tmp/nltk_data `
+  --oewn-zip tmp/oewn-2025-plus-json.zip `
+  --bundle ../OEWN `
+  --vocab tmp/models/bert-tiny/vocab.txt `
+  --candidate-budget 222 `
+  --document-manifest docs/semcor_fresh_dev_document_manifest_2026-10-31.json `
+  --out outputs/tiny_bert_fresh_doc_replay_20261031
+
+python -m src.analysis.tiny_bert_document_cluster_analysis `
+  --nltk-data tmp/nltk_data `
+  --prepared-dev outputs/tiny_bert_fresh_doc_dev_20261031 `
+  --run outputs/tiny_bert_fresh_doc_xpu_seed17_20261031/result.json `
+  --run outputs/tiny_bert_fresh_doc_xpu_seed23_20261031/result.json `
+  --run outputs/tiny_bert_fresh_doc_xpu_seed31_20261031/result.json `
+  --out outputs/tiny_bert_document_cluster_analysis_replay_20261031.json
+```
