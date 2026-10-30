@@ -43,3 +43,38 @@ def build_relation_views(target_id: str, branches: Iterable[Iterable[str]]) -> d
         "C": {"pairwise_edges": pairwise_edges},
         "D": {"branches": hyperedges},
     }
+
+
+def build_aligned_relation_tensors(target_id: str, branches: Iterable[Iterable[str]]) -> dict[str, object]:
+    """Build ID-only B/C/D masks over one shared, canonical node inventory.
+
+    B is a flat dependency-membership vector, C is the undirected 2-section,
+    and D is a branch-by-node incidence matrix. These are serialization
+    fixtures, not learned representations or claims about semantic roles.
+    """
+    views = build_relation_views(target_id, branches)
+    node_ids = views["node_ids"]
+    node_index = {node_id: index for index, node_id in enumerate(node_ids)}
+    size = len(node_ids)
+
+    flat_dependencies = set(views["B"]["dependencies"])
+    dependency_mask = tuple(node_id in flat_dependencies for node_id in node_ids)
+
+    adjacency = [[False] * size for _ in range(size)]
+    for left, right in views["C"]["pairwise_edges"]:
+        i, j = node_index[left], node_index[right]
+        adjacency[i][j] = True
+        adjacency[j][i] = True
+
+    incidence = tuple(
+        tuple(node_id in branch for node_id in node_ids)
+        for branch in views["D"]["branches"]
+    )
+
+    return {
+        "node_ids": node_ids,
+        "target_index": node_index[target_id],
+        "B": {"dependency_mask": dependency_mask},
+        "C": {"adjacency_matrix": tuple(tuple(row) for row in adjacency)},
+        "D": {"incidence_matrix": incidence},
+    }

@@ -51,11 +51,11 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 
 该结构编码器是新的研究实现，不等同于已验证的语义推理器。它仍需和候选文本基线、参数匹配的随机/打乱结构控制比较；打乱控制只能用于训练分区的结构消融，不可改变评估标签或测试输入文本。
 
-### T04-2b text-free relation view dry-run
+### T04-2b synthetic aligned-mask dry-run
 
-新增 `src/analysis/t04_structure_views.py`，只从合成 target/branch ID 构造三种关系视图：B 为依赖 ID 平面集合，C 为每个 `target + branch dependencies` 的 2-section 边并集，D 为分支超边集合；三个视图共享同一规范 `node_ids`。五项单测核对节点/分支重排不变、B 丢弃 branch partition、C 会将不同 D 高阶划分投影为相同边集，以及空分支拒绝规则。特别地，一个四节点 hyperedge 与同一节点全集上的三个三节点 hyperedges 可以有相同的 C、不同的 D，说明实现的 pairwise projection 确实会丢失高阶划分信息。
+新增 `build_aligned_relation_tensors()`，只从合成 target/branch ID 生成共享规范 `node_ids` 上的三种张量视图：B 为平面依赖 membership mask，C 为无向 2-section 邻接矩阵，D 为 branch×node incidence matrix。target index 显式给出；D 分支行、C 邻接和 B mask 均由同一节点清单对齐。8 项单测核对节点/分支重排不变、B 丢弃 branch partition、C 会将不同 D 高阶划分投影为相同张量、矩阵对称且无自环、以及空源分支拒绝规则。例子显示，一个四节点 hyperedge 与同一节点全集上的三个三节点 hyperedges 有相同 B/C 张量、不同 D incidence，说明 pairwise projection 丢失了高阶分支划分。
 
-此 dry-run 不读取 OEWN、gloss、语料、gold 或标签；不调用模型、XPU 或训练。它仅验证关系张量的构造约定，不验证释义对齐、真实图覆盖、编码器参数公平或 WSD 效果，不能替代 2b 的真实只读输入审计。正式实施仍需研究负责人批准评估来源与估计对象。
+此 dry-run 不读取 OEWN、gloss、语料、gold 或标签；不调用模型、XPU 或训练。它仅验证 ID-only 关系张量的对齐和结构差异，不验证 tokenizer 侧的 token IDs 等价、释义对齐、真实图覆盖、编码器参数公平或 WSD 效果，不能替代 2b 的真实只读输入审计。正式实施仍需研究负责人批准评估来源与估计对象。
 
 ## 5. 数据、切分与指标
 
