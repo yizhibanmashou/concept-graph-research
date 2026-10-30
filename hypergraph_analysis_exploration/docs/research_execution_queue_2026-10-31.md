@@ -19,7 +19,7 @@
 | 支线 | 远端分支/提交 | PR 状态 | 下一步 |
 |---|---|---|---|
 | T02 | `codex/t02-sampling-precision` / `e893756`；schema dry-run `codex/t02-schema-dry-run` / `9e1ef8e` | 抽样精度与分层工作量记录已推送；PR 创建/查询接口仍返回 `Unknown tool`，尚无确认 PR | [打开抽样方案 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t02-sampling-precision)；正式样本仍等待目标精度/工时决策 |
-| T04 | `codex/t04-structure-input-design` / `f679af7`；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计和 Conda/XPU 可复现说明已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
+| T04 | `codex/t04-structure-input-design` / `38b5595`；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计、Conda/XPU 记录及合成关系 view checker 已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
 | T05 | `codex/t05-data-feasibility` / `59edb70` | Wordbank schema/访问 gate 已补；PR 创建/查询仍返回 `Unknown tool`，尚无确认的 PR 编号 | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 编号与 CI |
 
 GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unknown tool`；不是代码或远端 push 失败。工具恢复前，分支已经在线，PR 创建链接可直接使用。不得在报告里把远端分支说成 PR，也不得据此声称 CI 通过。
@@ -45,7 +45,7 @@ GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unkno
 
 - **已完成证据：** SemCor 官方 train 内 13 文档隔离 dev，120 选中/111 可评分；XPU Conda `emotion_xpu` 上三种子 A/B/C/D 均值 24.02/24.62/27.03/24.62%；MFS 36.94%。D 对 B 配对净差为 0；对 C 为 −8/333。描述性审计发现 D 每目标每候选非 padding tokens 比 B 多约 18.1%。
 - **状态：** 当前 tiny BERT 与输入序列化不支持完整结构有增益；样本小、同源、候选预算事后选择、长度不平衡，不能外推或证伪更一般假设。旧和新 dev 均不得再调参；测试分区未读。
-- **下一步：** 已有 `t04_structure_isolation_design.md` v0.1，规定 B/C/D 共享同一节点释义文本并通过稀疏关系通道区分；本轮另实测 `emotion_xpu` 上 XPU 可用并补上运行说明。此草案仍待负责人确认估计对象和新评估来源；先补来源映射/覆盖审计与节点/分支资源估算，再冻结方案。尚未改造编码器或重训。
+- **下一步：** 已有 `t04_structure_isolation_design.md` v0.1 和纯合成关系 view checker；5 项测试证明节点/分支重排不变、B 丢弃分组、C 两两边投影会丢失高阶分支区分。checker 不读取真实图/语料、不含编码器。草案仍待负责人确认估计对象与评估来源；下一步先做真实图的只读共同节点覆盖、文本 token 同一性和稀疏结构规模审计，再冻结方案。尚未改造训练器或重训。
 - **放行：** 数据许可、候选映射、独立开发来源、模型权重/硬件、预算、强基线、主要估计量和停止规则全部冻结。
 - **停止：** 若无法建立输入信息公平对照或拿不到独立开发来源，停止 tiny-BERT 结构增益宣传，保留负面试点作为工程/方法结果。
 
