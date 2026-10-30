@@ -50,6 +50,14 @@ conda run -n emotion_xpu python -c "import torch, transformers; a=torch.ones((51
 
 Do not infer that the GUI-selected interpreter or an IDE terminal uses this environment: verify `sys.executable` inside the actual training process or invoke the entry point with `conda run -n emotion_xpu`.
 
+## Train-only shared-text token audit (2026-10-31)
+
+The exact tokenizer input was recovered from the pinned `prajjwal1/bert-tiny` revision (`6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837`). Its `vocab.txt` SHA-256, `07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3`, matches the frozen training metadata. The vocabulary is stored only in ignored local outputs. `base` provides `tokenizers==0.23.1`, matching the frozen metadata; this audit needs no PyTorch, while training continues to use `emotion_xpu`.
+
+The new `audit_t04_train_shared_token_inputs.py` reads the frozen 400-row train JSON for candidate IDs only, and reads only version/hash fields from metadata. It verifies the metadata hashes for the train graph inputs and exact vocabulary before building a shared canonical target-plus-dependency gloss token inventory for B/C/D. It does not access labels, context text, dev/test examples, or the WordNet corpus. On 3,404 candidate occurrences and 2,051 unique candidates, all 2,051 had complete, identical ordered node-token inventories across B/C/D; failures: 0. This is exact text-token equality for the audited records, not equal compute, equal total model sequence length after context packaging, equal semantics, or model evidence.
+
+Ignoring special tokens and truncation, total target-plus-dependency gloss pieces per candidate have min/median/P90/max 3/56/120/380; dependencies alone 2/47/106/333. Structure remains nonuniform: branch count 1/1/3/16, dependency nodes 1/5/10/28, pair edges 1/12/44/327, incidence cells 2/7/17/112 (min/median/P90/max). Thus the structural tensor path needs an explicit, predeclared packing/truncation policy and a common failure denominator before any training comparison. Do not use the old repeatedly accessed dev set to choose that policy. Machine-readable counts and source hashes are in ignored `outputs/t04_train_shared_token_inputs_20261031.json`; the script and synthetic-only tests are tracked.
+
 # Local Conda + Intel XPU runtime (observed 2026-10-31)
 
 The maintained pilot has already trained in the local Conda environment `emotion_xpu`; the earlier `ModuleNotFoundError: torch` came from the unrelated `base` environment. Observed runtime: Python 3.11.15, `torch 2.12.0+xpu`, `torchvision 0.27.0+xpu`, `torchaudio 2.11.0+xpu`, `transformers 5.9.0`; `torch.xpu.is_available()` returned true and the device was reported as Intel Arc Graphics. PyTorch and the XPU packages are pip builds installed inside Conda, so the environment name alone is not a portable environment specification. Do not install an NVIDIA CUDA build for this machine.
