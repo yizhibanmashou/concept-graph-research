@@ -69,6 +69,23 @@ def candidate_chunks(values, chunk_size):
         yield values[start:start + chunk_size]
 
 
+def batchify_rows(rows, version, max_len):
+    """Validate candidate rows and return unpadded inputs with labels.
+
+    Archived pilot rows have no candidate manifest; all stored candidates are
+    scorable. New-schema rows use the explicit scorable candidate list.
+    """
+    inputs, labels = [], []
+    for row in rows:
+        candidates = row['inputs'][version]
+        expected_count = len(row.get('scorable_candidate_ids', candidates))
+        if len(candidates) != expected_count or any(len(x) != max_len for x in candidates):
+            raise ValueError('unexpected candidate shape')
+        inputs.append(candidates)
+        labels.append(None if row.get('candidate_ids') is not None and row['label'] == -1 else row['label'])
+    return inputs, labels
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data', type=Path, required=True)
@@ -111,16 +128,9 @@ def main():
             return self.head(hidden).squeeze(-1)
 
     def batchify(rows, version):
-        inputs, labels = [], []
-        for row in rows:
-            candidates = row['inputs'][version]
-            # Archived pilot rows have no manifest; all stored candidates are scorable.
-            expected_count = len(row.get('scorable_candidate_ids', candidates))
-            if len(candidates) != expected_count or any(len(x) != max_len for x in candidates):
-                raise ValueError('unexpected candidate shape')
-            inputs.append(torch.tensor(candidates, dtype=torch.long, device=args.device))
-            labels.append(None if row.get('candidate_ids') is not None and row['label'] == -1 else row['label'])
-        return inputs, labels
+        values, labels = batchify_rows(rows, version, max_len)
+        tensors = [torch.tensor(candidates, dtype=torch.long, device=args.device) for candidates in values]
+        return tensors, labels
 
     def score_target(scorer, values):
         # Concatenate every candidate score before applying target-level softmax.
