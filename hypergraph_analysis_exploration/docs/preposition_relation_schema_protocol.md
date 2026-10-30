@@ -191,3 +191,22 @@ python -m src.analysis.audit_t02_oewn_prep_overlap `
   --bundle ../OEWN `
   --out outputs/t02_oewn_prep_overlap_v3_400_<new-run>.json
 ```
+
+## 10. 全部 eligible OEWN 目标的释义来源与 `prep` 结构影响（2026-10-31）
+
+新增 `src/analysis/audit_t02_full_oewn_prep_overlap.py`，在冻结图全部 eligible OEWN 目标上逐条校验来源 payload checksum 和 synset identity，再将同一记录的 raw/effective definition 与固定 OEWN 2025 Plus 发布包比对。脚本只写聚合计数及输入 SHA，不写 target ID、lemma、释义、标注或标签。完整 ignored 输出为 `outputs/t02_full_oewn_prep_overlap_20261031.json`，SHA-256 `969c908f796eff082c51dc141b8f9e68c0abedcee4e4437bf1d769d853bda3cc`。
+
+总体包含 104,907 个标准 POS（n/v/a/r）且冻结节点定义非空的 OEWN 目标；104,907/104,907 个目标都找到唯一的 `indexes/senses.jsonl` 身份行，并校验了 109,497 个唯一来源 payload 的包内 checksum 与 payload synset identity。104,886 个目标至少有一条 raw definition 与官方发布版释义精确匹配，21 个未精确匹配。effective definition 中 101,354 个精确匹配，3,553 个非空但不同；该结果是字符串来源匹配状态，不代表定义改写正确或错误。
+
+同一总体有 145,991 个原始 OR 分支。移除 `pos=prep` occurrence：删去 198,543 个 occurrence，改变 116,616 个分支，产生 358 个新空分支；84,976 个目标受影响，462 个目标出现新增非空分支碰撞，新增碰撞 excess 为 566。`prep_phrase` 敏感性口径相对主口径额外删去 303 个 occurrence、改变 85 个分支、增加 9 个新空分支和 1 个碰撞 excess；受影响目标从 84,976 增至 85,028。该分母不同于旧报告中包含非 OEWN 项目的 110,425 个全图节点，两个总体不可互换。
+
+按 effective definition 字符串匹配状态分层后，精确匹配组有 101,354 个目标，其中 82,066 个受 `prep` 影响；非空不同组有 3,553 个目标，其中 2,910 个受影响。分层仅表明图上干预与来源字符串的重合，不能把 unmatched 解释为低保真，也不能由 matched 推断删去介词没有语义损失。
+
+可在项目目录复算，输出须使用不存在的新路径：
+
+```powershell
+python -m src.analysis.audit_t02_full_oewn_prep_overlap `
+  --out outputs/t02_full_oewn_prep_overlap_<new-run>.json
+```
+
+此全量审计补齐了结构影响总体分母和 release-string overlap，却没有解决上游来源家族、许可、人工盲审或精度/工时决定。它不是定义保真实验，也不授权分发样本。下一步应在来源许可可确认的范围内建立来源家族 crosswalk，再依据用户决定的目标等权估计量与资源上限冻结独立盲审样本；没有可核实证据的关系类型仍标 `unresolved`。
