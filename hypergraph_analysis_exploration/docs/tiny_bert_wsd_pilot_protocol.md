@@ -30,3 +30,30 @@ Reconstruct the same 400 train and 120 development target sample IDs. Obtain can
 The full-candidate builder now locates the annotated target by its original XML word position and builds a maximum 32-WordPiece context from a target-form prefix plus a sentence window that contains the actual occurrence. `[unused0]` and `[unused1]` bracket that occurrence; their token IDs are taken from and recorded with the fixed model vocabulary. Neighboring whole XML words are added around the target until the budget is exhausted. If the target cannot fit or the annotated word does not match the stored XML position, the selected sample is excluded from scoring and its sample ID/reason is written to `excluded_targets.json`; the original selected-target denominator remains in metadata. A–D share the same context IDs and candidate order. The old prefix-only pilot remains a separate historical result and must not be described as having used this corrected context.
 
 This is an input-pipeline correction only. It has not been run on SemCor, does not establish model performance, and does not make the repeatedly used development set independent. Before any training, record the exact SemCor/XML, OEWN, graph, vocabulary hashes and candidate budget; report selected targets, excluded target-context failures, sentence-window truncation, gold mapping, candidate encoding failures and scorable targets separately. No held-out test documents or labels are used.
+
+# Local Conda + Intel XPU runtime (observed 2026-10-31)
+
+The maintained pilot has already trained in the local Conda environment `emotion_xpu`; the earlier `ModuleNotFoundError: torch` came from the unrelated `base` environment. Observed runtime: Python 3.11.15, `torch 2.12.0+xpu`, `torchvision 0.27.0+xpu`, `torchaudio 2.11.0+xpu`, `transformers 5.9.0`; `torch.xpu.is_available()` returned true and the device was reported as Intel Arc Graphics. PyTorch and the XPU packages are pip builds installed inside Conda, so the environment name alone is not a portable environment specification. Do not install an NVIDIA CUDA build for this machine.
+
+Activate and verify the intended environment before training:
+
+```powershell
+conda activate emotion_xpu
+python -c "import torch, transformers; print(torch.__version__, transformers.__version__); print(torch.xpu.is_available()); print(torch.xpu.get_device_name(0))"
+```
+
+The check must report an `+xpu` PyTorch build, `True`, and the Intel Arc device. Run the existing script from `hypergraph_analysis_exploration/` with the prepared local data/model directories and a new output directory (the trainer refuses to overwrite an existing output directory):
+
+```powershell
+python src/analysis/tiny_bert_wsd_train.py `
+  --data <prepared-data-directory> `
+  --model <local-bert-tiny-directory> `
+  --out <new-local-output-directory> `
+  --device xpu --seed 17
+```
+
+Use `--smoke` only for a one-batch device check; it trains A only and does not read the development set. Training artifacts, data, model weights, and outputs remain local and ignored by Git. If the XPU check fails, stop before training and record the actual Conda package versions and error; do not silently fall back to CPU while labeling the run XPU.
+
+## Existing corrected-context XPU pilot
+
+The local artifact `outputs/tiny_bert_fresh_doc_xpu_seed17_20261031/result.json` records a successful four-condition run: 379 labeled training targets per condition, seed 17, batch size 4, sequence budget 256, one epoch. On the reused development selection, 111 of 120 targets had an encodable gold candidate. Correct / 111 covered accuracy was A 32 (28.8%), B 33 (29.7%), C 31 (27.9%), D 28 (25.2%); when all 120 selected targets are the denominator and unencodable gold cases count wrong, the results were 26.7%, 27.5%, 25.8%, and 23.3%. This one-seed development result is exploratory, not an independent test or evidence that any representation is superior. In particular, it gives no positive signal for complete-structure condition D; preserve that negative result and proceed only under the existing fixed protocol and leakage gates.
