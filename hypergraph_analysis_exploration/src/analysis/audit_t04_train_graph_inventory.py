@@ -31,7 +31,7 @@ def summarize_train_inventory(
     nodes: dict[str, str],
     rules: dict[str, list[list[str]]],
 ) -> dict[str, Any]:
-    """Check only candidate IDs and graph inventory; never inspect labels or text."""
+    """Check candidate IDs and graph inventory; never inspect labels or contexts."""
     occurrence_counts: Counter[str] = Counter()
     for row in rows:
         candidate_ids = row.get("candidate_ids")
@@ -105,9 +105,9 @@ def summarize_train_inventory(
             "branch_node_incidence_cells": _distribution(incidence_cell_counts),
         },
         "limits": (
-            "Uses only candidate IDs from the supplied training split and graph IDs/definitions for presence checks; "
-            "does not inspect labels, contexts, gloss text, development/test files, tokenizer IDs, or model performance. "
-            "This does not establish source licensing or semantic correctness."
+            "Uses candidate IDs from the supplied training split and checks graph/gloss presence; gloss content is not "
+            "emitted, tokenized, scored, or semantically inspected. Does not inspect labels or contexts, development/test "
+            "files, tokenizer IDs, or model performance. This does not establish source licensing or semantic correctness."
         ),
     }
 
