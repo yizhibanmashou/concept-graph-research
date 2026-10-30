@@ -35,6 +35,20 @@ def classify_target(clauses, pos_by_node):
     return category
 
 
+def summarize_strata(target_counts, branch_counts):
+    """Summarize target prevalence and branch-level review workload by stratum."""
+    summary = {}
+    for category in sorted(set(target_counts) | set(branch_counts)):
+        targets = target_counts[category]
+        branches = branch_counts[category]
+        summary[category] = {
+            'targets': targets,
+            'branches': branches,
+            'mean_branches_per_target': branches / targets if targets else None,
+        }
+    return summary
+
+
 def audit(nodes_path, rules_path):
     with nodes_path.open(encoding='utf-8-sig', newline='') as stream:
         nodes = {row['synset_id']: row for row in csv.DictReader(stream, delimiter='\t')}
@@ -43,6 +57,7 @@ def audit(nodes_path, rules_path):
     by_class = Counter()
     by_pos_class = Counter()
     by_root_class = Counter()
+    branches_by_class = Counter()
     source_root_sizes = Counter()
     targets = 0
     with rules_path.open(encoding='utf-8') as stream:
@@ -56,15 +71,17 @@ def audit(nodes_path, rules_path):
             source_root = source_root_by_node[head]
             targets += 1
             by_class[category] += 1
+            branches_by_class[category] += len(row['clauses'])
             by_pos_class[(pos, category)] += 1
             by_root_class[(source_root, category)] += 1
             source_root_sizes[source_root] += 1
     return {
-        'schema': 'preposition-sampling-frame-audit/1',
+        'schema': 'preposition-sampling-frame-audit/2',
         'targets': targets,
         'source_root_group_count': len(source_root_sizes),
         'source_root_size_distribution': sorted(source_root_sizes.values()),
         'by_effect_class': dict(sorted(by_class.items())),
+        'by_effect_class_review_workload': summarize_strata(by_class, branches_by_class),
         'by_pos_and_effect_class': [
             {'pos': pos, 'effect_class': category, 'targets': count}
             for (pos, category), count in sorted(by_pos_class.items())
@@ -79,6 +96,7 @@ def audit(nodes_path, rules_path):
             'Uses POS-only prep deletion; does not inspect definitions, semantic labels, or reviewer data.',
             'source_root labels describe construction lineage and are not verified independent dictionary families.',
             'Counts define a stratified finite-graph sample frame; they do not define a semantic estimand or sample size.',
+            'Branch counts are workload proxies only; they do not account for definition length, reviewer time, or disagreement.',
         ],
     }
 

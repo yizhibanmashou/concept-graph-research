@@ -10,6 +10,7 @@
 
 - 110,425 个 target、154,206 条原始分支；`pos=prep` 主口径影响 89,058 个 target（80.65%）。
 - 按 target 的排他结构影响 strata：508 个出现新空分支、501 个出现非空分支碰撞、4 个同时出现两者、88,045 个有 prep occurrence 被删但没有新空分支/碰撞、21,367 个未受影响。五层合计 110,425。新空/碰撞重叠仅 4 个 target，二者不能简单相加。
+- 新增分层工作量核查：五层原始分支数分别为新空 1,102、碰撞 1,599、两者兼有 19、其他受影响 123,823、未受影响 27,663；每目标均值依次为 2.169、3.192、4.750、1.406、1.295 branches。高风险三层共 1,013 个目标，占 0.918%，但平均每目标约 2.685 分支；按 4 条件×2 名审阅者估算，每目标每分支对应 8 个 branch-condition-review 单元。该计数比统一套全图 1.397 分支/目标更能估计分层抽样的负担，但不含释义长度、回查、分歧与仲裁工时。
 - `nodes.tsv` 中只有 7 种 `source_root` 标签；各组 target 数（从小到大）为 30、537、792、1,259、1,752、21,662、84,393。最大两组占全图约 96.0%。节点文档已明确 `source_root` 表示构造 lineage/处理来源标签，不等同于已核实的独立上游词典或来源家族。
 - 因此，不能把 7 个 `source_root` 值当作 7 个独立 dictionary clusters 做 cluster bootstrap，也不能据此宣称跨来源家族泛化。当前可支持的是对该冻结图有限总体的 target-level 设计推断。要做来源家族层级结论，必须先从许可审核过的原始 provenance 独立建立 upstream source-family crosswalk，并审计映射歧义；未建立前相关估计不启动。
 
@@ -63,4 +64,4 @@ python -m src.analysis.preposition_sampling_frame_audit `
 
 ## 5. 验证范围
 
-脚本的五项合成单测通过；对本机冻结包完整运行得到 110,425 targets、7 个 `source_root` 标签以及上列五类结构影响计数。输入摘要与现有 full-graph report 一致。该检查只验证样本框计数及 strata 计算，不触及语义保真、正式抽样或用户未提供的原始来源许可。
+脚本的六项合成单测通过；本次扩展只增加各结构层的 branch 总数和每目标均值。对本机冻结包完整运行得到 110,425 targets、154,206 branches、7 个 `source_root` 标签和上列分层计数。输入摘要与现有 full-graph report 一致。机器输出写入 ignored `outputs/t02_sampling_frame_workload_audit_20261031.json`，schema 为 `preposition-sampling-frame-audit/2`。该检查只验证样本框计数及结构工作量 proxy，不触及释义、语义保真、正式抽样或用户未提供的原始来源许可。

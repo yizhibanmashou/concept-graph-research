@@ -1,6 +1,7 @@
 import unittest
+from collections import Counter
 
-from src.analysis.preposition_sampling_frame_audit import classify_target
+from src.analysis.preposition_sampling_frame_audit import classify_target, summarize_strata
 
 
 class PrepositionSamplingFrameAuditTests(unittest.TestCase):
@@ -28,6 +29,13 @@ class PrepositionSamplingFrameAuditTests(unittest.TestCase):
         self.assertEqual(classify_target([['noun-1'], ['noun-2']],
                                          {'noun-1': 'n', 'noun-2': 'n'}),
                          'unaffected')
+
+    def test_workload_uses_target_and_branch_counts(self):
+        summary = summarize_strata(Counter({'new_empty': 2}),
+                                   Counter({'new_empty': 5}))
+        self.assertEqual(summary['new_empty']['targets'], 2)
+        self.assertEqual(summary['new_empty']['branches'], 5)
+        self.assertEqual(summary['new_empty']['mean_branches_per_target'], 2.5)
 
 
 if __name__ == '__main__':
