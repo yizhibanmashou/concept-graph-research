@@ -13,3 +13,7 @@ After inspecting the initial outcome, repeat the same root set with order seeds 
 ## Post-hoc root-source sensitivity
 
 Partition the evaluation roots by the two largest `nodes.tsv` source labels and use order seed 17 within each group. Compare the original graph to the same two rewired graphs (seeds 101 and 102), capacities 256 and 4096, depth 4. This stratifies the roots only; rewiring does not preserve the source, POS or semantic roles of target nodes. The groups are drawn from one graph and have different sizes. They are not independent datasets, source-preserving rewires, or a basis for causal claims.
+
+## Post-hoc source-preserving controls
+
+Restrict edge swaps to targets with equal `source_root`, preserving directed degree and each head's counts of target source labels. Use the original 3,000 roots, order seed 17, depth 4, capacities 0/256/4096, and independent starts from the original for seeds 101/102/103, with three swap attempts per original edge. Audit actual swap counts, retained original edges and every head's source-group counts. These source labels describe the construction pipeline, not independent dictionaries; the control does not preserve exact semantic roles, POS, source clauses or meaning. Mixing and uniform sampling are not guaranteed. These graphs remain randomization diagnostics of one graph, not independent replication or cognitive evidence.

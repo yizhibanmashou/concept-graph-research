@@ -11,7 +11,7 @@ from pathlib import Path
 from src.analysis.witness_reuse_pilot import sha, simulate_lru
 
 
-def rewire(witnesses, seed, attempts_per_edge=3):
+def rewire(witnesses, seed, attempts_per_edge=3, groups=None):
     """Swap targets, preserving directed degrees and preventing new loops/duplicates."""
     if attempts_per_edge < 0:
         raise ValueError('attempts must be nonnegative')
@@ -20,6 +20,8 @@ def rewire(witnesses, seed, attempts_per_edge=3):
         raise ValueError('duplicate input edges')
     if any(child not in graph for children in graph.values() for child in children):
         raise ValueError('edge target missing from graph')
+    if groups is not None and any(node not in groups for node in graph):
+        raise ValueError('missing source group')
     edge_slots = [(head, i) for head, children in graph.items() for i in range(len(children))]
     original = {(head, child) for head, children in graph.items() for child in children}
     neighbors = {head: set(children) for head, children in graph.items()}
@@ -34,6 +36,8 @@ def rewire(witnesses, seed, attempts_per_edge=3):
             x, y = graph[left][li], graph[right][ri]
             # Preserve existing loops but never create or move one.
             if left == right or x == y or left == x or right == y or left == y or right == x:
+                continue
+            if groups is not None and groups[x] != groups[y]:
                 continue
             if y in neighbors[left] or x in neighbors[right]:
                 continue
@@ -50,6 +54,9 @@ def rewire(witnesses, seed, attempts_per_edge=3):
         raise AssertionError('incoming degree changed')
     if any(len(result[node]) != len(witnesses[node]) for node in witnesses):
         raise AssertionError('outgoing degree changed')
+    if groups is not None and any(Counter(groups[x] for x in result[node]) !=
+                                  Counter(groups[x] for x in witnesses[node]) for node in witnesses):
+        raise AssertionError('per-head target groups changed')
     remaining = len(original & {(head, child) for head, children in result.items() for child in children})
     return result, {'attempts': attempts, 'accepted': accepted, 'edge_count': len(original),
                     'original_edges_remaining': remaining}
