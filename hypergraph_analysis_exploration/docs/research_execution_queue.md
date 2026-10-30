@@ -21,7 +21,7 @@
 |---|---|---|---|---|---|
 | P0 | 总控：队列和五线依赖管理 | 路线图已有总问题、分工和阶段门槛；本文件补充逐项工作包、阻塞和 PR 状态 | 每轮先核对实际 Git 状态，再更新本表与根本地报告 | 计划和结果分开；旧日期、提交和 PR 状态以当前仓库及 GitHub 实际返回为准 | 本文件随总控或当轮主题 PR 更新；本轮新增在 T04 分支 |
 | P0 | T02-1：介词关系保真与结构消融 | 全图 `prep` 删除、`prep_phrase` 敏感性、配对/分层结构对照已运行；结构变化不是语义保真。40 条只允许试标。现有源记录的上游版本指纹无法绑定到特定 payload/release，来源家族与许可 unresolved | 先做来源记录到实际上游对象的可复算 crosswalk；并准备非文本的抽样框精度/工时方案草案。不得导出正式释义审查包 | 在总体/来源家族、盲呈现、多条件重复判定、目标等权区间及精度门槛、权限都明确前，不启动正式双盲标注；任何自动关系分类无证据均为 `unresolved` | 专项实现分支包含多个已推送子主题；各 PR 是否存在需在线核实，不能因分支已推送标记为已建 PR |
-| P0 | T04-2b：共同文本与真实图输入审计 | 冻结训练候选 3,404 次出现/2,051 唯一候选，结构覆盖与 B/C/D 释义 token 清单均 2,051/2,051；最长单条释义 77 WordPiece。旧序列化 A/B/C/D 已在 `emotion_xpu` 完成 3 种子训练，但 D 相对 B 没有净增益；同一 SemCor dev 已用于多轮探索 | 新共享 gloss encoder + relation pooling 的 train-only XPU 前向已重复 2 次；下一步优化 ID 顺序 batch 的 padding 与逐候选池化开销，保持输入/输出数值等价，再做不读 dev 的 train-only 单批反向/优化器 smoke | 旧 dev 仅作历史结果，不再选模型或调参。记录显示推理 padding 58.4%，前向未含 context、scorer、backprop/optimizer；任何性能比较须先补上下文/候选打分架构、共同失败分母、长度和算力对照，并冻结新来源/许可/映射/统计方案 | `codex/t04-structure-input-design` 上的当前实现已推送 `eecab14`；本轮 profile 实现待提交；GitHub PR connector 不可用，PR 未创建 |
+| P0 | T04-2b：共同文本与真实图输入审计 | 冻结训练候选 3,404 次出现/2,051 唯一候选，结构覆盖与 B/C/D 释义 token 清单均 2,051/2,051；最长单条释义 77 WordPiece。旧序列化 A/B/C/D 已在 `emotion_xpu` 完成 3 种子训练，但 D 相对 B 没有净增益；同一 SemCor dev 已用于多轮探索 | 完整预热后的 2×2 train-only XPU 消融显示 length-sort + pad-to-1 最优，pad-to-8 无收益；结果详见本文件状态覆盖。下一步做池化向量化及数值等价检查，再做不读 dev 的单批反向/优化器 smoke | 资源剖析不读标签/context/dev/test，也不含 context/scorer/backprop/optimizer；不代表 WSD 效果。旧 dev 不再用于选择或调参；正式评测仍需许可、sense-key 映射和新来源隔离方案 | `codex/t04-structure-input-design`；batching 改动待提交。GitHub PR connector 不可用，PR 未创建 |
 | P0 | T04-3：WSD 映射、许可和新评估 | SemCor 内部文档隔离试点已重复使用，不能继续调参；Raganato 使用 WN3.0；FEWS 与图中 Wiktionary 来源可能重叠。完整候选和输入映射需逐目标报告 | 只处理不含测试文本/标签的来源、许可、模型暴露和 WN3.0→OEWN crosswalk 元数据；按子集列零/唯一/多映射、POS/lemma 异常和候选覆盖 | 先冻结子集、许可和映射规则；不满足授权或映射覆盖条件时不解封测试集。确认性评测只能在代码/配置/模型/分析锁定后执行一次 | 后续单独 `codex/t04-frozen-wsd-eval`；不可把旧 dev 结果移名为新评估 |
 | P1 | T01：ToLogic 编译与语义审核 | 六例有限枚举和 want/without 重放/静态结构审计可复现；候选覆盖不等于公式语义正确，without 是外部接口且不在原 85 basis | 保持六例作回归；先把语义标签说明、双人独立判定、参数绑定与作用域协议准备齐；由负责人确认外部接口语义再做盲审 | 没有独立语义标签前只报告候选枚举、绑定和语法；不训练 ranker、不声称概念学习或泛化 | `codex/t01-semantic-review-protocol` 等分支已推送；逐 PR 状态需 GitHub 核查 |
 | P1 | T03：知径交互原型 | 现有 `concept-dictionary/` Demo 是唯一产品基线；功能测试不代表理解或学习 | 继续在现有 Demo 做固定案例的路径正确性/解释完整性核对，聚焦介词方向、否定、OR 备选、循环和无路径；先用程序断言和无参与者模拟 | 不重建替代系统；真实用户理解/学习实验须由用户决定并完成伦理、招募、同意和数据处理审批 | 小型功能修复单独 PR；不以模拟用户作学习证据 |
@@ -58,12 +58,27 @@
 
 ## 状态覆盖（2026-10-31，优先于上方 T04-2b 表格中的“下一动作”）
 
-T04 已完成的工程门槛：训练候选图结构覆盖 2,051/2,051；共同目标/依赖 gloss WordPiece 清单对齐 2,051/2,051；最长单条 gloss 77 token；无参数 A/B/C/D 聚合器和 train-only XPU 关系算子 profile 已完成。对 2,051 候选的随机向量 profile 有 13,526 relation-node、3,560 branches、41,316 edges；重复 3.7316/3.8978 秒。固定 BERT-tiny revision 的 config/weight/vocab 哈希已逐项匹配既有训练日志；真实 train-only gloss encoder + A/B/C/D pooling profile 覆盖 5,592 个唯一节点释义与 2,051 候选，重复两次：编码 4.883/4.920 秒，池化 7.206/7.958 秒，ID 顺序动态 batching padding 58.4%，编码/池化峰值增量分别 90,208,768/339,456 bytes。该前向未含上下文、候选打分、反向传播或优化器，不能称新模型训练已完成。28 项专项/合成测试已在 `emotion_xpu` 通过。旧序列化 A/B/C/D 已在 `emotion_xpu` 完成 seed 17/23/31：每条件 379 train，dev 111/120 可评分；各 seed 正确数 `32/33/31/28`、`23/23/31/28`、`25/26/28/26`，汇总 `80/82/90/82`（同一批目标重复三次），D−B 净差 0。旧 dev 已被探索，不再用于调参，旧 C/D 也不等于新关系池化。下一步：先等价优化 padding 和逐候选小算子开销，重跑 train-only profile，再做不读 dev 的单批反向/优化器 smoke；效果评估需另行冻结未复用 dev、来源/许可和 sense-key 映射。
+T04 已完成的工程门槛：训练候选图结构覆盖 2,051/2,051；共同目标/依赖 gloss WordPiece 清单对齐 2,051/2,051；最长单条 gloss 77 token；无参数 A/B/C/D 聚合器和 train-only XPU 关系算子 profile 已完成。对 2,051 候选的随机向量 profile 有 13,526 relation-node、3,560 branches、41,316 edges；重复 3.7316/3.8978 秒。固定 BERT-tiny revision 的 config/weight/vocab 哈希已逐项匹配既有训练日志；真实 train-only gloss encoder + A/B/C/D pooling profile 覆盖 5,592 个唯一节点释义与 2,051 候选，重复两次：编码 4.883/4.920 秒，池化 7.206/7.958 秒，ID 顺序动态 batching padding 58.4%，编码/池化峰值增量分别 90,208,768/339,456 bytes。该前向未含上下文、候选打分、反向传播或优化器，不能称新模型训练已完成。28 项专项/合成测试已在 `emotion_xpu` 通过。旧序列化 A/B/C/D 已在 `emotion_xpu` 完成 seed 17/23/31：每条件 379 train，dev 111/120 可评分；各 seed 正确数 `32/33/31/28`、`23/23/31/28`、`25/26/28/26`，汇总 `80/82/90/82`（同一批目标重复三次），D−B 净差 0。旧 dev 已被探索，不再用于调参，旧 C/D 也不等于新关系池化。下一步：保持按长度排序/pad-to-1，先向量化逐候选池化并做数值等价核验，再做不读 dev 的单批反向/优化器 smoke；效果评估需另行冻结未复用 dev、来源/许可和 sense-key 映射。
 
 本轮 T04 聚合器、两种 XPU profile、协议和队列更新都在 `codex/t04-structure-input-design` 专题分支；代码与协议提交 `eecab14`、`e1b8ed2` 均已推送，既有 token audit commits 为 `ee43ce2`、`8c63298`。GitHub PR connector 仍返回 `Unknown tool`，且本机未安装 GitHub CLI，因此尚无 PR；可从 [分支比较页](https://github.com/yizhibanmashou/concept-graph-research/compare/main...codex/t04-structure-input-design?expand=1)创建。CI 未核实。
+
+### 2026-10-31 XPU profile batching 复测（覆盖此前不完整预热测量）
+
+修正 profile 预热方式：编码器先按完整 batch 计划跑完一整遍，再计时第二遍；关系池化也先预热 32 个候选。对比均在 `emotion_xpu`、同一 Intel Arc XPU、固定 BERT-tiny 权重、5,592 个唯一 gloss、2,051 个训练候选、batch size 32 下进行，未读取标签、上下文、dev/test。
+
+| 编码 batch 设置 | padding 比例 | 编码时间 | 编码峰值额外分配 |
+|---|---:|---:|---:|
+| ID 顺序，pad-to-1 | 58.4% | 1.252 秒（1 次） | 90,208,768 bytes |
+| 按长度排序，pad-to-8 | 23.2% | 0.858 / 0.885 秒（2 次） | 53,596,160 bytes |
+
+length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约低 29%，padding 下降 35.2 个百分点，峰值增量内存约低 41%。这只是单设备 train-only 资源工程 profile，计时次数有限，batch 顺序、shape 与 pad multiple 一起变化，不能归因为单一因素，也不是模型训练或 WSD 质量结果。关系池化约 6.94–7.08 秒，峰值额外分配 339,456 bytes，仍是下一步工程优化点。此前仅预热两个短 batch 的 profile 数字应视为预热不足，不用于稳定吞吐判断。更新后的专项测试 21 项通过；下一步向量化池化并对照数值，再做 train-only 单批反向/优化器 smoke。
 
 ## 下一轮建议执行顺序
 
 1. **T04 profile 效率与训练 smoke**：对 train-only encoder + relation pooling 加入按长度组织 batch 或其他不改变样本/表示的 padding 优化，向量化逐候选池化；先用数值等价和定长输入检查，再重复量化吞吐/内存。随后仅用 train gold 做单批反向/optimizer 工程 smoke，不读 dev/test、不报告 WSD 指标。
 2. **T02 provenance crosswalk**：只用本地 source metadata 与公开目录标识调查能否把 raw-sha256 指纹映射至准确上游对象；无法绑定即正式登记为 unresolved，不生成语义标注样本。
 3. **总控和其他三线的就绪工作**：更新 PR 状态；T01 审阅流程、T03 固定任务断言、T05 license/schema 清单仅推进不需数据访问或用户科学决策的部分。
+
+### 2026-10-31 2×2 batching 消融更正
+
+完整预热的 2×2 profile 已完成，排序与 padding 倍数分别对照。ID/pad-1 编码 1.252/1.144 秒、padding 58.4%、额外峰值 90,208,768 bytes；ID/pad-8 为 1.232 秒、63.3%、101,390,336 bytes；length/pad-1 为 0.759/0.810 秒、1.8%、43,971,072 bytes；length/pad-8 为 0.858/0.885 秒、23.2%、53,596,160 bytes。length-sort/pad-1 相比 ID/pad-1 均值快约 35%，padding 低 56.6 个百分点，峰值少约 51%。pad-8 在两种顺序下都无优势；当前 profile 默认值改为 length/pad-1。关系池化 6.94–8.35 秒仍主导耗时。所有输入仍为 train candidate IDs 与图 gloss/rules，不读 labels/context/dev/test；不含反向或优化器。运行次数有限，结论是本机工程优选，非通用性能保证或 WSD 效果证据。

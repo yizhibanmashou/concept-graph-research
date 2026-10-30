@@ -147,3 +147,27 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 - 若 B 优于 A 但 D 不优于 B/C，证据支持额外释义内容有用，但不支持完整分支本身提供当前任务增益。
 - 若 C 与 D 无差异，需结合区间和覆盖分析判断是证据不足、pairwise 足够或高阶结构无增量，不能只凭点估计下结论。
 - 若结果不稳定、覆盖不平衡、结构信号不充分或评估区间很宽，报告失败/不确定并暂停该模型路线；不要换 dev、预算或切分以追求正结果。
+
+### T04-2d 复核：完整预热与 batch padding 对照（2026-10-31）
+
+前一版 text+structure profile 只预热两个较短 batch，不能提供可靠的稳态时延估计。本次脚本改为对全部 batch shape 完整预热一遍，再测第二遍；关系池化另预热 32 个候选。固定环境为 Conda `emotion_xpu`（PyTorch 2.12.0+xpu、Transformers 5.9.0、Intel Arc）、pinned BERT-tiny、batch size 32；只读取 train candidate IDs 与冻结图定义/规则，不读取标签、上下文、dev/test。样本为 5,592 个唯一 gloss、2,051 个候选，实际 token 数 65,370，最长 gloss 79 WordPiece（注意旧 token audit 记录 77；分词实现和定义文本边界需继续解释该差异）。
+
+| Batch 策略 | padding 比例 | 编码时延 | 峰值增量分配 |
+| --- | ---: | ---: | ---: |
+| ID 顺序、pad-to-1 | 58.4% | 1.252 秒（一次） | 90,208,768 bytes |
+| 长度排序、pad-to-8 | 23.2% | 0.858 / 0.885 秒（两次） | 53,596,160 bytes |
+
+长度排序并 pad-to-8 的两次测量相对 ID 顺序基线显示：编码约快 29%，padding 减少 35.2 个百分点，峰值增量内存约少 41%。两项设置同时变化且 ID 基线只有一次，不能分离排序与 pad multiple 的因果贡献；需按同设置再重复并补充 length-sort/pad-to-1 和 ID/pad-to-8 消融。关系池化约 6.94–7.08 秒，额外峰值 339,456 bytes，现为下一工程瓶颈。该结论仅是本机 train-only 资源工程结果，不涉及准确率、语义保真或训练可行性。21 项 T04 专项/合成测试通过。
+
+### 2×2 batch 排序与 padding 消融补记（2026-10-31）
+
+为分离排序与 pad multiple，完成完整预热的 2×2 train-only profile（batch size 32，5,592 gloss，2,051 candidates）：
+
+| 顺序 / pad multiple | 编码时延 | padding 比例 | 编码峰值增量 |
+|---|---:|---:|---:|
+| ID / 1 | 1.252 / 1.144 秒 | 58.4% | 90,208,768 bytes |
+| ID / 8 | 1.232 秒 | 63.3% | 101,390,336 bytes |
+| length / 1 | 0.759 / 0.810 秒 | 1.8% | 43,971,072 bytes |
+| length / 8 | 0.858 / 0.885 秒 | 23.2% | 53,596,160 bytes |
+
+同为 pad-to-1 时，length-sort 比 ID-sort 的均值编码时延低约 35%，padding 低 56.6 个百分点，峰值增量内存低约 51%。pad-to-8 没有收益。profile 默认采用 length-sort/pad-to-1。该选择只依据本机工程资源；profile 未读取标签、上下文、dev/test，也不含反向传播和优化器。计时重复有限，应在训练 pipeline 集成后再次复核；关系池化仍比释义编码更慢，接下来优先向量化池化并做数值等价测试。

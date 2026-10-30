@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from src.analysis.profile_t04_xpu_text_structure import (
+    make_gloss_batches,
     pad_token_batch,
     read_graph,
     read_train_candidate_ids,
@@ -27,6 +28,13 @@ class ProfileT04XpuTextStructureTests(unittest.TestCase):
         self.assertEqual(ids, [[101, 12, 102], [101, 102, 0]])
         self.assertEqual(masks, [[1, 1, 1], [1, 1, 0]])
 
+    def test_rounds_batch_padding_width_up_to_requested_multiple(self):
+        ids, masks = pad_token_batch([[1] * 9, [2] * 7], pad_to_multiple=8)
+        self.assertEqual(len(ids[0]), 16)
+        self.assertEqual(len(ids[1]), 16)
+        self.assertEqual(sum(masks[0]), 9)
+        self.assertEqual(sum(masks[1]), 7)
+
     def test_loads_dependency_glosses_as_well_as_train_target_glosses(self):
         with tempfile.TemporaryDirectory() as tmp:
             nodes = Path(tmp) / "nodes.tsv"
@@ -44,6 +52,15 @@ class ProfileT04XpuTextStructureTests(unittest.TestCase):
     def test_rejects_empty_sequences(self):
         with self.assertRaises(ValueError):
             pad_token_batch([[101, 102], []])
+
+    def test_length_order_reduces_padding_without_dropping_nodes(self):
+        encoded = {"a": [1], "b": [1] * 10, "c": [1], "d": [1] * 10}
+        by_id = make_gloss_batches(encoded, batch_size=2, order="id")
+        by_length = make_gloss_batches(encoded, batch_size=2, order="length")
+        id_padded = sum(max(len(row) for _, row in batch) * len(batch) for batch in by_id)
+        length_padded = sum(max(len(row) for _, row in batch) * len(batch) for batch in by_length)
+        self.assertEqual(sorted(node for batch in by_length for node, _ in batch), sorted(encoded))
+        self.assertLess(length_padded, id_padded)
 
 
 if __name__ == "__main__":

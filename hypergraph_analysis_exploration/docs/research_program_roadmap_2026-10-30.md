@@ -232,3 +232,9 @@
 ### T04-2c 合成关系池化与 train-only XPU 资源剖析（2026-10-31）
 
 参数无关 A/B/C/D pooling 已实现并通过合成性质测试：节点/分支顺序不影响向量；固定依赖节点并集和 pairwise 2-section 时，B/C 无法分辨不同 OR 分组，而 D 可分辨。随机向量关系算子 profile 覆盖 2,051 候选、13,526 relation-node、3,560 branches 和 41,316 edges；重复两次 3.7316/3.8978 秒。随后使用 pinned BERT-tiny 实际 gloss 做 train-only 前向：5,592 个唯一节点释义由 XPU 编码两次耗时 4.883/4.920 秒，2,051 个候选的 A/B/C/D 池化耗时 7.206/7.958 秒；ID 顺序动态 batch 的 padding 为 58.4%，编码和池化峰值额外分配 90,208,768/339,456 bytes。该 profile 仍不含上下文、打分、反向传播和优化器，不能证明新模型训练或效果。28 项相关专项测试通过。另核实旧序列化方案三种子 A/B/C/D 训练已完成，未观察到 D 相对 B 的净差；该结果在同一已复用 SemCor dev 上，只能作为旧序列化方案的探索性负结果。下一工程门槛是优化 padding 和逐候选小算子开销、重测，再做 train-only 单批反向 smoke；WSD 效果验证仍受独立开发集、许可及 sense-key 映射门槛约束。
+
+### T04 工程状态补记：XPU batching profile（2026-10-31）
+
+完整预热后的 train-only profile 显示，在本机 Intel Arc XPU 上，5,592 个 gloss、2,051 个 train 候选的 BERT-tiny 编码：ID 顺序/pad-to-1 为 1.252 秒、58.4% padding、90.2 MB 峰值增量；按长度排序/pad-to-8 为 0.858/0.885 秒（两次）、23.2% padding、53.6 MB。池化约 6.94–7.08 秒。基线仅一次且两项 batch 设置同时变化，故仅作为工程线索；不代表新模型训练或 WSD 效果。下一步分别消融排序和 padding multiple，并向量化池化、检查数值等价。
+
+2×2 复核进一步拆分了排序与 padding：length-sort/pad-1 两次编码 0.759/0.810 秒、padding 1.8%、编码峰值增量 43,971,072 bytes；ID/pad-1 两次 1.252/1.144 秒、padding 58.4%、90,208,768 bytes。pad-to-8 在两类顺序下都无优势，因此 profile 默认采用 length-sort/pad-1。该工程结论未经训练/下游效果验证。

@@ -80,13 +80,33 @@ def read_graph(nodes_path: Path, rules_path: Path, target_ids: set[str]) -> tupl
     return definitions, rules
 
 
-def pad_token_batch(encoded: list[list[int]], pad_id: int = 0) -> tuple[list[list[int]], list[list[int]]]:
+def pad_token_batch(
+    encoded: list[list[int]], pad_id: int = 0, pad_to_multiple: int = 1
+) -> tuple[list[list[int]], list[list[int]]]:
     if not encoded or any(not row for row in encoded):
         raise ValueError("token batch must contain nonempty sequences")
-    width = max(map(len, encoded))
+    if pad_to_multiple < 1:
+        raise ValueError("pad_to_multiple must be positive")
+    max_width = max(map(len, encoded))
+    width = ((max_width + pad_to_multiple - 1) // pad_to_multiple) * pad_to_multiple
     input_ids = [row + [pad_id] * (width - len(row)) for row in encoded]
     attention_mask = [[1] * len(row) + [0] * (width - len(row)) for row in encoded]
     return input_ids, attention_mask
+
+
+def make_gloss_batches(
+    encoded_by_id: dict[str, list[int]], batch_size: int, order: str = "id"
+) -> list[list[tuple[str, list[int]]]]:
+    if batch_size < 1:
+        raise ValueError("batch size must be positive")
+    if order not in ("id", "length"):
+        raise ValueError("batch order must be id or length")
+    items = list(encoded_by_id.items())
+    if order == "length":
+        items.sort(key=lambda item: (len(item[1]), item[0]))
+    else:
+        items.sort(key=lambda item: item[0])
+    return [items[start:start + batch_size] for start in range(0, len(items), batch_size)]
 
 
 def profile(
@@ -96,15 +116,18 @@ def profile(
     model_path: Path,
     out_path: Path,
     batch_size: int = 32,
-    warmup_batches: int = 2,
+    warmup_passes: int = 1,
+    batch_order: str = "length",
+    pad_to_multiple: int = 1,
+    relation_warmup_candidates: int = 32,
 ) -> dict[str, Any]:
     import torch
     import transformers
     from tokenizers import BertWordPieceTokenizer
     from transformers import BertConfig, BertModel
 
-    if batch_size < 1 or warmup_batches < 0:
-        raise ValueError("batch size must be positive and warmup batches nonnegative")
+    if batch_size < 1 or warmup_passes < 0 or pad_to_multiple < 1 or relation_warmup_candidates < 0:
+        raise ValueError("batch size/pad multiple must be positive and warmup passes nonnegative")
     if not torch.xpu.is_available():
         raise ValueError("XPU is unavailable in this Conda environment")
     if not all((model_path / name).is_file() for name in ("config.json", "pytorch_model.bin", "vocab.txt")):
@@ -137,25 +160,25 @@ def profile(
     model = BertModel.from_pretrained(str(model_path.resolve()), config=config, local_files_only=True).to("xpu")
     model.eval()
     vectors: dict[str, Any] = {}
-    batches = [
-        list(encoded_by_id.items())[start:start + batch_size]
-        for start in range(0, len(encoded_by_id), batch_size)
-    ]
+    batches = make_gloss_batches(encoded_by_id, batch_size, batch_order)
 
     def encode_batch(batch: list[tuple[str, list[int]]]) -> None:
         node_batch = [node_id for node_id, _ in batch]
         encoded = [ids for _, ids in batch]
-        padded, masks = pad_token_batch(encoded)
+        padded, masks = pad_token_batch(encoded, pad_to_multiple=pad_to_multiple)
         input_ids = torch.tensor(padded, dtype=torch.long, device="xpu")
         attention = torch.tensor(masks, dtype=torch.long, device="xpu")
         with torch.inference_mode():
             output = model(input_ids=input_ids, attention_mask=attention).last_hidden_state[:, 0]
         vectors.update({node_id: vector for node_id, vector in zip(node_batch, output)})
 
-    for batch in batches[:warmup_batches]:
-        encode_batch(batch)
+    warmup_started = time.perf_counter()
+    for _ in range(warmup_passes):
+        for batch in batches:
+            encode_batch(batch)
     vectors.clear()
     torch.xpu.synchronize()
+    warmup_seconds = time.perf_counter() - warmup_started
     baseline_after_model_bytes = torch.xpu.memory_allocated()
     torch.xpu.reset_peak_memory_stats()
     encoder_started = time.perf_counter()
@@ -164,7 +187,7 @@ def profile(
     for batch in batches:
         node_batch = [node_id for node_id, _ in batch]
         encoded = [ids for _, ids in batch]
-        padded, masks = pad_token_batch(encoded)
+        padded, masks = pad_token_batch(encoded, pad_to_multiple=pad_to_multiple)
         padded_token_count += sum(len(row) for row in padded)
         actual_token_count += sum(len(row) for row in encoded)
         input_ids = torch.tensor(padded, dtype=torch.long, device="xpu")
@@ -177,6 +200,9 @@ def profile(
     encoder_peak = torch.xpu.max_memory_allocated()
     encoder_peak_increment = max(0, encoder_peak - baseline_after_model_bytes)
 
+    for target_id in candidate_ids[:relation_warmup_candidates]:
+        aggregate_relation_views(vectors, target_id, rules[target_id])
+    torch.xpu.synchronize()
     torch.xpu.reset_peak_memory_stats()
     aggregation_baseline_bytes = torch.xpu.memory_allocated()
     aggregation_started = time.perf_counter()
@@ -210,7 +236,11 @@ def profile(
             "padding_fraction": 1 - actual_token_count / padded_token_count,
             "max_sequence_length": max(sequence_lengths),
             "batch_size": batch_size,
-            "warmup_batches": min(warmup_batches, len(batches)),
+            "batch_order": batch_order,
+            "warmup_passes": warmup_passes,
+            "warmup_batches": warmup_passes * len(batches),
+            "pad_to_multiple": pad_to_multiple,
+            "warmup_seconds": warmup_seconds,
         },
         "text_encoder": {
             "wall_clock_seconds": encoder_seconds,
@@ -222,6 +252,7 @@ def profile(
         "relation_aggregation": {
             "wall_clock_seconds": aggregation_seconds,
             "candidates_per_second": len(candidate_ids) / aggregation_seconds if aggregation_seconds else None,
+            "warmup_candidates": min(relation_warmup_candidates, len(candidate_ids)),
             "baseline_allocated_bytes": aggregation_baseline_bytes,
             "peak_allocated_bytes_after_reset": aggregation_peak,
             "peak_increment_bytes": max(0, aggregation_peak - aggregation_baseline_bytes),
@@ -251,9 +282,14 @@ def main() -> None:
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--batch-size", type=int, default=32)
-    parser.add_argument("--warmup-batches", type=int, default=2)
+    parser.add_argument("--warmup-passes", type=int, default=1)
+    parser.add_argument("--batch-order", choices=("id", "length"), default="length")
+    parser.add_argument("--pad-to-multiple", type=int, default=1)
+    parser.add_argument("--relation-warmup-candidates", type=int, default=32)
     args = parser.parse_args()
-    result = profile(args.train, args.nodes, args.rules, args.model, args.out, args.batch_size, args.warmup_batches)
+    result = profile(args.train, args.nodes, args.rules, args.model, args.out, args.batch_size,
+                     args.warmup_passes, args.batch_order, args.pad_to_multiple,
+                     args.relation_warmup_candidates)
     print(json.dumps({
         "candidate_count": result["train_candidate_unique_count"],
         "gloss_node_count": result["unique_gloss_node_count"],
