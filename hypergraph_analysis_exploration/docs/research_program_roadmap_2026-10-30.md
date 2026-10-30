@@ -246,3 +246,5 @@ B/C/D 的均值聚合已改写为 3×N 权重矩阵乘法；合成直接均值�
 合成结构池化的 XPU backward/SGD smoke 已在 Intel Arc 通过：有限 loss/gradient，参数更新正常。此项不含新模型参数、真实 WSD 标签或上下文，仅证明算子链支持反向与优化器；端到端小批训练仍待验证。
 
 进一步以首个 train candidate 的 18 条实际 OEWN gloss/4 个分支完成 XPU 编码—A/B/C/D 池化—反向—AdamW 单步 smoke，峰值分配 87.8 MB、37 个参数张量收到梯度。使用的是非监督 surrogate loss，只验证执行链，不构成 WSD 训练或效果证据。脚本为 `src/analysis/smoke_t04_xpu_train_only_backward.py`。
+
+监督微批工程 smoke 已跑通：seed 17 固定抽取两个 train 目标、14 个候选；A/B/C/D 共用 `inputs.A` 上下文—释义、相同 BERT-tiny 初始权重和 head 初始化，每个条件在自己的结构池化输入上完成一次 CE/AdamW 更新。精确重放的 train/model/sample 摘要、四个更新前训练 loss 与峰值内存完全一致。仅说明两目标训练链路可运行；loss 不作效果比较，尚未训练完整训练集或读取 dev/test。详见 `docs/t04_structure_isolation_design.md` 和脚本 `src/analysis/train_t04_xpu_train_only_microbatch.py`。

@@ -92,3 +92,7 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 在 `emotion_xpu` 的 Intel Arc 上，将可训练标量作用于合成节点向量，经 A/B/C/D 权重矩阵聚合、标量平方损失、反向和 SGD step；loss=11.5733、梯度=23.1466，参数由 1.0 更新到 0.7685，均为有限数。此项只验证 XPU autograd/optimizer 可执行，不读图数据、训练标签、上下文或 dev/test，也不是完整模型训练；下一门槛是在真实冻结 train-only gloss 向量上做一个小批结构前向与反向，并确认内存峰值。
 
 实图文本 smoke 由 `src/analysis/smoke_t04_xpu_train_only_backward.py` 固化：首个 train candidate 的 18 个 OEWN 图 gloss、4 个 OR 分支输入 pinned BERT-tiny，在 XPU 上经过共享编码、A/B/C/D 池化、surrogate loss、37 个参数梯度及 AdamW 更新；surrogate loss=0.8871，peak allocated=87,755,264 bytes。该脚本仅读 candidate_ids 与 graph definitions/rules，不读 labels/context/dev/test。surrogate 目标不是真实 WSD 损失，因此这仍是可复现工程 smoke，不是模型质量或训练有效性证据。
+
+### T04 监督式结构模型微批训练（2026-10-31）
+
+新增 `src/analysis/train_t04_xpu_train_only_microbatch.py`。程序以 seed 17 从冻结 train split 确定抽 2 个 gold-covered 目标，构成 14 个候选、87 个目标/依赖 gloss 节点、31 个 OR 分支；模型固定为已核验哈希的 BERT-tiny，A/B/C/D 均使用完全相同的 `inputs.A` 上下文+原 gloss token 序列，结构分支只改变候选图池化。每个条件独立从相同预训练权重及相同 head 初始化做 1 次 cross-entropy/AdamW 更新；全部 39 个参数张量有有限梯度，XPU 峰值分配 A=164,270,080、B=194,585,600、C=195,894,272、D=194,585,600 bytes。两次精确重放的样本摘要、训练/模型 SHA、四个更新前 loss（A=2.008603、B=1.955209、C=1.985051、D=1.981746）及峰值均一致。该 loss 只是两条训练样本的更新前诊断，不能用于比较效果；没有 dev/test 访问或 checkpoint 外传。此项确认真实 train-only 监督输入能完成一次端到端参数更新；下一步扩展完整 train 的训练日志/资源记录，并在尚不评估 dev 的情况下先审核输入 token 预算和失败样本处理。

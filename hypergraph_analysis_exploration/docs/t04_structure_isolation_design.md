@@ -185,3 +185,11 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 ### 实图释义单候选反向与更新烟测（2026-10-31）
 
 新增 `src/analysis/smoke_t04_xpu_train_only_backward.py`，只从冻结 train JSON 取 candidate IDs，从 OEWN 图读取对应定义和构造分支；不读取 gold labels、句子上下文、dev/test。用 pinned BERT-tiny 对首个候选及其 17 个依赖 gloss（共 18 条、4 个分支；batch 形状 18×30）编码，A/B/C/D 经权重矩阵池化后用明确标注的 surrogate squared-norm objective 反传并执行 AdamW。Intel Arc XPU 返回有限 loss=0.8871、37 个梯度张量，峰值 allocated=87,755,264 bytes，step 正常。此结果只证明真实词典释义输入下小规模编码器—结构池化梯度路径可运行；surrogate loss 无 WSD 监督意义，不能称为训练结果、效果评估或足够支撑全数据训练的资源证明。完整命令由脚本 CLI 提供。
+
+### A/B/C/D supervised train-only microbatch（2026-10-31）
+
+`src/analysis/train_t04_xpu_train_only_microbatch.py` 将新结构分支接入现有 WSD train record 做一次真实标签更新。按 seed 17 抽取同样 2 个 gold-covered train 目标；14 个候选涉及 87 个唯一目标/依赖 gloss、31 个构造分支。四条件在相同 `inputs.A` 上下文+原释义 token 序列上评分，候选 graph features 分别为 A（目标释义向量+零关系）、B（唯一依赖均值）、C（pairwise 2-section 均值）、D（完整 OR branch 均值）；所有条件相同节点释义集合、tokenizer、预算、预训练 encoder 和 head 初始化，每个条件单独作一步 CE/AdamW。代码只打开 `train.json` 与 metadata，不读取 dev/test。
+
+重复两次输出完全一致：selected sample hash=`b14406e815160c5428a2923ae0d00ffe70ec6da138f76431124724bacf075136`，train SHA=`e31e39e8b8ba1360ef89ff20ae13bfc9c7a7a05ac8797814ce69c2ca8167b4d7`，更新前 loss A/B/C/D=`2.008603/1.955209/1.985051/1.981746`；39 个参数张量均有有限梯度，优化器步正常。XPU peak allocated bytes A/B/C/D=`164270080/194585600/195894272/194585600`。以上是一个仅两目标、每条件一次更新的工程 smoke；四个训练 loss 受极小样本和随机 minibatch 支配，**不能比较或解释为 WSD 质量**。没有开发/测试评测，不产生模型 checkpoint。完整命令可由脚本 CLI 运行；profile JSON 留在 ignored `outputs/`。
+
+通过门槛仅为真实 train-only supervision、shared encoder、结构池化、梯度和 optimizer 更新链工作。下一阶段在扩大训练规模前，先审查共同 token/context 序列、图释义编码成本、未覆盖候选的计分规则以及训练失败日志；旧 dev 仍不可用于调参，正式验证 gate 仍是新开发隔离、许可及 WN3.0→OEWN 映射。
