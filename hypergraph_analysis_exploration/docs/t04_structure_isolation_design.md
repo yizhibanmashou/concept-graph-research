@@ -57,6 +57,14 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 
 此 dry-run 不读取 OEWN、gloss、语料、gold 或标签；不调用模型、XPU 或训练。它仅验证 ID-only 关系张量的对齐和结构差异，不验证 tokenizer 侧的 token IDs 等价、释义对齐、真实图覆盖、编码器参数公平或 WSD 效果，不能替代 2b 的真实只读输入审计。正式实施仍需研究负责人批准评估来源与估计对象。
 
+### T04-2b train-only 图候选覆盖审计（2026-10-31）
+
+新增 `src/analysis/audit_t04_train_graph_inventory.py`。程序只从冻结 `train.json` 读 `candidate_ids`，逐一核对冻结 OEWN `nodes.tsv`、`hypergraph_rules.jsonl`、目标/依赖 gloss 是否存在，并验证每个候选能在同一 canonical node inventory 上构造关系视图；不访问 gold/label、上下文、dev/test 文件，也不输出义项 ID 或 gloss。输入摘要与聚合结果存于本机 ignored `outputs/t04_train_graph_inventory_20261031.json`。
+
+复算结果：400 个训练目标包含 3,404 个候选出现次、2,051 个不同候选义项；2,051/2,051 均有目标节点、规则、非空分支和依赖定义，图关系视图失败为 0。按不同候选义项统计，分支数中位数 1、nearest-rank P90 为 3、最大 16；依赖数中位数 5、P90 为 10、最大 28；pairwise 边最大 327，D 的 branch-node incidence cells 最大 112。范围仅是既有训练候选池，不是模型候选覆盖率或全图分布，也不表示每个候选都满足相同 tokenizer 预算。
+
+该环境的图清单复算不使用 tokenizer。精确 token-ID 一致审计仍需恢复与既有输入 manifest 同版本的 BERT `vocab.txt`/tokenizers 版本；当前 `emotion_xpu` 可 import tokenizers 0.22.2，而冻结训练输入 metadata 记录 0.23.1，故不得将新词表或版本混用后称为逐字复现。下一步先绑定确切 vocabulary hash 和 tokenizer 版本，再在 train-only 候选上复算统一节点释义序列与 B/C/D 结构输入；不读取旧 dev 或测试标签。
+
 ## 5. 数据、切分与指标
 
 1. **旧 SemCor 开发集冻结。** 已反复用于方案开发的 120 条样本及其文档隔离子集不得再用于选择上限、池化器、超参数、停止点或主结果。历史结果只作为探索记录。
