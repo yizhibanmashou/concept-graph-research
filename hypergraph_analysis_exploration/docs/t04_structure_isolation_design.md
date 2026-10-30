@@ -252,3 +252,17 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 上下文 budget 审计按全部 A/B/C/D 及 13,616 个候选—条件输入对统计，不再只看 A。固定候选序列预算 222，加目标上下文 cap 128 与特殊符号，统一张量宽度为 352；A/B/C/D 的实际最大序列长度 351，均低于 BERT-Tiny 位置上限 512。128-token cap 下只有 3/400 句窗截断，起止目标标记错误为 0。32/64/96/128 cap 的截断目标数分别为 250/48/9/3；对应最大序列为 255/287/319/351，全部条件均在各自共同预算内。128 cap 比 32 cap 多约 9.6% 的候选—条件 token 出现量（1,828,331 vs 1,668,395）；这是计算成本，不是效果增益。
 
 训练环境使用 Conda `emotion_xpu`：Python 3.11、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Intel Arc XPU 可用；`nltk` 不在该环境内，因此数据构造/审计通过本机研究环境运行，模型训练只通过 `conda run -n emotion_xpu ... tiny_bert_wsd_train` 读取已冻结 JSON。train-only 四条件一轮训练已完成并以相同 seed 重放，启动时不读取 dev/test。每条件 379 条，mean loss A/B/C/D=1.859496/1.853116/1.853980/1.862553；checkpoint SHA 在完整重放中逐项一致。该结果只验证工程训练链与确定性，不把 loss 或小样本训练表现解释为 WSD 质量提升。训练命令增加 `--train-only`，避免访问 dev/test。
+
+### T04 外部 WiC 评测源首轮筛选（2026-10-31）
+
+本轮只核对官方项目页、基准论文/ACL 页面和仓库许可文件；未下载或打开 WiC/WiC-TSV/GrainWiC 的任何实例、文本或标签。
+
+| 候选 | 可核实事实 | 对本项目的限制与结论 |
+| --- | --- | --- |
+| 原始 WiC / SuperGLUE WiC | WiC 官方页声明数据为 CC BY-NC 4.0；SuperGLUE 论文说明提交系统不得在开发中使用构造 WiC 标签时所用的结构化源数据，并举例为 WordNet、VerbNet、Wiktionary sense-annotated examples。 | 本项目图及训练流程使用 OEWN/WordNet、Wiktionary 派生知识；若按官方 SuperGLUE WiC 规则报告，图资源和相关源信息会触及该限制。因此不作为当前结构增强系统的确认性主评测，不能只凭 CC BY-NC 许可认定 benchmark-use 合规。 |
+| WiC-TSV | 官方论文将其定义为多领域 target-sense verification，任务可不依赖外部 sense inventory；官方 GitHub 仓库有 MIT LICENSE。 | MIT 文本覆盖软件与仓库文档，不能自动视作数据授权。官方 repo 页面未找到数据集自身许可证/来源授权说明；数据许可和每个子集的文本来源仍 unresolved。不下载/不评测。 |
+| GrainWiC fine-grained | 官方数据卡给出 1,185 对、924 个目标词、WordNet 3.1 noun/verb 义项；两套数据均为 test-only。数据卡标 CC BY-SA 4.0，并说明定义和用例来自 WordNet 3.1、按 Princeton WordNet License 使用。 | 任务形态接近义项级 WiC，但同属 WordNet 资源谱系，与 OEWN/WordNet 图存在明显来源邻近；只有 test split，不能调阈值或选模型。可作为未来一次性、明示同源边界的次要评测候选，不是独立来源验证；必须先做不看测试条目的 WN3.1→OEWN 库存级映射、重叠风险和模型暴露核验，并冻结所有决策。 |
+
+**决定：**目前没有经许可、benchmark 规则、来源独立性、sense mapping 和模型暴露五项门槛共同核准的外部确认性测试。WiC 不适合当前 graph-informed 方法的 SuperGLUE 合规结果；WiC-TSV 等数据许可未确认；GrainWiC 仅保留为同源 test-only 次要候选。继续核查时不得打开其 test 文件或基于覆盖数字修方法。首先从公开 license/release 文档与 WordNet 3.1/ OEWN 完整库存建立不触碰 benchmark test item 的 crosswalk 可行性，再决定是否值得申请/使用相应数据。
+
+来源：[WiC 官方许可页](https://pilehvar.github.io/wic/)；[SuperGLUE 论文（WiC 源数据限制）](https://w4ngatang.github.io/static/papers/superglue.pdf?file=superglue.pdf)；[WiC-TSV 官方 repo](https://github.com/semantic-web-company/wic-tsv)及其[代码 MIT LICENSE](https://raw.githubusercontent.com/semantic-web-company/wic-tsv/master/LICENSE)；[WiC-TSV ACL 论文页](https://aclanthology.org/2021.eacl-main.140/)；[GrainWiC 官方数据卡](https://huggingface.co/datasets/cardiffnlp/GrainWiC)。

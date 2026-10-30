@@ -111,3 +111,7 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 ### T02 分层抽样精度与审阅工作量敏感性（2026-10-31）
 
 `codex/t02-sampling-precision`（远端 commit `fe02befc6df606e147dd10e0cdbfaab2481718be`）已包含全图抽样框 audit 和精度情景程序。它基于 110,425 个 target 的五个互斥结构影响层，不读 gloss、目标 ID 或人工标签；将 40 条既有试标排除在正式总体估计之外。文档说明了用户已确认的目标等权单位、目标内分支比例汇总、抽样权重和稀有层过采样约束。情景表采用有界 Hoeffding 上界而非从 40 条 pilot 估方差：假设 n=1,050、空分支层与碰撞层各 50，target 均值 95% 最坏半宽约 ±4.4 pp，三个对 source 的配对差同时覆盖半宽约 ±10.0 pp，估计约 12,774 个分支×条件×审阅者单元。它没有计入来源家族聚类设计效应，也不是功效保证或已批准样本数。下一步必须由负责人选择精度目标、对比族及可投入审阅时间，再等来源许可与 crosswalk 通过后冻结样本；40 条仍只用于流程。相关代码、测试和设计分别在该分支的 `src/analysis/preposition_sampling_frame_audit.py`、`src/analysis/t02_stratified_precision_sensitivity.py`、`docs/t02_sampling_precision_design.md`。该分支 PR 未核实。
+
+### T04 新增外部 WiC 候选源筛选（2026-10-31）
+
+未读取或下载任何 benchmark 样例。官方 WiC 页列 CC BY-NC 4.0，但 SuperGLUE 论文明确不允许参赛系统在开发中使用构造 WiC 标签的结构化源数据（WordNet、VerbNet、Wiktionary）；因此标准 WiC 不适合作为本项目使用词义图的确认性 SuperGLUE 结果。WiC-TSV 的任务不依赖固定库存，然而其 GitHub MIT LICENSE 只覆盖软件文本，官方页面未找到数据自身许可，仍 unresolved。GrainWiC fine-grained 有 1,185 对、924 词、WordNet 3.1 来源和 CC BY-SA/WordNet 许可标注，但它是单一 test split、与项目词典谱系同源邻近，只能作为未来明示边界的一次性次要评测候选，不可用来调参或声称独立来源验证。当前没有外部 WiC 源通过全部授权、规则、来源、映射、模型暴露 gates。详细证据与来源链接在 `docs/t04_structure_isolation_design.md` 的“外部 WiC 评测源首轮筛选”。
