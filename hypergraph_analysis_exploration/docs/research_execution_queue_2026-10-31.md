@@ -86,10 +86,11 @@
 - 仅用构造记录验证 legacy/new schema、不可评分目标、候选数不匹配、候选编码失败、microbatch 拼回单目标排序分数、失败不改变剩余候选归一化语义。
 - 验收：训练与推理共享同一打包/评分 helper；候选全集先由词形/POS/固定形态生成，不参考 gold；所有失败按原因单列且保留原始目标分母。
 
-#### T04-B · 结构输入等量对照（READY FOR DESIGN; MODEL RUN GATED）
+#### T04-B · 结构输入等量对照（合成结构视图已验证；真实输入审计待做，训练仍 gated）
 
 - 当前旧 C 的 `edges` 只是重复 B 的依赖别名表；旧 D 与 B 的文本长度不同，不能隔离 pairwise topology 或完整分支结构效应。不得沿用它们作结构增益证据。
 - 先制定新序列化：B/C/D 对每个目标和候选共享完全相同的依赖概念与释义 token IDs；C 只改变成对投影信息，D 只改变 AND/OR 分区与论元角色；计量实际/截断 token，并让模型看到的词元预算对齐。用合成图展示 pairwise projection 丢失高阶分支分区。
+- 已有 `t04_structure_views.py` 纯合成关系视图；2026-10-31 在该专题分支复核 `python -m unittest discover -s tests -p 'test_t04_structure_views.py' -v`，5 项通过，`py_compile` 与 `git diff --check` 通过。首次从仓库根运行 `python -m unittest tests.test_t04_structure_views` 因测试目录不在根 Python module path 而导入失败；改为项目目录下的 discover 命令后成功。失败是工作目录/测试发现命令不匹配，不是测试断言失败。
 - 不用旧 SemCor dev 选 checkpoint、预算、字段标记或阈值；先做 code-only/synthetic verification 与新增、独立来源 dev 的合法性和映射审计。无合适新评估来源时停止训练，报告可行性而非继续用旧 dev 搜索。
 - 设备：`emotion_xpu` Conda 已验证 torch 2.12.0+xpu / Transformers 5.9.0 / Intel Arc XPU；无需在 base Python 安装 PyTorch。每次训练记录精确环境 lock、驱动、设备、seed、token/padding、步数、运行时和峰值显存。
 
