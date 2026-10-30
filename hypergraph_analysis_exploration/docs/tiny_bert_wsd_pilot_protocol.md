@@ -106,4 +106,26 @@ A train-sample lemma/POS frequency baseline, counting only the 400 selected trai
 
 Across 333 paired target-seed observations, D vs B had 25 D-only and 25 B-only correct outcomes (net zero); D vs C had 17 D-only and 25 C-only outcomes (net D −8). Per seed, D−B correct-count differences were −5, +5, 0; D−C differences were −3, −3, −2. These are descriptive paired counts, not a significance test; seeds repeat the same targets and must not be treated as independent observations.
 
-**Exploratory conclusion:** On this new document-disjoint but same-source SemCor development subset, the tested `bert-tiny` serialization provides no observed incremental advantage for D over B; C has the highest three-seed mean, and the training-sample frequency baseline is higher than all four learned conditions. This is evidence against continuing this exact tiny-model / current-input configuration as a demonstration of full-structure gains. It does not falsify the broader hypothesis that complete concept structure can help machine understanding: the dev has only 111 scorable instances, the candidate budget was chosen after earlier exploration, the model is very small, candidate lexical token content differs by condition, and no modern strong encoder, independent source or human fidelity label was used. Do not tune against this dev. Next, report error strata and decide whether to stop this configuration or test one separately preregistered, stronger encoder/input method on a new independent source; do not add seeds or adjust budgets to chase a positive result.
+**Exploratory conclusion:** On this new document-disjoint but same-source SemCor development subset, the tested `bert-tiny` serialization provides no observed incremental advantage for D over B; C has the highest three-seed mean, and the training-sample frequency baseline is higher than all four learned conditions. This is evidence against continuing this exact tiny-model / current-input configuration as a demonstration of full-structure gains. It does not falsify the broader hypothesis that complete concept structure can help machine understanding: the dev has only 111 scorable instances, the candidate budget was chosen after earlier exploration, the model is very small, candidate lexical token content differs by condition, and no modern strong encoder, independent source or human fidelity label was used. Do not tune against this dev or add seeds to chase a positive result. The descriptive error/length audit below does not change that conclusion. Next, either stop this exact tiny-model configuration or freeze a separate protocol for a stronger model/input method and new independent source, including information-matched controls and a modern baseline before training.
+
+## Descriptive error and input-length audit (2026-10-31)
+
+After the three-seed table was frozen, a fixed descriptive audit was run on the same 120 selected dev rows; it is not a new model-selection set and must not be used to adjust the current model. The script checks the dev serialization hash against each result, then reports scorable accuracy by candidate-count bands and paired correctness outcomes. The 16 / 39 / 56 targets with respectively 2–3 / 4–7 / 8+ candidates are repeated over three seeds, so the `outcomes` below are not independent observations.
+
+| Candidates | Targets | A | B | C | D |
+|---|---:|---:|---:|---:|---:|
+| 2–3 | 16 | 47.92% | 50.00% | 43.75% | 39.58% |
+| 4–7 | 39 | 25.64% | 27.35% | 29.91% | 26.50% |
+| 8+ | 56 | 16.07% | 15.48% | 20.24% | 19.05% |
+
+The 8+ band is consistent with the task becoming harder as the candidate set grows; in that band D exceeds B descriptively by 3.57 percentage points, while D is below B in the small 2–3 band. This is not evidence of a long-tail benefit: candidate count is not sense frequency, the bands are small and post hoc, and no uncertainty interval or independent replication is available. Across all 333 target-seed outcomes, D/B each had 25 exclusive correct outcomes; D/C had 17 versus 25; B/A had 45 versus 43.
+
+The encoded tensors use the same fixed width and candidate count for A–D, but their non-padding text differs. Mean non-padding tokens per target-candidate were A 47.97, B 135.87, C 156.71 and D 160.51; D therefore carries about 18.1% more non-padding text per candidate than B. This is an input-content/length imbalance, not a measured compute imbalance or a causal explanation. It makes the representation contrast harder to interpret: extra gloss tokens and structure markers may alter what information is available even when tensor shapes match. A follow-up must define an information-matched tokenization/control protocol before selecting a new evaluation source; this dev must not be reused to tune that design.
+
+Reproduce the audit from the subproject root (the resulting JSON remains in ignored `outputs/`):
+
+```powershell
+python src/analysis/tiny_bert_wsd_error_analysis.py --data outputs/tiny_bert_fresh_doc_dev_20261031 --runs outputs/tiny_bert_fresh_doc_xpu_seed17_20261031 outputs/tiny_bert_fresh_doc_xpu_seed23_20261031 outputs/tiny_bert_fresh_doc_xpu_seed31_20261031 --out outputs/tiny_bert_fresh_dev_error_analysis_20261031.json
+```
+
+The script outputs aggregate counts only; it does not export target text, predictions, gold labels or per-example errors. Hash checks establish that all runs use the same prepared dev file, not that the sample is representative or independent of SemCor.
