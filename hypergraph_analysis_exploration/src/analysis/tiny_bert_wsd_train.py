@@ -69,6 +69,14 @@ def candidate_chunks(values, chunk_size):
         yield values[start:start + chunk_size]
 
 
+def conditions_for_run(smoke):
+    return ('A',) if smoke else ('A', 'B', 'C', 'D')
+
+
+def should_evaluate(smoke, train_only):
+    return not smoke and not train_only
+
+
 def batchify_rows(rows, version, max_len):
     """Validate candidate rows and return unpadded inputs with labels.
 
@@ -93,7 +101,9 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--device', choices=('cpu', 'xpu'), default='xpu')
     parser.add_argument('--seed', type=int, default=17)
-    parser.add_argument('--smoke', action='store_true', help='train one batch of A without reading dev')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--smoke', action='store_true', help='train one batch of A without reading dev')
+    mode.add_argument('--train-only', action='store_true', help='train A-D and never open dev.json')
     args = parser.parse_args()
     import torch
     import transformers
@@ -136,7 +146,7 @@ def main():
         # Concatenate every candidate score before applying target-level softmax.
         return torch.cat([scorer(chunk) for chunk in candidate_chunks(values, 8)], dim=0)
 
-    conditions = ('A',) if args.smoke else ('A', 'B', 'C', 'D')
+    conditions = conditions_for_run(args.smoke)
     train_log = {}
     for condition in conditions:
         random.seed(args.seed)
@@ -179,14 +189,17 @@ def main():
         del scorer, optimizer
         if args.device == 'xpu': torch.xpu.empty_cache()
 
-    result = {'train': train_log, 'device': args.device, 'torch_version': torch.__version__,
+    result = {'train': train_log, 'device': args.device, 'train_only': args.train_only,
+              'torch_version': torch.__version__,
               'transformers_version': transformers.__version__, 'seed': args.seed, 'learning_rate': 2e-5,
               'epochs': 1, 'batch_size': 4, 'joint_budget': max_len,
               'inputs_sha256': {'train.json': digest(train_path), 'metadata.json': digest(args.data / 'metadata.json'),
                                 'model_config': digest(args.model / 'config.json'),
                                 'model_weights': digest(args.model / 'pytorch_model.bin')},
-              'limits': 'Exploratory small-data train/dev pilot; development was used in prior design, no test read; no significance or semantic validation.'}
-    if not args.smoke:
+              'limits': ('Train-only engineering run; dev.json was not opened; no evaluation or semantic claim.'
+                         if args.train_only else
+                         'Exploratory small-data train/dev pilot; development was used in prior design, no test read; no significance or semantic validation.')}
+    if should_evaluate(args.smoke, args.train_only):
         dev_path = args.data / 'dev.json'
         dev = json.loads(dev_path.read_text(encoding='utf-8'))
         if train_ids & validate(dev, max_len):

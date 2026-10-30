@@ -35,6 +35,21 @@ The proposed operationalization now defines C as the simple undirected 2-section
 
 Four synthetic tests now cover alias consistency, pair generation, duplicate-edge collapse, and two different hypergraphs that share the same 2-section but have different D branch partitions. No SemCor rows or labels were read for this correction, and no data were regenerated or model retrained. The 2-section is a proposed control representation; obtain scientific sign-off before any new performance run.
 
+## Corrected-C train-only engineering run (2026-10-31)
+
+To validate the corrected representation without reopening the repeatedly used development set, `repack_t04_train_pairwise.py` reads only the source `train.json` plus its metadata, frozen OEWN node/rule files, and the pinned tokenizer vocabulary. It reconstructs each candidate's four representations using the same candidate order, training label, and context prefix; it verifies the source train, OEWN, and vocabulary hashes. It writes only `train.json` and a train-only metadata file. The trainer's `--train-only` mode fits A/B/C/D and never opens `dev.json`; ordinary `--smoke` remains a one-condition A-only path.
+
+Observed on the existing 400-row training sample: 379 gold candidates were scoreable, 21 remain unscorable, all 3,404 candidate instances were rebuilt, and all 400 rows retained a ready candidate list. Across 2,051 unique candidates, the source graph had 3,560 branches; under the common 222-token candidate budget, 1,676 branches were retained and the selected C projections contained 3,785 unique-candidate edge occurrences. These are input/coverage counts, not a semantic or performance result. The new train JSON SHA-256 is `09b29e1f78a07662288c1f912d38c465d75d9bffbdae74920dadd8c2a6dd6078`; source train SHA is `e31e39e8b8ba1360ef89ff20ae13bfc9c7a7a05ac8797814ce69c2ca8167b4d7`; frozen nodes/rules hashes match the prepared metadata.
+
+On `emotion_xpu` (PyTorch `2.12.0+xpu`, Transformers `5.9.0`, Intel Arc), seed 17, batch size 4, one epoch, learning rate `2e-5`, all four conditions completed 95 optimizer updates and trained on 379 targets. Recorded mean training losses A/B/C/D were 1.852500/1.850237/1.849918/1.849868; these are training-fit diagnostics and must not be interpreted as condition quality or compared as WSD accuracy. The run explicitly has `train_only=true`; it has no evaluation section and no dev/test examples or labels were read. A second run with the same configuration reproduced all four training losses and checkpoint SHA-256 values exactly. Transformers reported unused masked-language-model/pretraining-head weights while loading `BertModel`, expected because the downstream encoder omits those heads. Checkpoints and machine data remain in ignored `outputs/` and are not committed. Exact replay supports computational reproducibility for this fixed local run, not generalization or scientific validity.
+
+Reproduction from `hypergraph_analysis_exploration/` (use a new output directory each time):
+
+```powershell
+python -m src.analysis.repack_t04_train_pairwise --data outputs/tiny_bert_fresh_doc_dev_20261031 --bundle ..\OEWN --vocab outputs\models\prajjwal1_bert-tiny_6f75de8b\vocab.txt --out outputs\<NEW_TRAIN_ONLY_DATA_DIR>
+conda run -n emotion_xpu python -m src.analysis.tiny_bert_wsd_train --data outputs\<NEW_TRAIN_ONLY_DATA_DIR> --model outputs\models\prajjwal1_bert-tiny_6f75de8b --out outputs\<NEW_TRAIN_ONLY_RUN_DIR> --device xpu --seed 17 --train-only
+```
+
 The active environment is a Conda environment named `emotion_xpu`, not the default `base` interpreter. On this machine it reports Python 3.11.15, PyTorch `2.12.0+xpu`, Transformers `5.9.0`, and an available Intel Arc XPU. To check the environment without GUI use:
 
 ```powershell
