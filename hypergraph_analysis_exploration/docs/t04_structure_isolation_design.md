@@ -75,17 +75,25 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 
 来源核查依据：Raganato et al. 的[统一 WSD 论文](https://aclanthology.org/E17-1010/)；[FEWS 官方页面](https://nlp.cs.washington.edu/fews/)、[FEWS datasheet](https://nlp.cs.washington.edu/fews/datasheet.pdf)和[数据创建仓库](https://github.com/facebookresearch/fews)。这里的“潜在重叠”是由两者都源自 Wiktionary 推出的风险判断，尚未做逐记录匹配；此表不表示许可已批准。当前优先顺序是：先做不含测试文本的版本、许可与 sense mapping 元数据审计，再预注册统一 benchmark 子集和一次性评分；FEWS 保持为单独的后续长尾验证，不混入主结果或主开发集。
 
+#### Sense key 映射与来源隔离的执行口径
+
+Raganato 官方页面说明五个标准数据集的标注属于 WordNet 3.0 词义库存。当前代码已有 `audit_wn30_oewn_sense_key_crosswalk._load_oewn_sense_keys()`，可根据固定 OEWN entry archive 对 gold sense key 建立精确映射；正式评估前须逐资源报告零映射、唯一映射、多映射、目标不在冻结图、POS/lemma 不匹配和候选未覆盖，不能把“存在同名 key”直接当作映射通过。映射文件及 OEWN archive 版本必须固定并摘要化。
+
+Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwordnet/semcor) 保留原始 `wn30_key`，另提供随 OEWN 发行更新的 `oewn_key`；仓库说明该资源来源于 Princeton WordNet，并在 CC BY 4.0 下继续维护，底层仍带 Princeton WordNet License 署名条件。[格式与对齐说明](https://github.com/globalwordnet/semcor/blob/main/README.md) · [许可证](https://github.com/globalwordnet/semcor/blob/main/LICENSE.md)。这使它适合作为**sense-key 映射交叉核查和同源文档切分工具**，但它仍是 SemCor/Brown 材料，不能充当独立来源验证，也不能将更新后的标签视为独立标注者 gold。任何使用前还须固定仓库 commit、OEWN release、许可署名、数据变更范围，并核查与已有训练/开发样本及模型训练材料的文本重叠。
+
+执行顺序固定为：先不接触 benchmark 测试句/标签，完成候选资源的许可与模型暴露审查、sense-key 映射覆盖元数据审计；再锁定与已用样本及训练文档不相交的开发方案、候选生成、预算、序列化、配置和分析脚本；最后才对完整保留 benchmark 执行一次评分。若逐子集许可无法核验，或映射覆盖不足且偏向特定词性/义项，则不运行确认性评估，报告缺失项与分母。
+
 ## 6. 执行阶段与 PR gate
 
 | 阶段 | 交付物 | 通过标准 |
 | --- | --- | --- |
-| T04-2a：本设计审查 | 本协议、来源/许可选择、候选与切分清单 | 研究负责人审阅来源和估计对象；测试集确实未读 |
-| T04-2b：只读输入审计 | B/C/D 节点清单/token IDs 等价报告、结构 mask 可视化小样本、完整候选覆盖和资源估算 | 无 gold 候选泄漏；B/C/D 文本完全相同；D 保留分支身份；结构对称性成立 |
+| T04-2a：本设计审查 | 本协议、来源/许可选择、候选与切分清单 | 研究负责人审阅来源和估计对象；测试集确实未读；具体子集许可有来源证据 |
+| T04-2b：只读输入审计 | B/C/D 节点清单/token IDs 等价报告、结构 mask 可视化小样本、完整候选覆盖和资源估算、WN3.0 sense-key 映射分母 | 无 gold 候选泄漏；B/C/D 文本完全相同；D 保留分支身份；结构对称性成立；逐资源映射覆盖和多映射均有报告 |
 | T04-2c：训练代码 | 共享结构聚合器与 A/B/C/D 接口、固定配置、训练/推断共用输入构造 | 合成检查通过；参数数目、结构扰动、checkpoint 哈希及资源记录可核验 |
 | T04-3：冻结评估 | 新 dev 的预定种子结果、配对区间、覆盖与错误分析 | 代码/config/source/hash 在评分前锁定；测试标签未访问；一次性评分 |
 | T04-4：外部确认 | 独立 benchmark/FEWS 映射审计与一次评估 | 权限/跨资源映射通过，覆盖充分且与开发来源隔离 |
 
-当前完成了已有代码审计、设计草案和 text-free 关系 schema synthetic check；真实图只读输入审计尚未完成。此文档不授权读取保留测试集，不运行训练、不生成性能结论。工程上的 Conda/XPU 已能运行 PyTorch，但下一轮是否适合训练还取决于图大小、共享内存峰值、批次化和数据许可；先以稀疏结构存储估算显存/耗时，再用训练分区做冒烟。
+当前已完成旧序列化实现审查、设计草案和 text-free 关系 schema synthetic check。历史 A–D 与 corrected-context 三种子训练确实已在本机 `emotion_xpu` Conda 环境运行，但旧 C/D 输入没有隔离纯 pairwise 与完整分支效应，且同一 SemCor dev 已被反复使用；这些成绩只能作为探索结果，不能当作本设计的验证。新结构编码器、真实图输入等价审计、逐子集许可和新独立评测仍未完成。此文档不授权读取保留测试集。当前 tiny-BERT 能在 Intel Arc XPU 运行，不代表更大的结构输入模型已经通过显存/算力预算评估。
 
 ## 7. 相关研究与本项目的增量
 
