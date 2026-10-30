@@ -1,0 +1,7 @@
+# Selected-witness reuse: degree-preserving controls
+
+Research question: under a fixed root set and bounded expansion, how does reuse of states in the selected-witness projection compare with algorithmically rewired graphs having the same directed in- and out-degrees? This is computational graph analysis, not a claim about human cognition or semantic validity.
+
+Use the frozen witness file and existing 3,000 evaluation roots, depth 4, and a single root order with seed 17. Run capacities 0, 256 and 4096, counting computed `(node, remaining_depth)` states and percentage avoided relative to no caching within the same graph. Generate five controls independently from the original graph, seeds 101–105, each with three edge-swap attempts per original edge. Swaps preserve every node's in- and out-degree, avoid duplicate edges and newly introduced self-loops, and leave existing self-loops in place. Audit the number of accepted swaps and retained original edges. Hash input files, keep data local, and compare controls as whole graphs rather than treating their nodes as independent observations.
+
+The randomized graphs have no semantic interpretation. This limited edge-swap walk does not guarantee uniform sampling or mixing; five controls from one graph are not independent replications of a language or population. The procedure does not preserve parts of speech, semantic roles, clause meaning, or correlations beyond degrees. Differences cannot identify a causal mechanism or establish cognitive learning.
