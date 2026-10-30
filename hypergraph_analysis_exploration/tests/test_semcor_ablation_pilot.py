@@ -18,3 +18,12 @@ class SemcorAblationTests(unittest.TestCase):
         texts, status = make_texts(row, [['x']], {'x': 'one'}, list, 1)
         self.assertIsNone(texts)
         self.assertEqual(status, 'base_over_budget')
+
+    def test_compact_representation_retains_common_dependencies(self):
+        row = {'synset_id': 'h', 'definition': 'target'}
+        texts, status = make_texts(row, [['x'], ['y']], {'x': 'one', 'y': 'two'}, list, 1000, 'compact')
+        values = {key: json.loads(text) for key, text in texts.items()}
+        self.assertEqual(status, 'all')
+        self.assertEqual(values['B']['deps'], values['C']['deps'])
+        self.assertEqual(values['B']['deps'], values['D']['deps'])
+        self.assertEqual(len(values['D']['branches']), 2)

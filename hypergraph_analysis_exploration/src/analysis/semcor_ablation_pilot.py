@@ -14,19 +14,23 @@ from src.analysis.semcor_train_mapping import digest, partition
 from src.analysis.semcor_dev_pilot import build_index, mapped_target, observed_key, sentences
 from src.analysis.sense_representation_pilot import build
 from src.analysis.sense_budget_packing import pack
+from src.analysis.compact_sense_budget import pack as compact_pack, representations as compact_representations
 
 
 def compact(value):
     return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(',', ':'))
 
 
-def make_texts(row, clauses, definitions, encode, budget):
+def make_texts(row, clauses, definitions, encode, budget, serialization='long'):
     item = build(row['synset_id'], row['definition'], clauses, definitions)
-    selected = pack(item, encode, budget)
+    if serialization not in {'long', 'compact'}:
+        raise ValueError('unsupported serialization')
+    selected = (compact_pack if serialization == 'compact' else pack)(item, encode, budget)
     if selected['status'] == 'base_over_budget':
         return None, selected['status']
     selected_branches = [clauses[i] for i in selected['selected_indices']]
-    rebuilt = build(row['synset_id'], row['definition'], selected_branches, definitions)
+    rebuilt = (compact_representations(item, selected_branches)[0] if serialization == 'compact'
+               else build(row['synset_id'], row['definition'], selected_branches, definitions))
     return {version: compact(rebuilt[version]) for version in 'ABCD'}, selected['status']
 
 
@@ -37,6 +41,7 @@ def main():
     parser.add_argument('--bundle', type=Path, required=True)
     parser.add_argument('--vocab', type=Path, required=True)
     parser.add_argument('--vocab-revision', required=True)
+    parser.add_argument('--serialization', choices=('long', 'compact'), default='long')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     import nltk
@@ -70,7 +75,7 @@ def main():
         for candidate_id, row in candidates.items():
             if candidate_id not in rules:
                 return None
-            texts, status = make_texts(row, rules[candidate_id], definitions, encode, 256)
+            texts, status = make_texts(row, rules[candidate_id], definitions, encode, 256, args.serialization)
             if texts is None:
                 return None
             statuses[status] += 1
@@ -133,7 +138,7 @@ def main():
     denominator, covered = counts['eligible_tokens'], counts['covered']
     inputs = {'semcor.zip': args.nltk_data / 'corpora/semcor.zip', 'wordnet.zip': args.nltk_data / 'corpora/wordnet.zip',
               'oewn_entries.zip': args.oewn_zip, 'nodes.tsv': nodes_file, 'hypergraph_rules.jsonl': rules_file, 'vocab.txt': args.vocab}
-    result = {'split_seed': 17, 'budget_candidate_tokens': 256, 'counts': dict(counts),
+    result = {'split_seed': 17, 'budget_candidate_tokens': 256, 'serialization': args.serialization, 'counts': dict(counts),
               'slices': {key: dict(val) for key, val in sorted(slices.items())},
               'accuracy_covered': {v: counts[v + '_correct'] / covered if covered else None for v in 'ABCD'},
               'accuracy_all_eligible': {v: counts[v + '_correct'] / denominator if denominator else None for v in 'ABCD'},
