@@ -279,9 +279,19 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 | Senseval-2 English all-words | Senseval-3 官方历史页的任务表可定位 all-words 测试数据；Raganato 框架将该子集统一用于 WN3.0 评测 | 页面未呈现足以判断缓存、修改或再分发的明确条款 | 权利 unresolved；不得因下载按钮推断开放许可 |
 | Senseval-3 English all-words | Senseval-3 官方历史页列出 English all-words test data 下载项 | 当前检索到的任务/数据页没有明确授权范围 | 权利 unresolved；尚未确认是否允许本地研究缓存 |
 | SemEval-2007 Task 17 subtask 3 | ACL Anthology 确认 Task 17 包含 English all-words；Raganato 页面提供统一版本 | 检索到的“需签使用许可”官方说明实际属于 SemEval-2007 Task 9，不适用于此处；Task 17 的具体数据条款尚未找到 | 权利 unresolved；Task 9 条款不得移植 |
-| SemEval-2013 Task 12 English | 原任务是 multilingual WSD；SapienzaNLP 更新仓库说明，英语 WSD 数据已由 Raganato et al. 收集 | SapienzaNLP 仓库的 CC BY-NC 4.0 仅能证明其明确发布的数据/代码条款；其 README 明确该仓库只含法、德、意、西语更新数据，不含英语 | 不能用该仓库许可覆盖 Raganato 英语子集；权利 unresolved |
+| SemEval-2013 Task 12 English | 原任务是 multilingual WSD；SapienzaNLP 更新仓库说明，英语 WSD 数据已由 Raganato et al. 收集 | SapienzaNLP 仓库的 README 的许可全称与括号缩写不一致，且所列许可仅适用于明确发布内容；其 README 明确该仓库只含法、德、意、西语更新数据，不含英语 | 不能用该仓库许可覆盖 Raganato 英语子集；权利 unresolved |
 | SemEval-2015 Task 13 English | 官方 Task 13 页面列出 trial/test 数据和组织者；Raganato 框架收录英语 all-words 部分 | 官方任务页页脚保留版权，但没有给出可复用数据许可；SapienzaNLP 更新仓库同样排除英语子集 | 权利 unresolved；需任务组织者/原始发布方确认 |
 
 这次检索没有任何一个英语子集达到“许可可确认、可缓存用途明确、可公开再分发明确”的完整 gate。SemEval 官方 FAQ 也说明旧任务数据由任务组织者分发，而不是由 SemEval 统一授权；因此 Raganato 的统一打包和公开下载只解决技术访问，不自动解决原始数据权利。NLTK 的 `senseval` 包许可摘要是另一个独立分发包，不能仅凭同名就认定为 Raganato English all-words 文件的许可。当前不打开测试资源；下一步优先向各原任务发布方核对书面条款，并单独查模型预训练/历史暴露及项目内既往访问记录。若始终无法确认任何英语子集权利，应更换有明确许可和可追溯身份的评测来源，或将外部测试标为不可执行，不从可下载性倒推授权。
 
 依据：[Raganato evaluation data](https://lcl.uniroma1.it/wsdeval/evaluation-data)、[Senseval-3 官方数据页](https://web.eecs.umich.edu/~mihalcea/senseval/senseval3/data.html)、[SemEval 官方 FAQ](https://semeval.github.io/faq.html)、[SemEval-2015 Task 13 官方数据页](https://alt.qcri.org/semeval2015/task13/index.php?id=data-and-tools)、[SapienzaNLP multilingual WSD release 说明及许可](https://github.com/SapienzaNLP/mwsd-datasets)、[NLTK 数据许可摘要（仅作同名包边界核对）](https://github.com/nltk/nltk_data/blob/gh-pages/DATASET-LICENSES.md)、[SemEval-2007 Task 17 论文记录](https://aclanthology.org/S07-1016/)。其中“当前页面未找到明确许可”表示本轮公开页面审查未能确认，不等于断言不存在其他许可文件或法律授权。
+
+#### 固定 BERT-tiny 检查点的预训练暴露审计（2026-10-31）
+
+本项目本机缓存的模型 revision 为 `prajjwal1/bert-tiny@6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837`，本地 `config.json`、`pytorch_model.bin`、`vocab.txt` SHA-256 与既有训练记录一致。该 revision 的 Hugging Face 模型卡说明：这是从 Google BERT 仓库 TensorFlow checkpoint 转换的 PyTorch 预训练模型，属于小型 BERT 变体，配置为 2 层、hidden size 128；模型卡引用 2019 compact-BERT 论文和 2021 NLI 论文，但没有列出此 checkpoint 的完整语料清单、数据快照、训练日志或逐文档去重结果。模型卡标签含 MNLI/NLI，标签本身不能证明或排除该 checkpoint 做过相应监督微调；因此下游任务暴露也记为 **未核实**。
+
+原始 BERT 论文明确报告其预训练语料使用 BooksCorpus 与英文 Wikipedia。由于本 checkpoint 指向 Google BERT 系列权重，但现有模型卡未给出足以闭合“本 revision → 精确预训练 corpus/version → 是否含评测原文”的来源链，这只能形成潜在文本重叠风险，不能当成已证明的 benchmark 污染，也不能当成已排除污染。测试文本目前仍未打开，故不能做逐文档 overlap scan。应分别记录：无标签预训练文本是否重叠、WSD 监督标签是否暴露、模型是否在对应测试任务上微调；三者不可混为一项。当前 BERT-tiny 结果继续仅作为本机工程基线，不能单独支持确认性独立 benchmark 结论或“现代强模型”对照。
+
+后续对照模型选择需在不读测试样本前登记模型名与不可变 revision、模型卡/论文、预训练与指令微调来源、公开 WSD 监督数据、发布日期、已知评测暴露，以及不能核实的项目；测试仅在许可/来源 gate 通过后做一次性评分。若新模型的语料不可审计，应将其标为 exposure-unknown 的比较对象并限制结论；不能以“开源”或“模型卡没提到测试集”声称无泄漏。
+
+依据：[固定 revision 的模型卡](https://huggingface.co/prajjwal1/bert-tiny/blob/6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837/README.md)、[Google BERT 小模型发布页](https://github.com/google-research/bert)、[BERT 原论文](https://arxiv.org/abs/1810.04805)、[compact-BERT 论文](https://arxiv.org/abs/1908.08962)。原论文的 corpus 事实来自标准 BERT 模型，针对本 revision 的映射属于风险推断，须以模型权重来源记录进一步核实。
