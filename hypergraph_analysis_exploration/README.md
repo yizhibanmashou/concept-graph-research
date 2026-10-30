@@ -4,6 +4,8 @@
 
 ## 研究方向
 
+五条研究线的总目标、当前证据、阶段门槛、协作分工与 PR 工作单见[研究总控路线图](docs/research_program_roadmap_2026-10-30.md)。路线图强调结构、语义、模型表现和认知证据分开判定，并按总控、T02 介词结构、T04 NLP 的顺序启动；其余支线按门槛进入。
+
 - **依赖超图与概念组合**：`src/analysis/` 与 `src/logic/` 是现有结构审计和形式验证代码；`outputs/` 保存实验结果；[研究计划](docs/research_tracks_2026-10-28.md)讨论介词和来源控制。介词 full-Horn 删除敏感性分析可用 `python -m src.analysis.preposition_horn_relaxation` 复跑，结果写到根 `report/`。
 
 义项 A–D 输入草案可通过 `python -m src.analysis.sense_representation_audit --input outputs/sense_representation_sample_2026-10-29.json --out outputs/sense_audit_new.json` 检查共同目标、释义、依赖清单、成对边及联合分支。输入须先由 `sense_representation_pilot` 生成；输出须为新文件。JSON 字符数仅是序列化长度的描述，不是模型 token 数，不能证明相同输入预算或语义正确。
