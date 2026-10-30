@@ -16,7 +16,7 @@
 
 ### 可复核的项目状态
 
-- 本地分支本轮起点为 `codex/t02-source-evidence-audit`，相对 `origin/main` 有 5 个提交，包含 T02 空源分支校验与来源证据审计。目标分支远端 HEAD：`e83f870af9b605dab981025574b0d4f5dcf6f2d7`。
+- 本地分支本轮起点为 `codex/t02-source-evidence-audit`，相对 `origin/main` 有 6 个提交，包含 T02 空源分支校验、来源证据审计与标签权利日志对账。目标分支远端 HEAD：`9220354d36fc70836d99b1ec93ccf23725829509`。
 - T02 审计分支未创建 PR：GitHub PR 工具调用返回 `Unknown tool`。可以继续提交并推送；不得将对比页或已推送分支描述成 PR。
 - T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `2bb56c57f70a3ab84cfcec7f69649b42704fac8f`；这两个专题工作目前不在本队列分支中。
 - T04 最近几条候选打包/文档簇/结构输入分支的 PR 状态未能通过当前 GitHub MCP 连接核实；旧线程也记有 `Unknown tool`。在 PR 面板或有效 API 可用前，队列只记远端分支和 commit，不声称 PR 已创建或 CI 已通过。
@@ -53,7 +53,7 @@
 **可检验问题：** 冻结的 alternative/definition-WSD 子集中，来源 evidence 覆盖到什么程度，哪些原始标签可继续做上游 release/family 对齐？
 
 - 输入范围固定为索引中的 5,625 条记录；只做来源元数据聚合，不导出 gloss、释义、sense ID、路径、locator、URL 或人工标签。
-- 既有审计：3,444 条记录带 evidence，3,645 evidence item，82 个精确自报标签；1,512 条无 provenance object，669 条无 evidence list；evidence item 无显式 license 字段。
+- 既有审计：3,444 条记录带 evidence，3,645 evidence item，82 个精确自报标签；1,512 条无 provenance object，669 条无 evidence list；evidence item 无显式 license 字段。新建保守标签 join 后，原样匹配 6/82 标签、143/3,645 项；仅规范大小写、下划线和空格后唯一匹配 17/82 标签、2,395/3,645 项，无歧义；4 个匹配标签的日志有状态字段（2,270 项），另 13 个没有状态；65 个标签/1,250 项未匹配，主要剩余缺口是 Kaikki/Wiktextract 的 1,082 项。该工作是日志可定位性，不是清权。复算脚本、2 项合成测试和协议已提交 `9220354` 并推送；T02 目标测试共 10 项通过。
 - 继续工作：将已有 Phase 24/25/50–52/124–127 的 source-rights 日志与本次 T02 audit 的原始 exact label 对齐；明确这是标签交叉表而非清权。对 OLS provider 标签按 ontology ID 区分，保留 `unresolved`、source version 不确定和上游 payload 未绑定状态；优先核对高频的 GCIDE、Kaikki/Wiktextract、MeSH 与 OLS 记录。
 - PR 验收：输入 index/payload 摘要、聚合计数、精确标签 join/miss 分母、官方证据链接、版本绑定状态与失败案例；不提交源文本/许可受限数据。必须跑合成测试和 scoped audit，验证输出不含 forbidden fields。
 
