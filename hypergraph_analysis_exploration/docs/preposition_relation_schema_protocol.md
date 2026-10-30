@@ -102,7 +102,7 @@
 ## 7. PR 分解
 
 1. **T02-1（本 PR）**：共享协议与字段 schema；仅文档，不处理真实图内容。
-2. **T02-2**：纯合成记录 validator 和只读转换器，证明 source/branch/occurrence 引用、条件和 unresolved 约束；不生成真实审阅任务包。
+2. **T02-2（本 PR）**：`src/analysis/preposition_relation_records.py` 提供纯记录 validator 和只读四条件转换；合成测试覆盖分支/occurrence 引用、稳定次序、类型化关系证据与 unresolved 约束。不读真实 OEWN，不生成审阅任务包，也不从介词字符串推断语义关系。
 3. **T02-3**：在许可审核通过后生成正式盲审抽样框和访问隔离流程；试标 40 条单独保存。
 4. **T02-4**：只有独立双标、抽样计划和来源隔离冻结后，才做定义保真估计与结构结果并列分析。
 
