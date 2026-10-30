@@ -33,6 +33,8 @@ T05 不能把以下指标混成一个“概念习得年龄”：
 
 数据页指向版本化 Redivis 当前 release，要求记录数据集版本；当前 contributors 页面注明其所列 datasets 表构建于 2026-10-20。许可应按选中数据集的 `license` 字段核查并按该数据集的相关论文引用。数据页还注明 Elison English (American) WG 当前暂不出现在 word-level/常规导出视图，因其 item 导入问题仍在处理，但数据仍包含于 Redivis；因此元数据盘点必须区别“未显示/导出”与“数据不存在”，不可据此把该问卷当作覆盖为零。此审查只读取公开页面，没有下载或导出响应数据，也未登录 Redivis。
 
+官方 [datapage 源码仓库](https://github.com/langcog/wordbank-datapage)的 schema 文档把核心表粒度说明为：`instruments` = language × form，`datasets` = contributed dataset（含 `license`），`administrations` = child × test，`items` = item × instrument，`item_responses` = administration × item。官网当前 contributors 构建从 `datasets` 表展示 language、form、dataset name、contributor、citation、license、administration 数；当前页面不在静态 HTML 中列出全部行。源码说明这些核心表从 Redivis 加载，程序化取表需要 Redivis API token。因此本轮可以确认字段和获取路径，但没有逐数据集许可、英语 form 及 n 的清单；没有用户授权的 Redivis 访问时不得从本机凭证推断权限。后续只需获得官方公开页面可见的元数据或经用户授权的只读访问即可完成这张清单，不需要提取 child-by-word 响应表。
+
 ## 3. 路线选择：B+C，不把词形结果伪装成义项结果
 
 ### B：可计算的外部预测
