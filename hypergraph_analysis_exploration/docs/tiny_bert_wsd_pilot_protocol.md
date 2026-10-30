@@ -21,6 +21,26 @@ The pilot takes the first 32 WordPieces of `target: ... context: ...` rather tha
 
 The trainer accepts both archived pilot rows (no candidate manifest; every stored candidate is scoreable) and the newer full-candidate schema (explicit `candidate_ids` and `scorable_candidate_ids`; label `-1` means the gold candidate could not be scored). The data-only `batchify_rows()` helper is tested independently of PyTorch/XPU so that the old-schema fallback, the new-schema unscorable case, and a candidate-count mismatch are covered without loading corpus rows or training. Five trainer tests and two candidate-data tests pass, and both scripts compile. This is an input compatibility check only: it supplies no evidence about WSD performance or structure benefit. The fix and tests are on `codex/t04-full-candidate-packing` (commit `b7b42b6`).
 
+# Fresh-document XPU run already on disk (2026-10-31)
+
+The machine-local artifacts `outputs/tiny_bert_fresh_doc_xpu_seed{17,23,31}_20261031/result.json` record completed A/B/C/D runs on the document-disjoint SemCor train/dev preparation in `outputs/tiny_bert_fresh_doc_dev_20261031/`. This is an audit of existing artifacts, not a new training run. Rechecking the files confirms the recorded SHA-256 values for `train.json`, `dev.json`, and `metadata.json` match the run metadata. Each seed trained all four conditions on 379 trainable targets; the selected dev set has 120 targets, of which 111 have an encodable gold candidate. Across the three repeated evaluations, correct counts are A/B/C/D = 80/82/90/82 out of 333 target-seed evaluations (mean accuracy 24.02/24.62/27.03/24.62% over scorable targets); D−B is 0 percentage points in the pooled descriptive count. This is not 333 independent targets: the same 111 dev targets are reused across seeds. It remains exploratory and cannot establish a reliable condition ranking or a structure benefit.
+
+The run metadata records candidate budget 222 and joint budget 256, a fixed BERT-tiny initialization, one epoch, batch size 4, and learning rate 2e-5. Coverage is asymmetric at the gold-candidate level: 379/400 train and 111/120 dev are scoreable; all three seeds share the same recorded train/dev/metadata hashes. The result JSON explicitly says development data were used in prior design and no test was read. Do not tune against this dev again. Before a new performance experiment, fix the C condition so it actually encodes pairwise topology distinct from B, equalize usable token/information budgets, and obtain a new independent evaluation source. The full local package/model paths and checkpoints are ignored and must stay local; no corpus, model weights, or predictions belong in Git.
+
+The active environment is a Conda environment named `emotion_xpu`, not the default `base` interpreter. On this machine it reports Python 3.11.15, PyTorch `2.12.0+xpu`, Transformers `5.9.0`, and an available Intel Arc XPU. To check the environment without GUI use:
+
+```powershell
+conda run -n emotion_xpu python -c "import torch, transformers; print(torch.__version__, transformers.__version__, torch.xpu.is_available(), torch.xpu.get_device_name(0))"
+```
+
+No CUDA installation is required for this XPU setup. A training invocation additionally requires the prepared `train.json`/`dev.json`/`metadata.json` directory and a local BERT model directory with `config.json`, `vocab.txt`, and `pytorch_model.bin`; the trainer uses local files only. Example shape (replace `<LOCAL_MODEL_DIR>` and choose a new, nonexistent output directory):
+
+```powershell
+conda run -n emotion_xpu python -m src.analysis.tiny_bert_wsd_train --data outputs/tiny_bert_fresh_doc_dev_20261031 --model <LOCAL_MODEL_DIR> --out outputs/tiny_bert_rerun_seed17 --device xpu --seed 17
+```
+
+Do not rerun the same dev experiment merely to verify installation; the environment and an actual XPU tensor operation have already been checked, and the prior model runs are present locally.
+
 # Post-hoc target-centered window
 
 Reconstruct only the previously covered train and development sample IDs, use XML offsets to locate the annotated sentence occurrence, and keep it inside a 32-WordPiece prefix-plus-sentence budget. Preserve the original target-form prefix, all sample IDs, labels, candidate order and candidate token tails across A–D; reject a sample if the target cannot fit or if the old prepared input cannot be reconstructed. Candidate and joint budgets do not change. The data builder records original prepared hashes and per-split target coverage. Use the existing tiny BERT trainer with the same settings to compare windows, and identify seeds added after observing results as post-hoc. The development set is reused and cannot establish a final performance claim; held-out documents are not read.
