@@ -115,6 +115,17 @@ batch size 32、按节点 ID 顺序动态 padding、2 个 warmup batch 的两次
 
 来源核查依据：Raganato et al. 的[统一 WSD 论文](https://aclanthology.org/E17-1010/)；[FEWS 官方页面](https://nlp.cs.washington.edu/fews/)、[FEWS datasheet](https://nlp.cs.washington.edu/fews/datasheet.pdf)和[数据创建仓库](https://github.com/facebookresearch/fews)。这里的“潜在重叠”是由两者都源自 Wiktionary 推出的风险判断，尚未做逐记录匹配；此表不表示许可已批准。当前优先顺序是：先做不含测试文本的版本、许可与 sense mapping 元数据审计，再预注册统一 benchmark 子集和一次性评分；FEWS 保持为单独的后续长尾验证，不混入主结果或主开发集。
 
+#### 2026-10-31 FEWS 来源隔离与许可核验补充
+
+本次只核对 FEWS 官方网页、datasheet 与创建仓库中的说明，没有下载或打开数据样本及标签：
+
+- 官方资料报告 FEWS 共 121,459 个样本、71,391 个 sense types；dev 与 test 各 10,000 条，并各分 few-shot/zero-shot 两个 5,000 条部分。FEWS 来自 Wiktionary 定义和例句，创建代码注明使用 2020-01-01 的 Wiktionary dump。因此它可作为将来低样本/零样本义项压力测试，但与图中 Wiktionary-derived 节点属于同一来源家族；在完成 sense-level 和文本级重叠审计前，不能把它描述成独立词典来源验证。
+- FEWS 标签是 Wiktionary sense IDs（例如 `word.noun.2`），不是 WordNet 3.0 sense keys。OEWN 映射若缺失或一对多，必须单列并报告 coverage；禁止用 gloss 相似度把 gold 自动“修复”为某个候选。测试集不得参与候选规则、映射规则、截断预算或超参数选择。
+- FEWS 数据包 README 明确警告 `raw/quotations` 汇集了含 test split 样本的 quotation，不应用于训练。任何只用训练分区的流水线都不能从 raw 聚合文件取句子；应只读取有明确 split 的 train 文件，并在代码里拒绝 raw/test 路径。
+- 官方网页提供下载，但本次查看的 datasheet 和 dataset README 没有给出可独立确认的数据包许可条款。GitHub 仓库的 CC BY-NC 4.0 说明针对仓库代码；不能据此推定 FEWS 数据、原始 quotation 或 Wiktionary 内容的分发权。未取得数据包级授权依据前，不下载、提交或公开重分发数据，也不把许可门标为通过。
+
+来源依据：[FEWS 官方页面](https://nlp.cs.washington.edu/fews/)、[FEWS datasheet](https://nlp.cs.washington.edu/fews/datasheet.pdf)、[dataset README](https://github.com/facebookresearch/fews/blob/main/dataset_README.txt)、[FEWS 创建代码仓库说明与代码许可](https://github.com/facebookresearch/fews)。本段记录的是来源及风险门槛，不是 FEWS 实验结果。
+
 #### Sense key 映射与来源隔离的执行口径
 
 Raganato 官方页面说明五个标准数据集的标注属于 WordNet 3.0 词义库存。当前代码已有 `audit_wn30_oewn_sense_key_crosswalk._load_oewn_sense_keys()`，可根据固定 OEWN entry archive 对 gold sense key 建立精确映射；正式评估前须逐资源报告零映射、唯一映射、多映射、目标不在冻结图、POS/lemma 不匹配和候选未覆盖，不能把“存在同名 key”直接当作映射通过。映射文件及 OEWN archive 版本必须固定并摘要化。
