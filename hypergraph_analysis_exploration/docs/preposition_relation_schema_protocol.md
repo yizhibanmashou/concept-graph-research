@@ -121,3 +121,25 @@ python -m src.analysis.preposition_schema_dry_run --sample outputs/preposition_p
 ```
 
 输入指纹：`nodes.tsv` `9bde0367d0ba1f62f7f4810b05693a82f1dcb32767c2fe7f0e88055991e23bd1`；`hypergraph_rules.jsonl` `c07dd37342ab399244a091501a21ada9e2f9f706efb1dc34d6b8ebc16a8a0a53`；抽样文件 `structure_sampling_2026-10-29.json` `82f6099c32bd253aa679aa5f9e4507a64c430e911d229f3c3e73e4ee9582cd08`。pilot 结果只打印在本机终端；不将释义文本或原始样本 JSON 加入仓库。
+
+## 9. 冻结全图 `prep_phrase` 敏感性结构审计（2026-10-31）
+
+用户确定的主口径是删除 `pos=prep`；`pos=prep_phrase` 单列敏感性。为补齐后者，新增只读脚本 `src/analysis/preposition_full_graph_sensitivity.py`，在冻结图上并行比较仅删 `prep`、仅删 `prep_phrase`、两类都删三种派生视图。所有视图都从原始 rules 独立构造，不写回 OEWN；输出仅含聚合计数和输入摘要，不含释义或逐目标记录。
+
+| 删除范围 | 被删除 occurrence | 受影响目标 | 新空分支（目标数） | 非空碰撞 excess（目标数） | 非空签名减少* |
+|---|---:|---:|---:|---:|---:|
+| `prep`（主口径） | 207,753 | 89,058 | 623（512） | 633（505） | 1,256 |
+| `prep_phrase`（单独敏感性） | 347 | 286 | 12（11） | 1（1） | 13 |
+| `prep` + `prep_phrase` | 208,100 | 89,115 | 638（524） | 634（506） | 1,272 |
+
+冻结图共 110,425 个目标、154,206 条分支，源图没有空分支。仅删 `prep_phrase` 涉及 286 个目标；并入主口径后，相对 `prep` 单删新增受影响目标 57 个、新空分支 15 条和碰撞 excess 1 条。因而在这个冻结版本与 occurrence/POS 口径下，`prep_phrase` 对全图空分支和非空碰撞计数的增量较小，但不是零。所有数字描述结构投影，不说明 `prep_phrase` 语义上可删，也不表示其低频表示没有局部重要性。
+
+脚本按每目标的依赖 ID 集合签名计碰撞；原始 AND 顺序和重复 occurrence 不参与碰撞定义。新空分支与非空签名碰撞分开统计；“非空签名减少”还包含原非空分支因删除变空的签名损失，不能与碰撞 excess 混为一谈。三种干预是同一张图上的描述性变换，不是随机因果效应或定义保真标签。
+
+复现（在 `hypergraph_analysis_exploration/` 下；结果写入 ignored `outputs/`）：
+
+```powershell
+python src/analysis/preposition_full_graph_sensitivity.py --out outputs/preposition_full_graph_sensitivity_20261031.json
+```
+
+输入 SHA-256：`nodes.tsv` `9bde0367d0ba1f62f7f4810b05693a82f1dcb32767c2fe7f0e88055991e23bd1`；`hypergraph_rules.jsonl` `c07dd37342ab399244a091501a21ada9e2f9f706efb1dc34d6b8ebc16a8a0a53`。全图主口径结果与已有 prep 删除报告中的 623 个新空分支、633 个碰撞 excess 一致；本节补充了 `prep_phrase` 单独及联合敏感性数据。
