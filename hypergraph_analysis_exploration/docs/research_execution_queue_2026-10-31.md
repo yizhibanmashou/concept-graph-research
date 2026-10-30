@@ -16,9 +16,8 @@
 
 ### 可复核的项目状态
 
-- 本地分支本轮起点为 `codex/t02-source-evidence-audit`，相对 `origin/main` 有 6 个提交，包含 T02 空源分支校验、来源证据审计与标签权利日志对账。目标分支远端 HEAD：`9220354d36fc70836d99b1ec93ccf23725829509`。
-- T02 审计分支未创建 PR：GitHub PR 工具调用返回 `Unknown tool`。可以继续提交并推送；不得将对比页或已推送分支描述成 PR。
-- 本队列分支 `codex/research-execution-queue-20261031` 最新提交 `a56c0ba` 已推送；本轮 PR 搜索/创建调用均返回 `Unknown tool`，因此 PR 尚未创建。分支已具备可审阅文档，不把比较页称作 PR。
+- 队列分支本轮检查 HEAD 为 `aa60876`；T02 专项分支 `codex/t02-source-evidence-audit` 已推进至 `abe0c1e` 并推送。T02 审计分支仍未创建 PR：GitHub PR 工具调用返回 `Unknown tool`。分支推送不等于 PR 或 CI 完成。
+- 本队列分支 `codex/research-execution-queue-20261031` 起始提交 `aa60876` 已推送；本轮准备更新后继续推送。PR 搜索/创建调用此前均返回 `Unknown tool`，因此 PR 尚未创建。分支已具备可审阅文档，不把比较页称作 PR。
 - T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `2bb56c57f70a3ab84cfcec7f69649b42704fac8f`；这两个专题工作目前不在本队列分支中。
 - T04 最近几条候选打包/文档簇/结构输入分支的 PR 状态未能通过当前 GitHub MCP 连接核实；旧线程也记有 `Unknown tool`。在 PR 面板或有效 API 可用前，队列只记远端分支和 commit，不声称 PR 已创建或 CI 已通过。
 - 本机 Conda 环境 `emotion_xpu`：Python 3.11.15、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Accelerate `1.13.0`、Intel Arc XPU。`conda run -n emotion_xpu` 下 `torch.xpu.is_available()` 为 `True`、设备数 1，64×64 运算成功；设备属性报告约 16.45 GB。新建 ignored 输出 `outputs/tiny_bert_wsd_smoke_conda_20261031` 做了 4 个 train 记录、仅 A 条件的一批 smoke（seed 17）：checkpoint 保存成功，loss 1.5541；脚本 `--smoke` 路径不读取 dev，也不产生 WSD 准确率。该烟测证明当前 Conda/XPU/权重/训练入口连通，不证明研究效果或更大模型的预算。此前 base 环境缺少 PyTorch 与 `emotion_xpu` 已有 PyTorch 并不矛盾；运行应使用 `conda activate emotion_xpu` 或 `conda run -n emotion_xpu ...`。
@@ -29,7 +28,7 @@
 | 线 | 可用的既有证据 | 当前不得声称 |
 |---|---|---|
 | T01 ToLogic | 六例有限枚举 455 候选；`want` 单一 `be without` 输入 130 候选。回放一致，属候选生成/接口工程。 | 未有经独立审定的语义 gold、公式正确率或泛化结果。外部 `without` 接口不是 85 个 basis 之一。 |
-| T02 介词结构 | 冻结图 `prep` 删除时 505 个目标出现非空分支碰撞、少 633 条不同分支，另有 623 条新空分支；`prep_phrase` 单独敏感性变化较小但非零。5,625 条 alternative/definition-WSD source record 中，3,444 条有 evidence、共 3,645 项和 82 个原始标签。 | 删除后的结构变化不是语义改善；标签不是已确认独立来源 family。license 字段缺失不等于无许可，已有来源网页也不等于冻结条目已清权。 |
+| T02 介词结构 | 冻结图 `prep` 删除时 505 个目标出现非空分支碰撞、少 633 条不同分支，另有 623 条新空分支；`prep_phrase` 单独敏感性变化较小但非零。5,625 条 alternative/definition-WSD source record 中，3,444 条有 evidence、共 3,645 项和 82 个原始标签。针对 Kaikki 两标签的 1,082 项复核发现所有 `source_version` 共用一个 `raw-sha256` 指纹，但与定义文本哈希 0/1,082 相等。 | 删除后的结构变化不是语义改善；标签不是已确认独立来源 family。哈希对象和生成器未绑定，不能证明数据版本。license 字段缺失不等于无许可，已有来源网页也不等于冻结条目已清权。 |
 | T03 知径 | 现有 Demo 有搜索、义项选择、AND/OR 分支解释、循环提示、设置和历史恢复；已有自动测试与构建记录。 | 模拟/功能通过不证明真实用户理解或学习收益。未经批准不启动参与者研究或另建替代产品。 |
 | T04 NLP/WSD | 全候选生成和评分接口、XML occurrence 目标定位、文档隔离 dev 及 tiny-BERT A–D XPU 试点已有实现/记录。最近三种子正确数 A/B/C/D 为 80/82/90/82（分母 333 个目标×种子），配对 D−B=0；B/C/D 输入长度并不相等。 | 不是独立来源验证；旧 dev 已用于方案修订。结果不支持当前序列化配置下完整结构优于 B；也不能证伪结构的一般价值。不能继续在旧 dev 调参。 |
 | T05 认知发展 | 有概念缓存/复用模拟和 HTE 少量对齐先导；全图词形存在显著义项歧义。 | 计算复用不等于儿童学习；词形首见年代不等于概念诞生或个体首次理解。HTE 不可系统批量抓取，未经授权不扩展。 |
@@ -55,7 +54,7 @@
 
 - 输入范围固定为索引中的 5,625 条记录；只做来源元数据聚合，不导出 gloss、释义、sense ID、路径、locator、URL 或人工标签。
 - 既有审计：3,444 条记录带 evidence，3,645 evidence item，82 个精确自报标签；1,512 条无 provenance object，669 条无 evidence list；evidence item 无显式 license 字段。新建保守标签 join 后，原样匹配 6/82 标签、143/3,645 项；仅规范大小写、下划线和空格后唯一匹配 17/82 标签、2,395/3,645 项，无歧义；4 个匹配标签的日志有状态字段（2,270 项），另 13 个没有状态；65 个标签/1,250 项未匹配，主要剩余缺口是 Kaikki/Wiktextract 的 1,082 项。该工作是日志可定位性，不是清权。复算脚本、2 项合成测试和协议已提交 `9220354` 并推送；T02 目标测试共 10 项通过。
-- Kaikki/Wiktextract 标签定向审计已完成：5,625/5,625 个 payload 可解析；两类标签共 1,082 evidence items。所有条目虽有 `source_version`，值都不能被识别为日期、semver 或提交哈希；locator 不是 URL，ontology 字段缺失。`evidence_type` 为 `definition` 881 项、`related_definition` 201 项。新增脚本与两项合成隐私测试，六项来源审计目标测试通过；T02 分支 commit `03ca156` 已推送。官方 Kaikki 当前页面所列 dump 日期不能绑定本地这些条目，因此版本与许可仍 unresolved；这不是清权结论。
+- Kaikki/Wiktextract 标签定向审计已更新：5,625/5,625 个 payload 可解析；两类标签共 1,082 evidence items。所有 `source_version` 均呈 `raw-sha256:<64 hex>` 格式，两个标签各只有一个且彼此相同的指纹；与 1,082 条合法 `definition_text_sha256` 均不相同。故可确认字段是摘要形态，不能确认其哈希对象或上游版本绑定。locator 不是 URL，ontology 字段缺失；`evidence_type` 为 `definition` 881 项、`related_definition` 201 项。目标测试 13 项通过；T02 分支 commit `abe0c1e` 已推送。来源版本和许可仍 unresolved；这不是清权结论。
 - 继续工作：将已有 Phase 24/25/50–52/124–127 的 source-rights 日志与原始 exact label 对齐；明确这是标签交叉表而非清权。对 OLS provider 标签按 ontology ID 区分，保留 `unresolved` 和上游 payload 未绑定状态；优先核对 GCIDE、MeSH 与 OLS 记录，并为 Kaikki/Wiktextract 查找可验证的本地生成流水线或 snapshot checksum。若绑定证据不存在，明确记为无法消解，不强行赋 family 或许可状态。
 - PR 验收：输入 index/payload 摘要、聚合计数、精确标签 join/miss 分母、官方证据链接、版本绑定状态与失败案例；不提交源文本/许可受限数据。必须跑合成测试和 scoped audit，验证输出不含 forbidden fields。
 
@@ -127,6 +126,7 @@
 - 确认训练依赖位于 Conda 环境 `emotion_xpu` 而非默认 `base`；复核 Python/PyTorch/Transformers/Accelerate 版本、XPU 可用性和设备内存字段。另做 4 条 train 记录的 A-only smoke，checkpoint 成功保存；不读 dev、不报性能分数。新输出留在 ignored `outputs/tiny_bert_wsd_smoke_conda_20261031`。这不是重新训练 A–D，也不改变旧开发集已被重复使用、不可继续调参的研究 gate。
 - 将近期 T02、T04、T03、T05 和结构探索线程的结论压缩为当前队列，并同远端分支 HEAD 对照；单个线程中的计划和结果仅作线索，已存在的提交/文件为准。
 - 尝试创建 T02 PR；GitHub MCP 返回 `Unknown tool`，因此没有创建 PR，也没有声称 CI 运行。
+- T02 审计再扫 5,625/5,625 个 payload，并修正版本形态分类，核验共享摘要与定义文本哈希关系；限定输出只记录计数、不泄漏摘要。目标 T02 合成测试 13 项通过，`git diff --check` 通过；commit `abe0c1e` 已推送到 `codex/t02-source-evidence-audit`。PR 状态仍未创建/未核实。
 
 ## 4. 当晚退出交接标准
 
