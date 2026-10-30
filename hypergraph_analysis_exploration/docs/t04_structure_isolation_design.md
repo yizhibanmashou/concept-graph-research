@@ -259,3 +259,11 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 全库存另有 378 个 WordNet synset 仅部分成员 key 映射到单一 OEWN synset；116,714 个 synset 的所有成员 key 都指向同一个 OEWN synset。没有发现一个 WordNet sense key 在 OEWN 中对应多个目标。**这证明的是标识符覆盖，不是义项语义等价。**241 个 WordNet synset 的成员 key 分裂到多个 OEWN synset，benchmark 不能把 synset 层面强制压成一对一；应以 sense-key 逐例审计，并报告该 benchmark 自身的 exact/partial/multi/unmapped 分母。FEWS 的 Wiktionary sense IDs 不是 WN3 sense keys，因此 99.54% 不能解释成 FEWS 覆盖率，也没有解决 FEWS 来源家族、许可或泄漏门槛。
 
 复现命令（从子项目目录运行）：`python -m src.analysis.audit_wn30_oewn_sense_key_crosswalk --wordnet-tar tmp/phase256_inputs/WordNet-3.0.tar.gz --oewn-zip tmp/oewn-2025-plus-json.zip --output outputs/t04_wn30_oewn_sensekey_audit_20261031.json`。结果只保存在 ignored `outputs/`。本次新增 POS 分层输出，4 项 synthetic/unit tests 通过。下一门槛仍是：在数据许可和独立性 gate 通过后，对候选 benchmark 的实际标注身份做一次锁定 coverage audit；不得因库存级覆盖率高而推断测试覆盖或解封测试集。
+
+#### 评测候选源与许可门槛复核（2026-10-31）
+
+重新核对官方 [Raganato WSD Evaluation Framework](https://lcl.uniroma1.it/wsdeval/home) 及其 [Evaluation data 说明](https://lcl.uniroma1.it/wsdeval/evaluation-data)：五个标准英语 all-words 子集统一到 WordNet 3.0；官方网页介绍并提供完整评测框架及单集下载。该框架在技术上仍是 WN3 标签任务的合适候选来源，但页面没有给出足以替代每个原始 task terms 的单一数据许可；因此“公开可下载”不等于可再分发，评测包还包含 gold，不能在协议冻结前下载或打开。
+
+[SemEval 官方 FAQ](https://semeval.github.io/faq.html) 说明过往任务数据由各任务组织方分发；2020 年起才要求任务组织者在评测结束后归档至 Zenodo。故后续应按 Senseval-2、Senseval-3、SemEval-2007 Task 17、SemEval-2013 Task 12、SemEval-2015 Task 13 分别找组织方/原始 task 许可和允许的研究用途，不能从某个 task 的许可推广到其他 task。当前 web 检索中 SemEval-2007 的一条“需签许可”页面实际属于 Task 9（多层语义标注），不是 WSD Task 17，已排除，不用其许可结论替代 Task 17 权利核查。
+
+实施上的下一步是先只建立包含原始发布者、任务编号、官方数据入口、许可/署名条款、是否可缓存、是否允许再分发、模型既往暴露、数据是否曾在本项目中打开的 metadata 表；不拉取 xml/gold 文件。只有至少一个子集的权利、隔离和可评分映射 gate 均有书面证据，且实验协议冻结后，才考虑将其纳入一次性评测。当前无需再追求“先跑一个 benchmark 数字”。

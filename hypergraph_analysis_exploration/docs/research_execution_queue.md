@@ -81,6 +81,8 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 
 **研究决策影响：**对于基于 WN3 labels 的数据，可以继续评估 exact-key 层级的覆盖，而不必因“整个库存完全不可映射”而放弃；但必须按目标报告多目标/无映射失败，并保留共同可评分分母。FEWS 的 Wiktionary sense ID、同源风险、数据包许可及 test 保护仍各自独立 unresolved，不能解封数据。下一动作是只读盘点其他公开基准的数据/标签许可、原模型训练暴露和现有 splits；若没有一个满足 gate 的未用开发集，本支线暂时维持 train-only 工程阶段。
 
+官方 Raganato evaluation-data 页面列出五个 WN3 统一数据集及评测包下载，但没有提供覆盖全部源任务的统一许可条款；SemEval FAQ 指出历史任务数据由任务组织方分发。评测包含 gold，故本轮未下载。检索到的 SemEval-2007 “须签许可”页属于 Task 9，不是 WSD Task 17，已明确排除。引用和逐任务权利核查门槛见 `t04_structure_isolation_design.md`。
+
 1. **T04 profile 效率与训练 smoke**：对 train-only encoder + relation pooling 加入按长度组织 batch 或其他不改变样本/表示的 padding 优化，向量化逐候选池化；先用数值等价和定长输入检查，再重复量化吞吐/内存。随后仅用 train gold 做单批反向/optimizer 工程 smoke，不读 dev/test、不报告 WSD 指标。
 2. **T02 provenance crosswalk**：只用本地 source metadata 与公开目录标识调查能否把 raw-sha256 指纹映射至准确上游对象；无法绑定即正式登记为 unresolved，不生成语义标注样本。
 3. **总控和其他三线的就绪工作**：更新 PR 状态；T01 审阅流程、T03 固定任务断言、T05 license/schema 清单仅推进不需数据访问或用户科学决策的部分。
