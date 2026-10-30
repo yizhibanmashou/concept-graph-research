@@ -54,6 +54,29 @@ python -m src.analysis.preposition_sampling_frame_audit `
 
 以上配对差界限刻意保守；相关条件的真实差值方差可能较小，但 40 条试标不得用于估计该方差。全图平均 1.397 条分支/target，按四条件、双标计算，n=185 约为 2.1k 条 branch-condition judgments；n=738 约为 8.2k。实际工作量要按抽中 strata 的真实分支数和试标测得的每条用时更新，不能把 branch 数当成统计 n。
 
+### 分层过采样敏感性（工作量与加权精度并列）
+
+为显示稀有结构层过采样的代价，另计算一个**假设分配**：`empty_and_collision` 4 个 target 全取；`new_empty`、`new_collision` 各抽 50 个；其余名额按总体比例分给 `other_affected` 与 `unaffected`。估计总体时用各层真实总体权重 `W_h=N_h/N`，不使用样本原始比例。令 `S=Σ_h W_h²/n_h`；均值最坏半宽为 `sqrt(log(2/0.05)·S/2)`，三项配对差同时 95% 最坏半宽为 `sqrt(2·log(2·3/0.05)·S)`。区间采用有界变量 Hoeffding 近似、不利用有限总体修正；配对差范围为 [-1,1]。这里的 50 仅是工作量敏感性参数，不是已选样本数或高风险层充分精度承诺。分支负担按已观察 strata 平均原始分支数外推，4 条件×2 名审阅者对应约 8 个 branch-condition-review 单元/分支。
+
+| 假设目标总数 | empty/collision/both/other/unaffected 分配 | target 等权总体均值 95% 最坏半宽 | 三个配对差同时 95% 最坏半宽 | 预计分支数 | 预计审阅单元（分支×4 条件×2 人） |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 200 | 50/50/4/77/19 | ±13.7 pp | ±31.3 pp | 420 | 3,359 |
+| 500 | 50/50/4/319/77 | ±6.8 pp | ±15.4 pp | 835 | 6,683 |
+| 800 | 50/50/4/560/136 | ±5.1 pp | ±11.6 pp | 1,251 | 10,005 |
+| 1,050 | 50/50/4/761/185 | ±4.4 pp | ±10.0 pp | 1,597 | 12,774 |
+
+因此，200 个目标更像流程/可行性样本，不能给出窄的总体配对差区间；即使总数 1,050，±10 pp 也只是这个有界、同时区间公式下的总体保守精度。每个稀有层只有 50 个时，其层内三对比较仍非常不精确（最坏同时半宽约 ±43.8 pp）；若要精确比较局部高风险层，需要更大层内样本和相应成本。以上不是传统功效分析，不基于 pilot 标签或目标效应。对标注小时的换算仍须由 40 条 pilot 另测每个 target/branch 的回查和双标时长。
+
+复现上表（在 `hypergraph_analysis_exploration/` 中运行；输入仅为结构 frame audit）：
+
+```powershell
+python -m src.analysis.t02_stratified_precision_sensitivity `
+  --frame-audit outputs/t02_sampling_frame_workload_audit_20261031.json `
+  --out outputs/t02_stratified_sensitivity_new.json
+```
+
+输出为本机 ignored JSON，脚本要求新输出路径、不读取 gloss/labels/IDs。该情景计算脚本的 3 项测试与抽样框审计脚本的 6 项测试共 9 项均通过。换算为实际 reviewer-hours 仍需流程试标耗时；不能仅凭分支数估工时。
+
 ## 4. 冻结样本之前仍须完成
 
 1. 明确建立可审计的上游来源家族 crosswalk；`source_root` 不能代替它。
@@ -64,4 +87,4 @@ python -m src.analysis.preposition_sampling_frame_audit `
 
 ## 5. 验证范围
 
-脚本的六项合成单测通过；本次扩展只增加各结构层的 branch 总数和每目标均值。对本机冻结包完整运行得到 110,425 targets、154,206 branches、7 个 `source_root` 标签和上列分层计数。输入摘要与现有 full-graph report 一致。机器输出写入 ignored `outputs/t02_sampling_frame_workload_audit_20261031.json`，schema 为 `preposition-sampling-frame-audit/2`。该检查只验证样本框计数及结构工作量 proxy，不触及释义、语义保真、正式抽样或用户未提供的原始来源许可。
+抽样框审计的六项和情景计算的三项合成单测均通过；扩展只统计各结构层 branch 总数/每目标均值，并从聚合摘要计算加权精度与预估审阅单元。对本机冻结包完整运行得到 110,425 targets、154,206 branches、7 个 `source_root` 标签和上列分层计数。输入摘要与现有 full-graph report 一致。机器输出写入 ignored `outputs/t02_sampling_frame_workload_audit_20261031.json` 与 `outputs/t02_stratified_sensitivity_20261031.json`，schema 分别为 `preposition-sampling-frame-audit/2` 和 `preposition-stratified-precision-sensitivity/1`。这些检查只验证样本框计数及无标签精度/工作量情景，不触及释义、语义保真、正式抽样或用户未提供的原始来源许可。
