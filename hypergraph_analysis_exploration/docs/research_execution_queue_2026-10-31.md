@@ -19,8 +19,8 @@
 | 支线 | 远端分支/提交 | PR 状态 | 下一步 |
 |---|---|---|---|
 | T02 | `codex/t02-schema-dry-run` / `9e1ef8e` | PR 创建接口返回 `Unknown tool`；未确认存在 PR | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t02-schema-dry-run)，创建后记录 PR 编号、diff、CI 与结果 |
-| T04 | `codex/t04-morphology-candidate-union` / `afa2248` | 项目此前记录该分支对应 PR #37；本轮 PR/CI 查询接口不可用，故当前开放/合并状态未核实 | 在 GitHub 核对 #37 的 head 是否为 `afa2248`，检查变更文件与 CI；不触碰测试标签 |
-| T05 | `codex/t05-data-feasibility` / `6d35c62` | PR 创建接口返回 `Unknown tool`；尚无确认的 PR 编号 | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 编号与 CI |
+| T04 | `codex/t04-structure-input-design` / `f679af7`；原形态并集分支 `codex/t04-morphology-candidate-union` / `afa2248` | 结构隔离设计和 Conda/XPU 可复现说明已推送；PR/CI 查询接口仍不可用，#37 的 head/open/merged 状态未核实 | [打开结构设计分支 PR 创建页](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t04-structure-input-design)；另在 GitHub 核对 #37 与 CI |
+| T05 | `codex/t05-data-feasibility` / `59edb70` | Wordbank schema/访问 gate 已补；PR 创建/查询仍返回 `Unknown tool`，尚无确认的 PR 编号 | [打开创建页面](https://github.com/yizhibanmashou/concept-graph-research/pull/new/codex/t05-data-feasibility)，创建后记录 PR 编号与 CI |
 
 GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unknown tool`；不是代码或远端 push 失败。工具恢复前，分支已经在线，PR 创建链接可直接使用。不得在报告里把远端分支说成 PR，也不得据此声称 CI 通过。
 
@@ -44,7 +44,7 @@ GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unkno
 
 - **已完成证据：** SemCor 官方 train 内 13 文档隔离 dev，120 选中/111 可评分；XPU Conda `emotion_xpu` 上三种子 A/B/C/D 均值 24.02/24.62/27.03/24.62%；MFS 36.94%。D 对 B 配对净差为 0；对 C 为 −8/333。描述性审计发现 D 每目标每候选非 padding tokens 比 B 多约 18.1%。
 - **状态：** 当前 tiny BERT 与输入序列化不支持完整结构有增益；样本小、同源、候选预算事后选择、长度不平衡，不能外推或证伪更一般假设。旧和新 dev 均不得再调参；测试分区未读。
-- **下一步：** 先按 T04 协议写出一份新实验方案：选择独立来源（候选先做映射/覆盖审计）或更强 WSD 系统；A/B/C/D 的共同词汇信息与长度控制；训练 token/算力、candidate coverage、MFS/强 gloss baseline；来源/lemma-family split、主要对比和区间估计。提交方案后再分支实施，不先追加当前 dev 训练。
+- **下一步：** 已有 `t04_structure_isolation_design.md` v0.1，规定 B/C/D 共享同一节点释义文本并通过稀疏关系通道区分；本轮另实测 `emotion_xpu` 上 XPU 可用并补上运行说明。此草案仍待负责人确认估计对象和新评估来源；先补来源映射/覆盖审计与节点/分支资源估算，再冻结方案。尚未改造编码器或重训。
 - **放行：** 数据许可、候选映射、独立开发来源、模型权重/硬件、预算、强基线、主要估计量和停止规则全部冻结。
 - **停止：** 若无法建立输入信息公平对照或拿不到独立开发来源，停止 tiny-BERT 结构增益宣传，保留负面试点作为工程/方法结果。
 
@@ -66,8 +66,8 @@ GitHub connector 本轮两次 `create_pull_request` 调用均实际返回 `Unkno
 
 ### Q5 · T05 外部数据盘点
 
-- **已完成：** 官方 Wordbank、CHILDES/TalkBank、Brysbaert–Biemiller 页面审查和阶段路线；本轮没有下载儿童级数据。见 [T05 可行性文档](https://github.com/yizhibanmashou/concept-graph-research/blob/codex/t05-data-feasibility/hypergraph_analysis_exploration/docs/t05_data_feasibility_2026-10-31.md)。
-- **下一步：** 只做 Wordbank 英语工具、表单、年龄范围、item 定义、数据集 license 和 release 元数据表；向 AoA 数据权利方确认访问/衍生义项映射权。CHILDES 仅候选具体明确许可证、时间密度适合的语料。
+- **已完成：** 官方 Wordbank、CHILDES/TalkBank、Brysbaert–Biemiller 页面审查；Wordbank 官方 Data 页及 datapage schema 源码核对出 child/word/child-by-word 粒度、item 字段和 `datasets.license`，未下载儿童级响应。见 [T05 可行性文档](https://github.com/yizhibanmashou/concept-graph-research/blob/codex/t05-data-feasibility/hypergraph_analysis_exploration/docs/t05_data_feasibility_2026-10-31.md)。
+- **下一步：** 完成 Wordbank 英语工具、表单、年龄范围、item 定义、逐数据集 license 和固定 release 表；schema 暴露 Redivis API token 依赖，本轮未尝试从本机凭证获取访问。向 AoA 权利方确认数据访问与衍生义项映射权。CHILDES 只筛选许可证明确且时间密度合适的具体语料。
 - **放行：** 每个 dataset/corpus 有明确版本、访问权、license、单位定义和可再分发限制；义项映射指南和 source/lemma split 先冻结。
 - **停止：** 没有合法可用的义项级数据时，继续报告图计算性质；不把词形 norm 冒充义项习得，也不使用未授权第三方副本。
 
