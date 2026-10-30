@@ -66,6 +66,15 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 5. 至少三个预定随机种子用于训练稳定性描述，但种子不算独立样本。置信区间按目标做配对 bootstrap，并报告 D−B、C−B、D−C 的绝对百分点差和区间。样本量不足以排除有意义的正负差时结论写“不确定”，不追加种子直到显著。
 6. 错误分析只用锁定 dev 的一次输出，按未映射/编码失败、候选数、train sense frequency、目标截断、结构节点/分支规模汇总；不得据此回头修改同一实验并继续报告为确认结果。
 
+### 5.1 评测来源可行性筛查（2026-10-31；未下载数据）
+
+| 资源 | 已核实的来源事实 | 适合的评测作用 | 主要 gate |
+| --- | --- | --- | --- |
+| Raganato unified all-words WSD | 统一框架包含 Senseval-2/3、SemEval-2007/2013/2015 五个测试集；工作中采用 WordNet 3.0 sense inventory | **主评测候选**：标准 all-words 范围更适合检验通用上下文消歧 | 逐子集核对文本/标注许可、下载版本和模型预训练/历史训练暴露；固定 WN3.0→OEWN 2025 映射及一对多/缺失处理；在协议和映射清单冻结前不读取测试句与标签 |
+| FEWS | 官方页面说明其从 Wiktionary 释义与例句构建；数据表列出 121,459 条样本、71,391 个 sense type；官方创建代码注明使用 2020-01-01 Wiktionary dump | **长尾/低样本次要压力测试候选**；其目标分布适合考察少样本和零样本义项 | 本图也记录 Kaikki/Wiktextract 的 Wiktionary 来源，故 FEWS 与图释义存在同来源家族及潜在内容重叠风险；不能把它直接称作独立来源确认。需核对 sense-key 对齐、逐条/分家族重叠、标签定义与许可。Datasheet 还提示少量冒犯性例句/义项，需在查看原文前制定最小化暴露与汇报规则 |
+
+来源核查依据：Raganato et al. 的[统一 WSD 论文](https://aclanthology.org/E17-1010/)；[FEWS 官方页面](https://nlp.cs.washington.edu/fews/)、[FEWS datasheet](https://nlp.cs.washington.edu/fews/datasheet.pdf)和[数据创建仓库](https://github.com/facebookresearch/fews)。这里的“潜在重叠”是由两者都源自 Wiktionary 推出的风险判断，尚未做逐记录匹配；此表不表示许可已批准。当前优先顺序是：先做不含测试文本的版本、许可与 sense mapping 元数据审计，再预注册统一 benchmark 子集和一次性评分；FEWS 保持为单独的后续长尾验证，不混入主结果或主开发集。
+
 ## 6. 执行阶段与 PR gate
 
 | 阶段 | 交付物 | 通过标准 |
