@@ -21,7 +21,7 @@
 |---|---|---|---|---|---|
 | P0 | 总控：队列和五线依赖管理 | 路线图已有总问题、分工和阶段门槛；本文件补充逐项工作包、阻塞和 PR 状态 | 每轮先核对实际 Git 状态，再更新本表与根本地报告 | 计划和结果分开；旧日期、提交和 PR 状态以当前仓库及 GitHub 实际返回为准 | 本文件随总控或当轮主题 PR 更新；本轮新增在 T04 分支 |
 | P0 | T02-1：介词关系保真与结构消融 | 全图 `prep` 删除、`prep_phrase` 敏感性、配对/分层结构对照已运行；结构变化不是语义保真。40 条只允许试标。现有源记录的上游版本指纹无法绑定到特定 payload/release，来源家族与许可 unresolved | 先做来源记录到实际上游对象的可复算 crosswalk；并准备非文本的抽样框精度/工时方案草案。不得导出正式释义审查包 | 在总体/来源家族、盲呈现、多条件重复判定、目标等权区间及精度门槛、权限都明确前，不启动正式双盲标注；任何自动关系分类无证据均为 `unresolved` | 专项实现分支包含多个已推送子主题；各 PR 是否存在需在线核实，不能因分支已推送标记为已建 PR |
-| P0 | T04-2b：共同文本与真实图输入审计 | 冻结训练候选 3,404 次出现/2,051 唯一候选，结构覆盖与 B/C/D 释义 token 清单均 2,051/2,051；固定 tokenizer 0.23.1 与词表哈希一致。最长单条释义 77 WordPiece，低于 BERT 512 上限；候选总节点 token 和最大 380 不是单序列长度 | 固定“逐节点同一文本编码器 + 共享结构聚合”接口；用合成案例验证置换不变、C 丢失高阶分支划分、D 保留分支身份、同一节点集合。再量化节点/边/分支数带来的真实 XPU 编码成本 | A/B/C/D 的文本、节点和候选顺序一致；候选失败共用分母；结构通道不增加自然语言 token。模型训练前必须有不重复使用旧开发标签的锁定评估计划 | `codex/t04-structure-input-design` 已推送至 `8c63298`；本地 PR 创建 connector 返回 `Unknown tool`，尚未确认有 PR |
+| P0 | T04-2b：共同文本与真实图输入审计 | 冻结训练候选 3,404 次出现/2,051 唯一候选，结构覆盖与 B/C/D 释义 token 清单均 2,051/2,051；最长单条释义 77 WordPiece。旧序列化 A/B/C/D 已在 `emotion_xpu` 完成 3 种子训练，但 D 相对 B 没有净增益；同一 SemCor dev 已用于多轮探索 | 将新参数无关 relation pooling 接到逐节点文本编码器，先做 train-only 单批资源审计；分离文本编码、图聚合、padding、峰值 XPU 内存、耗时和吞吐。只使用冻结 train candidate IDs/图规则，不访问标签、context 或 dev/test | 旧 dev 仅作历史结果，不再选模型或调参。新架构须先过 B/C/D 节点释义 token 对齐、候选共同分母、结构消融及资源公平性检查；任何独立评估须先冻结来源、许可、候选映射和统计方案 | `codex/t04-structure-input-design` 本地有未提交实现；现有 PR 状态未在线核实 |
 | P0 | T04-3：WSD 映射、许可和新评估 | SemCor 内部文档隔离试点已重复使用，不能继续调参；Raganato 使用 WN3.0；FEWS 与图中 Wiktionary 来源可能重叠。完整候选和输入映射需逐目标报告 | 只处理不含测试文本/标签的来源、许可、模型暴露和 WN3.0→OEWN crosswalk 元数据；按子集列零/唯一/多映射、POS/lemma 异常和候选覆盖 | 先冻结子集、许可和映射规则；不满足授权或映射覆盖条件时不解封测试集。确认性评测只能在代码/配置/模型/分析锁定后执行一次 | 后续单独 `codex/t04-frozen-wsd-eval`；不可把旧 dev 结果移名为新评估 |
 | P1 | T01：ToLogic 编译与语义审核 | 六例有限枚举和 want/without 重放/静态结构审计可复现；候选覆盖不等于公式语义正确，without 是外部接口且不在原 85 basis | 保持六例作回归；先把语义标签说明、双人独立判定、参数绑定与作用域协议准备齐；由负责人确认外部接口语义再做盲审 | 没有独立语义标签前只报告候选枚举、绑定和语法；不训练 ranker、不声称概念学习或泛化 | `codex/t01-semantic-review-protocol` 等分支已推送；逐 PR 状态需 GitHub 核查 |
 | P1 | T03：知径交互原型 | 现有 `concept-dictionary/` Demo 是唯一产品基线；功能测试不代表理解或学习 | 继续在现有 Demo 做固定案例的路径正确性/解释完整性核对，聚焦介词方向、否定、OR 备选、循环和无路径；先用程序断言和无参与者模拟 | 不重建替代系统；真实用户理解/学习实验须由用户决定并完成伦理、招募、同意和数据处理审批 | 小型功能修复单独 PR；不以模拟用户作学习证据 |
@@ -54,10 +54,16 @@
 
 | 分支 | 主题 | 检查 | PR 状态 |
 |---|---|---|---|
-| `codex/t04-structure-input-design` | train-only B/C/D 共享释义 token 与单条 gloss 长度审计 | 17 项专项/合成测试；冻结 tokenizer 和图哈希；工作树干净；仅训练候选 ID 进入分析 | 已推送 `8c63298`；当前 GitHub connector 的 search/create 调用返回 `Unknown tool`，未确认 PR 已创建 |
+| `codex/t04-structure-input-design` | train-only B/C/D 共享释义 token、关系聚合器性质检查与 XPU 关系算子 profile | 24 项专项/合成测试在 `emotion_xpu` 通过；profile 只用 train candidate IDs 与图结构，权重为固定随机向量；工作区数据/权重未跟踪 | 此轮新增代码待提交；GitHub connector search/create 返回 `Unknown tool`，未确认 PR 已创建 |
+
+## 状态覆盖（2026-10-31，优先于上方 T04-2b 表格中的“下一动作”）
+
+T04 已完成的工程门槛：训练候选图结构覆盖 2,051/2,051；共同目标/依赖 gloss WordPiece 清单对齐 2,051/2,051；最长单条 gloss 77 token；无参数 A/B/C/D 聚合器完成合成性质核验；train-only XPU 关系算子 profile 覆盖 2,051 个候选、13,526 个 relation-node 实例、3,560 branches、41,316 pair edges，两次耗时 3.7316/3.8978 秒（526.2–549.6 候选/秒），额外峰值分配均为 339,456 bytes。24 项专项/合成测试在 `emotion_xpu` 通过。另已核实旧序列化 A/B/C/D 在同一 `emotion_xpu` Conda 环境完成 seed 17/23/31 三组训练：每条件 379 个 train gold，dev 选择 120、可评分 111；各 seed A/B/C/D 正确数分别为 32/33/31/28、23/23/31/28、25/26/28/26，合并为 80/82/90/82（333 个重复的目标×seed 结果）。D−B 合并净差为 0；这不是三份独立评估，且旧 C/D 表示与新关系池化架构不同，不能当作新方案结果。下一动作不是首次训练或寻找旧 dev，而是把新 relation pooling 接入逐节点共享文本编码器并做 train-only 单批 XPU 资源审计；不读取 gold/context/dev/test。新效果验证仍须锁定未复用 dev、来源/许可和 sense-key 映射。
+
+本轮 T04 聚合器、XPU profile、协议和队列更新都在 `codex/t04-structure-input-design` 专题分支；既有 token audit commits 为 `ee43ce2`、`8c63298`，总控队列此前 commits 为 `caeb2c3`、`cfdc9ed`。本轮新变更待提交。GitHub PR connector 仍无法提供 PR 创建确认。
 
 ## 下一轮建议执行顺序
 
-1. **T04 结构模型合成实现**：依已冻结的逐节点文本编码协议，完成无模型/轻量合成输入的 B/C/D relation aggregation API 与性质测试。若参数匹配导致架构差异不可比，记录选择，不看旧 dev 决定。
+1. **T04 端到端 train-only 前向资源审计**：复用本地固定 BERT-tiny 权重（config/weight hash 已由三种子运行记录），以训练候选 ID 与图规则构造单批 text-encoder + relation-forward，训练候选不带 gold/context；记录 XPU 峰值内存、耗时和吞吐，不访问 dev/test。若运行环境不能重定位已用权重，则在锁定 revision 下恢复本地模型后再执行。
 2. **T02 provenance crosswalk**：只用本地 source metadata 与公开目录标识调查能否把 raw-sha256 指纹映射至准确上游对象；无法绑定即正式登记为 unresolved，不生成语义标注样本。
 3. **总控和其他三线的就绪工作**：更新 PR 状态；T01 审阅流程、T03 固定任务断言、T05 license/schema 清单仅推进不需数据访问或用户科学决策的部分。

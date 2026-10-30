@@ -63,7 +63,29 @@ B/C/D 的节点 ID、释义文本、顺序和 token IDs 必须逐候选完全一
 
 复算结果：400 个训练目标包含 3,404 个候选出现次、2,051 个不同候选义项；2,051/2,051 均有目标节点、规则、非空分支和依赖定义，图关系视图失败为 0。按不同候选义项统计，分支数中位数 1、nearest-rank P90 为 3、最大 16；依赖数中位数 5、P90 为 10、最大 28；pairwise 边最大 327，D 的 branch-node incidence cells 最大 112。范围仅是既有训练候选池，不是模型候选覆盖率或全图分布，也不表示每个候选都满足相同 tokenizer 预算。
 
-该环境的图清单复算不使用 tokenizer。环境交叉核对发现：`emotion_xpu` 有 PyTorch/XPU、tokenizers 0.22.2，但没有 NLTK；`base` 有 tokenizers 0.23.1 和 NLTK 包，但 NLTK `wordnet.zip`/`semcor.zip` 不在默认数据路径。冻结训练 JSON 仍可在 XPU 环境用于训练入口；重新生成 SemCor 样本则还需获取正确 NLTK 语料。冻结输入 metadata 记录 tokenizer 0.23.1 与 vocab SHA-256；本地搜索没有找到摘要匹配的 vocab，找到的其他 `vocab.txt` 哈希不匹配，不能代用。下一步先恢复并校验确切 vocabulary bytes，再在 train-only 候选上复算统一节点释义序列与 B/C/D 结构输入；不读取旧 dev 或测试标签，不因重现旧数据而安装未经记录的替代语料。
+该初始图清单审计不使用 tokenizer。上述环境和词表“尚未找到”的记录是较早状态，已被下面的 train-only token 审计更新：冻结词表已恢复且摘要匹配，`base` 的 tokenizers 0.23.1 完成只读计数，`emotion_xpu` 保留作 PyTorch/XPU 训练环境。SemCor 重生成所需 NLTK 语料仍须独立核验；本轮不重新生成样本。
+
+### T04-2b train-only 释义 token 对齐与单条长度（2026-10-31）
+
+已从固定 BERT-tiny revision 恢复词表，SHA-256 与训练 metadata 一致；图 nodes/rules 摘要也在运行前逐项验证。新增 `audit_t04_train_shared_token_inputs.py`，仅从冻结 train JSON 读取 `candidate_ids`，metadata 仅读版本及输入哈希，不读取 labels、上下文、dev/test 文件。3,404 次候选出现涉及 2,051 个唯一候选，全部成功构造 B/C/D 共同的有序节点/释义 token 库，token ID 完全相同，失败 0。每个候选最长单条 gloss 的 WordPiece 数 min/median/P90/max=2/17/26/77；所有目标及依赖 gloss 的 token 总和 min/median/P90/max=3/56/120/380。该实现设想是每个 gloss 独立通过同一文本编码器，故单条 gloss 长度决定 512 位置上限；总和表示需编码节点量，不应误作单序列长度并据此裁剪分支。节点/边/分支数仍可能造成不同的真实计算量，须用之后的 XPU 运行日志/峰值内存/时长量化。17 项审计与结构专项测试通过；结果仅验证输入与长度范围，不是语义正确率或模型效果。
+
+### T04-2c 参数无关的 B/C/D 关系聚合合成核验（2026-10-31）
+
+新增 `src/analysis/t04_relation_aggregation.py`，对已编码的节点向量提供一个透明、无可学习参数的参考聚合：A 为目标向量加零关系通道；B 对唯一依赖集合取均值；C 对每条目标+分支 clique 的无向端点均值取并集均值；D 先对每个原始分支（目标及成员）取均值，再对 OR 分支取均值。所有条件输出维度一致，后续 scorer 可共享参数。该选择是最小可解释的接口/基线，不等于推荐最终神经结构，也不代表模型训练已完成。
+
+4 项合成测试覆盖输入/分支置换不变、缺节点/空分支错误、同维度与 A 零关系通道，并构造相同依赖并集和相同 pairwise 2-section、但不同分支划分的例子：B/C 向量相等，D 向量不同。与结构张量和 token audit 共 15 项专项测试在 `emotion_xpu` Conda 运行通过。无语料或真实 label 输入，没有训练、dev/test 访问或性能分数。
+
+### T04-2c train-only XPU 关系算子资源 profile（2026-10-31）
+
+新增 `src/analysis/profile_t04_xpu_relation_aggregation.py`，只读取 train JSON 的 candidate ID 字段和这些目标的规则，不访问标签、上下文、释义文本、dev/test；对节点创建按 ID 哈希固定的随机 128 维向量，并在 XPU 执行已测的无参数关系池化。全量 2,051 个候选处理了 13,526 个目标/依赖节点实例、3,560 条分支和 41,316 个唯一 pairwise 边。相同环境/输入重复两次，设备同步 wall-clock 分别 3.7316/3.8978 秒，即 549.6/526.2 候选/秒；baseline allocated 2,863,104 bytes，重置峰值统计后聚合峰值 3,202,560 bytes，额外峰值两次均为 339,456 bytes。两次输出数值有限、结构计数和哈希一致。结果写入 ignored `outputs/t04_xpu_relation_profile_20261031.json` 和 `_v2.json`。24 项 audit/aggregation 专项测试在 `emotion_xpu` 通过。
+
+解释边界：这个 profile 只测关系池化 Python/XPU 路径，随机向量不含词义信息；内存增量未包含 BERT 文本编码器、BERT 权重/激活、优化器、反向传播、训练 batch padding 或多个候选训练过程，吞吐也不是端到端模型吞吐。它说明当前稀疏结构聚合本身在该 train graph shape 上可运行，不能据此宣称真实训练资源足够或模型有效。
+
+### 状态校正：旧序列化模型已在 Conda/XPU 完成三种子（2026-10-31）
+
+后续检查本机 ignored outputs 发现，`tiny_bert_fresh_doc_xpu_seed17/23/31_20261031` 各有 A/B/C/D checkpoint 和结果记录。每个条件都在 `emotion_xpu`（PyTorch 2.12.0+xpu、Transformers 5.9.0、Intel Arc）成功训练一轮；因此“本机尚未训练”或“当前整体 WSD 训练仍待首次运行”均为过期说法。合并开发正确数 A/B/C/D=80/82/90/82，基于同一 111 个可评分目标的三个重复种子，D−B 净差 0。该数据是内部 SemCor 文档隔离开发样本，但已经用于多轮事后分析，只可作为旧方案探索记录，不能继续调参或当作确认性证据。
+
+这三组 checkpoint 对应先前 JSON 序列化 cross-encoder，不是本设计的逐 gloss shared encoder + relation pooling。其历史 C/D 输入没有按本设计分开构造 pairwise 2-section 和 branch-incidence 结构；各条件实际 token 长度不同。新 pooling 尚未训练或在 dev 评估。下一步使用已记录的固定模型权重摘要在 train-only 输入上做共享文本编码器 + 新关系池化的单批前向资源 profile；若无法恢复原权重文件，才从 pin revision 恢复并复核哈希。后续效果评估必须另行冻结未复用的开发/测试方案、映射与许可，不得回头利用此 dev 选设置。
 
 ## 5. 数据、切分与指标
 

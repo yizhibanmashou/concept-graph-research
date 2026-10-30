@@ -221,10 +221,14 @@
 本节用于覆盖前文中已过时的进度句，保留路线图历史，不抹去当时状态。
 
 - T02 四条件结构变化、`prep` 主分析与 `prep_phrase` 敏感性结果已进一步更新；source metadata 的 `raw-sha256` 仍无法绑定到确切上游对象/版本，许可和来源家族未解决。40 条仅是试标；用户确认的目标等权、多轴标签和并列估计规则有效，但正式总体/来源家族、盲呈现方式、精度门槛和人力预算仍需确定。不能开始正式语义结论。
-- T04 训练分区图覆盖为 2,051/2,051；使用 metadata 固定的 tokenizer/vocab，在同一批 train 候选上 B/C/D 目标和依赖释义 token IDs 完全一致。最长单条 gloss 为 77 WordPiece，而每个 gloss 按专项协议单独编码；候选所有 gloss token 总和不是一个模型序列，不能据此设置节点/分支裁剪上限。T04 下一个工程任务是实现并合成验证逐节点文本编码后的 B/C/D 结构聚合器，再单独评估真实 XPU 资源开销；模型性能训练不得复用旧 dev 调参。
+- T04 训练分区图覆盖为 2,051/2,051；使用 metadata 固定的 tokenizer/vocab，在同一批 train 候选上 B/C/D 目标和依赖释义 token IDs 完全一致。最长单条 gloss 为 77 WordPiece，而每个 gloss 按专项协议单独编码；候选所有 gloss token 总和不是一个模型序列，不能据此设置节点/分支裁剪上限。参数无关 A/B/C/D 关系聚合参考接口已实现并通过合成性质检查。纠正后的序列化 A/B/C/D tiny-BERT 方案已在 `emotion_xpu` 完成 seed 17/23/31 三次训练，合并正确数 A/B/C/D=80/82/90/82（每 seed 同一 111 个可评分 dev 目标，333 个目标×seed 记录）；D−B 净差为 0。该 dev 已被重复用于探索，结果不能作为独立确认；旧 C/D 也没有隔离成对投影与完整分支的效应。下一步先将新 relation-pooling 接入共享逐节点文本编码器并对 train-only 候选做 XPU 前向资源 profiling，再决定新训练协议；不在旧 dev 调参。
 - 当前 T04 代码提交已推送到 `codex/t04-structure-input-design`（截至 `8c63298`）；GitHub PR 检索和创建工具返回 `Unknown tool`，因此不能称 PR 已建立。该状态与“分支已推送”必须分别报告。
 - 五线逐项依赖、当前 gate、验收与下一动作转移到 `docs/research_execution_queue.md`；后续每轮更新队列和专项协议，根目录报告/进度仍依项目约定留本机。
 
 ### T04-2b train-only token 结果的复核说明
 
 在冻结的 400 条 train JSON 上，只读取候选 ID；metadata 只用于版本与摘要校验。3,404 次候选出现对应 2,051 个唯一候选，2,051/2,051 有图节点与规则，B/C/D 共同释义文本 token ID 完全一致，失败为 0。单条 gloss 长度 min/median/P90/max=2/17/26/77；每候选所有节点 token 数 min/median/P90/max=3/56/120/380。使用逐节点独立文本编码时，后一个统计描述总编码工作量；资源公平性应测节点编码次数、超边/边处理、batch padding、峰值 XPU 内存和 wall-clock，而不是把总 gloss 长度当单条截断长度。结果仅是 train 输入一致性审计，不是准确率或语义正确性证据。
+
+### T04-2c 合成关系池化与 train-only XPU 资源剖析（2026-10-31）
+
+参数无关 A/B/C/D pooling 已实现并通过合成性质测试：节点/分支顺序不影响向量；固定依赖节点并集和 pairwise 2-section 时，B/C 无法分辨不同 OR 分组，而 D 可分辨。随后在 train-only 实际图形状上对 2,051 候选做 XPU profiling，使用确定性随机节点向量，不含释义语义或标签：13,526 relation-node 实例、3,560 branches、41,316 edges；重复两次 3.7316/3.8978 秒、约 549.6/526.2 candidates/sec，结构算子额外峰值分配均为 339,456 bytes。24 项相关专项测试在 `emotion_xpu` 通过。profile 未包含 BERT text encoder、训练反向传播、优化器和 batch padding，不证明端到端训练可行或任务表现。另核实旧序列化方案三种子 A/B/C/D 训练已完成，未观察到 D 相对 B 的净差；该结果在同一已复用 SemCor dev 上，只能作为当前序列化方案的探索性负结果。下一工程门槛是将新 pooling 接入逐节点共享文本编码器并做 train-only 单批 text+structure profile；WSD 效果验证仍受独立开发集、许可及 sense-key 映射门槛约束。
