@@ -1,6 +1,6 @@
 # T02 介词关系 schema 与盲审协议草案
 
-状态：schema v0 草案；本轮只冻结用户已决的实验口径并定义结构字段，不转换真实 OEWN 记录、不导出释义文本、不创建人工标注任务包。该文档不是预注册，也不是语义结果。
+状态：schema v0 草案；本轮冻结用户已决的实验口径并完成 40 条既有试标的结构转换 dry-run，不导出释义文本、不创建人工标注任务包。该文档不是预注册，也不是语义结果。
 
 ## 1. 研究问题和结果边界
 
@@ -106,4 +106,18 @@
 3. **T02-3**：在许可审核通过后生成正式盲审抽样框和访问隔离流程；试标 40 条单独保存。
 4. **T02-4**：只有独立双标、抽样计划和来源隔离冻结后，才做定义保真估计与结构结果并列分析。
 
-本轮未读取人工试标标签、未读取保留测试标签、未转换真实图条目、未生成数据包、未运行实验。协议/示例的后续实现需保持这些隔离。
+本轮未读取人工试标标签、未读取保留测试标签、未生成数据包、未运行正式语义审阅。以下 dry-run 只用既有 40 条 pilot 中保留的原始分支检查 schema 转换，不构成总体估计或定义保真结果。
+
+## 8. 40 条试标材料的 schema dry-run（2026-10-31）
+
+为检查 schema v0 是否能承载既有 pilot 的原始 OR 分支、AND occurrence、删除结果、边界和未解析关系，新增 `src/analysis/preposition_schema_dry_run.py`。脚本读取本地 `outputs/preposition_paired_review_20261029.json`，以原始 `original` 分支复建 occurrence 身份，并调用 `preposition_relation_records.transform_record`；它不读取或打印定义文本，不提供人工标签，也不生成类型化语义关系。
+
+结果：40 个 pilot target、71 条源分支、51 个 `prep` occurrence。原始条件 0 条空分支；`prep` 删除条件产生 13 条空分支；boundary-preserve 与 typed-relation 条件各保留 71 条分支、0 条空分支。删除后非空分支签名碰撞 excess 为 0。51 个介词位置在 boundary 条件中成为未解析边界，在 typed 条件中成为 `unresolved` 记录；支持关系数为 0。这说明转换器可表达“删除会留下空分支”以及“不知道时保留 unresolved”，不说明定义语义已保真。40 条是流程试标 pilot，不代表总体，不进入正式结构/保真估计。
+
+复现（在 `hypergraph_analysis_exploration/` 下运行）：
+
+```powershell
+python -m src.analysis.preposition_schema_dry_run --sample outputs/preposition_paired_review_20261029.json
+```
+
+输入指纹：`nodes.tsv` `9bde0367d0ba1f62f7f4810b05693a82f1dcb32767c2fe7f0e88055991e23bd1`；`hypergraph_rules.jsonl` `c07dd37342ab399244a091501a21ada9e2f9f706efb1dc34d6b8ebc16a8a0a53`；抽样文件 `structure_sampling_2026-10-29.json` `82f6099c32bd253aa679aa5f9e4507a64c430e911d229f3c3e73e4ee9582cd08`。pilot 结果只打印在本机终端；不将释义文本或原始样本 JSON 加入仓库。
