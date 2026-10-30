@@ -20,7 +20,7 @@
 - T02 审计分支未创建 PR：GitHub PR 工具调用返回 `Unknown tool`。可以继续提交并推送；不得将对比页或已推送分支描述成 PR。
 - T04 `codex/t04-full-candidate-packing` 远端 HEAD 为 `0c9e232401421c5f1cf80a637759dddec3b593c5`，包括完整候选评分、旧行兼容与已核实的 fresh-document XPU 试点记录。`codex/t04-structure-input-design` 的远端 HEAD 为 `2bb56c57f70a3ab84cfcec7f69649b42704fac8f`；这两个专题工作目前不在本队列分支中。
 - T04 最近几条候选打包/文档簇/结构输入分支的 PR 状态未能通过当前 GitHub MCP 连接核实；旧线程也记有 `Unknown tool`。在 PR 面板或有效 API 可用前，队列只记远端分支和 commit，不声称 PR 已创建或 CI 已通过。
-- 本机 Conda 环境 `emotion_xpu`：Python 3.11 系列、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Intel Arc XPU。以 `conda run -n emotion_xpu` 执行 `torch.xpu.is_available()` 得到 `True`、设备数 1，XPU 64×64 张量运算成功。该检查证明环境能做小模型 XPU 运算；不证明更大模型的显存/吞吐预算，也不是新一轮训练结果。此前 tiny-BERT 开发训练已经在此环境完成。
+- 本机 Conda 环境 `emotion_xpu`：Python 3.11.15、PyTorch `2.12.0+xpu`、Transformers `5.9.0`、Accelerate `1.13.0`、Intel Arc XPU。`conda run -n emotion_xpu` 下 `torch.xpu.is_available()` 为 `True`、设备数 1，64×64 运算成功；设备属性报告约 16.45 GB。新建 ignored 输出 `outputs/tiny_bert_wsd_smoke_conda_20261031` 做了 4 个 train 记录、仅 A 条件的一批 smoke（seed 17）：checkpoint 保存成功，loss 1.5541；脚本 `--smoke` 路径不读取 dev，也不产生 WSD 准确率。该烟测证明当前 Conda/XPU/权重/训练入口连通，不证明研究效果或更大模型的预算。此前 base 环境缺少 PyTorch 与 `emotion_xpu` 已有 PyTorch 并不矛盾；运行应使用 `conda activate emotion_xpu` 或 `conda run -n emotion_xpu ...`。
 - 最新五个相关 Codex 专项线程已查看：T04 数据兼容、候选分块、错误分析与 XPU 记录；T02 用户已决口径和未决来源/抽样 gate；T03 现有 Demo 的功能可靠性和许可/用户研究边界；T05 HTE 词形歧义与许可限制；结构探索的汇报数字边界。线程内容已与当前仓库状态交叉核对，旧线程报告不能覆盖当前 Git 状态。
 
 ### 全项目既有结果摘要
@@ -121,7 +121,7 @@
 
 ## 3. 本轮更新记录
 
-- 纠正环境误述：训练环境不是缺少 PyTorch，而是 Conda 环境 `emotion_xpu`；在该环境重新核验 XPU 可用、设备数为 1，并完成 64×64 运算。本轮未训练新模型，没有新的 WSD 性能结果。
+- 确认训练依赖位于 Conda 环境 `emotion_xpu` 而非默认 `base`；复核 Python/PyTorch/Transformers/Accelerate 版本、XPU 可用性和设备内存字段。另做 4 条 train 记录的 A-only smoke，checkpoint 成功保存；不读 dev、不报性能分数。新输出留在 ignored `outputs/tiny_bert_wsd_smoke_conda_20261031`。这不是重新训练 A–D，也不改变旧开发集已被重复使用、不可继续调参的研究 gate。
 - 将近期 T02、T04、T03、T05 和结构探索线程的结论压缩为当前队列，并同远端分支 HEAD 对照；单个线程中的计划和结果仅作线索，已存在的提交/文件为准。
 - 尝试创建 T02 PR；GitHub MCP 返回 `Unknown tool`，因此没有创建 PR，也没有声称 CI 运行。
 

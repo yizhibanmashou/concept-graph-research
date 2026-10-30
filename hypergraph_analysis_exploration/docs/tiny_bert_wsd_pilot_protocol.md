@@ -30,3 +30,19 @@ Reconstruct the same 400 train and 120 development target sample IDs. Obtain can
 The full-candidate builder now locates the annotated target by its original XML word position and builds a maximum 32-WordPiece context from a target-form prefix plus a sentence window that contains the actual occurrence. `[unused0]` and `[unused1]` bracket that occurrence; their token IDs are taken from and recorded with the fixed model vocabulary. Neighboring whole XML words are added around the target until the budget is exhausted. If the target cannot fit or the annotated word does not match the stored XML position, the selected sample is excluded from scoring and its sample ID/reason is written to `excluded_targets.json`; the original selected-target denominator remains in metadata. A–D share the same context IDs and candidate order. The old prefix-only pilot remains a separate historical result and must not be described as having used this corrected context.
 
 This is an input-pipeline correction only. It has not been run on SemCor, does not establish model performance, and does not make the repeatedly used development set independent. Before any training, record the exact SemCor/XML, OEWN, graph, vocabulary hashes and candidate budget; report selected targets, excluded target-context failures, sentence-window truncation, gold mapping, candidate encoding failures and scorable targets separately. No held-out test documents or labels are used.
+
+# Conda/XPU launch smoke (2026-10-31)
+
+The model dependencies are in the local Conda environment `emotion_xpu`, not the default `base` environment. Verified versions: Python 3.11.15, PyTorch 2.12.0+xpu, Transformers 5.9.0 and Accelerate 1.13.0; `torch.xpu.is_available()` returned true, device count was 1, and a 64×64 XPU matrix operation synchronized successfully. The XPU device property reports 16.45 GB; this is a runtime property and not a measured free-memory or peak-training-memory value.
+
+On 2026-10-31 the current trainer entry point was smoke-run with four existing train records, condition A only, seed 17, and `--smoke`. It saved a checkpoint successfully (mean batch loss 1.5541) under the ignored local output `outputs/tiny_bert_wsd_smoke_conda_20261031`. The smoke branch does not read `dev.json`, does not evaluate WSD, and is not a new A–D experiment. Reproduction from repository root:
+
+```powershell
+conda run -n emotion_xpu python hypergraph_analysis_exploration/src/analysis/tiny_bert_wsd_train.py `
+  --data hypergraph_analysis_exploration/outputs/tiny_bert_wsd_data_222_20261030 `
+  --model hypergraph_analysis_exploration/tmp/models/bert-tiny `
+  --out hypergraph_analysis_exploration/outputs/tiny_bert_wsd_smoke_conda_20261031 `
+  --device xpu --seed 17 --smoke
+```
+
+The output directory must not already exist. This confirms local runtime and entry-point compatibility only. It does not reopen the repeatedly used development set as a tuning target; future performance work still requires a fresh, independent evaluation protocol and fair A/B/C/D serialization.
