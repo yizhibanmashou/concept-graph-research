@@ -1,5 +1,5 @@
 import unittest
-from src.analysis.tiny_bert_wsd_data import choose_candidates, select
+from src.analysis.tiny_bert_wsd_data import choose_candidates, encode_target_centered_context, select
 
 
 class TinyBertDataTests(unittest.TestCase):
@@ -14,3 +14,20 @@ class TinyBertDataTests(unittest.TestCase):
         self.assertEqual(select(rows, 1)[0]['sample_id'], 'a')
         rows[1]['gold'] = 'changed'
         self.assertEqual(select(rows, 1)[0]['sample_id'], 'a')
+
+    def test_centered_context_brackets_actual_occurrence_and_respects_budget(self):
+        words = ['left'] * 20 + ['pivot'] + ['right'] * 20
+
+        def encode(text):
+            return [1, 2] if text == 'target: pivot context:' else [3]
+
+        ids, window = encode_target_centered_context(words, 20, 'pivot', encode, 90, 91, maximum=12)
+        self.assertEqual(len(ids), 12)
+        self.assertEqual(ids[window['target_piece_start'] - 1], 90)
+        self.assertEqual(ids[window['target_piece_start']], 3)
+        self.assertEqual(ids[window['target_piece_end']], 91)
+        self.assertTrue(window['sentence_truncated'])
+
+    def test_centered_context_rejects_mismatched_xml_position(self):
+        with self.assertRaisesRegex(ValueError, 'does not match'):
+            encode_target_centered_context(['first', 'second'], 0, 'second', lambda _text: [1], 90, 91)

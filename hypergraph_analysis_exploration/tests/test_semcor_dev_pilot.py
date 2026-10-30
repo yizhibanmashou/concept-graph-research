@@ -1,6 +1,9 @@
 import unittest
 from collections import Counter
-from src.analysis.semcor_dev_pilot import build_index, mapped_target, norm, observed_key, pos_class, ranked_gloss, ranked_mfs
+from io import BytesIO
+from zipfile import ZipFile
+from src.analysis.semcor_dev_pilot import (build_index, mapped_target, norm, observed_key, pos_class,
+                                           ranked_gloss, ranked_mfs, sentence_records, sentences)
 
 
 class SemcorDevPilotTests(unittest.TestCase):
@@ -26,3 +29,17 @@ class SemcorDevPilotTests(unittest.TestCase):
         self.assertEqual(observed_key('running', 'VBG', morph), ('run', 'v'))
         self.assertEqual(observed_key('Unknown_Name', 'NNP', morph), ('unknown name', 'n'))
         self.assertIsNone(observed_key('and', 'CC', morph))
+
+    def test_sentence_records_preserves_xml_word_positions_and_legacy_view(self):
+        payload = b'<corpus><s><wf>early</wf><punc>,</punc><wf wnsn="1" lexsn="x">pivot</wf><wf>late</wf></s></corpus>'
+        memory = BytesIO()
+        with ZipFile(memory, 'w') as archive:
+            archive.writestr('semcor/sample.xml', payload)
+        memory.seek(0)
+        with ZipFile(memory) as archive:
+            records = list(sentence_records(archive, 'sample.xml'))
+            legacy = list(sentences(archive, 'sample.xml'))
+        self.assertEqual(records[0][1], ['early', ',', 'pivot', 'late'])
+        self.assertEqual([(position, word.text) for position, word in records[0][2]], [(2, 'pivot')])
+        self.assertEqual(legacy[0][0], 'early , pivot late')
+        self.assertEqual([word.text for word in legacy[0][1]], ['pivot'])

@@ -9,7 +9,7 @@ from pathlib import Path
 
 from src.analysis.audit_wn30_oewn_sense_key_crosswalk import _load_oewn_sense_keys
 from src.analysis.compact_sense_budget import pack, representations
-from src.analysis.semcor_dev_pilot import build_index, mapped_target, observed_key, sentences
+from src.analysis.semcor_dev_pilot import build_index, mapped_target, observed_key, sentence_records
 from src.analysis.semcor_train_mapping import digest, partition
 from src.analysis.sense_representation_pilot import build
 
@@ -47,6 +47,58 @@ def prepare_candidate_manifest(candidate_ids, prepare):
     return manifest
 
 
+def encode_target_centered_context(words, target_word_index, surface, encode, start_marker, end_marker,
+                                   maximum=32):
+    """Encode a bounded sentence window that explicitly brackets the target occurrence."""
+    surface = surface.replace('_', ' ')
+    if not 0 <= target_word_index < len(words):
+        raise ValueError('target word index is outside the sentence')
+    if words[target_word_index] != surface:
+        raise ValueError('annotated target does not match sentence word at its XML position')
+    prefix = encode('target: ' + surface + ' context:')
+    encoded_words = [encode(word) for word in words]
+    target = encoded_words[target_word_index]
+    fixed = len(prefix) + len(target) + 2
+    if not target or fixed > maximum:
+        raise ValueError('target occurrence does not fit the context budget')
+
+    remaining = maximum - fixed
+    left_index = target_word_index - 1
+    right_index = target_word_index + 1
+    left = []
+    right = []
+    left_open = left_index >= 0
+    right_open = right_index < len(words)
+    prefer_left = True
+    while remaining and (left_open or right_open):
+        take_left = (left_open and not right_open) or (left_open and right_open and prefer_left)
+        if take_left:
+            pieces = encoded_words[left_index]
+            if len(pieces) <= remaining:
+                left[:0] = pieces
+                remaining -= len(pieces)
+                left_index -= 1
+                left_open = left_index >= 0
+            else:
+                left_open = False
+        else:
+            pieces = encoded_words[right_index]
+            if len(pieces) <= remaining:
+                right.extend(pieces)
+                remaining -= len(pieces)
+                right_index += 1
+                right_open = right_index < len(words)
+            else:
+                right_open = False
+        prefer_left = not prefer_left
+
+    target_start = len(prefix) + len(left) + 1
+    context_ids = prefix + left + [start_marker] + target + [end_marker] + right
+    return context_ids, {'target_piece_start': target_start,
+                         'target_piece_end': target_start + len(target),
+                         'sentence_truncated': left_index >= 0 or right_index < len(words)}
+
+
 def select(records, n):
     return sorted(records, key=lambda row: (row['sample_id'], row['doc'], row['sentence'], row['token']))[:n]
 
@@ -81,6 +133,9 @@ def main():
     cls_id, sep_id, pad_id = (tokenizer.token_to_id(x) for x in ('[CLS]', '[SEP]', '[PAD]'))
     if (cls_id, sep_id, pad_id) != (101, 102, 0):
         raise ValueError('expected BERT special token IDs 101, 102 and 0')
+    target_start_id, target_end_id = (tokenizer.token_to_id(x) for x in ('[unused0]', '[unused1]'))
+    if target_start_id is None or target_end_id is None:
+        raise ValueError('target markers [unused0] and [unused1] must exist in the vocabulary')
     cache = {}
 
     def candidate(candidate_id):
@@ -107,8 +162,8 @@ def main():
     with zipfile.ZipFile(args.nltk_data / 'corpora/semcor.zip') as semcor_archive:
         for subset in ('train', 'dev'):
             for doc in split[subset]:
-                for sentence_index, (context, annotated) in enumerate(sentences(semcor_archive, doc)):
-                    for token_index, token in enumerate(annotated):
+                for sentence_index, (_context, words, annotated) in enumerate(sentence_records(semcor_archive, doc)):
+                    for token_index, (word_index, token) in enumerate(annotated):
                         if token.get('rdf'):
                             continue
                         key = observed_key(token.text or '', token.get('pos', ''), wordnet.morphy)
@@ -117,10 +172,12 @@ def main():
                         instance_id = f'{doc}:{sentence_index}:{token_index}'
                         collected[subset].append({'sample_id': stable_hash(instance_id), 'instance_id': instance_id,
                             'doc': doc, 'sentence': sentence_index, 'token': token_index,
-                            'context': context, 'surface': token.text or '', 'key': key, 'element': token})
+                            'word_index': word_index, 'words': words,
+                            'surface': token.text or '', 'key': key, 'element': token})
 
     results = {}
     counts = {}
+    excluded_targets = {'train': [], 'dev': []}
     for subset, size in (('train', 400), ('dev', 120)):
         records = select(collected[subset], size)
         if len(records) < size:
@@ -136,11 +193,22 @@ def main():
             if issue:
                 stats['gold_' + issue] += 1
             gold_index = ids.index(gold) if gold in ids else None
-            ctx = tokenizer.encode('target: ' + record['surface'].replace('_', ' ') + ' context: ' + record['context'],
-                                   add_special_tokens=False).ids
-            if len(ctx) > 32:
-                stats['context_truncated'] += 1
-            ctx = ctx[:32]
+            ready_ids = [item['candidate_id'] for item in manifest if item['status'] == 'ready']
+            stats['encodable_candidates'] += len(ready_ids)
+            stats['failed_candidates'] += len(ids) - len(ready_ids)
+            try:
+                ctx, window = encode_target_centered_context(
+                    record['words'], record['word_index'], record['surface'],
+                    lambda text: tokenizer.encode(text, add_special_tokens=False).ids,
+                    target_start_id, target_end_id, maximum=32)
+            except ValueError as exc:
+                stats['excluded_target_context'] += 1
+                excluded_targets[subset].append({'sample_id': record['sample_id'], 'reason': str(exc)})
+                if gold_index is None or gold not in ready_ids:
+                    stats['gold_not_encodable'] += 1
+                continue
+            if window['sentence_truncated']:
+                stats['sentence_window_truncated'] += 1
             versions = {}
             for version in 'ABCD':
                 pairs = []
@@ -154,9 +222,6 @@ def main():
                         raise ValueError('joint sequence exceeds budget')
                     pairs.append(seq + [pad_id] * (joint_budget - len(seq)))
                 versions[version] = pairs
-            ready_ids = [item['candidate_id'] for item in manifest if item['status'] == 'ready']
-            stats['encodable_candidates'] += len(ready_ids)
-            stats['failed_candidates'] += len(ids) - len(ready_ids)
             if gold_index is not None and gold in ready_ids:
                 stats['gold_candidate_no_branch'] += manifest[gold_index]['payload'][1] == 'none'
                 stats['trainable_or_scorable'] += 1
@@ -175,13 +240,19 @@ def main():
     args.out.mkdir(parents=True, exist_ok=False)
     for subset in ('train', 'dev'):
         (args.out / (subset + '.json')).write_text(json.dumps(results[subset], sort_keys=True, separators=(',', ':')), encoding='utf-8')
+    (args.out / 'excluded_targets.json').write_text(
+        json.dumps(excluded_targets, sort_keys=True, indent=2), encoding='utf-8')
     metadata = {'counts': counts, 'split_seed': 17, 'candidate_budget': args.candidate_budget,
                 'joint_budget': 128 if args.candidate_budget == 94 else 256,
+                'context_budget': 32, 'context_policy': 'target-centered with [unused0]/[unused1] occurrence markers',
+                'target_marker_ids': {'start': target_start_id, 'end': target_end_id},
                 'nltk_version': nltk.__version__, 'tokenizers_version': tokenizers.__version__,
                 'inputs_sha256': {'semcor.zip': digest(args.nltk_data / 'corpora/semcor.zip'),
                     'wordnet.zip': digest(args.nltk_data / 'corpora/wordnet.zip'), 'entries.zip': digest(args.oewn_zip),
                     'nodes.tsv': digest(nodes_file), 'rules.jsonl': digest(rules_file), 'vocab.txt': digest(args.vocab)},
                 'sample_ids_sha256': {subset: stable_hash('\n'.join(r['sample_id'] for r in results[subset])) for subset in results},
+                'excluded_target_ids_sha256': {subset: stable_hash('\n'.join(r['sample_id'] for r in excluded_targets[subset]))
+                                               for subset in excluded_targets},
                 'limits': 'Exploratory fixed train/dev selection, no test documents read; recorded labels are local only.'}
     (args.out / 'metadata.json').write_text(json.dumps(metadata, sort_keys=True, indent=2), encoding='utf-8')
     print(json.dumps(counts))

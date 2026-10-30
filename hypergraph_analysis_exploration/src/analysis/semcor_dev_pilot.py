@@ -67,13 +67,21 @@ def observed_key(surface, penn_tag, morph):
     return (norm(morph(surface, pos) or surface), pos)
 
 
-def sentences(archive, doc):
+def sentence_records(archive, doc):
     with archive.open('semcor/' + doc) as f:
         root = ElementTree.parse(f).getroot()
     for sentence in root.iter('s'):
         words = list(sentence)
-        context = ' '.join((word.text or '').replace('_', ' ') for word in words)
-        yield context, [word for word in words if word.tag == 'wf' and word.get('wnsn') and word.get('lexsn')]
+        surfaces = [(word.text or '').replace('_', ' ') for word in words]
+        context = ' '.join(surfaces)
+        annotated = [(position, word) for position, word in enumerate(words)
+                     if word.tag == 'wf' and word.get('wnsn') and word.get('lexsn')]
+        yield context, surfaces, annotated
+
+
+def sentences(archive, doc):
+    for context, _surfaces, annotated in sentence_records(archive, doc):
+        yield context, [word for _position, word in annotated]
 
 
 def main():
