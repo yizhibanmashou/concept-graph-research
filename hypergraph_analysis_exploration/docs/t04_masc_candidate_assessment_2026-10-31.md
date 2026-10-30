@@ -5,7 +5,7 @@
 
 ## 结论摘要
 
-MASC Sentence Corpus 是目前发现的一个较强 T04 候选：官方介绍称它有约 110,000 句，覆盖 114 个常见多义词，以 WordNet 3.1 sense inventory 进行人工标注；句子来自 MASC 与 OANC，标签说明包含多标注者一致性材料。MASC 官方主页将资源置于 CC BY 3.0 US 条款下，OANC 官方说明其数据可自由用于研究与开发且不受使用、再分发限制。当前官方迁移 release 的 `masc_wordsense.zip` 清单给出 6,796,136 字节及 SHA-256 `ccce5d4468a799531cacb3968b0e07db025dd3fb52d354d556856b27ddc0d732`。
+MASC Sentence Corpus 是目前发现的一个较强 T04 候选：官方介绍称它有约 110,000 句，覆盖 114 个常见多义词，以 WordNet 3.1 sense inventory 进行人工标注；句子来自 MASC 与 OANC。主句料中每个词的完整用例至少由一人标注，每词约 100 句有多位标注者；另有独立下载的 AMT 版本，覆盖其中 45 个词、每词约 1,000 例，由约 25 位众包标注者标注，且与训练标注者使用相同 sense inventory。AMT 版本适合研究标签分歧，但与主语料重叠，不能算独立语料或独立词项集合。MASC 官方主页将资源置于 CC BY 3.0 US 条款下，OANC 官方说明其数据可自由用于研究与开发且不受使用、再分发限制。当前官方迁移 release 的 `masc_wordsense.zip` 清单给出 6,796,136 字节及 SHA-256 `ccce5d4468a799531cacb3968b0e07db025dd3fb52d354d556856b27ddc0d732`。
 
 因此，**建议将 MASC 作为 SemCor 之后的候选开发/文档外推数据源，进入“经负责人批准后做只读数据盘点”的阶段**。它能检验模型是否迁移到另一批上下文文本；它不能直接提供对低频义项的覆盖，也不是独立于 WordNet/OEWN 的 sense inventory。只有在样本级条款、WN3.1→OEWN 映射、来源隔离和模型预训练暴露审查通过后，才可冻结实际实验协议。此文档本身不授权下载或读取数据。
 
@@ -14,12 +14,13 @@ MASC Sentence Corpus 是目前发现的一个较强 T04 候选：官方介绍称
 | 事项 | 已核实信息 | 对研究设计的含义 |
 |---|---|---|
 | 语料规模和标签 | MASC 页面介绍约 110,000 句、114 个词、WordNet 3.1 senses；标签经人工判定。完整集合每条至少一位标注者；每词约 100 句有多位标注者，用于一致性分析。 | 可研究上下文判义与标注不确定性；不能把 114 个常见词包装成完整 all-words 或长尾 benchmark。 |
+| 多标注版本 | MASC Sentence Corpus 另提供 45 词 AMT 标注版本，每词约 1,000 例、约 25 位标注者，sense inventory 与训练标注者版本相同。 | 可研究标签分布与不确定性；它与主语料共享部分词项/句子，若纳入须预先规定如何隔离和计分，不能称为独立复现。 |
 | 上下文来源 | 句子链接回 MASC 或 OANC 原文；官方将 MASC/OANC 作为开放语言资源。 | 与已反复使用的 SemCor 是不同语料来源，但拆分必须按原文档分组；需检查与超图 source families 及模型预训练数据的实际重叠，不能仅凭名称宣布独立。 |
 | 许可 | MASC 首页写明 CC BY 3.0 US；OANC 官方页称数据可自由用于研究和开发、使用及再分发不受限。 | 元数据层面比 SemCor 清楚；下载后仍须核对具体 release 包的随附 license、署名说明和子文件边界，再把状态升级为本项目用途已审查。 |
 | 冻结版本 | ANC 官方 2026-09-25 数据迁移 release 的 manifest 记录 `masc_wordsense.zip` 为 6,796,136 bytes，SHA-256 `ccce5d4468a799531cacb3968b0e07db025dd3fb52d354d556856b27ddc0d732`。该 release 声明保留各数据集原有许可。 | 可在批准后固定 artifact 身份并逐字节验 hash；此哈希只识别下载字节，不替代内容许可或标签质量审查。 |
 | 义项映射 | 标注 inventory 为 WordNet 3.1；现有本项目词典映射审计重点是 WordNet 3.0 sense key→OEWN。 | 必须新建 WN3.1→OEWN 精确 crosswalk，按 lemma/POS/sense key 或可验证 synset identity 对齐；禁止 gloss 模糊匹配，完整报告一对一、多对一、歧义、缺失分母。 |
 
-来源： [MASC 资源与许可说明](https://anc.org/data/masc/)、[MASC Sentence Corpus 标注方法](https://anc.org/data/masc/wordnet-framenet-annotations/)、[ANC 官方下载页](https://anc.org/data/masc/downloads/data-download/)、[2026-09-25 官方归档 release](https://github.com/nancyide/anc-website/releases/tag/datasets-2026-09-25)、[release 下载清单](https://raw.githubusercontent.com/nancyide/anc-website/ecc70bb/migration/download-manifest.json)、[OANC 数据使用说明](https://anc.org/data/oanc/)。
+来源： [MASC 资源与许可说明](https://anc.org/data/masc/)、[MASC Sentence Corpus 标注方法](https://anc.org/data/masc/wordnet-framenet-annotations/)、[MASC AMT 标注说明](https://anc.org/data/masc/masc-amt-word-sense-annotation/)、[ANC 官方下载页](https://anc.org/data/masc/downloads/data-download/)、[2026-09-25 官方归档 release](https://github.com/nancyide/anc-website/releases/tag/datasets-2026-09-25)、[release 下载清单](https://raw.githubusercontent.com/nancyide/anc-website/ecc70bb/migration/download-manifest.json)、[OANC 数据使用说明](https://anc.org/data/oanc/)。
 
 ## 对五线总问题的有效性边界
 
