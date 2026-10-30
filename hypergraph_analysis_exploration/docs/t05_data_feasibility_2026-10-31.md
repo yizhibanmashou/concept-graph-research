@@ -19,11 +19,19 @@ T05 不能把以下指标混成一个“概念习得年龄”：
 
 | 数据源 | 可用观测与潜在价值 | 与 OEWN 义项对齐的困难 | 访问、许可与风险 | 当前决定 |
 |---|---|---|---|---|
-| Wordbank / CDI | CDI 是家长报告的早期词汇理解/产出量表；网站提供儿童×词项响应、不同年龄及人口学/工具信息，并可查询或导出版本化数据。适合估计**词形/问卷词项层面**的年龄曲线，适合成为较易启动的 B+C 外部预测试点。 | CDI item 通常是表格里的词或表达，不自带 OEWN sense key；家长报告的词项掌握不能证明儿童只知道一个义项。复合词、变体、同形异义词、具体问卷措辞均需核查。 | Wordbank 页面称默认 CC BY 4.0，但部分贡献数据集标为 CC BY-NC 4.0；Redivis 数据集版本化且下载需要免费账户。必须按数据集 `license` 字段逐项确认，不能由主页默认许可覆盖具体例外。 | **可先做许可与词项元数据盘点；** 若用于可公开研究，固定 Redivis release、工具版本、数据集许可、CDI 表单版本。结果只能称词项层面，除非另有义项标注。 |
+| Wordbank / CDI | CDI 是家长报告的早期词汇理解/产出量表；官方数据页提供 child、word、child-by-word 三种层级及不同年龄、人口学/工具信息。适合估计**词形/问卷词项层面**年龄曲线，可作为 B+C 外部预测的次要任务。 | CDI item 不自带 OEWN sense key；`uni_lemma` 是跨语言条目的概念性 gloss 映射，不是 WordNet/OEWN synset ID。家长报告的词项掌握不能证明儿童只知道一个义项。复合词、变体、同形异义词、具体问卷措辞均需核查。 | 官方页面说明数据可免费下载且 Redivis 版本化；具体数据集许可由 `datasets.license` 字段区分，主页默认 CC BY 4.0 不覆盖标为 CC BY-NC 的条目。当前公开说明未确认登录要求，获取时再核实。 | **可先做许可与词项元数据盘点；** 若用于可公开研究，固定 Redivis release、工具版本、逐数据集许可、CDI 表单版本。结果只能称词项层面，除非另有义项标注。 |
 | CHILDES / TalkBank | 自然会话转录、说话者年龄/对话语境和纵向语料可能帮助人工判断语境中的词义使用，或分析词形表达出现轨迹。 | 语料记录词语使用，不直接测量理解或习得；单次首现受采样、对话机会、转录和家庭差异影响。需按语境人工映射到 OEWN 义项，并保存不确定/多义情况。纵向且可比的样本可能较小。 | 官方说明有公开网页、注册后数据、受控数据三个访问级别；大多数转录需注册，部分语料/媒体受控。TalkBank 一般规则为 CC BY-NC-SA 3.0，除非具体语料另有规定；不应把原始转录、个人信息或不可再分发内容上传 GitHub。 | **暂不下载。** 若走该路，先选一个具备明确语料级许可、年龄元数据及足够纵向密度的语料，提交数据保护与用途审查，再做本地-only sense coding feasibility pilot。不能以 transcript 首现替代理解年龄。 |
 | Brysbaert & Biemiller 2017 / Living Word Vocabulary | 论文描述约 44,000 个词义、来自 31,000 多个词形/多词表达；以儿童不同年级的知识测试构造 test-based AoA，是当前最接近**意义级**的公开常用测量路线。 | 测试记录与 OEWN synset 不一定一一对应；原始词义拆分、定义和图义项粒度不同。需检查同词多行、词性、多词表达、测试来源及空缺。 | UGent 论文条目将出版物版权状态标为 “No license (in copyright)”。第三方文件或 R 包中的许可声明不足以代替权利人/官方来源确认；数据的再分发及衍生映射权利目前未厘清。原指标是年级测试标准，不是幼儿首学时间。 | **科学问题匹配度高，权利门槛未过。** 先核对官方数据可取得方式、逐字段授权和许可；未确认前不抓取、镜像、提交或据第三方 CSV 建模。即使获准，也只能称年级测试知识/AoA proxy。 |
 
-来源与可核事实：Wordbank 当前主页说明其 CDI 数据规模、家长报告性质及默认许可；FAQ 说明 Redivis 版本/下载方式、CC BY 与部分 CC BY-NC 的差异。[Wordbank](https://langcog.github.io/wordbank-datapage/), [FAQ](https://langcog.github.io/wordbank-datapage/faq.html), [Data page](https://langcog.github.io/wordbank-datapage/analyses?name=item_data)。CHILDES 的访问分级和 TalkBank 使用规则见[官方访问说明](https://talkbank.org/childes/access.html)与[版权/使用规则](https://talkbank.org/0share/rules.html)。Brysbaert & Biemiller 数据规模、论文和权利字段见[UGent 官方书目条目](https://biblio.ugent.be/publication/8535511)；其“年级测试测得的词义知识”定义也应以原文为准，而不能简写成幼儿首次习得时间。
+来源与可核事实：Wordbank 当前主页说明其 CDI 数据规模、家长报告性质及默认许可；FAQ 说明 Redivis 版本/下载方式、CC BY 与部分 CC BY-NC 的差异。[Wordbank](https://langcog.github.io/wordbank-datapage/), [FAQ](https://langcog.github.io/wordbank-datapage/faq.html), [Data page](https://langcog.github.io/wordbank-datapage/data.html)。CHILDES 的访问分级和 TalkBank 使用规则见[官方访问说明](https://talkbank.org/childes/access.html)与[版权/使用规则](https://talkbank.org/0share/rules.html)。Brysbaert & Biemiller 数据规模、论文和权利字段见[UGent 官方书目条目](https://biblio.ugent.be/publication/8535511)；其“年级测试测得的词义知识”定义也应以原文为准，而不能简写成幼儿首次习得时间。
+
+### Wordbank 官方字段核查（2026-10-31）
+
+当前官方 [Data 页面](https://langcog.github.io/wordbank-datapage/data.html)确认三类导出粒度：child-level、word-level、child-by-word（长表或宽表）；均可按年龄、工具、规范样本标记及页面列出的人口学字段筛选。word-level 表给出 `item_id`、`item_kind`、`item_definition`、`category`、`uni_lemma`、`age`、`n_children`、`prop_produces`，Words & Gestures 表单另可有 `prop_understands`。child-by-word 长表包含匿名 `data_id`、月龄 `age`、人口学字段和 item 字段，并记录 `produces`；理解响应只适用于支持理解测量的表单。首轮分析必须固定表单与测量类型，不能把结构不同的问卷版本直接拼成同一响应变量。
+
+`uni_lemma` 的官方说明是供跨语言轨迹使用的跨语言概念性 gloss，对应 items 表中的统一 lemma；它没有被说明为 WordNet/OEWN synset 编号，也不解决多义词词义划分。因而 Wordbank 可用于词形/问卷 item 层的词汇轨迹或预测，不能单独回答“某个 OEWN 义项何时习得”。从 item 到 OEWN 的映射应另建、报告覆盖与歧义，并将未匹配和一对多项保留为显式状态。
+
+数据页指向版本化 Redivis 当前 release，要求记录数据集版本；当前 contributors 页面注明其所列 datasets 表构建于 2026-10-20。许可应按选中数据集的 `license` 字段核查并按该数据集的相关论文引用。数据页还注明 Elison English (American) WG 当前暂不出现在 word-level/常规导出视图，因其 item 导入问题仍在处理，但数据仍包含于 Redivis；因此元数据盘点必须区别“未显示/导出”与“数据不存在”，不可据此把该问卷当作覆盖为零。此审查只读取公开页面，没有下载或导出响应数据，也未登录 Redivis。
 
 ## 3. 路线选择：B+C，不把词形结果伪装成义项结果
 
