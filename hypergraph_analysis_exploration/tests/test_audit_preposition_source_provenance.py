@@ -25,6 +25,10 @@ class PrepositionSourceProvenanceAuditTests(unittest.TestCase):
                                 "source_locator": "secret-locator",
                                 "download_url": "https://example.invalid/private",
                                 "definition_text_sha256": "a" * 64,
+                                "predicate": "must not be emitted",
+                                "arguments": [{"role": "agent"}],
+                                "negation_scope": "hidden locator",
+                                "source_span": "hidden span",
                                 "definition": "must not appear",
                             }]
                         }
@@ -54,10 +58,17 @@ class PrepositionSourceProvenanceAuditTests(unittest.TestCase):
         self.assertEqual(result["summary"]["evidence_items"], 1)
         self.assertEqual(result["summary"]["unique_exact_source_labels"], 1)
         self.assertEqual(result["summary"]["records_with_license_field_in_evidence"], 0)
+        self.assertEqual(result["summary"]["source_evidence_items_with_typed_relation_fields"], 1)
+        self.assertEqual(result["typed_relation_field_coverage"]["evidence_items_by_field_group"], {
+            "predicate_or_relation_type": 1,
+            "argument_or_role": 1,
+            "polarity_or_negation_scope": 1,
+            "evidence_span_locator": 1,
+        })
         self.assertEqual(len(result["inputs_sha256"]["source_records_index"]), 64)
         self.assertEqual(len(result["inputs_sha256"]["scoped_payload_set"]), 64)
         rendered = json.dumps(result, ensure_ascii=False)
-        for forbidden in ("secret-locator", "example.invalid", "must not appear"):
+        for forbidden in ("secret-locator", "example.invalid", "must not appear", "hidden locator", "hidden span"):
             self.assertNotIn(forbidden, rendered)
 
     def test_reports_missing_payload_as_error_without_exposing_path(self):

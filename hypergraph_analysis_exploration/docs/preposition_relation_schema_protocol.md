@@ -132,6 +132,19 @@ python -m unittest tests.test_audit_t02_targeted_source_metadata -v
 
 本机 ignored 聚合结果 `outputs/t02_targeted_source_metadata_20261031_v2.json` 的输入摘要：index `b24d7484aa4364f002c05b8a20687e266dcb7868ee97c241d10a2b28b69b4195`；scoped payload set `a18721c319f2deee70168deda60f4deb48f4f2a296975bcb3e36996900246852`。更新后的三项合成测试覆盖摘要格式识别、跨标签相同摘要检测、与定义文本哈希相等/不等判定、host 提取、标签筛选及摘要/私密字段不泄漏。该分析只补强来源可追溯性检查，不构成清权或定义语义验证。
 
+### 5.2.4 来源证据字段对关系类型化的支持度（2026-10-31）
+
+为判断当前冻结来源证据是否能直接支持 T02 的窄关系 schema，扩展只读审计器，仅统计每个 `source_evidence` 对象顶层键是否属于四组字段名：谓词/关系类型、论元/参与者角色、极性/否定范围、证据片段定位。审计不读取这些字段的值，也不访问定义、引文或 locator 内容。已有本地 ignored 输出 `outputs/t02_source_relation_field_coverage_20261031.json`，scope 与前述子集相同；5,625 条记录全部读取成功，3,645 个 evidence item 均未出现四组字段名，带 license/licence 键的 evidence item 也是 0。输入摘要与前述子集一致：index `b24d7484aa4364f002c05b8a20687e266dcb7868ee97c241d10a2b28b69b4195`，payload set `a18721c319f2deee70168deda60f4deb48f4f2a296975bcb3e36996900246852`。
+
+此结果意味着目前不能仅凭冻结包内这些来源证据对象自动赋予“空间/位置、方向/路径、参与者角色、否定/缺失”等支持关系；规则转换应继续将证据不足关系标成 `unresolved`，不可从介词字符串或释义文本猜测标签。它不证明上游资源没有可用语义证据，也不替代逐来源 identity/release/rights 核验或独立人工定义保真审核。字段名匹配本身亦不足以证明正确性；若未来来源生产者补充显式字段，仍需核对字段语义、引用跨度和版本绑定，再进入人工审核。
+
+审计器与合成测试为 `src/analysis/audit_preposition_source_provenance.py` 和 `tests/test_audit_preposition_source_provenance.py`；本轮 2 项单测通过。输出只含聚合数和输入哈希，位于 ignored `outputs/`，不上传仓库。复算时选用一个尚不存在的新输出文件名：
+
+```powershell
+python -m src.analysis.audit_preposition_source_provenance --bundle ../OEWN --out outputs/t02_source_relation_field_coverage_<new-run>.json
+python -m unittest tests.test_audit_preposition_source_provenance -v
+```
+
 ### 5.3 盲化、双标与仲裁（执行前需负责人确认）
 
 - 两名审阅者独立标注；隐藏条件名称、机器结构统计、抽样层、另一名审阅者结果及训练/测试用途。

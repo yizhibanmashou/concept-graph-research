@@ -14,9 +14,20 @@ from pathlib import Path
 from typing import Any
 
 
-SCHEMA_VERSION = "t02-source-provenance-audit/1"
+SCHEMA_VERSION = "t02-source-provenance-audit/2"
 SCOPE_PREFIX = "sources/Synset/alternative_or_definition_wsd_frozen/"
 LICENSE_KEYS = {"license", "licence", "license_url", "licence_url"}
+RELATION_FIELD_GROUPS = {
+    "predicate_or_relation_type": {"predicate", "relation", "relation_type", "semantic_relation"},
+    "argument_or_role": {
+        "arguments", "roles", "semantic_roles", "agent", "patient", "theme",
+        "source_role", "goal_role",
+    },
+    "polarity_or_negation_scope": {"polarity", "negation", "negation_scope"},
+    "evidence_span_locator": {
+        "evidence_span", "source_span", "text_span", "evidence_locator", "quote_locator",
+    },
+}
 
 
 def _walk_license_fields(value: Any) -> bool:
@@ -51,6 +62,8 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
     )
     errors = []
     payloads_digest = hashlib.sha256()
+    relation_field_counts = Counter()
+    evidence_items_with_relation_fields = 0
 
     for line_number, relpath in rows:
         source_file = (bundle / relpath).resolve()
@@ -95,6 +108,13 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
                                 ("definition_text_sha256", "definition_sha256")):
                 aggregate[name + ("_present" if item.get(field) not in (None, "") else "_missing")] += 1
             aggregate["license_field_present"] += _walk_license_fields(item)
+            evidence_keys = {str(key).lower() for key in item}
+            present_groups = [
+                group for group, field_names in RELATION_FIELD_GROUPS.items()
+                if evidence_keys & field_names
+            ]
+            evidence_items_with_relation_fields += bool(present_groups)
+            relation_field_counts.update(present_groups)
         for label in seen_labels:
             labels[label]["record_count"] += 1
         totals["records_with_license_field_in_evidence"] += _walk_license_fields(evidence)
@@ -114,6 +134,24 @@ def summarize_bundle(bundle: Path) -> dict[str, Any]:
             "evidence_items": totals["evidence_items"],
             "unique_exact_source_labels": len(labels),
             "records_with_license_field_in_evidence": totals["records_with_license_field_in_evidence"],
+            "source_evidence_items_with_typed_relation_fields": evidence_items_with_relation_fields,
+        },
+        "typed_relation_field_coverage": {
+            "evidence_items_with_any_field_group": evidence_items_with_relation_fields,
+            "evidence_items_by_field_group": {
+                group: relation_field_counts[group] for group in RELATION_FIELD_GROUPS
+            },
+            "field_groups": {
+                "predicate_or_relation_type": "explicit relation/predicate field name on the evidence object",
+                "argument_or_role": "argument list or participant-role field name on the evidence object",
+                "polarity_or_negation_scope": "polarity, negation, or scope field name on the evidence object",
+                "evidence_span_locator": "explicit span/quote locator field name on the evidence object",
+            },
+            "limits": (
+                "Counts inspect only top-level keys of source_evidence objects; they do not read field values, "
+                "definitions, quotes, or locators. Field presence would not establish that a relation is correct "
+                "or supported. Absence here does not prove the upstream source lacks usable evidence."
+            ),
         },
         "inputs_sha256": {
             "source_records_index": hashlib.sha256(index_bytes).hexdigest(),
