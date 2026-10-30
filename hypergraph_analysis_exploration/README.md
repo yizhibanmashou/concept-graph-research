@@ -1,10 +1,10 @@
 # OEWN 义项构造与依赖超图研究
 
-本仓库研究词典义项定义中的联合依赖、替代分支及其来源，探索可复现的结构分析、逻辑构造和 NLP 应用。图中的可达性是形式结构结果，不自动等同自然语言蕴涵或学习效果。数据、候选与自动生成的公式需要独立语义核验。
+本仓库研究词典义项定义中的联合依赖、替代分支及其来源，探索可复现的结构分析、逻辑构造、NLP 应用与概念发展问题。图中的可达性是形式结构结果，不自动等同自然语言蕴涵或学习效果。数据、候选与自动生成的公式需要独立语义核验。
 
 ## 研究方向
 
-五条研究线的总目标、当前证据、阶段门槛、协作分工与 PR 工作单见[研究总控路线图](docs/research_program_roadmap_2026-10-30.md)。T02 的已决关系字段和盲审协议见[介词关系 schema 与盲审协议草案](docs/preposition_relation_schema_protocol.md)。路线图强调结构、语义、模型表现和认知证据分开判定，并按总控、T02 介词结构、T04 NLP 的顺序启动；其余支线按门槛进入。
+五条研究线的阶段、当前证据、门槛与决策权见[研究总控路线图](docs/research_program_roadmap_2026-10-30.md)；本轮可以执行的工作、依赖和 PR 状态见[五线执行队列](docs/research_execution_queue_2026-10-31.md)。T02 的关系字段、盲审协议和全图 `prep_phrase` 敏感性结果见[介词关系 schema 与盲审协议](docs/preposition_relation_schema_protocol.md)。T04 的 XPU 试点和误差/输入长度审计见[WSD 试点协议](docs/tiny_bert_wsd_pilot_protocol.md)；T05 的数据单位和许可 gate 见[数据可行性评估](https://github.com/yizhibanmashou/concept-graph-research/blob/codex/t05-data-feasibility/hypergraph_analysis_exploration/docs/t05_data_feasibility_2026-10-31.md)。结构、语义、模型表现和认知证据分开判定。
 
 - **依赖超图与概念组合**：`src/analysis/` 与 `src/logic/` 是现有结构审计和形式验证代码；`outputs/` 保存实验结果；[研究计划](docs/research_tracks_2026-10-28.md)讨论介词和来源控制。介词 full-Horn 删除敏感性分析可用 `python -m src.analysis.preposition_horn_relaxation` 复跑，结果写到根 `report/`。
 
@@ -13,7 +13,7 @@
 介词配对审查可先运行 `python -m src.analysis.structure_sampling_pilot --seed 17 --sample-size 5 --out outputs/sample_new.json`，再运行 `python -m src.analysis.preposition_paired_review --bundle ../OEWN --sample outputs/sample_new.json --pos prep --out outputs/paired_review_new.json`。导出按同一目标逐分支展示原依赖和删除后的依赖、空分支及非空分支碰撞，并留出人工审查字段。`--pos prep-and-phrase` 是另一个删除口径；两者须分别报告。源样本和冻结包默认不随 Git 提供，输出必须是新文件。该工具没有构造角色关系或判断语义正确性，也没有遮蔽干预条件；样本仅用于探索，不是确认性评测。
 - **逻辑公式构造**：[ToLogic 支线](research/tologic/README.md)包含整理后的引擎、六例和 `want` 案例；原始 ZIP 与额外重跑输出不上传，公开发布前仍需完成权利审查。
 - **交互词典**：同级目录 `../concept-dictionary/` 是交互原型，见其 README；与本目录一起属于工作区根部的 Git 仓库。
-- **NLP 应用**：以 WSD 验证义项表示中的结构增益，反向词典作为后续任务。PR #31 已合并全候选列表与目标级评分工程接口；它不是模型效果证据，目前仍没有完成完整候选训练或独立基准评测。
+- **NLP 应用**：优先以 WSD 验证义项表示中的结构增益，反向词典作为后续任务。已完成全候选管线、SemCor 文档隔离内部开发试点和 tiny BERT 三种子 A–D 结果；当前未观察到完整分支相对 B 的增益，简单 MFS 基线更强。该试点规模小、同源且输入文本长度不平衡，不构成最终验证；测试分区未读取。后续必须使用新协议、新来源及长度/信息控制。
 
 ## 目录
 
@@ -48,6 +48,6 @@ Get-FileHash -Algorithm SHA256 -LiteralPath OEWN/manifest.json, OEWN/checksums.j
 
 本轮版本的两个摘要依次为 `126c8c5390efaff9ca1aaa1e12f7931ca90b802104ffaf57385d4b692c23605f` 和 `6800f0840858d4358a873dcec941c9c15ab85539b3c91f357c11444477040e6c`，也记录在 `config/frozen_bundle_integrity_lock.json`。之后运行上面的全包审计；它读取约 19 GB 文件，结果写入根 `report/`，可用 `--bundle` 和 `--output` 指定其他输入及输出。校验只能确认文件与清单一致，不能代替来源或许可审核。
 
-## 上传 GitHub 之前
+## GitHub 发布边界
 
-工作区根目录有本地 Git 元数据，但尚无首个提交或远端。数据包、词典派生内容、文章和实验输出的权限尚未全部确认；`.gitignore` 不是完整的发布审查。先审阅 `git status --short --untracked-files=all` 和 `docs/data_release_gate.md`，核对敏感信息、版权、文件体积和逐文件许可，再自行选择首批提交。未指定代码许可证，不能假定已开源授权；不要上传外部冻结包或 ToLogic 原始资料，除非权利审查通过。
+本项目已经连接到用户建立的私有仓库 `yizhibanmashou/concept-graph-research`，研究改动按主题分支和 PR 审阅。根目录 `docs/`、`report/`、`materials/` 和 `AGENTS.md` 按本机规则忽略；原始 OEWN 包、压缩包、儿童数据、原始语料、私有会议资料、模型权重和运行输出不得进入 Git。子项目中的公开协议和可复现脚本可以提交，但每次仍须检查许可、隐私、文件体积和 `git status --short --untracked-files=all`；`.gitignore` 不代替发布审查。仓库未授予代码许可证，不要将其称作已获开源授权。
