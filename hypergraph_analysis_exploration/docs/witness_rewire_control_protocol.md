@@ -9,3 +9,7 @@ The randomized graphs have no semantic interpretation. This limited edge-swap wa
 ## Post-hoc order sensitivity
 
 After inspecting the initial outcome, repeat the same root set with order seeds 11, 23 and 31, reusing the original graph and the rewired graphs with seeds 101, 102 and 103. For each graph and order, compare capacities 256 and 4096 against that graph's uncached expansion. Graph/order cells reuse both roots and graphs and are not independent datasets. `python -m src.analysis.witness_rewire_order_sensitivity --bundle ../OEWN --roots outputs/experiment_2026_10_13/evaluation_root_ids.txt --out outputs/witness_rewire_order_sensitivity_20261030.json` reproduces the experiment from the project directory when the frozen data is present.
+
+## Post-hoc root-source sensitivity
+
+Partition the evaluation roots by the two largest `nodes.tsv` source labels and use order seed 17 within each group. Compare the original graph to the same two rewired graphs (seeds 101 and 102), capacities 256 and 4096, depth 4. This stratifies the roots only; rewiring does not preserve the source, POS or semantic roles of target nodes. The groups are drawn from one graph and have different sizes. They are not independent datasets, source-preserving rewires, or a basis for causal claims.
