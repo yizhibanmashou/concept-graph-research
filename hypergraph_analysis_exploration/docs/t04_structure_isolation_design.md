@@ -200,7 +200,7 @@ Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwo
 
 ### A/B/C/D 完整 train-only 结构 epoch（2026-10-31）
 
-新增 `src/analysis/train_t04_xpu_train_only_structural_epoch.py`，把共享 gloss encoder 与 A/B/C/D 结构池化推进到完整训练分区的一轮训练。输入为固定训练 JSON 中 400 个目标（379 个 gold 可评分、21 个不可评分目标保留为不可训练），seed 17；四条件分别完成 190 个 AdamW 更新，target batch=2、graph-gloss batch=32。每个条件都从同一 pinned BERT-tiny 权重和相同随机 head 初始化开始，使用相同乱序训练目标、相同候选、相同 context+candidate-gloss token 序列；唯一条件差异是图关系通道：A 零关系、B 唯一依赖均值、C pairwise 2-section 均值、D 完整 OR 分支均值。train-only 可评分候选池有 2,008 个唯一义项；每条件处理 3,243 个 context-candidate 输入和 17,265 个 gloss-node 输入实例。
+新增 `src/analysis/train_t04_xpu_train_only_structural_epoch.py`，把共享 gloss encoder 与 A/B/C/D 均值池化推进到完整训练分区的一轮工程运行。输入为固定训练 JSON 中 400 个目标（379 个 gold 可评分、21 个不可评分目标保留为不可训练），seed 17；四条件分别完成 190 个 AdamW 更新，target batch=2、graph-gloss batch=32。每个条件都从同一 pinned BERT-tiny 权重和相同随机 head 初始化开始，使用相同乱序训练目标、相同候选、相同 context+candidate-gloss token 序列；唯一条件差异是图关系通道：A 零关系、B 唯一依赖均值、C pairwise 2-section 端点均值、D 分支内均值再对 OR 分支均值。train-only 可评分候选池有 2,008 个唯一义项；每条件处理 3,243 个 context-candidate 输入和 17,265 个 gloss-node 输入实例。后续合成碰撞审计确认 B/C/D 这些均值均会丢失某些不同关系结构，因此该 epoch 只能称为首阶均值池化的工程训练/重放，不能作为“完整结构已送入模型”的证据。
 
 在 `emotion_xpu` / Intel Arc 上，四条件 mean train loss 为 A/B/C/D=1.85719/1.86272/1.86111/1.85932；XPU 峰值 allocated bytes 为 224,224,256/223,901,696/223,901,696/223,901,696；单次 wall-clock 为 29.31/24.70/24.53/23.83 秒。相同输入、样本摘要、训练损失、峰值和四个 checkpoint SHA 在完整重放中完全相同。脚本和结果仅用于确认 379 条训练数据上的完整 optimizer 路径、可复现性与本机资源估算；训练损失不能比较为模型质量，计时仅为单机单次观测，也不构成泛化或公平效果结果。运行未读取 dev/test，也未查看其中标签。
 
@@ -270,3 +270,9 @@ conda run -n emotion_xpu python -m src.analysis.train_t04_xpu_train_only_microba
 **决定：**目前没有经许可、benchmark 规则、来源独立性、sense mapping 和模型暴露五项门槛共同核准的外部确认性测试。WiC 不适合当前 graph-informed 方法的 SuperGLUE 合规结果；WiC-TSV 等数据许可未确认；GrainWiC 仅保留为同源 test-only 次要候选。继续核查时不得打开其 test 文件或基于覆盖数字修方法。首先从公开 license/release 文档与 WordNet 3.1/ OEWN 完整库存建立不触碰 benchmark test item 的 crosswalk 可行性，再决定是否值得申请/使用相应数据。
 
 来源：[WiC 官方许可页](https://pilehvar.github.io/wic/)；[SuperGLUE 论文（WiC 源数据限制）](https://w4ngatang.github.io/static/papers/superglue.pdf?file=superglue.pdf)；[WiC-TSV 官方 repo](https://github.com/semantic-web-company/wic-tsv)及其[代码 MIT LICENSE](https://raw.githubusercontent.com/semantic-web-company/wic-tsv/master/LICENSE)；[WiC-TSV ACL 论文页](https://aclanthology.org/2021.eacl-main.140/)；[GrainWiC 官方数据卡](https://huggingface.co/datasets/cardiffnlp/GrainWiC)。
+
+### 2026-10-31：D 分支均值不是无损的完整结构表示
+
+代码审计发现，当前 `aggregate_relation_views()` 的 D 将每个 AND 分支内 `target + dependencies` 做均值，再对 OR 分支均值做均值；它最终只是节点向量的线性加权，未把 branch×node incidence 交给 scorer。C 虽先构造 pairwise 边集合，随后也只对全部边端点做加权均值。用同一 target `head`、同一依赖节点 `{a,b,c,d}`、两个各含 2 个依赖的 OR 分支作合成反例：`{{a,b},{c,d}}` 与 `{{a,c},{b,d}}` 的分支划分与 pairwise 边集合均不同；但 B、C、D 三个 pooled 向量完全相同。C/D pooled relation 均为 `[5.0, 1.333333...]`。因此当前 B/C/D 的均值池化不能区分该反例中的三种结构；先前“D 保留完整分支结构”的说法只对某些结构例子成立，不能概括此池化算子。完整 train-only A/B/C/D epoch 只验证首阶均值池化的可重放训练，不验证无损完整结构或高阶组合增益。
+
+现有合成测试新增该碰撞作为明确限制，保留另一个 D 可区分不同分支大小的例子，避免从单个正例推断普遍可辨识性。下一版核心 D 条件应将原始 branch×node 归属显式提供给 permutation-invariant branch-set encoder/scorer；C 也必须让 pair endpoint 信息在聚合前经过非线性关系项编码，不能只做线性端点均值。B/C/D 使用相同的关系项编码器与输出维度，参数量和文本节点集一致。先做结构碰撞/置换不变/梯度性质审计，再做 train-only 工程训练；在新实现与 token/算力控制冻结之前，不读取旧 dev 或任何保留测试。此为表示算子审计，不是语义保真或 WSD 性能结果。

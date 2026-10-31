@@ -25,7 +25,7 @@ class T04RelationAggregationTests(unittest.TestCase):
         for condition in "ABCD":
             self.assertTrue(torch.equal(left[condition], right[condition]))
 
-    def test_pairwise_projection_loses_partition_that_d_retains(self):
+    def test_pairwise_projection_collision_with_single_vs_four_branches(self):
         one_branch = aggregate_relation_views(
             self.vectors, "head", [["a", "b", "c", "d"]]
         )
@@ -40,6 +40,21 @@ class T04RelationAggregationTests(unittest.TestCase):
         self.assertTrue(torch.equal(one_branch["B"], four_branches["B"]))
         self.assertTrue(torch.equal(one_branch["C"], four_branches["C"]))
         self.assertFalse(torch.equal(one_branch["D"], four_branches["D"]))
+
+    def test_b_c_d_means_collapse_distinct_equal_size_partitions(self):
+        left = aggregate_relation_views(
+            self.vectors, "head", [["a", "b"], ["c", "d"]]
+        )
+        right = aggregate_relation_views(
+            self.vectors, "head", [["a", "c"], ["b", "d"]]
+        )
+
+        self.assertNotEqual(left["canonical_branches"], right["canonical_branches"])
+        self.assertEqual(left["dependency_ids"], right["dependency_ids"])
+        self.assertNotEqual(left["pair_ids"], right["pair_ids"])
+        self.assertTrue(torch.equal(left["B"], right["B"]))
+        self.assertTrue(torch.equal(left["C"], right["C"]))
+        self.assertTrue(torch.equal(left["D"], right["D"]))
 
     def test_outputs_have_shared_width_and_a_has_zero_relation_channel(self):
         result = aggregate_relation_views(self.vectors, "head", [["a", "b"]])

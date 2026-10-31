@@ -36,7 +36,10 @@ def aggregate_relation_views(
     width. A is the target vector. B mean-pools the unique dependency set. C
     mean-pools undirected endpoint-pair means from each target-plus-branch
     clique (the pairwise 2-section). D mean-pools within each original branch,
-    including the target, then mean-pools across alternative branches.
+    including the target, then mean-pools across alternative branches. This D
+    output is a lossy first-order statistic, not an injective encoding of the
+    full AND/OR branch structure. C's endpoint mean can likewise collapse
+    distinct pairwise edge sets, so neither view is a lossless graph encoding.
 
     All returned candidates concatenate the same target vector and one
     relation vector, so a downstream scorer can share its parameters. This is

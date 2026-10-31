@@ -119,3 +119,9 @@ length-sort + pad-to-8 相较 ID-sort + pad-to-1，本次观测编码时间约�
 ### T04 新增外部 WiC 候选源筛选（2026-10-31）
 
 未读取或下载任何 benchmark 样例。官方 WiC 页列 CC BY-NC 4.0，但 SuperGLUE 论文明确不允许参赛系统在开发中使用构造 WiC 标签的结构化源数据（WordNet、VerbNet、Wiktionary）；因此标准 WiC 不适合作为本项目使用词义图的确认性 SuperGLUE 结果。WiC-TSV 的任务不依赖固定库存，然而其 GitHub MIT LICENSE 只覆盖软件文本，官方页面未找到数据自身许可，仍 unresolved。GrainWiC fine-grained 有 1,185 对、924 词、WordNet 3.1 来源和 CC BY-SA/WordNet 许可标注，但它是单一 test split、与项目词典谱系同源邻近，只能作为未来明示边界的一次性次要评测候选，不可用来调参或声称独立来源验证。当前没有外部 WiC 源通过全部授权、规则、来源、映射、模型暴露 gates。详细证据与来源链接在 `docs/t04_structure_isolation_design.md` 的“外部 WiC 评测源首轮筛选”。
+
+### 2026-10-31：T04 D 池化的信息损失审计
+
+当前 C/D 都不是完整结构输入：C 构造 pairwise edge set 后仅做全部边端点的线性均值；D 对各 AND 分支（目标+依赖）分别取均值，再对 OR 分支均值取均值。合成反例固定 target=`head`、同一依赖集 `{a,b,c,d}`，比较 OR=`{{a,b},{c,d}}` 与 OR=`{{a,c},{b,d}}`：分支划分和 pairwise 边集合不同，但 B/C/D pooled 向量完全相同；C/D relation 均为 `[5.0, 1.333333...]`。此前 D 能区分“一条大分支 vs 四条较小分支”的测试只证明该例，不证明所有分支结构可辨识。故当前 A/B/C/D train-only 全 epoch 的正确解释收窄为首阶均值池化的工程重放，不能称为完整 AND/OR 编码的训练或结构增益检验。
+
+下一实现门槛：D 把 branch×node incidence 显式送入置换不变 branch-set encoder/scorer，C 在池化前对 pair endpoint 作非线性关系项编码；B/C/D 共享关系项编码器、输出宽度、参数初始化与文本节点集合。先完成不同分支划分碰撞、节点/分支置换、梯度及参数量核验，再冻结 train-only 训练方案；不得复用旧 dev 选择实现，也不解封测试集。结果和设计见 `t04_structure_isolation_design.md`。
