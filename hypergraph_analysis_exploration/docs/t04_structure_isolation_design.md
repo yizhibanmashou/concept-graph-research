@@ -119,6 +119,10 @@ batch size 32、按节点 ID 顺序动态 padding、2 个 warmup batch 的两次
 
 Raganato 官方页面说明五个标准数据集的标注属于 WordNet 3.0 词义库存。当前代码已有 `audit_wn30_oewn_sense_key_crosswalk._load_oewn_sense_keys()`，可根据固定 OEWN entry archive 对 gold sense key 建立精确映射；正式评估前须逐资源报告零映射、唯一映射、多映射、目标不在冻结图、POS/lemma 不匹配和候选未覆盖，不能把“存在同名 key”直接当作映射通过。映射文件及 OEWN archive 版本必须固定并摘要化。
 
+#### 本机 OEWN 包的义项标识字段检查（2026-10-31）
+
+对 27 个 `entries-*.json` 文件做完整字段名扫描，不输出词条、释义或义项标识值。共 153,888 个 entry、161,875 个 POS 记录和 212,659 个 sense 对象；每个 sense 对象均含字符串字段 `id` 与 `synset`，同时可有额外字段（共见 558 种可选字段组合）。POS 记录可有 `sense`，并可选 `pronunciation`/`form`。按文件名排序后，对每个文件内容 SHA-256 再摘要的组合值为 `8701d5a20cc0f050d03f7d21033307a46c8ddd4432d7274ecc1a7363bcc60038`。这确认现有 WN3.0 exact-key crosswalk 的 OEWN 侧身份字段可从 sense `id` 提取；但本机扫描没有加载 WordNet 3.1 库存，也没有 MASC 标注或实例元数据，因此不能据此推导 WN3.1→OEWN 映射覆盖或 MASC 候选可评测。当前 99.54% 只适用于 WordNet 3.0 整体 sense-key 库存；外部 WN3.1 评估仍必须以冻结的完整库存/官方标识和逐目标映射审计为前置条件，不能用 gloss 相似度补映射。该 schema 检查不读取任何 dev/test 内容，也不解除数据许可、来源独立性或模型暴露门槛。
+
 Global WordNet Association 的 [SemCor reannotation](https://github.com/globalwordnet/semcor) 保留原始 `wn30_key`，另提供随 OEWN 发行更新的 `oewn_key`；仓库说明该资源来源于 Princeton WordNet，并在 CC BY 4.0 下继续维护，底层仍带 Princeton WordNet License 署名条件。[格式与对齐说明](https://github.com/globalwordnet/semcor/blob/main/README.md) · [许可证](https://github.com/globalwordnet/semcor/blob/main/LICENSE.md)。这使它适合作为**sense-key 映射交叉核查和同源文档切分工具**，但它仍是 SemCor/Brown 材料，不能充当独立来源验证，也不能将更新后的标签视为独立标注者 gold。任何使用前还须固定仓库 commit、OEWN release、许可署名、数据变更范围，并核查与已有训练/开发样本及模型训练材料的文本重叠。
 
 执行顺序固定为：先不接触 benchmark 测试句/标签，完成候选资源的许可与模型暴露审查、sense-key 映射覆盖元数据审计；再锁定与已用样本及训练文档不相交的开发方案、候选生成、预算、序列化、配置和分析脚本；最后才对完整保留 benchmark 执行一次评分。若逐子集许可无法核验，或映射覆盖不足且偏向特定词性/义项，则不运行确认性评估，报告缺失项与分母。

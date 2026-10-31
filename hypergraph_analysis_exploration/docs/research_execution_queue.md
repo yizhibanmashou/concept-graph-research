@@ -28,6 +28,10 @@
 | P1 | T05：义项级发展数据可行性 | Wordbank 是多种粒度的问卷数据，CHILDES 首现不等于理解，sense-level AoA 权利/映射未解决；既有图缓存结果仅是算法模拟 | 只核可合法访问的数据集级 schema、许可和词形—义项映射字段；先列许可、语言、年龄、单位、sense ID 和覆盖元数据清单 | 未获得儿童级数据授权或可审计的义项映射时不下载响应、不做预测；不得将模拟写成认知发展验证 | 继续在 `codex/t05-data-feasibility` 上单主题 PR；核查当前远端与 PR 状态 |
 | P2 | 跨线整合/外部应用 | NLP/WSD 优先；反向词典、词替换、翻译与人类研究均在下游 gate 之后 | 仅在 T04 有可复验结构增益、跨资源覆盖和许可过关后，启动一项下游复核 | 不用反向词典开发分数取代 WSD 验证；不把图可达性解释成逻辑蕴涵/认知发展 | 尚未启动 |
 
+### 2026-10-31：T04 本机 OEWN schema 与 WN3.1 映射边界
+
+对 27 个 entries JSON 文件、153,888 个 entry、161,875 个 POS 记录、212,659 个 sense 对象做了字段名扫描；所有 sense 对象都有字符串 `id`/`synset`，但存在 558 种可选扩展字段组合。排序文件摘要 hash 为 `8701d5a20cc0f050d03f7d21033307a46c8ddd4432d7274ecc1a7363bcc60038`。该结果确认 WN3.0 exact-key crosswalk 的 OEWN 身份字段可取自 sense `id`，但本机没有 WordNet 3.1 库存或 MASC 对应元数据，不能外推 WN3.1/MASC 覆盖。若推进该方向，先合法取得并固定完整库存，再按官方 sense identity 审计逐目标映射与候选覆盖；不以 gloss 相似度兜底。未读 benchmark 样本/标签，rights、source independence 和 model exposure gates 仍未解除。详见 `t04_structure_isolation_design.md` 同名小节。
+
 ## 里程碑定义
 
 | ID | 里程碑 | 交付物 | 通过证据 |
