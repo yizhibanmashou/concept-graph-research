@@ -13,7 +13,9 @@
 介词配对审查可先运行 `python -m src.analysis.structure_sampling_pilot --seed 17 --sample-size 5 --out outputs/sample_new.json`，再运行 `python -m src.analysis.preposition_paired_review --bundle ../OEWN --sample outputs/sample_new.json --pos prep --out outputs/paired_review_new.json`。导出按同一目标逐分支展示原依赖和删除后的依赖、空分支及非空分支碰撞，并留出人工审查字段。`--pos prep-and-phrase` 是另一个删除口径；两者须分别报告。源样本和冻结包默认不随 Git 提供，输出必须是新文件。该工具没有构造角色关系或判断语义正确性，也没有遮蔽干预条件；样本仅用于探索，不是确认性评测。
 - **逻辑公式构造**：[ToLogic 支线](research/tologic/README.md)包含整理后的引擎、六例和 `want` 案例；原始 ZIP 与额外重跑输出不上传，公开发布前仍需完成权利审查。
 - **交互词典**：同级目录 `../concept-dictionary/` 是交互原型，见其 README；与本目录一起属于工作区根部的 Git 仓库。
-- **NLP 应用**：以 WSD 验证义项表示中的结构增益，反向词典作为后续任务。PR #31 已合并全候选列表与目标级评分工程接口；它不是模型效果证据，目前仍没有完成完整候选训练或独立基准评测。
+- **NLP 应用**：以 WSD 检验义项表示中的结构增益，反向词典作为后续任务。全候选训练工程已在本机 Conda `emotion_xpu` 环境完成 train-only A/B/C/D 运行及复现；这只证明训练流程可执行、可重放，不代表 WSD 效果或结构增益。外部 benchmark 的许可、模型暴露和 WordNet/OEWN 映射门槛尚未通过，因此尚无独立基准结论。环境核验命令与训练限制见[小型 BERT WSD 试点协议](docs/tiny_bert_wsd_pilot_protocol.md)，当前任务队列见[研究执行队列](docs/research_execution_queue.md)。
+
+T04 结构隔离实验设计（包括 pairwise 2-section 与完整分支池化的差异、共同文本输入及独立评估 gate）见[结构效应与文本长度控制方案](docs/t04_structure_isolation_design.md)。共享 gloss encoder 与 A/B/C/D 池化已有 train-only 工程实现；设计中的独立效果验证仍未执行，不能用已重复使用的 SemCor 开发集挑选结构或超参数。
 
 ## 目录
 

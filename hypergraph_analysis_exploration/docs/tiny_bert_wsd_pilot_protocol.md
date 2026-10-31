@@ -30,3 +30,57 @@ Reconstruct the same 400 train and 120 development target sample IDs. Obtain can
 The full-candidate builder now locates the annotated target by its original XML word position and builds a maximum 32-WordPiece context from a target-form prefix plus a sentence window that contains the actual occurrence. `[unused0]` and `[unused1]` bracket that occurrence; their token IDs are taken from and recorded with the fixed model vocabulary. Neighboring whole XML words are added around the target until the budget is exhausted. If the target cannot fit or the annotated word does not match the stored XML position, the selected sample is excluded from scoring and its sample ID/reason is written to `excluded_targets.json`; the original selected-target denominator remains in metadata. A–D share the same context IDs and candidate order. The old prefix-only pilot remains a separate historical result and must not be described as having used this corrected context.
 
 This is an input-pipeline correction only. It has not been run on SemCor, does not establish model performance, and does not make the repeatedly used development set independent. Before any training, record the exact SemCor/XML, OEWN, graph, vocabulary hashes and candidate budget; report selected targets, excluded target-context failures, sentence-window truncation, gold mapping, candidate encoding failures and scorable targets separately. No held-out test documents or labels are used.
+
+## Correction: corrected-context pilot and Conda/XPU runtime (2026-10-31)
+
+The preceding paragraph records the status when the input-pipeline note was first written; the statement that it had not been run on SemCor is now superseded. Subsequent local outputs under ignored `outputs/tiny_bert_fresh_doc_*_20261031/` show the corrected-context A/B/C/D comparison ran on three seeds. Do not upload these output directories or checkpoints.
+
+- Conda environment: `emotion_xpu`; Python 3.11.15; PyTorch `2.12.0+xpu`; Transformers `5.9.0`; Intel Arc Graphics through oneAPI Level Zero.
+- The base Conda environment has no PyTorch, but `conda run -n emotion_xpu ...` imports the XPU build. Keep the training command bound to this named environment; installing another PyTorch into `base` is unnecessary.
+- A separate hardware smoke test allocated XPU tensors, multiplied two 512×512 matrices, synchronized the device, and returned `512.0`. `torch.xpu.is_available()` was true and one device was visible. The runtime reported `total_memory=16844MB`; this is a PyTorch/oneAPI device property, not a measurement of dedicated VRAM, so do not use it as a guaranteed model-memory budget.
+- The checked-in pilot configuration is deliberately small: `prajjwal1/bert-tiny`, batch size 4, one epoch, learning rate `2e-5`, joint input budget 256, seeds 17/23/31. Local result metadata confirms all twelve A/B/C/D runs used `device=xpu`; each trained on 379 examples and scored 111 of 120 selected development targets.
+- Across the three repeated runs on the same development set, correct counts were A 80/333, B 82/333, C 90/333, D 82/333. This is a seed-sensitivity summary on one reused, same-source development sample, not three independent evaluations. It does not show an aggregate D-over-B gain; it also cannot rule out gains under a better controlled representation or independent evaluation.
+- This verifies that the local workstation can run the current tiny model and execute XPU kernels in the Conda environment. It does not verify BERT-base or larger-model memory use, a different batch/context budget, or portability to another Arc driver. Test larger configurations only after a single-batch memory smoke test and preserve the frozen data and held-out test boundary.
+
+Reproduce the environment/kernel check without changing environments:
+
+```powershell
+conda run -n emotion_xpu python -c "import torch, transformers; a=torch.ones((512,512),device='xpu'); b=a@a; torch.xpu.synchronize(); print(torch.__version__, transformers.__version__, torch.xpu.get_device_name(0), float(b[0,0].cpu()))"
+```
+
+Do not infer that the GUI-selected interpreter or an IDE terminal uses this environment: verify `sys.executable` inside the actual training process or invoke the entry point with `conda run -n emotion_xpu`.
+
+## Train-only shared-text token audit (2026-10-31)
+
+The exact tokenizer input was recovered from the pinned `prajjwal1/bert-tiny` revision (`6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837`). Its `vocab.txt` SHA-256, `07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3`, matches the frozen training metadata. The vocabulary is stored only in ignored local outputs. `base` provides `tokenizers==0.23.1`, matching the frozen metadata; this audit needs no PyTorch, while training continues to use `emotion_xpu`.
+
+The new `audit_t04_train_shared_token_inputs.py` reads the frozen 400-row train JSON for candidate IDs only, and reads only version/hash fields from metadata. It verifies the metadata hashes for the train graph inputs and exact vocabulary before building a shared canonical target-plus-dependency gloss token inventory for B/C/D. It does not access labels, context text, dev/test examples, or the WordNet corpus. On 3,404 candidate occurrences and 2,051 unique candidates, all 2,051 had complete, identical ordered node-token inventories across B/C/D; failures: 0. This is exact text-token equality for the audited records, not equal compute, equal total model sequence length after context packaging, equal semantics, or model evidence.
+
+Ignoring special tokens and truncation, total target-plus-dependency gloss pieces per candidate have min/median/P90/max 3/56/120/380; dependencies alone 2/47/106/333. The maximum length of any single target or dependency gloss per candidate is 77 (median 17, P90 26), so each gloss individually is below BERT's 512-position limit before special tokens. The sum over nodes is not a single sequence under the protocol's shared per-node text encoder; it reflects the number of node encodings and must be reported as a compute/input-volume covariate, not as truncation. Structure remains nonuniform: branch count 1/1/3/16, dependency nodes 1/5/10/28, pair edges 1/12/44/327, incidence cells 2/7/17/112 (min/median/P90/max). Under the stated per-node encoder design, no dependency/branch packing is currently required for sequence-length compliance; remaining resource fairness concerns include number of node encodings, pair edges, branches, batch padding and wall-clock/memory. Do not introduce a shared truncation/packing cap from aggregate node token sums, and do not use the old repeatedly accessed dev set to choose an architecture. Machine-readable counts and source hashes are in ignored `outputs/t04_train_shared_token_inputs_20261031_v2.json`; the script and synthetic-only tests are tracked.
+
+# Local Conda + Intel XPU runtime (observed 2026-10-31)
+
+The maintained pilot has already trained in the local Conda environment `emotion_xpu`; the earlier `ModuleNotFoundError: torch` came from the unrelated `base` environment. Observed runtime: Python 3.11.15, `torch 2.12.0+xpu`, `torchvision 0.27.0+xpu`, `torchaudio 2.11.0+xpu`, `transformers 5.9.0`; `torch.xpu.is_available()` returned true and the device was reported as Intel Arc Graphics. PyTorch and the XPU packages are pip builds installed inside Conda, so the environment name alone is not a portable environment specification. Do not install an NVIDIA CUDA build for this machine.
+
+Activate and verify the intended environment before training:
+
+```powershell
+conda activate emotion_xpu
+python -c "import torch, transformers; print(torch.__version__, transformers.__version__); print(torch.xpu.is_available()); print(torch.xpu.get_device_name(0))"
+```
+
+The check must report an `+xpu` PyTorch build, `True`, and the Intel Arc device. Run the existing script from `hypergraph_analysis_exploration/` with the prepared local data/model directories and a new output directory (the trainer refuses to overwrite an existing output directory):
+
+```powershell
+python src/analysis/tiny_bert_wsd_train.py `
+  --data <prepared-data-directory> `
+  --model <local-bert-tiny-directory> `
+  --out <new-local-output-directory> `
+  --device xpu --seed 17
+```
+
+Use `--smoke` only for a one-batch device check; it trains A only and does not read the development set. Training artifacts, data, model weights, and outputs remain local and ignored by Git. If the XPU check fails, stop before training and record the actual Conda package versions and error; do not silently fall back to CPU while labeling the run XPU.
+
+## Existing corrected-context XPU pilot
+
+The local artifact `outputs/tiny_bert_fresh_doc_xpu_seed17_20261031/result.json` records a successful four-condition run: 379 labeled training targets per condition, seed 17, batch size 4, sequence budget 256, one epoch. On the reused development selection, 111 of 120 targets had an encodable gold candidate. Correct / 111 covered accuracy was A 32 (28.8%), B 33 (29.7%), C 31 (27.9%), D 28 (25.2%); when all 120 selected targets are the denominator and unencodable gold cases count wrong, the results were 26.7%, 27.5%, 25.8%, and 23.3%. This one-seed development result is exploratory, not an independent test or evidence that any representation is superior. In particular, it gives no positive signal for complete-structure condition D; preserve that negative result and proceed only under the existing fixed protocol and leakage gates.
