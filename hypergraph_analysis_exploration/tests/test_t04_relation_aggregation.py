@@ -43,10 +43,12 @@ class T04RelationAggregationTests(unittest.TestCase):
 
     def test_b_c_d_means_collapse_distinct_equal_size_partitions(self):
         left = aggregate_relation_views(
-            self.vectors, "head", [["a", "b"], ["c", "d"]]
+            self.vectors, "head", [["a", "b"], ["c", "d"]],
+            include_relation_items=True,
         )
         right = aggregate_relation_views(
-            self.vectors, "head", [["a", "c"], ["b", "d"]]
+            self.vectors, "head", [["a", "c"], ["b", "d"]],
+            include_relation_items=True,
         )
 
         self.assertNotEqual(left["canonical_branches"], right["canonical_branches"])
@@ -55,6 +57,9 @@ class T04RelationAggregationTests(unittest.TestCase):
         self.assertTrue(torch.equal(left["B"], right["B"]))
         self.assertTrue(torch.equal(left["C"], right["C"]))
         self.assertTrue(torch.equal(left["D"], right["D"]))
+        self.assertTrue(torch.equal(left["relation_items"]["B"], right["relation_items"]["B"]))
+        self.assertFalse(torch.equal(left["relation_items"]["C"], right["relation_items"]["C"]))
+        self.assertFalse(torch.equal(left["relation_items"]["D"], right["relation_items"]["D"]))
 
     def test_outputs_have_shared_width_and_a_has_zero_relation_channel(self):
         result = aggregate_relation_views(self.vectors, "head", [["a", "b"]])

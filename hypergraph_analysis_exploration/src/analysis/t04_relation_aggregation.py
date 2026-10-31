@@ -29,6 +29,8 @@ def aggregate_relation_views(
     node_vectors: Mapping[str, Any],
     target_id: str,
     branches: Iterable[Iterable[str]],
+    *,
+    include_relation_items: bool = False,
 ) -> dict[str, Any]:
     """Return A/B/C/D pooled vectors with a shared, parameter-free operator.
 
@@ -97,7 +99,7 @@ def aggregate_relation_views(
     target = matrix[node_index[target_id]]
     relation_vectors = weight_tensor @ matrix
 
-    return {
+    result = {
         "A": torch.cat([target, torch.zeros_like(target)]),
         "B": torch.cat([target, relation_vectors[0]]),
         "C": torch.cat([target, relation_vectors[1]]),
@@ -106,3 +108,15 @@ def aggregate_relation_views(
         "pair_ids": pair_ids,
         "canonical_branches": canonical,
     }
+    if include_relation_items:
+        result["relation_items"] = {
+            "B": torch.stack([node_vectors[node_id] for node_id in dependency_ids]),
+            "C": torch.stack([
+                (node_vectors[left] + node_vectors[right]) / 2 for left, right in pair_ids
+            ]),
+            "D": torch.stack([
+                torch.stack([target, *(node_vectors[node_id] for node_id in branch)]).mean(0)
+                for branch in canonical
+            ]),
+        }
+    return result
