@@ -38,6 +38,7 @@ class T04RelationSetEncoderTests(unittest.TestCase):
         right = encode_relation_item_views(self.right, self.encoder)
 
         self.assertTrue(torch.equal(left["B"], right["B"]))
+        self.assertTrue(torch.equal(left["A"], right["A"]))
         self.assertFalse(torch.equal(left["C"], right["C"]))
         self.assertFalse(torch.equal(left["D"], right["D"]))
         self.assertEqual(tuple(left["D"].shape), (4,))
@@ -61,7 +62,7 @@ class T04RelationSetEncoderTests(unittest.TestCase):
     def test_invalid_relation_items_are_rejected(self):
         with self.assertRaisesRegex(ValueError, "rank-2"):
             self.encoder(torch.ones(3))
-        with self.assertRaisesRegex(ValueError, "missing B/C/D"):
+        with self.assertRaisesRegex(ValueError, "missing A/B/C/D"):
             encode_relation_item_views({"B": torch.ones(1, 2)}, self.encoder)
 
 

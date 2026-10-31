@@ -1,9 +1,10 @@
-"""Run one train-only A/B/C/D epoch with shared gloss encoder and graph pooling.
+"""Run a train-only A/B/C/D epoch with a shared gloss encoder.
 
 This is an engineering run only. It reads the train split, graph definitions,
 and graph rules; it never opens development or test files and does not report
 WSD quality. Each candidate receives the same context+candidate-gloss token
-sequence in every condition; only its parameter-free graph pooling changes.
+sequence in every condition. The default `mean_pool` mode is the historical
+parameter-free baseline; `shared_set_encoder` is the newer nonlinear prototype.
 """
 from __future__ import annotations
 
@@ -21,6 +22,10 @@ from src.analysis.profile_t04_xpu_text_structure import (
     read_graph,
 )
 from src.analysis.t04_relation_aggregation import aggregate_relation_views
+from src.analysis.t04_relation_set_encoder import (
+    SharedRelationItemEncoder,
+    encode_relation_item_views,
+)
 from src.analysis.tiny_bert_wsd_train import digest, validate
 
 
@@ -44,6 +49,7 @@ def run_epoch(
     seed: int = 17,
     target_batch_size: int = 2,
     graph_batch_size: int = 32,
+    relation_mode: str = "mean_pool",
 ) -> dict[str, Any]:
     import torch
     import transformers
@@ -54,6 +60,8 @@ def run_epoch(
         raise ValueError("XPU is unavailable in this Conda environment")
     if target_batch_size < 1 or graph_batch_size < 1:
         raise ValueError("batch sizes must be positive")
+    if relation_mode not in {"mean_pool", "shared_set_encoder"}:
+        raise ValueError("unsupported relation mode")
     if out_dir.exists():
         raise FileExistsError(f"output directory already exists: {out_dir}")
 
@@ -111,10 +119,19 @@ def run_epoch(
         encoder = BertModel.from_pretrained(
             str(model_path.resolve()), config=config, local_files_only=True
         ).to("xpu")
+        relation_encoder = (
+            SharedRelationItemEncoder(config.hidden_size, config.hidden_size).to("xpu")
+            if relation_mode == "shared_set_encoder" else None
+        )
         head = torch.nn.Linear(config.hidden_size * 3, 1).to("xpu")
         encoder.train()
+        if relation_encoder is not None:
+            relation_encoder.train()
         head.train()
-        optimizer = torch.optim.AdamW([*encoder.parameters(), *head.parameters()], lr=2e-5)
+        parameters = [*encoder.parameters(), *head.parameters()]
+        if relation_encoder is not None:
+            parameters.extend(relation_encoder.parameters())
+        optimizer = torch.optim.AdamW(parameters, lr=2e-5)
         torch.xpu.synchronize()
         torch.xpu.reset_peak_memory_stats()
         started = time.perf_counter()
@@ -147,10 +164,26 @@ def run_epoch(
                 hidden = encoder(input_ids=token_tensor, attention_mask=mask_tensor).last_hidden_state[:, 0]
                 node_vectors.update({node_id: hidden[index] for index, node_id in enumerate(node_batch)})
 
-            graph_views = {
-                target_id: aggregate_relation_views(node_vectors, target_id, rules[target_id])
-                for target_id in candidate_ids
-            }
+            if relation_mode == "mean_pool":
+                graph_views = {
+                    target_id: aggregate_relation_views(node_vectors, target_id, rules[target_id])
+                    for target_id in candidate_ids
+                }
+            else:
+                graph_views = {}
+                for target_id in candidate_ids:
+                    item_views = aggregate_relation_views(
+                        node_vectors,
+                        target_id,
+                        rules[target_id],
+                        include_relation_items=True,
+                    )["relation_items"]
+                    encoded_views = encode_relation_item_views(item_views, relation_encoder)
+                    target_vector = node_vectors[target_id]
+                    graph_views[target_id] = {
+                        name: torch.cat([target_vector, encoded_views[name]])
+                        for name in "ABCD"
+                    }
             context_rows = [
                 token_row for row in rows for token_row in row["inputs"]["A"]
             ]
@@ -189,7 +222,7 @@ def run_epoch(
                 raise RuntimeError("non-finite train loss")
             loss.backward()
             gradients = [
-                parameter.grad for parameter in [*encoder.parameters(), *head.parameters()]
+                parameter.grad for parameter in parameters
                 if parameter.grad is not None
             ]
             if not gradients or not bool(torch.stack([
@@ -207,7 +240,10 @@ def run_epoch(
         elapsed = time.perf_counter() - started
         checkpoint = out_dir / f"{condition}.pt"
         out_dir.mkdir(parents=True, exist_ok=True)
-        torch.save({"encoder": encoder.state_dict(), "head": head.state_dict()}, checkpoint)
+        checkpoint_state = {"encoder": encoder.state_dict(), "head": head.state_dict()}
+        if relation_encoder is not None:
+            checkpoint_state["relation_encoder"] = relation_encoder.state_dict()
+        torch.save(checkpoint_state, checkpoint)
         results[condition] = {
             "train_examples": examples_seen,
             "optimizer_steps": steps,
@@ -218,7 +254,7 @@ def run_epoch(
             "peak_allocated_bytes": int(torch.xpu.max_memory_allocated()),
             "checkpoint_sha256": digest(checkpoint),
         }
-        del encoder, head, optimizer
+        del encoder, relation_encoder, head, optimizer
         torch.xpu.empty_cache()
 
     result = {
@@ -230,6 +266,7 @@ def run_epoch(
         "seed": seed,
         "target_batch_size": target_batch_size,
         "graph_batch_size": graph_batch_size,
+        "relation_mode": relation_mode,
         "train_rows": len(train),
         "trainable_rows": len(trainable),
         "unscorable_train_rows": len(train) - len(trainable),
@@ -243,7 +280,8 @@ def run_epoch(
         "limits": (
             "One train-only epoch per condition. No development or test files were opened. "
             "Training loss, runtime and memory are engineering diagnostics, not WSD quality estimates; "
-            "the four conditions share the same base context-candidate token sequence and vary only graph pooling."
+            "the four conditions share the same base context-candidate token sequence; relation_mode records whether"
+            " relation items use legacy linear means or the shared nonlinear set encoder."
         ),
     }
     with (out_dir / "result.json").open("x", encoding="utf-8") as stream:
@@ -262,12 +300,14 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--target-batch-size", type=int, default=2)
     parser.add_argument("--graph-batch-size", type=int, default=32)
+    parser.add_argument("--relation-mode", choices=("mean_pool", "shared_set_encoder"), default="mean_pool")
     args = parser.parse_args()
     result = run_epoch(
         args.data, args.nodes, args.rules, args.model, args.out,
         seed=args.seed,
         target_batch_size=args.target_batch_size,
         graph_batch_size=args.graph_batch_size,
+        relation_mode=args.relation_mode,
     )
     print(json.dumps({
         "device": result["device"],

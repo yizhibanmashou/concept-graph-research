@@ -110,6 +110,7 @@ def aggregate_relation_views(
     }
     if include_relation_items:
         result["relation_items"] = {
+            "A": target.unsqueeze(0),
             "B": torch.stack([node_vectors[node_id] for node_id in dependency_ids]),
             "C": torch.stack([
                 (node_vectors[left] + node_vectors[right]) / 2 for left, right in pair_ids

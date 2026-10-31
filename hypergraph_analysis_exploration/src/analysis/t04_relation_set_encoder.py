@@ -9,7 +9,7 @@ from torch import nn
 
 
 class SharedRelationItemEncoder(nn.Module):
-    """Apply one shared nonlinear map per B/C/D relation item, then mean-pool."""
+    """Apply one shared nonlinear map per A/B/C/D relation item, then mean-pool."""
 
     def __init__(self, input_width: int, output_width: int | None = None) -> None:
         super().__init__()
@@ -36,8 +36,8 @@ def encode_relation_item_views(
     item_views: Mapping[str, torch.Tensor],
     encoder: SharedRelationItemEncoder,
 ) -> dict[str, torch.Tensor]:
-    """Encode B/C/D with the exact same module and parameter set."""
-    missing = set("BCD") - set(item_views)
+    """Encode A/B/C/D with the exact same module and parameter set."""
+    missing = set("ABCD") - set(item_views)
     if missing:
-        raise ValueError("missing B/C/D relation item views")
-    return {condition: encoder(item_views[condition]) for condition in "BCD"}
+        raise ValueError("missing A/B/C/D relation item views")
+    return {condition: encoder(item_views[condition]) for condition in "ABCD"}
